@@ -59,6 +59,8 @@ If a style playbook is active, verify:
 
 Each violation is a **suggestion** severity finding.
 
+Brand palette / anti-slop is stronger than a style suggestion: a forbidden accent (cyan/violet/lavender) or a glow is a **critical** violation of the brand, not a nicety — see **Brand Palette / Anti-Slop Review** below (`lib/brand_palette_guard.py`).
+
 ### Step 5: Evaluate Success Criteria
 
 For each `success_criteria` item from the manifest:
@@ -186,6 +188,21 @@ Run at **scene_plan** and **edit** stages. Use `lib/slideshow_risk.py` to comput
 | weak_shot_intent | "X scenes are missing shot_intent — why does this frame exist?" |
 | typography_overreliance | "X% of scenes are text/stat cards — video feels like animated slides" |
 | unsupported_cinematic_claims | "Claiming cinematic but missing hero moments / lighting / movement" |
+
+## Brand Palette / Anti-Slop Review
+
+Run at **scene_plan**, **edit**, and **compose** stages. Use `lib/brand_palette_guard.py` -> `check_brand_palette(payload, playbook=<active_playbook>)`. It answers "does this composition break the brand?" — the #1 tell of AI-generated video is a lavender / violet / cyan accent plus glows. It is anchored to the active playbook's `brand_guard` block (e.g. `styles/aetherlogik-ember.yaml`: ember-only over near-black, boxless, glow-free).
+
+### What to run:
+- **scene_plan / edit**: `check_brand_palette` over the scene props, overlays, and any `edit_decisions.metadata` theme colors.
+- **compose**: also run it over the resolved theme / HyperFrames `css_vars` before the render.
+
+### Severity:
+- `verdict == "fail"` (any forbidden color — cyan/violet/lavender/neon-blue — or a hard glow/bloom): **CRITICAL** — replace with the playbook accent, or if an off-brand color is intentional (a client's own palette), record it in `allowed_overrides` + a `decision_log` entry.
+- `verdict == "revise"` (boxless warnings — a card = solid background + border-radius, or a soft glow): **SUGGESTION** — separate with air + type + hairlines, not a card.
+- `verdict == "pass"`: note in the review summary, no finding needed.
+
+An intentional off-brand color is legal ONLY via an explicit `allowed_overrides` argument justified in the `decision_log` — an undocumented off-brand hex is always CRITICAL.
 
 ## Decision Log Review
 

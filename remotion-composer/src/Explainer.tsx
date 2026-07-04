@@ -325,6 +325,9 @@ interface AudioConfig {
 
 export interface ExplainerProps {
   [key: string]: unknown;
+  /** Seconds of tail after the last cut. Default 1 (final fade); set 0
+   *  for an exact-duration render that ends on the last cut's out point. */
+  tail_padding_seconds?: number;
   cuts: Cut[];
   overlays?: Overlay[];
   captions?: WordCaption[];
@@ -792,7 +795,7 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
 // ---------------------------------------------------------------------------
 
 const OverlayRenderer: React.FC<{ overlay: Overlay }> = ({ overlay }) => {
-  if (overlay.type === "section_title") {
+  if (overlay.type === "section_title" && overlay.text) {
     return (
       <SectionTitle
         title={overlay.text}
@@ -802,7 +805,7 @@ const OverlayRenderer: React.FC<{ overlay: Overlay }> = ({ overlay }) => {
       />
     );
   }
-  if (overlay.type === "stat_reveal") {
+  if (overlay.type === "stat_reveal" && overlay.text) {
     return (
       <StatReveal
         stat={overlay.text}
@@ -812,7 +815,7 @@ const OverlayRenderer: React.FC<{ overlay: Overlay }> = ({ overlay }) => {
       />
     );
   }
-  if (overlay.type === "hero_title") {
+  if (overlay.type === "hero_title" && overlay.text) {
     return <HeroTitle title={overlay.text} subtitle={overlay.subtitle} />;
   }
   if (overlay.type === "headline" && overlay.text) {
