@@ -39,6 +39,8 @@ import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { SectionTitle } from "./components/SectionTitle";
 import { StatReveal } from "./components/StatReveal";
 import { HeroTitle } from "./components/HeroTitle";
+import { HeadlineOverlay } from "./components/HeadlineOverlay";
+import { BrandClose } from "./components/BrandClose";
 import { AnimeScene } from "./components/AnimeScene";
 import type { CameraMotion } from "./components/AnimeScene";
 import { TerminalScene } from "./components/TerminalScene";
@@ -233,6 +235,11 @@ interface Cut {
   progressSegments?: any[];
   // Hero title props (when used as scene, not overlay)
   heroSubtitle?: string;
+  // Brand close props (type: "brand_close") — added 2026-07-04 brand-reel pilot
+  wordmark?: string;
+  tagline?: string;
+  url?: string;
+  logoSrc?: string;
   // Styling overrides
   backgroundColor?: string;
   backgroundImage?: string; // AI-generated or stock image rendered behind the component
@@ -271,7 +278,7 @@ interface Cut {
 }
 
 interface Overlay {
-  type: "section_title" | "stat_reveal" | "hero_title" | "provider_chip";
+  type: "section_title" | "stat_reveal" | "hero_title" | "provider_chip" | "headline";
   in_seconds: number;
   out_seconds: number;
   text?: string;
@@ -282,6 +289,9 @@ interface Overlay {
   providers?: string[];
   cycleSeconds?: number;
   label?: string;
+  // headline — added 2026-07-04 brand-reel pilot (brand-safe: no hardcoded colors)
+  color?: string;
+  fontSize?: number;
 }
 
 interface AudioLayer {
@@ -392,11 +402,16 @@ const ImageScene: React.FC<{ src: string; animation?: string }> = ({
     // Subtle parallax — foreground moves faster
     translateY = interpolate(progress, [0, 1], [15, -15]);
     scale = 1.1;
+  } else if (anim === "push-in-subtle") {
+    // Slow, brand-safe cinematic push-in (~1.0 -> 1.08), no diagonal drift.
+    // Added 2026-07-04 brand-reel pilot — built-in "zoom-in"/"ken-burns" reach
+    // 1.18-1.22 by the end of the cut, too strong for a subtle brand push.
+    scale = 1 + progress * 0.08;
   }
   // "static" or "none" → just display
 
   return (
-    <AbsoluteFill style={{ overflow: "hidden", background: "#0F172A" }}>
+    <AbsoluteFill style={{ overflow: "hidden", background: "#0a0a0a" }}>
       <Img
         src={resolveAsset(src)}
         style={{
@@ -432,7 +447,7 @@ const VideoScene: React.FC<{ src: string; startFrom?: number }> = ({
   });
 
   return (
-    <AbsoluteFill style={{ background: "#0F172A" }}>
+    <AbsoluteFill style={{ background: "#0a0a0a" }}>
       <OffthreadVideo
         src={resolveAsset(src)}
         startFrom={Math.round(startFrom * fps)}
@@ -485,7 +500,7 @@ const BackgroundImageLayer: React.FC<{
       {/* Dark overlay for readability */}
       <AbsoluteFill
         style={{
-          background: `rgba(15, 23, 42, ${overlayOpacity})`,
+          background: `rgba(10, 10, 10, ${overlayOpacity})`,
         }}
       />
       {/* Component content on top */}
@@ -519,7 +534,7 @@ const BackgroundVideoLayer: React.FC<{
       {/* Dark overlay for readability */}
       <AbsoluteFill
         style={{
-          background: `rgba(15, 23, 42, ${overlayOpacity})`,
+          background: `rgba(10, 10, 10, ${overlayOpacity})`,
         }}
       />
       {/* Component content on top */}
@@ -595,6 +610,18 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
   if (cut.type === "hero_title" && cut.text) {
     return maybeWrapWithBg(
       <HeroTitle title={cut.text} subtitle={cut.heroSubtitle || cut.subtitle} />
+    );
+  }
+  if (cut.type === "brand_close" && cut.wordmark) {
+    return (
+      <BrandClose
+        wordmark={cut.wordmark}
+        tagline={cut.tagline}
+        url={cut.url}
+        logoSrc={cut.logoSrc}
+        accentColor={cut.accentColor}
+        backgroundColor={cut.backgroundColor}
+      />
     );
   }
   if (cut.type === "terminal_scene" && cut.steps) {
@@ -752,6 +779,11 @@ const OverlayRenderer: React.FC<{ overlay: Overlay }> = ({ overlay }) => {
   }
   if (overlay.type === "hero_title") {
     return <HeroTitle title={overlay.text} subtitle={overlay.subtitle} />;
+  }
+  if (overlay.type === "headline" && overlay.text) {
+    return (
+      <HeadlineOverlay text={overlay.text} color={overlay.color} fontSize={overlay.fontSize} />
+    );
   }
   if (overlay.type === "provider_chip" && overlay.providers) {
     return (
