@@ -1,0 +1,82 @@
+{
+  "themeConfig": {
+    "backgroundColor": "#0A0A0A",
+    "surfaceColor": "#0A0A0A",
+    "primaryColor": "#FF6B1A",
+    "accentColor": "#FF6B1A",
+    "textColor": "#FFFFFF",
+    "chartColors": ["#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A"]
+  },
+  "cuts": [
+    {
+      "id": "hero-video",
+      "source": "assets/reel/hero-socio-clip.mp4",
+      "in_seconds": 0,
+      "out_seconds": 8.93,
+      "playbackRate": 0.9
+    },
+    {
+      "id": "ember-thread",
+      "type": "ember_thread",
+      "in_seconds": 8.93,
+      "out_seconds": 15,
+      "backgroundColor": "#0A0A0A",
+      "accentColor": "#FF6B1A"
+    },
+    {
+      "id": "brand-close",
+      "type": "brand_close",
+      "in_seconds": 15,
+      "out_seconds": 22,
+      "wordmark": "AetherLogik",
+      "tagline": "Lo construimos, lo automatizamos, es tuyo.",
+      "url": "aetherlogik.com",
+      "logoSrc": "assets/reel/logo-ember.webp",
+      "accentColor": "#FF6B1A",
+      "backgroundColor": "#0A0A0A"
+    }
+  ],
+  "overlays": [
+    {
+      "type": "headline",
+      "in_seconds": 0,
+      "out_seconds": 5,
+      "text": "Tú haces lo que importa.",
+      "color": "#FFFFFF",
+      "fontSize": 58,
+      "position": "bottom",
+      "scrim": true
+    },
+    {
+      "type": "headline",
+      "in_seconds": 5,
+      "out_seconds": 8.93,
+      "text": "La IA se encarga del resto.",
+      "color": "#FFFFFF",
+      "fontSize": 58,
+      "position": "bottom",
+      "scrim": true
+    },
+    {
+      "type": "headline",
+      "in_seconds": 9.3,
+      "out_seconds": 15,
+      "text": "Automatización e inteligencia artificial, hechas para tu negocio.",
+      "subtitle": "Aunque no seas técnico.",
+      "color": "#FFFFFF",
+      "subtitleColor": "#D4D4D4",
+      "fontSize": 50,
+      "subtitleFontSize": 26,
+      "position": "center"
+    }
+  ],
+  "captions": [],
+  "audio": {
+    "music": {
+      "src": "assets/reel/bg-music-v3.mp3",
+      "volume": 1.0,
+      "fadeInSeconds": 1.2,
+      "fadeOutSeconds": 2.0
+    }
+  }
+}
