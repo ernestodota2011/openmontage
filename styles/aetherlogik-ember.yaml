@@ -1,0 +1,132 @@
+# AetherLogik Ember — playbook de marca para video premium.
+# Fuente de verdad reutilizable para los gates (slideshow_risk, variation, delivery_promise,
+# brand_palette_guard) y para el style-bridge (Remotion themeConfig / HyperFrames :root).
+# Marca: acento SOLO ember sobre near-black, boxless, movimiento sutil, anti-AI-slop.
+identity:
+  name: "AetherLogik Ember"
+  category: cinematic
+  mood: premium, warm, restrained, intelligent
+  pace: moderate
+  best_for: "AetherLogik brand reels, brand-films, explainers y teasers premium (agencia y demos)"
+
+visual_language:
+  color_palette:
+    primary: ["#ff6b1a", "#e85d10"]
+    accent: ["#ff6b1a"]
+    background: "#0a0a0a"
+    text: "#f5f5f5"
+    muted: "#9aa0a6"
+    muted_text: "#9aa0a6"
+    surface: "#141414"
+  composition: "boxless — sin cards; aire generoso + hairlines + tipografia; sujeto integrado a la escena; rule-of-thirds para el hero"
+  texture: "grano de film temporal sutil + halation calido en highlights; NO flat, NO plastico"
+
+typography:
+  headings:
+    font: "Space Grotesk"
+    weight: 700
+    tracking: "-0.03em"
+  body:
+    font: "Inter"
+    weight: 400
+    line_height: 1.5
+  code:
+    font: "JetBrains Mono"
+    weight: 400
+  scale_system: "major_third"
+  weight_matrix:
+    title: 700
+    heading: 600
+    body: 400
+    caption: 450
+
+motion:
+  transitions: [fade, dissolve, none]
+  animation_style: "ease-out entrance (easeOutExpo), sin bounce; movimiento sutil, profundidad > movimiento"
+  pacing_rules:
+    min_scene_hold_seconds: 2.5
+    max_scene_hold_seconds: 6.0
+    text_card_hold_seconds: 2.1
+    stat_card_hold_seconds: 2.5
+    transition_duration_seconds: 0.5
+  entrance: "mask-reveal (translateY 110%->0, 700-900ms) o blur-in + rise; stagger de linea 80-120ms"
+  exit: "blur-out + fade, mas rapido (250-350ms)"
+  fps: 24
+  easing:
+    entrance: "cubic-bezier(0.16, 1, 0.3, 1)"
+    exit: "cubic-bezier(0.32, 0, 0.67, 0)"
+    camera: "cubic-bezier(0.65, 0, 0.35, 1)"
+  spring_default: { mass: 1, stiffness: 100, damping: 26, overshootClamping: false }
+
+audio:
+  voice_style: "calido, cercano, seguro; ES neutro con tu"
+  music_mood: "cinematic minimal / ambient tenso; densidad baja al inicio, sube al climax"
+  music_volume: 0.0
+  loudness_target_lufs: -14
+  true_peak_dbtp: -1.0
+  sfx_style: "whoosh sutil en cortes, impacto sub en el reveal, riser antes del climax; UI ticks -24dB"
+  ducking_threshold_db: -12
+  ducking_method: "sidechaincompress + loudnorm 2-pasadas (NUNCA subir volume a ciegas)"
+
+asset_generation:
+  image_prompt_prefix: "cinematic photoreal, warm tungsten light over near-black, single ember accent, subject integrated into the scene, shallow depth of field, "
+  image_negative_prompt: "cyan, teal, blue, violet, lavender, purple, neon, glow, bloom, cutout sticker subject, flat even lighting, oversaturated, plastic, text artifacts, warped hands, extra fingers"
+  i2v_negative_prompt: "morphing, melting face, warped hands, extra fingers, distortion, warping, flicker, background shifting, text artifacts, blue light, cyan, teal, neon glow"
+  consistency_anchors:
+    - "Ember (#ff6b1a) es el UNICO acento y aparece como puntuacion, no como fondo"
+    - "Fondo/estructura near-black (#0a0a0a); texto near-white (#f5f5f5)"
+    - "CERO cian/violeta/lavanda y CERO glows (tell #1 de AI-slop)"
+    - "Boxless: sin cards alrededor del texto"
+    - "Sujeto integrado a la escena, nunca recortado tipo sticker"
+    - "Iluminacion calida tungsteno; el ember nace de la luz de la escena"
+
+overlays:
+  headline:
+    bg: "transparent"
+    text: "#f5f5f5"
+    accent: "#ff6b1a"
+    scrim: "linear-gradient(transparent, rgba(0,0,0,0.55))"
+  key_term:
+    bg: "transparent"
+    text: "#ff6b1a"
+  brand_close:
+    bg: "#0a0a0a"
+    text: "#f5f5f5"
+    accent: "#ff6b1a"
+
+quality_rules:
+  - "Acento UNICO ember #ff6b1a; CERO cian/violeta/lavanda y CERO glow/bloom (finding CRITICAL)"
+  - "Boxless: sin cards/cajas/bordes redondeados con fondo alrededor del texto"
+  - "Movimiento sutil (profundidad > movimiento); sin overshoot/bounce cursi"
+  - "Sujeto integrado a la escena, nunca recortado"
+  - "Audio audible y nivelado a -14 LUFS / -1 dBTP (nunca mudo, nunca subir volume a ciegas)"
+  - "Isotipo = el asset real (logo-ember-hires.webp), NO generado con IA"
+  - "Contraste minimo 4.5:1 para todo el texto; legible a 720p"
+  - "El ember es puntuacion: 1 palabra/elemento acentuado por composicion"
+
+chart_palette:
+  - "#ff6b1a"
+  - "#ff8a4c"
+  - "#c24e12"
+  - "#f5f5f5"
+  - "#9aa0a6"
+  - "#5c5c5c"
+
+color_rules:
+  harmony_type: "monochromatic"
+  contrast_validation: true
+  colorblind_safe: true
+
+# Bloque leido por lib/brand_palette_guard.py (anti-AI-slop). Si falta, el guard usa sus defaults.
+brand_guard:
+  accent_hex: "#ff6b1a"
+  background_hex: "#0a0a0a"
+  # Hex prohibidos de forma dura (slop conocido + navy que se colo en v1):
+  forbidden_hex: ["#22d3ee", "#a78bfa", "#00ffff", "#0ff", "#0f172a", "#1e40af", "#2563eb"]
+  # Banda de matiz permitida (grados HSV) para colores saturados: warm ember/naranja.
+  allowed_hue_ranges: [[0, 55], [330, 360]]
+  # Saturacion por debajo de esto = se considera gris/neutro y se permite (blanco/negro/grises).
+  neutral_saturation_max: 0.18
+  allow_glow: false
+  glow_blur_threshold_px: 12
+  boxless: true
