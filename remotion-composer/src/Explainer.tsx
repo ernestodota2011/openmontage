@@ -41,6 +41,7 @@ import { StatReveal } from "./components/StatReveal";
 import { HeroTitle } from "./components/HeroTitle";
 import { HeadlineOverlay } from "./components/HeadlineOverlay";
 import { BrandClose } from "./components/BrandClose";
+import { BeatWord } from "./components/BeatWord";
 import { AnimeScene } from "./components/AnimeScene";
 import type { CameraMotion } from "./components/AnimeScene";
 import { TerminalScene } from "./components/TerminalScene";
@@ -207,6 +208,11 @@ interface Cut {
   // Video source trim — seek to this point in the source before playback.
   // Defaults to 0 (play from beginning). Use this instead of in_seconds for source trimming.
   source_in_seconds?: number;
+  // Playback speed for video cuts (1 = native speed, <1 = slow motion, >1 = speed up).
+  // Added 2026-07-04 reel-v2: stretches a short i2v clip to cover a longer cut
+  // (e.g. a 6s clip at playbackRate 0.67 spans a 9s cut) using Remotion's native
+  // frame-accurate video decoding — no re-encode/interpolation artifacts.
+  playbackRate?: number;
   // Comparison props
   leftLabel?: string;
   rightLabel?: string;
@@ -432,9 +438,10 @@ const ImageScene: React.FC<{ src: string; animation?: string }> = ({
 // Enhanced Video Scene
 // ---------------------------------------------------------------------------
 
-const VideoScene: React.FC<{ src: string; startFrom?: number }> = ({
+const VideoScene: React.FC<{ src: string; startFrom?: number; playbackRate?: number }> = ({
   src,
   startFrom = 0,
+  playbackRate = 1,
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -451,6 +458,7 @@ const VideoScene: React.FC<{ src: string; startFrom?: number }> = ({
       <OffthreadVideo
         src={resolveAsset(src)}
         startFrom={Math.round(startFrom * fps)}
+        playbackRate={playbackRate}
         style={{
           width: "100%",
           height: "100%",
@@ -574,7 +582,7 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
   // Use transparent bg so the animated gradient background shows through
   // When no explicit backgroundColor on the cut, inherit from theme
   const rawBg = (cut.backgroundImage || cut.backgroundVideo) ? "transparent" : (cut.backgroundColor || theme.surfaceColor);
-  const bgColor = (rawBg === theme.backgroundColor || rawBg === "#0F172A" || rawBg === "#0f172a") ? "transparent" : rawBg;
+  const bgColor = (rawBg === theme.backgroundColor || rawBg === "#0a0a0a" || rawBg === "#0A0A0A") ? "transparent" : rawBg;
   const textColor = cut.color || theme.textColor;
   const accent = cut.accentColor || theme.accentColor;
 
@@ -610,6 +618,18 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
   if (cut.type === "hero_title" && cut.text) {
     return maybeWrapWithBg(
       <HeroTitle title={cut.text} subtitle={cut.heroSubtitle || cut.subtitle} />
+    );
+  }
+  if (cut.type === "beat_word" && cut.text) {
+    return (
+      <BeatWord
+        text={cut.text}
+        backgroundImageSrc={cut.backgroundImage}
+        color={textColor}
+        accentColor={accent}
+        fontSize={cut.fontSize}
+        backgroundColor={cut.backgroundColor || theme.backgroundColor}
+      />
     );
   }
   if (cut.type === "brand_close" && cut.wordmark) {
@@ -740,7 +760,9 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
   }
 
   if (cut.source && isVideo(cut.source)) {
-    return maybeWrapWithBg(<VideoScene src={cut.source} startFrom={cut.source_in_seconds ?? 0} />);
+    return maybeWrapWithBg(
+      <VideoScene src={cut.source} startFrom={cut.source_in_seconds ?? 0} playbackRate={cut.playbackRate} />
+    );
   }
 
   // Final fallback — try as image if source exists, otherwise show text_card

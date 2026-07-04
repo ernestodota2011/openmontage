@@ -1,0 +1,83 @@
+{
+  "themeConfig": {
+    "backgroundColor": "#0A0A0A",
+    "surfaceColor": "#0A0A0A",
+    "primaryColor": "#FF6B1A",
+    "accentColor": "#FF6B1A",
+    "textColor": "#FFFFFF",
+    "chartColors": ["#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A", "#FF6B1A"]
+  },
+  "cuts": [
+    {
+      "id": "hero-video",
+      "source": "assets/reel/reel-hero-clip-i2v.mp4",
+      "in_seconds": 0,
+      "out_seconds": 9,
+      "playbackRate": 0.671296
+    },
+    {
+      "id": "word-1",
+      "type": "beat_word",
+      "in_seconds": 9,
+      "out_seconds": 11.33,
+      "text": "Apps a medida",
+      "fontSize": 104,
+      "color": "#FFFFFF",
+      "backgroundColor": "#0A0A0A",
+      "backgroundImage": "assets/reel/hero.jpg"
+    },
+    {
+      "id": "word-2",
+      "type": "beat_word",
+      "in_seconds": 11.33,
+      "out_seconds": 13.67,
+      "text": "Automatización",
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "backgroundColor": "#0A0A0A",
+      "backgroundImage": "assets/reel/hero.jpg"
+    },
+    {
+      "id": "word-3",
+      "type": "beat_word",
+      "in_seconds": 13.67,
+      "out_seconds": 16,
+      "text": "IA en tu negocio",
+      "fontSize": 96,
+      "color": "#FFFFFF",
+      "backgroundColor": "#0A0A0A",
+      "backgroundImage": "assets/reel/hero.jpg"
+    },
+    {
+      "id": "brand-close",
+      "type": "brand_close",
+      "in_seconds": 16,
+      "out_seconds": 22,
+      "wordmark": "AetherLogik",
+      "tagline": "Lo construimos, lo automatizamos, es tuyo.",
+      "url": "aetherlogik.com",
+      "logoSrc": "assets/reel/logo-ember.webp",
+      "accentColor": "#FF6B1A",
+      "backgroundColor": "#0A0A0A"
+    }
+  ],
+  "overlays": [
+    {
+      "type": "headline",
+      "in_seconds": 3,
+      "out_seconds": 9,
+      "text": "Tu operación, funcionando sola.",
+      "color": "#FFFFFF",
+      "fontSize": 72
+    }
+  ],
+  "captions": [],
+  "audio": {
+    "music": {
+      "src": "assets/reel/bg-music.mp3",
+      "volume": 0.12,
+      "fadeInSeconds": 2,
+      "fadeOutSeconds": 3
+    }
+  }
+}

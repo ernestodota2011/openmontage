@@ -15,6 +15,7 @@ export { ScreenshotScene } from "./ScreenshotScene";
 export { ProviderChip } from "./ProviderChip";
 export { HeadlineOverlay } from "./HeadlineOverlay";
 export { BrandClose } from "./BrandClose";
+export { BeatWord } from "./BeatWord";
 export type { ParticleType } from "./ParticleOverlay";
 export type { CameraMotion, AnimeSceneProps } from "./AnimeScene";
 export type { TerminalStep } from "./TerminalScene";
