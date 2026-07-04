@@ -42,6 +42,7 @@ import { HeroTitle } from "./components/HeroTitle";
 import { HeadlineOverlay } from "./components/HeadlineOverlay";
 import { BrandClose } from "./components/BrandClose";
 import { BeatWord } from "./components/BeatWord";
+import { EmberThread } from "./components/EmberThread";
 import { AnimeScene } from "./components/AnimeScene";
 import type { CameraMotion } from "./components/AnimeScene";
 import { TerminalScene } from "./components/TerminalScene";
@@ -298,6 +299,10 @@ interface Overlay {
   // headline — added 2026-07-04 brand-reel pilot (brand-safe: no hardcoded colors)
   color?: string;
   fontSize?: number;
+  // headline subtitle + placement — added 2026-07-04 vertical reel v3
+  subtitleColor?: string;
+  subtitleFontSize?: number;
+  scrim?: boolean;
 }
 
 interface AudioLayer {
@@ -644,6 +649,14 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
       />
     );
   }
+  if (cut.type === "ember_thread") {
+    return (
+      <EmberThread
+        backgroundColor={cut.backgroundColor}
+        accentColor={accent}
+      />
+    );
+  }
   if (cut.type === "terminal_scene" && cut.steps) {
     return maybeWrapWithBg(
       <TerminalScene
@@ -804,7 +817,16 @@ const OverlayRenderer: React.FC<{ overlay: Overlay }> = ({ overlay }) => {
   }
   if (overlay.type === "headline" && overlay.text) {
     return (
-      <HeadlineOverlay text={overlay.text} color={overlay.color} fontSize={overlay.fontSize} />
+      <HeadlineOverlay
+        text={overlay.text}
+        color={overlay.color}
+        fontSize={overlay.fontSize}
+        subtitle={overlay.subtitle}
+        subtitleColor={overlay.subtitleColor}
+        subtitleFontSize={overlay.subtitleFontSize}
+        position={overlay.position as "center" | "bottom" | undefined}
+        scrim={overlay.scrim}
+      />
     );
   }
   if (overlay.type === "provider_chip" && overlay.providers) {
