@@ -31,6 +31,7 @@ export interface LaHoraRobadaProps {
   shot4Src: string;
   musicSrc: string;
   logoSrc: string;
+  [key: string]: unknown; // required by the <Composition> generic (house convention, dbe87d7)
 }
 
 const SHOT1_FRAMES = 80; // 3.333s — ANTES-A, establishing, push-in 1.0->1.03
