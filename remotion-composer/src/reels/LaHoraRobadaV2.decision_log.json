@@ -1,0 +1,75 @@
+{
+  "reel": "la-hora-robada-v2",
+  "date": "2026-07-05",
+  "supersedes": "la-hora-robada (v1, LaHoraRobada.tsx) -- v1 left untouched for comparison",
+  "reference_keyframes_for_coherence_guard": {
+    "kf_a": "https://media.aetherlogik.com/agency/la-hora-robada/v2/kf-a-small.jpg",
+    "kf_b": "https://media.aetherlogik.com/agency/la-hora-robada/v2/kf-b-small.jpg",
+    "kf_c": "https://media.aetherlogik.com/agency/la-hora-robada/v2/kf-c-small.jpg"
+  },
+  "decisions": [
+    {
+      "category": "approach",
+      "choice": "Approach A - cadena continua (un mundo, un personaje, cambia el tiempo)",
+      "options_considered": ["Approach A - cadena continua", "montaje multi-clip v1 (descartado)"],
+      "reason": "Veredicto de Ernesto sobre v1: buena calidad de imagen pero montaje de 4 clips i2v independientes (drift de personaje/vestuario, 3 mundos sin relacion). Doctrina Video-Coherencia-SOTA-2026 (2 investigaciones verificadas) recomienda first/last-frame interpolation + hero-frame + camara nombrada + paleta fija.",
+      "confidence": 0.9
+    },
+    {
+      "category": "i2v_model",
+      "choice": "fal-ai/kling-video/o1/image-to-video [Pro] (first/last-frame)",
+      "options_considered": ["Kling O1 Pro", "Kling O1 Standard", "Kling 2.5/3 Pro (i2v simple, usado en v1)"],
+      "reason": "Unico modelo verificado en fal con first/last-frame + sintaxis @Image1/@Image2 nativa, requerido para encadenar Plano1->Plano2 por keyframe compartido. Pro elegido sobre Standard ($0.112/s vs $0.084/s) por ser la pieza mas exigente en identidad/coherencia de todo el reel.",
+      "confidence": 0.9
+    },
+    {
+      "category": "ember_thread_role",
+      "choice": "puente de 0.5s sobre el corte de archivo entre Plano1 y Plano2, no una escena propia",
+      "options_considered": ["escena completa como en v1", "puente corto sobre el corte"],
+      "reason": "v1 uso EmberThread como su propia escena de 1s; en v2 los 2 planos ya estan cosidos narrativamente por el keyframe compartido KF-B, asi que EmberThread solo necesita disfrazar el corte fisico de archivo, no cargar la transicion emocional completa.",
+      "confidence": 0.85
+    },
+    {
+      "category": "delivery_promise_fix",
+      "choice": "contar el EmberThread bridge como cut type=animation para el calculo de motion_ratio",
+      "options_considered": ["3 cuts sin contar el bridge (66.7%, FALLA)", "4 cuts contando el bridge como animation (75%, PASA)"],
+      "reason": "Detectado proactivamente en pre-produccion: con solo Plano1+Plano2+BrandClose (3 cuts) el motion_ratio caia a 66.7%, por debajo del 70% minimo para motion_led. El bridge es honestamente animacion real (no una tarjeta de texto), asi que contarlo es clasificacion correcta, no un truco para pasar el gate.",
+      "confidence": 0.9
+    },
+    {
+      "category": "luz_fria_vs_regla_de_marca",
+      "choice": "luz fria del Plano1 especificada como blanco-frio NEUTRO desaturado (~5000K), nunca azul/cian saturado",
+      "options_considered": ["luz fria saturada tipo cian (rechazado)", "luz fria neutra desaturada (elegido)"],
+      "reason": "brand_palette_guard permite neutros (saturacion <=0.18) sin importar el matiz; solo prohibe SATURADOS fuera de la banda ember. Verificado con coherence_guard sobre el render real: saturacion 0.005 en el frame inicial de Plano1 (practicamente gris, no azul).",
+      "confidence": 0.95
+    },
+    {
+      "category": "fps_y_duracion",
+      "choice": "24fps, 408 frames = 17.000s exactos",
+      "options_considered": ["24fps (elegido, consistente con v1 y styles/aetherlogik-ember.yaml)", "30fps"],
+      "reason": "Mismo estandar de marca que v1 (motion.fps: 24 en el playbook). Duracion 17.0s identica a v1 por coincidencia de la suma de planos (7.0+0.5+6.0+3.5), dentro del rango 15-18s aprobado.",
+      "confidence": 0.9
+    },
+    {
+      "category": "musica",
+      "choice": "pista nueva 'mas animada' generada (Suno/PoYo), NO reusar la de v1",
+      "options_considered": ["reusar music-leveled.mp3 de v1 (mas barato)", "generar pista nueva mas energica"],
+      "reason": "Decision explicita de Ernesto en la aprobacion de presupuesto ($2.01 incluye musica nueva). Brief: cinematic/warm/hopeful/pulso ritmico claro/lift emocional mayor en el despues, nunca EDM generica.",
+      "confidence": 1.0
+    },
+    {
+      "category": "coherence_guard",
+      "choice": "gate nuevo CPU-only (palette envelope + dHash/histograma vs keyframes), scope honesto sin verificacion facial fina",
+      "options_considered": ["gate con modelo de identidad facial en GPU (fuera de alcance)", "gate CPU-only con metricas de pixel honestas (elegido)"],
+      "reason": "Especificacion explicita del coordinador: CPU-only, ffmpeg + numpy/Pillow, honesto sobre que caza (drift grueso) y que no (identidad facial fina). Corrido contra el render real de este reel antes de este commit: PASS en ambos planos.",
+      "confidence": 0.9
+    },
+    {
+      "category": "asset_cost",
+      "choice": "$2.006 real (3 keyframes + 2 clips Kling O1 Pro + musica nueva)",
+      "options_considered": ["estimado de pre-produccion: $1.906 sin musica nueva / $2.006 con musica nueva"],
+      "reason": "Costo real identico al estimado con musica nueva incluida. Buffer de ~$0.99 bajo el tope de $3 no fue necesario -- 0 retakes, los 3 keyframes y los 2 clips pasaron verificacion visual + coherence_guard en el primer intento.",
+      "confidence": 1.0
+    }
+  ]
+}

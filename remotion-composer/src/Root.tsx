@@ -17,6 +17,7 @@ import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
 import { LaHoraRobada, LaHoraRobadaProps, LA_HORA_ROBADA_TOTAL_FRAMES } from "./reels/LaHoraRobada";
+import { LaHoraRobadaV2, LaHoraRobadaV2Props, LA_HORA_ROBADA_V2_TOTAL_FRAMES } from "./reels/LaHoraRobadaV2";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -366,6 +367,20 @@ export const Root: React.FC = () => {
           musicSrc: "",
           logoSrc: "",
         } as LaHoraRobadaProps}
+      />
+      <Composition
+        id="LaHoraRobadaV2"
+        component={LaHoraRobadaV2}
+        durationInFrames={LA_HORA_ROBADA_V2_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          plano1Src: "",
+          plano2Src: "",
+          musicSrc: "",
+          logoSrc: "",
+        } as LaHoraRobadaV2Props}
       />
     </>
   );
