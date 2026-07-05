@@ -16,6 +16,7 @@ import { ProductReveal, ProductRevealProps } from "./components/ProductReveal";
 import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
+import { LaHoraRobada, LaHoraRobadaProps, LA_HORA_ROBADA_TOTAL_FRAMES } from "./reels/LaHoraRobada";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -349,6 +350,22 @@ export const Root: React.FC = () => {
           fadeOutSeconds: 1.5,
           overlay: true,
         } as EndTagProps}
+      />
+      <Composition
+        id="LaHoraRobada"
+        component={LaHoraRobada}
+        durationInFrames={LA_HORA_ROBADA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          shot1Src: "",
+          shot2Src: "",
+          shot3Src: "",
+          shot4Src: "",
+          musicSrc: "",
+          logoSrc: "",
+        } as LaHoraRobadaProps}
       />
     </>
   );

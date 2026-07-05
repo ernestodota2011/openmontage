@@ -1,0 +1,55 @@
+{
+  "reel": "la-hora-robada",
+  "date": "2026-07-04",
+  "decisions": [
+    {
+      "category": "renderer_family",
+      "choice": "cinematic",
+      "options_considered": ["cinematic", "animated-explainer", "hybrid"],
+      "reason": "Brand-film con arco emocional ANTES/DESPUES y hero-frames; no hay narracion ni contenido informativo (descarta animated-explainer), y no hay footage fuente real que mezclar con soporte (descarta hybrid).",
+      "confidence": 0.9
+    },
+    {
+      "category": "render_runtime",
+      "choice": "remotion",
+      "options_considered": ["remotion", "hyperframes"],
+      "reason": "Pieza video-led (4 de 5 beats son i2v real); las primitivas brand-safe (KineticHeadline/EmberThread/BrandClose/FilmGrade) ya existen en Remotion/React. HyperFrames es mas fuerte en tipografia/HTML-driven y su bloom nativo es justo el vector de glow que el guard prohibe.",
+      "confidence": 0.85
+    },
+    {
+      "category": "composition_mode",
+      "choice": "atelier",
+      "options_considered": ["atelier", "templated"],
+      "reason": "Pieza hero/marca de estreno del pipeline nuevo. Composicion bespoke nueva (LaHoraRobada.tsx) hand-authored por escena, sin cut.type JSON ni Explainer.tsx -- ver nota de interpretacion de atelier en LaHoraRobada.art-direction.md para la transparencia sobre reuso de theme.ts/KineticHeadline/EmberThread/BrandClose/FilmGrade como infraestructura de marca propia.",
+      "confidence": 0.8
+    },
+    {
+      "category": "mask_reveal_primitive",
+      "choice": "KineticHeadline",
+      "options_considered": ["KineticHeadline", "HeadlineOverlay"],
+      "reason": "Ambos existen en el fork (commits 2ca4cfc y dbe87d7). KineticHeadline implementa el mask-reveal real (overflow:hidden + translateY 110%->0 + easeOutExpo + stagger de linea, tokens de theme.ts) descrito en premium-craft-standards.md, y su propio docstring dice explicitamente 'use it for hero/brand headlines INSTEAD of hero_title'. HeadlineOverlay usa un spring simple de fade+translate (no es mask-reveal) y fue disenado para el dispatcher JSON de Explainer.tsx (carril templated de v1-v3).",
+      "confidence": 0.95
+    },
+    {
+      "category": "fps",
+      "choice": 24,
+      "options_considered": [24, 30],
+      "reason": "styles/aetherlogik-ember.yaml declara motion.fps: 24 como estandar de marca (look cine); los renders anteriores (v1-v3) usaron 30fps por default de Explainer/ExplainerVertical antes de que existiera el playbook de marca. La composicion bespoke nueva no hereda ese default.",
+      "confidence": 0.9
+    },
+    {
+      "category": "tagline_cierre",
+      "choice": "IA que te devuelve el tiempo.",
+      "options_considered": ["propuesta del director en Ronda 1"],
+      "reason": "Aprobada por Ernesto tal cual en el mensaje de aprobacion de Ronda 2, sin pasar por copywriter (no es copy de conversion, es microcopy de marca sin claims/cifras).",
+      "confidence": 1.0
+    },
+    {
+      "category": "asset_cost",
+      "choice": "$2.45 real (4 stills + 4 clips i2v + 1 musica)",
+      "options_considered": ["estimado Ronda 1: $2.45"],
+      "reason": "Costo real identico al estimado de pre-produccion. Buffer de $0.55 bajo el tope de ~$3 no fue necesario -- 0 retakes.",
+      "confidence": 1.0
+    }
+  ]
+}
