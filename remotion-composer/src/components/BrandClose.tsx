@@ -15,6 +15,20 @@ export interface BrandCloseProps {
   logoSrc?: string; // path in public/ (staticFile-resolved) or absolute http(s) URL
   accentColor?: string;
   backgroundColor?: string;
+  /** Base ("cream") color for the wordmark's non-accented part in the
+   * official two-tone treatment. No exact "crema" hex is registered yet in
+   * the brand identity doc — this warm-white sits in until one is (closed
+   * decision 2026-07-05). */
+  wordmarkColor?: string;
+  /** Substring of `wordmark` to render in `accentColor` (case-insensitive,
+   * first match only). Official two-tone treatment: "Aether" (wordmarkColor)
+   * + "Logik" (accentColor) — defaults to "Logik" to match the AetherLogik
+   * wordmark used across the fork. Ignored when `wordmarkMono` is true or
+   * when the substring isn't found in `wordmark` (graceful mono fallback —
+   * safe for other callers of this shared component). */
+  wordmarkAccentPart?: string;
+  /** Force single-color legacy rendering, skipping the two-tone split. */
+  wordmarkMono?: boolean;
 }
 
 /**
@@ -23,6 +37,12 @@ export interface BrandCloseProps {
  * background. Added for the AetherLogik brand reel pilot (2026-07-04) —
  * none of the existing cut types support a 3-tier stacked close
  * (mark + tagline + url) without hardcoded off-brand colors.
+ *
+ * Wordmark two-tone treatment added 2026-07-05 (official brand decision:
+ * "Aether" crema + "Logik" ember) — parametrized, not hardcoded to this
+ * reel's exact string, so other callers of this shared component keep
+ * working (mono fallback when `wordmarkAccentPart` isn't found, or force
+ * it explicitly via `wordmarkMono`).
  */
 export const BrandClose: React.FC<BrandCloseProps> = ({
   wordmark,
@@ -31,6 +51,9 @@ export const BrandClose: React.FC<BrandCloseProps> = ({
   logoSrc,
   accentColor = "#FF6B1A",
   backgroundColor = "#0A0A0A",
+  wordmarkColor = "#F5EFE0",
+  wordmarkAccentPart = "Logik",
+  wordmarkMono = false,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -45,6 +68,25 @@ export const BrandClose: React.FC<BrandCloseProps> = ({
       ? logoSrc
       : staticFile(logoSrc)
     : undefined;
+
+  const accentIdx = wordmarkMono
+    ? -1
+    : wordmark.toLowerCase().indexOf(wordmarkAccentPart.toLowerCase());
+
+  const wordmarkNode =
+    accentIdx === -1 ? (
+      <span style={{ color: wordmarkColor }}>{wordmark}</span>
+    ) : (
+      <>
+        <span style={{ color: wordmarkColor }}>{wordmark.slice(0, accentIdx)}</span>
+        <span style={{ color: accentColor }}>
+          {wordmark.slice(accentIdx, accentIdx + wordmarkAccentPart.length)}
+        </span>
+        <span style={{ color: wordmarkColor }}>
+          {wordmark.slice(accentIdx + wordmarkAccentPart.length)}
+        </span>
+      </>
+    );
 
   return (
     <AbsoluteFill
@@ -75,11 +117,10 @@ export const BrandClose: React.FC<BrandCloseProps> = ({
           fontSize: 88,
           fontWeight: 800,
           fontFamily: "Inter, system-ui, sans-serif",
-          color: "#F5F5F5",
           letterSpacing: "-0.01em",
         }}
       >
-        {wordmark}
+        {wordmarkNode}
       </div>
       {tagline && (
         <div
