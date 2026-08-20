@@ -46,9 +46,20 @@ interface BubbleProps {
   message: ChatMessage;
   enterAtFrame: number;
   emphasize?: boolean;
+  /** Dim a non-target bubble during a punch beat (fixed real 2026-08-20:
+   * bubble-opacity dimming is cheap and reversible, unlike layout changes,
+   * and gives the eye somewhere unambiguous to land). */
+  dim?: boolean;
+  /** Color for the timestamp/tick line. Defaults to BRAND.muted. Callers
+   * pass BRAND.accent to actually deliver the "el tick pasa a ember cuando
+   * se lee" promise (fixed real 2026-08-20 — the label text used to change
+   * from "enviado ✓" to "leído ✓✓" without ever changing color, so the
+   * promised ember tick never rendered in the shipped pixels — caught in
+   * post-render final_review frame-sampling). */
+  timeColor?: string;
 }
 
-const Bubble: React.FC<BubbleProps> = ({ message, enterAtFrame, emphasize }) => {
+const Bubble: React.FC<BubbleProps> = ({ message, enterAtFrame, emphasize, dim, timeColor }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const local = frame - enterAtFrame;
@@ -59,7 +70,14 @@ const Bubble: React.FC<BubbleProps> = ({ message, enterAtFrame, emphasize }) => 
   });
   const translateY = interpolate(s, [0, 1], [24, 0]);
   const emphasisScale = emphasize
-    ? interpolate(local, [0, 14], [1, 1.06], {
+    ? interpolate(local, [0, 14], [1, 1.1], {
+        easing: EASING.outExpo,
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+      })
+    : 1;
+  const dimOpacity = dim
+    ? interpolate(local, [0, 14], [1, 0.32], {
         easing: EASING.outExpo,
         extrapolateLeft: "clamp",
         extrapolateRight: "clamp",
@@ -71,14 +89,14 @@ const Bubble: React.FC<BubbleProps> = ({ message, enterAtFrame, emphasize }) => 
       style={{
         alignSelf: message.outgoing ? "flex-end" : "flex-start",
         maxWidth: "78%",
-        opacity,
+        opacity: opacity * dimOpacity,
         transform: `translateY(${translateY}px) scale(${emphasisScale})`,
       }}
     >
       <div
         style={{
           background: BRAND.surface,
-          border: message.outgoing ? `1px solid ${BRAND.accent}` : "1px solid transparent",
+          border: message.outgoing || emphasize ? `1px solid ${BRAND.accent}` : "1px solid transparent",
           borderRadius: 18,
           padding: "14px 18px",
           color: BRAND.text,
@@ -94,7 +112,7 @@ const Bubble: React.FC<BubbleProps> = ({ message, enterAtFrame, emphasize }) => 
           marginTop: 6,
           fontSize: 18,
           fontFamily: "JetBrains Mono, monospace",
-          color: BRAND.muted,
+          color: timeColor ?? BRAND.muted,
           textAlign: message.outgoing ? "right" : "left",
         }}
       >
@@ -142,18 +160,42 @@ export const ChatThreadStack: React.FC<{ messages: ChatMessage[] }> = ({ message
   );
 };
 
-/** variant="punch" — the thread stays put; the parent Sequence's NamedCamera
- * does the punch-in. This just emphasizes the target bubble on entry. */
+/** variant="punch" — a real digital punch-in: the WHOLE layer scales up
+ * fast (not just +6% on one bubble), the two non-target bubbles dim to 32%
+ * opacity, and the target bubble gets an ember hairline + a stronger scale
+ * bump. Fixed real 2026-08-20 (post-render final_review): the original cut
+ * only nudged one bubble +6% inside an otherwise-identical frame to the
+ * previous scene — in the rendered pixels it read as visually indistinguishable
+ * from `whatsapp_stack`, which under-delivers the declared shot_intent
+ * ("el gut-punch: el costo real de no responder rapido") on the reel's own
+ * emotional fulcrum. This version composites its own camera (no external
+ * NamedCamera needed) so the punch reads even as a single still frame. */
 export const ChatThreadPunch: React.FC<{ messages: ChatMessage[]; punchIndex: number }> = ({
   messages,
   punchIndex,
-}) => (
-  <PhoneFrame>
-    {messages.map((m, i) => (
-      <Bubble key={i} message={m} enterAtFrame={0} emphasize={i === punchIndex} />
-    ))}
-  </PhoneFrame>
-);
+}) => {
+  const frame = useCurrentFrame();
+  const layerScale = interpolate(frame, [0, 10], [1, 1.14], {
+    easing: EASING.outExpo,
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  return (
+    <AbsoluteFill style={{ transform: `scale(${layerScale})` }}>
+      <PhoneFrame>
+        {messages.map((m, i) => (
+          <Bubble
+            key={i}
+            message={m}
+            enterAtFrame={0}
+            emphasize={i === punchIndex}
+            dim={i !== punchIndex}
+          />
+        ))}
+      </PhoneFrame>
+    </AbsoluteFill>
+  );
+};
 
 /** variant="bot_reply" — typing indicator -> bot bubble -> ticks flip ember
  * -> appointment confirmation card. */
@@ -216,6 +258,7 @@ export const ChatThreadBotReply: React.FC<{
               outgoing: true,
             }}
             enterAtFrame={REPLY_AT}
+            timeColor={frame >= REPLY_AT + 12 ? BRAND.accent : BRAND.muted}
           />
         )}
 
