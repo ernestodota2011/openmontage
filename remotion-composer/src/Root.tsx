@@ -18,6 +18,7 @@ import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
 import { LaHoraRobada, LaHoraRobadaProps, LA_HORA_ROBADA_TOTAL_FRAMES } from "./reels/LaHoraRobada";
 import { LaHoraRobadaV2, LaHoraRobadaV2Props, LA_HORA_ROBADA_V2_TOTAL_FRAMES } from "./reels/LaHoraRobadaV2";
+import { TresMensajesDeAnoche, TresMensajesDeAnocheProps, TRES_MENSAJES_TOTAL_FRAMES } from "./reels/TresMensajesDeAnoche";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -381,6 +382,20 @@ export const Root: React.FC = () => {
           musicSrc: "",
           logoSrc: "",
         } as LaHoraRobadaV2Props}
+      />
+      <Composition
+        id="TresMensajesDeAnoche"
+        component={TresMensajesDeAnoche}
+        durationInFrames={TRES_MENSAJES_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          coldOpenSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          tail_padding_seconds: 0,
+        } as TresMensajesDeAnocheProps}
       />
     </>
   );
