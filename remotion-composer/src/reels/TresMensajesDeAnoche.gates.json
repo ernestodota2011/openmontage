@@ -1,0 +1,86 @@
+{
+  "reel": "tres-mensajes-de-anoche",
+  "run_date": "2026-08-20",
+  "run_by": "video-producer (local, python3 contra lib/*.py del fork, rama aetherlogik/brand-safe-reel-extensions)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.0,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.0, "reason": "Good variety"},
+        "decorative_visuals": {"score": 0.0, "reason": "Most scenes have clear communicative purpose"},
+        "weak_motion": {"score": 0.0, "reason": "Camera movement appears purposeful"},
+        "weak_shot_intent": {"score": 0.0, "reason": "Strong shot intent coverage"},
+        "typography_overreliance": {"score": 0.0, "reason": "Visual-first approach"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "Cinematic claims supported by structure"}
+      }
+    },
+    "variation_checker": {"score": 0.0, "verdict": "strong", "violations": [], "suggestions": []},
+    "delivery_promise": {
+      "promise_type": "hybrid",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.8333333333333334,
+      "motion_cuts": 5,
+      "slide_cuts": 1,
+      "still_cuts": 0
+    },
+    "brand_palette_guard": {
+      "verdict": "revise",
+      "counts": {"critical": 0, "warning": 3},
+      "violations": [
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.incoming_bubble"},
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.outgoing_bubble"},
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.appointment_card"}
+      ],
+      "note": "Las 3 warnings son la excepcion de UI chrome documentada (burbujas de chat necesitan bg+radius para leerse como burbujas). 0 criticos: cero cian/violeta/lavanda, cero glow, cero navy."
+    },
+    "tsc_noemit": {"exit_code": 0, "errors": 0, "command": "npm install && npx tsc --noEmit -p remotion-composer"}
+  },
+  "assets_generated": {
+    "still_a_cold_open": {
+      "model": "fal-ai/nano-banana-pro",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/still-a-cold-open-4k.png",
+      "cost_usd": 0.15
+    },
+    "still_b_reach_phone": {
+      "model": "fal-ai/nano-banana-pro/edit",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/still-b-reach-phone-4k.png",
+      "cost_usd": 0.15
+    },
+    "cold_open_video": {
+      "model": "fal-ai/kling-video/o1/image-to-video [Pro]",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/cold-open-kling-o1.mp4",
+      "duration_s_actual": 6.083,
+      "resolution": "1072x1928",
+      "codec": "h264",
+      "cost_usd_est": 0.681
+    },
+    "music": {
+      "model": "fal-ai/elevenlabs/music",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/music.mp3",
+      "cost_usd": 0.30
+    },
+    "sfx_notification_ding": {
+      "model": "fal-ai/elevenlabs/sound-effects/v2",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3",
+      "cost_usd": 0.0024
+    },
+    "sfx_gut_punch": {
+      "model": "fal-ai/elevenlabs/sound-effects/v2",
+      "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-gut-punch.mp3",
+      "cost_usd": 0.002
+    },
+    "total_cost_usd_actual": 1.2854,
+    "note": "Todos los assets descargados y re-hosteados en R2 (bucket agency/tres-mensajes-de-anoche/) antes de las 24h de expiracion de fal/PoYo. Isotipo de marca NO generado con IA: se reusa el asset real https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp."
+  },
+  "cold_open_visual_verification": {
+    "method": "ffprobe (duracion/resolucion/codec) + ffmpeg -ss <t> -frames:v 1 en 3 puntos (0.2s/3.0s/5.8s) mirados directamente",
+    "ffprobe": {"codec_name": "h264", "width": 1072, "height": 1928, "avg_frame_rate": "24/1", "duration_s": 6.083333},
+    "visual_result": "Movimiento continuo y motivado (brazo que se extiende y toma el telefono), identidad/vestuario/cuarto/iluminacion consistentes entre el frame inicial y el final (hero-frame lock funciono), sin warping visible, manos bien formadas (5 dedos), cero cian/violeta, luz ember calida como unica fuente."
+  },
+  "pending_post_render_gates": {
+    "coherence_guard": "requiere el MP4 renderizado real (pixeles) + los keyframes de referencia (still A/B del cold open). Pendiente de que devops corra el render en CT 128.",
+    "final_review": "ffprobe (duracion/resolucion/codec h264/audio real) + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  }
+}

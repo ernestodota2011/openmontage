@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open_wake",
+    "type": "video",
+    "description": "Dormitorio en penumbra; el celular en el buro se ilumina con la notificacion entrante y el brillo ember se refleja en el rostro dormido; la mano se despierta y alcanza el telefono, camara dolly-in lento sobre eje fijo",
+    "shot_language": {"shot_size": "MS", "camera_movement": "dolly_in_slow", "lighting_key": "low-key tungsteno practico, unica fuente = brillo del celular ember"},
+    "shot_intent": "hook silencioso: el espectador reconoce la escena en 2s sin texto, ancla emocional antes del dato",
+    "hero_moment": true,
+    "information_role": "establece el problema sin decirlo: mensajes esperando de madrugada",
+    "texture_keywords": ["grano de pelicula", "luz practica calida", "shallow dof", "piel iluminada por pantalla"]
+  },
+  {
+    "id": "whatsapp_stack",
+    "type": "animation",
+    "description": "Pantalla del celular en primer plano: 3 burbujas de mensaje entran en cascada con marca de hora 11:47pm, 11:52pm, 12:15am sobre fondo near-black; drift sutil de camara virtual sobre la composicion",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, ticks ember, sin acento saturado"},
+    "shot_intent": "muestra el volumen y la hora exacta: el problema es concreto, no abstracto",
+    "hero_moment": false,
+    "information_role": "dato duro: 3 mensajes, de noche, sin responder",
+    "texture_keywords": ["interfaz de chat estilizada propia", "tipografia mono para la hora", "burbujas neutras sin verde de WhatsApp"]
+  },
+  {
+    "id": "punch_lost_client",
+    "type": "animation",
+    "description": "Punch-in digital sobre el tercer mensaje: 'Gracias, ya contratamos a otra empresa'; la musica cae a casi silencio 0.4s y un golpe seco marca el corte",
+    "shot_language": {"shot_size": "CU", "camera_movement": "punch_in", "lighting_key": "UI modo oscuro, hold seco, sin color cromatico"},
+    "shot_intent": "el gut-punch: el costo real de no responder rapido, motiva el dato de los 5 minutos",
+    "hero_moment": false,
+    "information_role": "consecuencia visible del problema",
+    "texture_keywords": ["silencio antes del golpe", "tipografia con peso alto"]
+  },
+  {
+    "id": "stat_five_minutes",
+    "type": "stat_card",
+    "description": "Tipografia cinetica mask-reveal: 'Contactar en los primeros 5 minutos multiplica la conversion' con atribucion HBR / InsideSales en letra chica",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, hold deliberado de 3s"},
+    "shot_intent": "ancla el dato del blog al reel: la razon medible detras del dolor",
+    "hero_moment": false,
+    "information_role": "dato duro citado, bisagra entre el problema y la solucion",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "bot_responds",
+    "type": "animation",
+    "description": "Misma pantalla, mismo hilo de chat: el bot responde en segundos, los ticks cambian a ember, aparece el indicador de escritura y luego una tarjeta de cita confirmada con fecha y hora",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, ticks y confirmacion en ember"},
+    "shot_intent": "el 'mira lo que es posible': la misma interfaz, resuelta en segundos",
+    "hero_moment": false,
+    "information_role": "demo del producto, la promesa central del reel",
+    "texture_keywords": ["indicador de escritura", "tick ember", "tarjeta de cita confirmada"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo 'a' ember glossy + wordmark bicolor AetherLogik + tagline 'No pierdas otro cliente mientras duermes' + url aetherlogik.com sobre near-black, hold cerrado de 3s",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio, key suave sobre el isotipo"},
+    "shot_intent": "cierre de marca con CTA al blog/serie de tutoriales",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

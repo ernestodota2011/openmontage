@@ -1,0 +1,100 @@
+{
+  "reel": "tres-mensajes-de-anoche",
+  "date": "2026-08-20",
+  "source_post": "src/content/blog/chatbot-whatsapp-para-negocios.md (D:\\aetherlogik-astro)",
+  "purpose": "Piloto de la serie blog->reel de AetherLogik. Gancho para el post del chatbot de WhatsApp -- vende la serie, no ensena el tutorial completo.",
+  "decisions": [
+    {
+      "category": "3_axes",
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier",
+      "options_considered": [
+        "render_runtime=remotion (elegido)",
+        "render_runtime=hyperframes"
+      ],
+      "reason": "Se presentaron ambos runtimes por doctrina (AGENT_GUIDE 'Present Both Composition Runtimes'). HyperFrames (HTML/CSS/GSAP capturado como textura) exigiria reconstruir el stacking de burbujas + spring physics + typing indicator en GSAP/HTML desde cero; Remotion ya tiene la libreria de componentes brand-safe vetada (KineticHeadline/EmberThread/BrandClose/FilmGrade, theme.ts con easing/springs) probada en 3 reels previos (v1/v2/v3), y el patron NamedCamera + Sequence de LaHoraRobadaV2 es exactamente lo que este reel necesita. composition_mode=atelier es obligatorio (regla dura: hero/marca nunca templated).",
+      "confidence": 0.9
+    },
+    {
+      "category": "delivery_promise_classification",
+      "choice": "promise_type=hybrid (no motion_led, aunque el ratio medido lo habria superado)",
+      "options_considered": [
+        "motion_led (min_motion_ratio 0.7, still_fallback prohibido)",
+        "hybrid (min_motion_ratio 0.2, elegido)"
+      ],
+      "reason": "El reel mezcla un cold-open cinematico real (i2v) con un cuerpo de demo de UI/explainer -- eso es la definicion de hybrid, no de un cinematic puro. Clasificarlo como hybrid es la etiqueta honesta, no un truco para pasar el gate: medido con lib/delivery_promise.py el motion_ratio real es 83.3% (5/6 cuts), que de todas formas supera el piso de motion_led (70%). Se documenta la clasificacion mas honesta y el numero medido, no el que hiciera falta para pasar.",
+      "confidence": 0.85
+    },
+    {
+      "category": "asset_mix_generado_vs_autorado",
+      "choice": "Solo el cold open (escena 1) se genera con i2v real; las 3 escenas de UI de chat + la tipografia del dato + el cierre se autoran en Remotion (ChatThreadScene.tsx, componente nuevo)",
+      "options_considered": [
+        "Pedir a un modelo de video que genere la UI de WhatsApp animada",
+        "Autorar la UI en Remotion (elegido)"
+      ],
+      "reason": "Nota de realismo explicita de la skill aetherlogik-video: los modelos de i2v hacen bien escenas cinematicas/atmosfericas pero la UI/tipografia sale mejor autorada -- pedirle a un modelo de video que dibuje texto de chat legible y consistente produce artefactos tipograficos (uno de los negativos estandar de la doctrina de craft). Autorar en Remotion tambien es mas barato ($0 vs. varios clips i2v) y reusable para el resto de la serie.",
+      "confidence": 0.95
+    },
+    {
+      "category": "still_model",
+      "choice": "fal-ai/nano-banana-pro (texto-a-imagen, 4K, 9:16) para el hero-frame A + fal-ai/nano-banana-pro/edit para el hero-frame B (mano alcanzando el telefono, mismo cuarto/vestuario)",
+      "options_considered": [
+        "fal-ai/nano-banana-pro + /edit (elegido)",
+        "PoYo nano-banana-pro / nano-banana-pro-edit (mismo modelo subyacente, via PoYo)"
+      ],
+      "reason": "Mismo modelo (Gemini 3 Pro Image / Nano Banana Pro) disponible en ambas plataformas a precio identico ($0.15/img). Se elige fal porque ya esta cableado como MCP en esta sesion (tool nativa get_model_schema/run_model, sin friccion de curl+descarga+archivado manual que exige PoYo), y porque el flujo de coherencia (hero-frame + /edit para lockear identidad) ya esta probado en LaHoraRobadaV2 con este mismo par de modelos.",
+      "confidence": 0.9
+    },
+    {
+      "category": "i2v_model",
+      "choice": "fal-ai/kling-video/o1/image-to-video [Pro] (first/last-frame, @Image1/@Image2), 6s",
+      "options_considered": [
+        "Kling O1 Pro (elegido, $0.112/s)",
+        "Kling v3 Pro i2v simple ($0.14/s, sin first/last-frame)",
+        "Veo 3.1 image-to-video ($0.40/s, audio nativo -- no se necesita audio del clip, el audio lo maneja la composicion)",
+        "Seedance 2.0 image-to-video (PoYo/fal, ~$0.014/s -- mas barato pero sin first/last-frame explicito por keyframe compartido)"
+      ],
+      "reason": "Es el UNICO plano que necesita coherencia de identidad (cadena continua, doctrina de coherencia): first/last-frame de Kling O1 fija el arranque (dormido) y el final (mano en el telefono) con control estricto, evitando el micro-movimiento uncanny de un i2v de extremo abierto. Pro sobre Standard porque es la pieza mas exigente en identidad de todo el reel (mismo criterio que LaHoraRobadaV2). Veo 3.1 se descarta por precio (3.6x mas caro) sin beneficio -- no necesitamos su audio nativo ni su 4K para un plano de 6s en un reel de $2-3 de assets.",
+      "confidence": 0.85
+    },
+    {
+      "category": "music_sfx",
+      "choice": "fal-ai/elevenlabs/music para la pista (~30-35s) + fal-ai/elevenlabs/sound-effects/v2 para el golpe/whoosh del punch y el ding de notificacion",
+      "options_considered": [
+        "fal-ai/elevenlabs/music + sound-effects/v2 (elegido)",
+        "PoYo Suno v5 / MiniMax Music 2.6 (catalogo mas amplio, requiere descarga manual antes de 24h)",
+        "Reusar bg-music-v3.mp3 de reel-socio-v3 (mas barato, pero no calza con el arco 'problema->gut-punch->posibilidad' de este reel)"
+      ],
+      "reason": "ElevenLabs Music da control fino de estructura (intro->build->drop) necesario para el duck de 0.4s antes del punch y el release en el beat del dato -- la misma disciplina de sound design que uso LaHoraRobadaV2. fal ya archiva/expone la URL sin el paso manual de descarga-en-24h que exige PoYo. Costo marginal frente al catalogo de PoYo, la ventaja es cero friccion operativa.",
+      "confidence": 0.8
+    },
+    {
+      "category": "brand_ui_palette",
+      "choice": "El chat de la escena 2/3/5 NO reproduce el verde/azul literal de WhatsApp; usa la paleta ember/near-black propia (ver ChatThreadScene.tsx)",
+      "options_considered": [
+        "Clonar el verde/azul real de WhatsApp para maxima legibilidad como 'screenshot'",
+        "Paleta propia ember/near-black (elegido)"
+      ],
+      "reason": "El verde de WhatsApp (~120 grados de matiz, saturado) cae fuera de la banda ember permitida y dispara un critico off_brand_color en brand_palette_guard -- no es solo preferencia, es una regla dura de marca. Ademas, un signature device propio (no un clon) es lo que exige composition_mode=atelier y es reusable en el resto de la serie sin quedar atado a la marca de un tercero.",
+      "confidence": 0.95
+    },
+    {
+      "category": "boxless_exception",
+      "choice": "Se acepta la advertencia card_boxless (severidad warning, no critical) en las 3 burbujas de chat + la tarjeta de cita, documentada explicitamente, en vez de forzar burbujas sin fondo/radio",
+      "options_considered": [
+        "Burbujas sin bg/radius (evita el warning, pero deja de leerse como chat)",
+        "Aceptar el warning documentado (elegido)"
+      ],
+      "reason": "brand_palette_guard clasifica card_boxless como warning -- verdict 'revise', NO 'fail' -- precisamente para casos como este: UI chrome que necesita forma de burbuja para ser legible como chat. Forzar cero bg/radius rompe la legibilidad del recurso didactico central del reel sin ganar nada de marca (0 colores fuera de banda, 0 glow). Documentado en el art-direction y en este log para que quede trazable y no se lea como negligencia.",
+      "confidence": 0.9
+    },
+    {
+      "category": "budget",
+      "choice": "Presupuesto real: still A $0.15 + still B(edit) $0.15 + i2v Kling O1 Pro 6.083s ~$0.681 + musica ElevenLabs Music (30s) $0.30 + SFX ding 1.2s $0.0024 + SFX punch 1s $0.002 = $1.2854 total",
+      "options_considered": [
+        "$1.2854 real, medido tras generar (dentro del tope de $5/asset y $25 total del piloto)"
+      ],
+      "reason": "Muy por debajo de los topes declarados por Ernesto ($5 por asset individual, $25 total). No se justifica generar assets adicionales (mas i2v, mas stills) para un reel que la doctrina de coherencia pide mantener con POCOS planos conectados -- mas assets aqui subiria el riesgo de drift sin mejorar el reel.",
+      "confidence": 1.0
+    }
+  ]
+}
