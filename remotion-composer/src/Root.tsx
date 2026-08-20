@@ -394,6 +394,8 @@ export const Root: React.FC = () => {
           coldOpenSrc: "",
           musicSrc: "",
           logoSrc: "",
+          sfxDingSrc: "",
+          sfxPunchSrc: "",
           tail_padding_seconds: 0,
         } as TresMensajesDeAnocheProps}
       />

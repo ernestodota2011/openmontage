@@ -49,6 +49,8 @@ export interface TresMensajesDeAnocheProps {
   coldOpenSrc: string;
   musicSrc: string;
   logoSrc: string;
+  sfxDingSrc?: string;
+  sfxPunchSrc?: string;
   [key: string]: unknown; // required by the <Composition> generic (lesson from LaHoraRobada, commit b26d3552)
 }
 
@@ -102,8 +104,10 @@ const THREAD_MESSAGES: ChatMessage[] = [
 ];
 
 /** Music envelope — dip to near-silence 0.4s before the gut-punch message,
- * release into the stat beat. devops' FFmpeg pass layers the impact SFX +
- * final 2-pass loudnorm (-14 LUFS / -1.0 dBTP) on top of this shape. */
+ * release into the stat beat. SFX (ding + gut-punch) are embedded above as
+ * their own <Sequence>/<Audio> pairs; devops' FFmpeg finishing pass only
+ * needs the final 2-pass loudnorm (-14 LUFS / -1.0 dBTP) on top of this
+ * pre-mixed shape — no manual SFX sync required downstream. */
 function musicVolume(frame: number): number {
   const duckStart = SCENE3_START - 10; // ~0.4s before the punch
   const duckEnd = SCENE3_START + 12;
@@ -123,10 +127,27 @@ export const TresMensajesDeAnoche: React.FC<TresMensajesDeAnocheProps> = ({
   coldOpenSrc,
   musicSrc,
   logoSrc,
+  sfxDingSrc,
+  sfxPunchSrc,
 }) => {
   return (
     <AbsoluteFill style={{ background: BRAND.bg }}>
       <Audio src={musicSrc} volume={musicVolume} />
+
+      {/* SFX embebidos, sincronizados a frame exacto (no dejarlo a una
+          mezcla manual de FFmpeg en devops): ding sutil al arrancar (el
+          celular ya brilla en el primer frame del cold open) + el golpe
+          seco exactamente en el punch-in del mensaje perdido. */}
+      {sfxDingSrc && (
+        <Sequence from={4} durationInFrames={40} name="sfx_notification_ding">
+          <Audio src={sfxDingSrc} volume={0.7} />
+        </Sequence>
+      )}
+      {sfxPunchSrc && (
+        <Sequence from={SCENE3_START} durationInFrames={30} name="sfx_gut_punch">
+          <Audio src={sfxPunchSrc} volume={0.9} />
+        </Sequence>
+      )}
 
       {/* Scene 1 — cold_open_wake. Real generated video (Kling O1, chained
           first/last frame from the two Nano Banana Pro hero-frame stills).

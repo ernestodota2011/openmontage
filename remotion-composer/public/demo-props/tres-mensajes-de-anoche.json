@@ -2,5 +2,7 @@
   "coldOpenSrc": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/cold-open-kling-o1.mp4",
   "musicSrc": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/music.mp3",
   "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
+  "sfxDingSrc": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3",
+  "sfxPunchSrc": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-gut-punch.mp3",
   "tail_padding_seconds": 0
 }
