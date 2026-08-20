@@ -82,5 +82,68 @@
   "pending_post_render_gates": {
     "coherence_guard": "requiere el MP4 renderizado real (pixeles) + los keyframes de referencia (still A/B del cold open). Pendiente de que devops corra el render en CT 128.",
     "final_review": "ffprobe (duracion/resolucion/codec h264/audio real) + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  },
+  "post_render_verify": {
+    "run_date": "2026-08-20T17:51Z",
+    "artifact": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/tres-mensajes-de-anoche-v1.mp4",
+    "verdict_on_v1": "NO-GO",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264 High yuv420p",
+      "width": 1080,
+      "height": 1920,
+      "avg_frame_rate": "24/1",
+      "duration_s": 30.0,
+      "codec_audio": "aac LC 48000Hz stereo",
+      "size_bytes": 300067403,
+      "video_bit_rate_bps": 79727462,
+      "audio_bit_rate_bps": 284694,
+      "sha256_matches_downloaded_bytes": true
+    },
+    "coherence_guard": {
+      "verdict": "pass",
+      "scope": "escena cold_open_wake (0-6s), 4 muestras vs still-a/still-b",
+      "detail": "hue 25-34deg, saturation 0.5-0.57 (banda ember), dHash 9-18, hist_sim 0.5-0.86 — 0 violaciones"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["2.0s", "9.0s", "13.5s", "17.0s", "23.0s", "28.0s"],
+      "findings": [
+        {
+          "severity": "critical",
+          "scene": "punch_lost_client (12-15s)",
+          "issue": "Frame en 13.5s casi indistinguible del frame en 9.0s (whatsapp_stack). El unico cambio (+6% escala en 1 de 3 burbujas) no lee como gut-punch — bajo-entrega el shot_intent declarado, que es el fulcro emocional del reel.",
+          "fix_status": "FIXED en el codigo (push d0d9d4d), pendiente re-render"
+        },
+        {
+          "severity": "minor",
+          "scene": "bot_responds (23.0s)",
+          "issue": "El tick 'leido' nunca cambia a color ember (solo cambia el texto) — la promesa documentada en decision_log/script no se renderizo en pixeles.",
+          "fix_status": "FIXED en el codigo (push d0d9d4d), pendiente re-render"
+        }
+      ]
+    },
+    "audio_spotcheck": {
+      "muted": false,
+      "mean_volume_db": -20.0,
+      "max_volume_db": -1.0,
+      "ding_sfx_present": true,
+      "punch_sfx_present_and_audible": true,
+      "loudnorm_measured": {"input_i": -18.37, "input_tp": -0.98, "input_lra": 12.00, "input_thresh": -30.21},
+      "finding": "CRITICO: -18.37 LUFS integrado medido vs -14 LUFS objetivo duro de premium-craft-standards para social (YT/IG/TikTok/LinkedIn) — 4.4 LU por debajo del target. Se leera notablemente mas bajo que el resto del contenido social.",
+      "duck_isolation_note": "El duck de musica (SCENE3_START-10 a SCENE3_START+12) se verifico por REVISION DE CODIGO de musicVolume() en TresMensajesDeAnoche.tsx (logica correcta), NO por medicion aislada de audio — el SFX de golpe arranca en el mismo frame donde el duck toca su minimo, haciendo imposible aislar el stem de musica del SFX con ffmpeg en caja negra sin las pistas separadas. Declarado honestamente, no asumido como verificado por pixeles/samples."
+    },
+    "promise_preservation": {
+      "verdict": "gap encontrado y corregido en codigo",
+      "detail": "ver visual_spotcheck — el tick ember prometido no se renderizaba"
+    },
+    "subtitle_check": {
+      "verdict": "pass",
+      "detail": "Todo el copy relevante vive en pantalla (burbujas + tipografia cinetica); no hay locucion que subtitular; texto legible en los 6 frames muestreados"
+    },
+    "weight_finding": {
+      "measured_bitrate_mbps": 80.0,
+      "root_cause_hypothesis": "El grano SVG de FilmGrade ya esta horneado en pixeles en las escenas 1 y 6 (Remotion, render del master). El pase de finishing de FFmpeg aplico ADEMAS 'noise=c0s=8:c0f=t' de forma UNIFORME sobre los 30s completos — incluyendo las 4 escenas de UI (2,3,4,5) que son fondos near-black grandes y planos, el peor caso para compresion de ruido temporal (nada que predecir entre frames, alta entropia por pixel en zonas que de otro modo pesarian casi 0 bits). Esto es responsabilidad de la instruccion de render que yo di (receta de-plastic completa aplicada sin distinguir escena real vs UI) — se corrige en la proxima instruccion.",
+      "fix_for_next_render": "Quitar 'noise=c0s=8:c0f=t' del pase de finishing global (el grano de las escenas 1/6 ya vive en el master via FilmGrade.tsx); subir CRF 17->19 dado que ya no hace falta preservar detalle de grano inyectado externamente. Ver comando exacto en el reporte."
+    }
   }
 }
