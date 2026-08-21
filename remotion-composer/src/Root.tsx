@@ -42,6 +42,10 @@ import { LaDiferenciaQueImporta, LaDiferenciaQueImportaProps, LA_DIFERENCIA_QUE_
 import { LosCincoTrabajosDeLaIa, LosCincoTrabajosDeLaIaProps, LOS_CINCO_TRABAJOS_DE_LA_IA_TOTAL_FRAMES } from "./reels/LosCincoTrabajosDeLaIa";
 import { TresNegociosTresResultados, TresNegociosTresResultadosProps, TRES_NEGOCIOS_TRES_RESULTADOS_TOTAL_FRAMES } from "./reels/TresNegociosTresResultados";
 import { CincoSenalesDeQueEstasListo, CincoSenalesDeQueEstasListoProps, CINCO_SENALES_DE_QUE_ESTAS_LISTO_TOTAL_FRAMES } from "./reels/CincoSenalesDeQueEstasListo";
+import { LoQueNoSabesDeTuNegocio, LoQueNoSabesDeTuNegocioProps, LO_QUE_NO_SABES_DE_TU_NEGOCIO_TOTAL_FRAMES } from "./reels/LoQueNoSabesDeTuNegocio";
+import { AsiSonLosTreintaMinutos, AsiSonLosTreintaMinutosProps, ASI_SON_LOS_TREINTA_MINUTOS_TOTAL_FRAMES } from "./reels/AsiSonLosTreintaMinutos";
+import { LoQueRecibesDespues, LoQueRecibesDespuesProps, LO_QUE_RECIBES_DESPUES_TOTAL_FRAMES } from "./reels/LoQueRecibesDespues";
+import { PorQueEsGratisAgendaAhora, PorQueEsGratisAgendaAhoraProps, POR_QUE_ES_GRATIS_AGENDA_AHORA_TOTAL_FRAMES } from "./reels/PorQueEsGratisAgendaAhora";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -762,6 +766,65 @@ export const Root: React.FC = () => {
           sfxWhooshSrc: "",
           tail_padding_seconds: 0,
         } as CincoSenalesDeQueEstasListoProps}
+      />
+      <Composition
+        id="LoQueNoSabesDeTuNegocio"
+        component={LoQueNoSabesDeTuNegocio}
+        durationInFrames={LO_QUE_NO_SABES_DE_TU_NEGOCIO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueNoSabesDeTuNegocioProps}
+      />
+      <Composition
+        id="AsiSonLosTreintaMinutos"
+        component={AsiSonLosTreintaMinutos}
+        durationInFrames={ASI_SON_LOS_TREINTA_MINUTOS_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          phasesTimelineSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          tail_padding_seconds: 0,
+        } as AsiSonLosTreintaMinutosProps}
+      />
+      <Composition
+        id="LoQueRecibesDespues"
+        component={LoQueRecibesDespues}
+        durationInFrames={LO_QUE_RECIBES_DESPUES_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChimeSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueRecibesDespuesProps}
+      />
+      <Composition
+        id="PorQueEsGratisAgendaAhora"
+        component={PorQueEsGratisAgendaAhora}
+        durationInFrames={POR_QUE_ES_GRATIS_AGENDA_AHORA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as PorQueEsGratisAgendaAhoraProps}
       />
     </>
   );
