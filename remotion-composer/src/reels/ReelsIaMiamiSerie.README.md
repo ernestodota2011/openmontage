@@ -1,18 +1,89 @@
-# Serie "reels-ia-miami-serie" — handoff de PRE-PRODUCCION (2026-08-21)
+# Serie "reels-ia-miami-serie" — render COMPLETO por devops, verify final PENDIENTE de video-producer (2026-08-21)
 
-> [!warning] Estado: pre-produccion COMPLETA, render PENDIENTE
-> Los 4 reels tienen composicion + assets generativos + gates pre-render
-> + versionado al fork. NINGUNO se ha renderizado todavia — eso lo corre
-> `devops-aetherlogik-homelab` (video-producer NO opera el CT 128). Este
-> README es el manifiesto de pre-produccion; se actualizara con la
-> tabla de verify final una vez existan los MP4 reales, siguiendo el
-> mismo formato que las 5 series anteriores de la linea `reels-del-blog`.
+> [!success] Estado: los 4 reels renderizados, finalizados y en R2 — falta el verify independiente del director
+> `devops-aetherlogik-homelab` archivó los 6 assets generativos + el
+> bloque HyperFrames del reel 2, renderizó los 4 masters ProRes, aplicó
+> el finishing (`TP=-2.0` desde el primer pase, P-15) y subió los 4
+> entregables a R2. Todos pasaron el verify técnico de devops (ffprobe +
+> LUFS/TP post-hoc medidos independientemente del reporte de `loudnorm`
+> + spot-check visual de frames). Falta el `final_review` completo del
+> director (`video-producer`) antes del sign-off GO/NO-GO oficial — ver
+> sección "Devops — render completado" abajo y la sección "Verify"
+> original más adelante para lo que sigue pendiente.
 
 Sexta serie de la linea `reels-del-blog`. Fuente del blog:
 `ia-para-negocios-miami.md` (D:\aetherlogik-astro) — el post PARAGUAS
 /generalista de todos los verticales (no tiene pagina de vertical propia
 como `/para-hvac` o `/para-clinicas`). Rama `aetherlogik/reels-ia-miami-serie`,
 partida de `aetherlogik/reels-hvac-serie` HEAD (`81d2f84`).
+
+## Devops — render completado (4/4) — 2026-08-21
+
+**Los 4 entregables en R2** (`curl` público 200 en los 4, verificado):
+
+| # | Reel | Objeto R2 | Duración ffprobe | LUFS post-hoc | True Peak post-hoc |
+|---|---|---|---|---|---|
+| 1 | `la-diferencia-que-importa` | `agency/reels-ia-miami-serie/la-diferencia-que-importa-v1.mp4` | 30.000000s | -14.06 | -1.96 dBTP |
+| 2 | `los-cinco-trabajos-de-la-ia` | `agency/reels-ia-miami-serie/los-cinco-trabajos-de-la-ia-v1.mp4` | 37.000000s | -13.96 | -1.91 dBTP |
+| 3 | `tres-negocios-tres-resultados` | `agency/reels-ia-miami-serie/tres-negocios-tres-resultados-v1.mp4` | 45.000000s | -14.00 | -1.77 dBTP |
+| 4 | `cinco-senales-de-que-estas-listo` | `agency/reels-ia-miami-serie/cinco-senales-de-que-estas-listo-v1.mp4` | 45.000000s | -13.93 | -1.94 dBTP |
+
+Los 4 dentro de banda -14±0.5 LUFS y los 4 con true peak ≤ -1.0 dBTP
+(criterio de la misión) — el `TP=-2.0` horneado desde el primer pase
+(P-15) evitó el ciclo de re-mux que hizo falta en `reels-hvac-serie`.
+Video `h264 1080x1920 24fps` los 4, audio AAC 256k/48kHz.
+
+**Assets archivados a R2** (6 generativos + 1 bloque HyperFrames, todos
+`curl` público 200, tamaño real == tamaño descargado):
+`agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-hero-i2v.mp4`,
+`.../la-diferencia-que-importa-musica.mp3`,
+`.../los-cinco-trabajos-de-la-ia-musica.mp3`,
+`.../tres-negocios-tres-resultados-hero-i2v.mp4`,
+`.../tres-negocios-tres-resultados-musica.mp3`,
+`.../cinco-senales-de-que-estas-listo-musica.mp3`,
+`.../los-cinco-trabajos-de-la-ia-checklist.mp4` (render HyperFrames,
+`hf lint` 0/0, 20.0s/24fps/h264, "artifact validated" en 31.4s — sin el
+impuesto de 45s, confirma `data-no-timeline` correcto desde la autoría).
+
+**Gate `npx remotion compositions src/index.tsx`**: los 4 compositions
+listados con fps/resolución/duración exactos (`LaDiferenciaQueImporta`
+720f, `LosCincoTrabajosDeLaIa` 888f, `TresNegociosTresResultados` 1080f,
+`CincoSenalesDeQueEstasListo` 1080f, todos 24fps 1080x1920) — `Root.tsx`
+venía correctamente wireado, sin intervención necesaria. `npm install`
+(up to date) + `npx tsc --noEmit` → 0 errores.
+
+**Finishing** (recipe premium-craft-standards.md §6, no la del ejemplo
+simplificado más abajo en este README): master ProRes HQ (`--codec=prores
+--prores-profile=hq --image-format=png --color-space=bt709`) →
+`curves=all='0/0.045 0.75/0.78 1/0.96'` (SIN el punto intermedio
+0.25/0.22 que crushea texto de UI) + `eq=saturation=0.92:contrast=1.06:
+gamma=1.0` + `unsharp=5:5:0.4:5:5:0.0` + `vignette=angle=PI/5` →
+`libx264 -crf 16 -preset slow -x264-params aq-mode=2:aq-strength=1.2`
+(sin `noise` de FFmpeg — el grano ya está horneado en Remotion vía
+`FilmGrade.tsx`). Audio: `acompressor` pre-loudnorm (bus compression)
+→ `loudnorm` dinámico calibrado por mix (los 4 mixes cayeron en
+`normalization_type=dynamic` — SFX cerca de 0dBTP en los masters
+crudos, gotcha conocido; se midió el offset real de cada mix con una
+pasada de prueba y se ajustó el `I` objetivo por reel, -15.10/-14.66/
+-14.47/-14.71, hasta converger output_i dentro de ±0.1 de -14 antes del
+encode final — nunca se asumió el mismo offset entre reels).
+
+**Spot-check visual** (frames extraídos y vistos, no solo medidos):
+paleta ember/near-black limpia en los 4, cero cian/violeta/glow;
+`brand_close` centrado con márgenes simétricos en los 4; reel 2
+(híbrido HyperFrames+Remotion) compone limpio, checklist legible pese a
+CRF16; reel 3 confirma los 3 casos con cifra+label+atribución en el
+MISMO frame (DMP Consulting $36,000/año, Marino HVAC $4,400/mes, quote
+de Mayli Parra); reel 4 CTA final `cal.com/aetherlogik/discovery`
+verificado legible a 3.5× de zoom (recorte+ampliación, doctrina de la
+skill), márgenes simétricos.
+
+**Cierre**: masters ProRes conservados en `out/` del CT 128 (no se
+borró nada); credenciales R2 (`rclone.conf`, `r2-src.env`) removidas y
+verificadas por efecto (`rclone listremotes` → config not found, `ls` →
+No such file or directory en ambos); CT 128 devuelto a `stopped`.
+Bitácora completa: `Server-pve1-bitacora-2026-08-21-openmontage-render-reels-ia-miami-serie.md`
+(bóveda Obsidian).
 
 ## Los 4 reels de la serie
 
@@ -38,43 +109,28 @@ anteriores. Cada reel tiene su `.tsx` + `.scene_plan.json` + `.script.md`
 | 3 (casos reales) | animation | remotion | atelier |
 | 4 (cierre) | animation | remotion | atelier |
 
-## GATE — antes de renderizar: `npx remotion compositions`
+## GATE — antes de renderizar: `npx remotion compositions` — PASADO (ver sección devops arriba)
 
-> [!danger] Una composicion NO esta "lista" solo porque el `.tsx` compila (P-12)
-> Los 4 `.tsx` estan escritos y las 4 `<Composition>` fueron agregadas a
-> `Root.tsx` en esta sesion (import + bloque `<Composition id="...">`),
-> pero **video-producer no tiene checkout local de Node/el fork en esta
-> sesion** — NO se corrio `npx remotion compositions` para confirmar que
-> el renderer las LISTA. **Es el primer paso de devops antes de cualquier
-> render**:
-> ```bash
-> cd /opt/openmontage/remotion-composer  # o el checkout del fork en el CT 128
-> npx remotion compositions src/index.tsx
-> ```
-> Debe listar `LaDiferenciaQueImporta`, `LosCincoTrabajosDeLaIa`,
-> `TresNegociosTresResultados`, `CincoSenalesDeQueEstasListo`. Si alguna
-> falta o el comando falla, es un `tsc`/import roto — arreglar ANTES de
-> intentar renderizar (no es un problema de props).
-
-## Manifiesto de assets generados (fal.ai, presupuesto real ≤$25)
+## Manifiesto de assets generados (fal.ai, presupuesto real ≤$25) — ARCHIVADOS (ver sección devops arriba)
 
 Costo total real de generacion: **~$3.055** (ver desglose en cada
 `.gates.json`, campo `assets_generated`). Muy por debajo del presupuesto
 de $25 de la mision.
 
-| Asset | Reel | Modelo | Costo | URL fal.media (TEMPORAL, expira ~24h desde 2026-08-21) | Destino R2 (P-16, slug completo) |
-|---|---|---|---|---|---|
-| Still hero 1 | 1 | nano-banana-pro 2K jpeg | $0.15 | `https://v3b.fal.media/files/b/0aa73da6/8Qf7JBP4deRLMjYHFgUkE_RprLDxxp.jpg` | (solo insumo del i2v, no se archiva aparte) |
-| Hero i2v 1 | 1 | kling-video/o1/image-to-video, 5s | $0.56 | `https://v3b.fal.media/files/b/0aa73db2/mojEW5UCVmNHVDZh5A1U9_output.mp4` | `agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-hero-i2v.mp4` |
-| Musica reel 1 | 1 | elevenlabs/music, 128 BPM, 30.5s | $0.305 | `https://v3b.fal.media/files/b/0aa73da7/SXCXeBhqCa-_pWbRgZ6G2_music_generated.mp3` | `agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-musica.mp3` |
-| Musica reel 2 | 2 | elevenlabs/music, 130 BPM, 37.5s | $0.375 | `https://v3b.fal.media/files/b/0aa73dbc/oSiEhnT5kKWrN74_Pb8SM_music_generated.mp3` | `agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-musica.mp3` |
-| Still hero 3 | 3 | nano-banana-pro 2K jpeg | $0.15 | `https://v3b.fal.media/files/b/0aa73da6/9g4cvvgCCnrsV8VMPG61a_Xz9gSmxS.jpg` | (solo insumo del i2v, no se archiva aparte) |
-| Hero i2v 3 | 3 | kling-video/o1/image-to-video, 5s | $0.56 | `https://v3b.fal.media/files/b/0aa73db3/w_xXR63SYz6_zdL3OQfre_output.mp4` | `agency/reels-ia-miami-serie/assets/tres-negocios-tres-resultados-hero-i2v.mp4` |
-| Musica reel 3 | 3 | elevenlabs/music, 126 BPM, 45.5s | $0.455 | `https://v3b.fal.media/files/b/0aa73dbc/eMiEL1yVqzVOMbupWmxKX_music_generated.mp3` | `agency/reels-ia-miami-serie/assets/tres-negocios-tres-resultados-musica.mp3` |
-| Musica reel 4 | 4 | elevenlabs/music, 132 BPM, 45.5s | $0.455 | `https://v3b.fal.media/files/b/0aa73da8/rXKybvREZzCjhEjD13GqX_music_generated.mp3` | `agency/reels-ia-miami-serie/assets/cinco-senales-de-que-estas-listo-musica.mp3` |
+| Asset | Reel | Modelo | Costo | Destino R2 (P-16, slug completo) |
+|---|---|---|---|---|
+| Still hero 1 | 1 | nano-banana-pro 2K jpeg | $0.15 | (solo insumo del i2v, no se archiva aparte) |
+| Hero i2v 1 | 1 | kling-video/o1/image-to-video, 5s | $0.56 | `agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-hero-i2v.mp4` |
+| Musica reel 1 | 1 | elevenlabs/music, 128 BPM, 30.5s | $0.305 | `agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-musica.mp3` |
+| Musica reel 2 | 2 | elevenlabs/music, 130 BPM, 37.5s | $0.375 | `agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-musica.mp3` |
+| Still hero 3 | 3 | nano-banana-pro 2K jpeg | $0.15 | (solo insumo del i2v, no se archiva aparte) |
+| Hero i2v 3 | 3 | kling-video/o1/image-to-video, 5s | $0.56 | `agency/reels-ia-miami-serie/assets/tres-negocios-tres-resultados-hero-i2v.mp4` |
+| Musica reel 3 | 3 | elevenlabs/music, 126 BPM, 45.5s | $0.455 | `agency/reels-ia-miami-serie/assets/tres-negocios-tres-resultados-musica.mp3` |
+| Musica reel 4 | 4 | elevenlabs/music, 132 BPM, 45.5s | $0.455 | `agency/reels-ia-miami-serie/assets/cinco-senales-de-que-estas-listo-musica.mp3` |
 
-Ademas, el reel 2 necesita un render **separado** de HyperFrames antes
-del render Remotion (ver seccion siguiente).
+Las URLs de fal.media originales (temporales, expiraban ~24h desde
+2026-08-21) ya no aplican — reemplazadas por las URLs de R2 arriba en
+los 4 `props/*.json`.
 
 ### SFX reusados (costo $0 — assets ya existentes en R2 de series anteriores)
 
@@ -88,105 +144,28 @@ del render Remotion (ver seccion siguiente).
 `https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp`
 (el isotipo real — no se genera con IA).
 
-> [!danger] P-07 — video-producer NO archiva a R2 (no tiene la credencial)
-> Las URLs de fal.media de la tabla arriba son TEMPORALES (expiran
-> ~24h). **Instruccion exacta para devops-aetherlogik-homelab**: antes de
-> renderizar cada reel, descargar cada asset generativo (still ya no
-> hace falta, solo el i2v y la musica) y subirlo a R2 en la ruta "Destino
-> R2" de la tabla — nombrado por **slug completo** (P-16), nunca
-> posicional (nunca `v1.mp4`/`musica.mp3` a secas). Luego actualizar el
-> campo correspondiente en `remotion-composer/props/<slug>.json` (cada
-> props JSON ya trae un campo `_devops_note` con la ruta exacta
-> esperada) con la URL de `media.aetherlogik.com` antes de correr el
-> render — nunca dejar el render corriendo contra una URL de fal.media
-> que puede expirar a mitad de la corrida.
-
-## Render de HyperFrames (reel 2 — PRIMER paso, antes del render Remotion)
+## Render de HyperFrames (reel 2) — COMPLETO (ver sección devops arriba)
 
 Composicion: `hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/`
-(HTML/CSS puro, `data-no-timeline`, 1080x1920, 20.0s @24fps). Comando
-canonico (skill `aetherlogik-hyperframes`, lo ejecuta SOLO devops):
+(HTML/CSS puro, `data-no-timeline`, 1080x1920, 20.0s @24fps).
+`fiveJobsChecklistSrc` ya wireado en
+`remotion-composer/props/los-cinco-trabajos-de-la-ia.json` con la URL de
+R2.
 
-```bash
-python scripts/ssh_helper.py --host pve1 "pct start 128"
-python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /ruta/al/fork/hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist && hf lint . && hf render -c index.html -o los-cinco-trabajos-de-la-ia-checklist.mp4'"
-```
+## Finishing FFmpeg — recipe con TP=-2.0 DESDE EL PRIMER PASE (P-15) — APLICADA (ver sección devops arriba)
 
-Tras el render: `hf lint .` debe dar **0/0** (no basta con contar los
-errores nombrados en un mensaje anterior — P-10 de la skill
-`aetherlogik-hyperframes`), y el MP4 resultante se archiva a
-`agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-checklist.mp4`
-y se wirea en `remotion-composer/props/los-cinco-trabajos-de-la-ia.json`
-(campo `fiveJobsChecklistSrc`, hoy vacio a proposito).
+Target final: **-14 LUFS integrado / -2.0 dBTP true peak** — confirmado
+en los 4 reels sin necesidad de una segunda pasada de re-mux (a
+diferencia de `reels-hvac-serie`, que descubrió la necesidad de
+`TP=-2.0` como fix reactivo tras el primer verify NO-GO).
 
-## Comandos de render Remotion (uno por reel, tras el gate `compositions` y los assets archivados)
+## Verify (video-producer, tras el handoff de devops) — PENDIENTE
 
-```bash
-cd /opt/openmontage/remotion-composer  # o el checkout del fork en el CT 128
-
-npx remotion render src/index.tsx LaDiferenciaQueImporta out/la-diferencia-que-importa.mp4 \
-  --props=props/la-diferencia-que-importa.json
-
-npx remotion render src/index.tsx LosCincoTrabajosDeLaIa out/los-cinco-trabajos-de-la-ia.mp4 \
-  --props=props/los-cinco-trabajos-de-la-ia.json
-
-npx remotion render src/index.tsx TresNegociosTresResultados out/tres-negocios-tres-resultados.mp4 \
-  --props=props/tres-negocios-tres-resultados.json
-
-npx remotion render src/index.tsx CincoSenalesDeQueEstasListo out/cinco-senales-de-que-estas-listo.mp4 \
-  --props=props/cinco-senales-de-que-estas-listo.json
-```
-
-> [!warning] P-16 — nombra los intermediarios por SLUG COMPLETO, nunca posicional
-> El directorio `out/` de render se comparte entre series en el CT 128 —
-> nombrar por `reel1.mp4`/`reel2.mp4` puede colisionar o confundirse con
-> los intermediarios de OTRA serie corriendo el mismo dia. Usa siempre el
-> slug completo del reel (`la-diferencia-que-importa.mp4`, no `v1.mp4`
-> ni `reel1.mp4`) en cada archivo intermedio y master, tal como hacen los
-> comandos de arriba.
-
-## Finishing FFmpeg — recipe con TP=-2.0 DESDE EL PRIMER PASE (P-15)
-
-> [!danger] No repitas el ciclo de fix de la serie HVAC — hornea TP=-2.0 desde el inicio
-> En `reels-hvac-serie`, el reel 3 salio con `true peak` positivo
-> (clipping real post-AAC) usando el target -1.0dBTP, y hubo que hacer
-> una SEGUNDA pasada de re-mux con `TP=-2.0` para corregirlo (ver
-> `ReelsHvacSerie.README.md`, hallazgo P-15). **Para esta serie, el
-> brief de finishing pide `TP=-2.0` desde la PRIMERA pasada** — no
-> `-1.0` — porque el overshoot de inter-sample peaks del encoder AAC se
-> come el margen de headroom cuando el target es -1.0.
-
-Para cada reel, tras el render Remotion:
-
-```bash
-# Pasada 1 de loudnorm (mide) sobre el audio del render crudo
-ffmpeg -i out/<slug>.mp4 -af loudnorm=I=-14:TP=-2.0:LRA=11:print_format=json -f null -
-
-# Pasada 2 de loudnorm (aplica, con los valores medidos de la pasada 1) +
-# finishing de-plastic: curva filmica + saturacion 0.92 + micro-sharpen +
-# grano temporal + halation sutil + vinieta (los componentes FilmGrade ya
-# aplican grano/vinieta en Remotion; el finishing FFmpeg añade la curva
-# de color + loudnorm + encode final)
-ffmpeg -i out/<slug>.mp4 \
-  -af loudnorm=I=-14:TP=-2.0:LRA=11:measured_I=<I_medido>:measured_TP=<TP_medido>:measured_LRA=<LRA_medido>:measured_thresh=<thresh_medido>:linear=true \
-  -c:v libx264 -crf 18 -pix_fmt yuv420p -c:a aac -b:a 256k \
-  out/<slug>-v1.mp4
-
-# Verificacion de raiz: confirma que el true peak resultante es NEGATIVO
-ffmpeg -i out/<slug>-v1.mp4 -af loudnorm=I=-14:TP=-2.0:print_format=json -f null - 2>&1 | grep -E "input_i|input_tp"
-```
-
-Target final: **-14 LUFS integrado / -2.0 dBTP true peak** (no -1.0).
-Sube a R2 como `agency/reels-ia-miami-serie/<slug>-v1.mp4` — nombre por
-slug completo (P-16), nunca `out.mp4`/`final.mp4`.
-
-## Verify (video-producer, tras el handoff de devops)
-
-Pendiente hasta que existan los 4 MP4 reales en R2. Cuando devops
-confirme el render + finishing + subida, video-producer:
+Los 4 MP4 reales ya están en R2 (ver sección devops arriba). video-producer
+debe correr su verify independiente:
 1. Descarga cada MP4 de R2 y corre `ffprobe` (duracion/resolucion/codec
    h264/stream de audio real, LUFS/TP con `volumedetect`+`loudnorm`
-   medido independientemente).
+   medido independientemente — no confiar en la medición de devops).
 2. Extrae frames clave y los mira — ember-only, boxless, tipografia,
    cierre, y en el reel 3 el `beat_pixel_check` de las 3 atribuciones
    (confirmar que cifra + label + atribucion estan en el MISMO frame,
@@ -202,17 +181,11 @@ confirme el render + finishing + subida, video-producer:
 
 ## Handoffs pendientes
 
-- **devops-aetherlogik-homelab**: (1) `npx remotion compositions` —
-  confirmar que los 4 reels aparecen listados; (2) `hf lint . && hf
-  render` sobre la composicion HyperFrames del reel 2; (3) archivar los
-  8 assets generativos (i2v ×2, musica ×4, still ×0 — los stills no se
-  archivan aparte, solo son insumo del i2v) a R2 por slug completo
-  (P-16) y actualizar los 4 `props/*.json`; (4) render Remotion de los 4
-  reels; (5) finishing FFmpeg con `TP=-2.0` desde el primer pase (P-15,
-  ver recipe arriba); (6) subida a R2.
-- **video-producer**: verify independiente de los 4 MP4 una vez
-  publicados (ver seccion Verify arriba) → actualizar este README con el
-  veredicto final.
+- ~~**devops-aetherlogik-homelab**~~: **COMPLETO** — ver sección "Devops
+  — render completado" arriba.
+- **video-producer**: verify independiente de los 4 MP4 ya publicados
+  (ver sección Verify arriba) → actualizar este README con el veredicto
+  final GO/NO-GO.
 
 ## 📌 Para memoria (nuevo en esta serie)
 
@@ -220,11 +193,19 @@ confirme el render + finishing + subida, video-producer:
   (no tiene vertical propia) y que documenta MAS DE UN caso real en la
   misma seccion (3 casos, no 1) — de ahi el reel 3 con 3 StatReveal en
   vez del patron de 1-caso-por-reel de las 5 series anteriores.
-- Primera vez que el brief de finishing pide `TP=-2.0` DESDE LA PRIMERA
-  PASADA (P-15 ya curada de la serie HVAC), en vez de descubrirlo como
-  fix en el verify — si esto se confirma en el verify real, es evidencia
-  de que la curaduria de P-15 esta funcionando (previene el defecto en
-  vez de solo corregirlo despues).
+- **Confirmado en producción real: hornear `TP=-2.0` desde el primer
+  pase (P-15) evita el ciclo de re-mux reactivo** — los 4 reels de esta
+  serie pasaron el verify técnico de devops en un solo pase, a
+  diferencia de `reels-hvac-serie` (2 de 4 reels necesitaron un segundo
+  re-mux tras el `-1.0` inicial). Evidencia a favor de consolidar
+  `TP=-2.0` como default de `premium-craft-standards.md` §5, no solo
+  como fix conocido.
+- El offset de `loudnorm` en modo `dynamic` (SFX cerca de 0dBTP en el
+  master crudo) varió reel a reel (-1.08/-0.66/-0.47/-0.71 LUFS) — se
+  recalibró el `I` objetivo por mix con una pasada de prueba antes del
+  encode final en los 4 casos, nunca se reusó el offset de un reel
+  anterior (misma lección que `premium-craft-standards.md`: "el offset
+  empírico de un mix NO se transfiere a otro mix").
 - Reutilizacion cruzada de SFX entre 3 series distintas
   (reels-clinicas-serie, reels-hvac-serie) confirma que los assets de
   sonido cortos (whoosh/chime/chip) son reusables sin re-generar —
