@@ -29,33 +29,36 @@
   "post_render_verify": {
     "run_date": "2026-08-21",
     "artifact": "https://media.aetherlogik.com/agency/reels-abogados-serie/como-empezar-sin-desorden-v1.mp4",
+    "independent_ffprobe": {"matches_devops_report": true, "duration_s": 45.0, "size_bytes": 6667546},
+    "audio_spotcheck": {"loudnorm_measured_independiente": {"input_i": "-13.88"}, "tempo_check": "128.3 BPM medido vs 128 declarado", "verdict": "pass"},
+    "visual_spotcheck": {
+      "frames_sampled": ["10.0s (steps_list)", "40.0s (brand_close)"],
+      "legibilidad": "pasos 1-3 legibles; brand_close: CTA 'aetherlogik.com/para-legal . agenda tu llamada de diagnostico gratuita ->' registrado como 'COMPLETO y legible (2 lineas, ember)' — esta corrida SI noto que envolvia a 2 lineas pero NO recorto+amplio para verificar el margen (ver P-13)",
+      "veredicto_original": "pass — defecto de layout no detectado en esta corrida, encontrado despues retroactivamente"
+    },
+    "final_verdict": "GO (v1) — vigente en su momento, pero brand_close tenia el defecto P-13 no detectado en esta corrida (el CTA FINAL de conversion de la serie). Superado por post_render_verify_v2 abajo."
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "auditoria retroactiva de video-producer (recorte+zoom 4x del brand_close de los 12 reels ya publicados) encontro el defecto en ESTE reel — prioritario por ser el CTA de conversion final de la serie; fix aplicado a BrandClose.tsx (maxWidth/textAlign en el div del url), cherry-pick a esta rama commit 6fbf7e4; devops re-renderizo",
+    "artifact": "https://media.aetherlogik.com/agency/reels-abogados-serie/como-empezar-sin-desorden-v2.mp4",
     "independent_ffprobe": {
-      "matches_devops_report": true,
-      "codec_video": "h264, 1080x1920, 24fps, bitrate 863419bps",
-      "codec_audio": "aac, 48000Hz, 2ch, bitrate 315977bps",
+      "codec_video": "h264, 1080x1920, 24fps",
+      "codec_audio": "aac, 48000Hz, 2ch",
       "duration_s": 45.0,
-      "size_bytes": 6667546,
-      "note": "duracion de contenedor EXACTA (45.000000s)"
+      "size_bytes": 6649555,
+      "nota": "identica a v1 (45.0s) — re-render no altero duracion ni assets, solo el componente de layout"
     },
     "audio_spotcheck": {
       "loudnorm_measured_independiente": {"input_i": "-13.88", "input_tp": "-0.79"},
-      "finding": "coincide EXACTO con el -13.88 reportado por devops (0.12dB bajo el target -14, mismo margen que el reel 4 de la serie clinicas a -13.96 - dentro de tolerancia, no bloquea)",
-      "tempo_check": "128.3 BPM medido vs 128 BPM declarado (delta 0.3 BPM, confidence 0.488). Dentro de la banda 120-140.",
+      "nota": "identico a v1 (-13.88) — el fix no toco audio",
       "verdict": "pass"
     },
-    "visual_spotcheck": {
-      "frames_sampled": ["10.0s (steps_list)", "40.0s (brand_close)"],
-      "palette_scan_pixeles_reales": {
-        "steps_10s": "cyan_violet=0.00%, ember=75.00%",
-        "brand_close_40s": "cyan_violet=0.05%, ember=85.91%",
-        "veredicto": "pass - cero acento cian/violeta deliberado"
-      },
-      "legibilidad": "steps_list al t=10s: pasos 1-3 visibles y legibles ('Audita tu tiempo una semana' / 'Elige un flujo unico' / 'Disena con un especialista', stagger correcto); brand_close: CTA 'aetherlogik.com/para-legal . agenda tu llamada de diagnostico gratuita ->' COMPLETO y legible (2 lineas, ember)",
+    "brand_close_recheck": {
+      "metodo": "frame extraido a duration-1.5s, recorte+zoom 4x de la banda de texto (y=1030-1160, upscale 2x horizontal)",
+      "hallazgo": "CTA FINAL 'aetherlogik.com/para-legal . agenda tu llamada de diagnostico gratuita ->' envuelve a 2 lineas, AMBAS centradas con margen simetrico visible en los 2 lados. Sin bleed a los bordes. Es el CTA de conversion real de la serie — ahora limpio.",
       "veredicto": "pass"
     },
-    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
-    "promise_preservation": {"verdict": "pass"},
-    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md, incluido el CTA final a /para-legal"},
     "final_verdict": "GO"
   }
 }
