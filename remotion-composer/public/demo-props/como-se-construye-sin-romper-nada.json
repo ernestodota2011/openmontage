@@ -1,8 +1,7 @@
 {
-  "processAndHonestySrc": "",
+  "processAndHonestySrc": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/proceso-y-honestidad.mp4",
   "musicSrc": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/music.mp3",
   "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
   "sfxPhaseTickSrc": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/sfx-phase-tick.mp3",
-  "tail_padding_seconds": 0,
-  "_pending": "processAndHonestySrc queda vacio a proposito: lo llena devops con la URL de R2 tras renderizar hyperframes-compositions/proceso-y-honestidad/ (hf lint + hf render) y archivarlo. Ver ReelsChatbotSerie.README.md paso 2 de Reel 4."
+  "tail_padding_seconds": 0
 }
