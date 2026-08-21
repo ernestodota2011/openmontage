@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline 'Cinco trabajos que ya no necesitas hacer tu.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "promete el contenido denso que sigue",
+    "hero_moment": false,
+    "information_role": "apertura del reel didactico",
+    "texture_keywords": ["tipografia cinetica", "sin i2v"]
+  },
+  {
+    "id": "five_jobs_checklist",
+    "type": "hyperframes",
+    "description": "Clip HyperFrames: checklist de 5 nodos iluminandose — los 5 trabajos exactos de la seccion del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static (CSS-only, data-no-timeline)", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "responde con precision la pregunta 'que puede hacer la IA por mi negocio'",
+    "hero_moment": false,
+    "information_role": "los 5 trabajos, fieles al post",
+    "texture_keywords": ["checklist nodos", "stagger 2.0-16.0s"]
+  },
+  {
+    "id": "no_reemplaza",
+    "type": "animation",
+    "description": "KineticHeadline: 'No reemplaza a tu equipo. Libera su tiempo para lo que si importa.' — fiel a la FAQ del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "corta la objecion de 'me van a reemplazar' antes de que aparezca",
+    "hero_moment": false,
+    "information_role": "el limite honesto sobre reemplazo de personal",
+    "texture_keywords": ["una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA al reel 3 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, sin venta directa",
+    "hero_moment": false,
+    "information_role": "CTA interno de la serie",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

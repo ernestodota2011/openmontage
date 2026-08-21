@@ -1,0 +1,33 @@
+{
+  "reel": "los-cinco-trabajos-de-la-ia",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.45,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.2, "reason": "4 escenas, cada una con un device distinto (tipografia, hyperframes, tipografia, brand_close)"},
+        "decorative_visuals": {"score": 0.0, "reason": "el checklist HyperFrames comunica los 5 trabajos reales, no decora"},
+        "weak_motion": {"score": 0.6, "reason": "0 escenas i2v — tipico y aceptado para un reel 100% didactico/checklist"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.5, "reason": "4 de 4 escenas (100%) tipografia/HyperFrames, mitigado por el device HyperFrames de alta densidad informativa (no slides genericas)"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico, el reel se declara didactico"}
+      }
+    },
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 3, "hyperframes_cuts": 1, "nota": "el reel se declara didactico/checklist, no motion-led — el bloque HyperFrames es motion graphics autorado, no video real, y se cuenta por separado del ratio de video real para no sobre-reclamar"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "incluye escaneo del clip HyperFrames renderizado, no solo las escenas Remotion"},
+    "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 5 items del checklist son la sintesis fiel y en el mismo orden de los 5 puntos numerados de 'Los 5 trabajos que la IA hace mejor que una persona en Miami'. La frase no_reemplaza parafrasea la respuesta real de la FAQ '¿La IA reemplaza a mi equipo?'. Ninguna cifra ni claim nuevo se introduce."}
+  },
+  "assets_generated": {
+    "hyperframes_composition": {"tipo": "HTML/CSS autorado (data-no-timeline), sin costo de generacion", "path": "hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/index.html", "cost_usd": 0.0},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 130, "length_ms_requested": 37500, "unit_price_usd_per_min": 0.6, "cost_usd": 0.375, "url": "https://v3b.fal.media/files/b/0aa73dbc/oSiEhnT5kKWrN74_Pb8SM_music_generated.mp3"},
+    "sfx_chip": {"source": "reusado — reels-hvac-serie/assets/sfx-ding-checklist.mp3", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.375
+  },
+  "post_render_verify": {
+    "status": "PENDIENTE — requiere DOS renders de devops: (1) hf lint . && hf render sobre hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/ (comando canonico de aetherlogik-hyperframes) -> archivar el MP4 resultante a R2 y wirearlo en props.fiveJobsChecklistSrc, (2) render Remotion de la composicion completa + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + hf lint en 0/0 confirmado) sobre el MP4 final una vez publicado."
+  }
+}

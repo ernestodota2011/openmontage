@@ -1,0 +1,8 @@
+{
+  "fiveJobsChecklistSrc": "",
+  "musicSrc": "https://v3b.fal.media/files/b/0aa73dbc/oSiEhnT5kKWrN74_Pb8SM_music_generated.mp3",
+  "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
+  "sfxChipSrc": "https://media.aetherlogik.com/agency/reels-hvac-serie/assets/sfx-ding-checklist.mp3",
+  "tail_padding_seconds": 0,
+  "_devops_note": "fiveJobsChecklistSrc VACIO a proposito: requiere que devops corra 'hf lint . && hf render' sobre hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/ (comando canonico en la skill aetherlogik-hyperframes), archive el MP4 resultante a agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-checklist.mp4 y llene este campo con la URL de media.aetherlogik.com ANTES de renderizar la composicion Remotion completa. musicSrc es una URL TEMPORAL de fal.media (expira ~24h desde 2026-08-21) — archivar a agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-musica.mp3 antes de renderizar (P-07)."
+}

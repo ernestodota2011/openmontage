@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>los-cinco-trabajos-de-la-ia-checklist</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0d0d0d 0%, #0a0a0a 60%, #050505 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #stage {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    position: absolute;
+    top: 170px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #F5F5F5;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: headerIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    padding: 0 90px;
+  }
+  @keyframes headerIn { to { opacity: 1; transform: translateY(0); } }
+
+  .list {
+    position: absolute;
+    top: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+    width: 850px;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    opacity: 0;
+    transform: translateY(28px);
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16,1,0.3,1);
+    animation-fill-mode: both;
+  }
+  .node-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    align-self: stretch;
+  }
+  .node {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #FF6B1A;
+    background: #0a0a0a;
+    flex-shrink: 0;
+  }
+  .track {
+    width: 2px;
+    flex: 1;
+    min-height: 34px;
+    background: #2a2a2a;
+    margin-top: 4px;
+  }
+  .row:last-child .track { visibility: hidden; }
+  .label {
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    color: #9AA0A6;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .value {
+    font-size: 29px;
+    font-weight: 600;
+    color: #F5F5F5;
+    line-height: 1.32;
+    max-width: 730px;
+  }
+
+  @keyframes rowIn { to { opacity: 1; transform: translateY(0); } }
+  @keyframes nodeLit { to { background: #FF6B1A; } }
+
+  #item1 { animation-name: rowIn; animation-delay: 2.0s; }
+  #item2 { animation-name: rowIn; animation-delay: 5.5s; }
+  #item3 { animation-name: rowIn; animation-delay: 9.0s; }
+  #item4 { animation-name: rowIn; animation-delay: 12.5s; }
+  #item5 { animation-name: rowIn; animation-delay: 16.0s; }
+
+  #node1, #track1 { animation: nodeLit 0.01s linear 2.0s forwards; }
+  #node2, #track2 { animation: nodeLit 0.01s linear 5.5s forwards; }
+  #node3, #track3 { animation: nodeLit 0.01s linear 9.0s forwards; }
+  #node4, #track4 { animation: nodeLit 0.01s linear 12.5s forwards; }
+  #node5 { animation: nodeLit 0.01s linear 16.0s forwards; }
+</style>
+</head>
+<body>
+  <div
+    id="stage"
+    data-composition-id="los-cinco-trabajos-de-la-ia-checklist"
+    data-start="0"
+    data-duration="20"
+    data-fps="24"
+    data-width="1080"
+    data-height="1920"
+    data-no-timeline
+  >
+    <div class="header">Cinco trabajos que ya no necesitas hacer tu.</div>
+    <div class="list">
+      <div class="row" id="item1">
+        <div class="node-col"><div class="node" id="node1"></div><div class="track" id="track1"></div></div>
+        <div><div class="label">Uno</div><div class="value">Responde mensajes y leads las 24 horas</div></div>
+      </div>
+      <div class="row" id="item2">
+        <div class="node-col"><div class="node" id="node2"></div><div class="track" id="track2"></div></div>
+        <div><div class="label">Dos</div><div class="value">Envia recordatorios automaticos a tus clientes</div></div>
+      </div>
+      <div class="row" id="item3">
+        <div class="node-col"><div class="node" id="node3"></div><div class="track" id="track3"></div></div>
+        <div><div class="label">Tres</div><div class="value">Genera facturas y documentos sin errores</div></div>
+      </div>
+      <div class="row" id="item4">
+        <div class="node-col"><div class="node" id="node4"></div><div class="track" id="track4"></div></div>
+        <div><div class="label">Cuatro</div><div class="value">Coordina tu agenda y la de tu equipo</div></div>
+      </div>
+      <div class="row" id="item5">
+        <div class="node-col"><div class="node" id="node5"></div></div>
+        <div><div class="label">Cinco</div><div class="value">Responde las preguntas frecuentes de siempre</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

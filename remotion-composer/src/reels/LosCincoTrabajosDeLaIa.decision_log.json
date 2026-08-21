@@ -1,0 +1,51 @@
+{
+  "reel": "los-cinco-trabajos-de-la-ia",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes",
+      "options_considered": [
+        "TagRevealList de Remotion para los 5 items (patron mas simple)",
+        "HyperFrames (HTML/CSS puro, data-no-timeline) para el bloque denso de 5 items"
+      ],
+      "choice": "renderer_family=hybrid, render_runtime=hyperframes (bloque central) + remotion (resto), composition_mode=atelier",
+      "reason": "la mision instruye explicitamente 'bloques densos -> HyperFrames'. Un checklist de 5 items con nodos+tracks iluminandose en cascada tiene mas presencia visual y mejor legibilidad tipografica en HyperFrames (control total de CSS/layout) que el TagRevealList generico de Remotion — mismo patron ya GO'd en las 4 series anteriores para listas de 4-5 items.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "i2v — por que 0 en este reel",
+      "options_considered": [
+        "agregar un hero i2v de apoyo (ej. persona usando el telefono mientras el sistema trabaja)",
+        "0 escenas i2v, presupuesto de hero reservado para reel 1 y reel 3"
+      ],
+      "choice": "0 escenas i2v",
+      "reason": "la doctrina de la serie es maximo 1 hero i2v por reel, y el presupuesto ya esta asignado a reel 1 (gancho) y reel 3 (casos reales) — este reel didactico se sostiene solo con HyperFrames + tipografia, sin necesitar un tercer hero.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "5 items exactos — sin inventar un 6o ni reordenar",
+      "options_considered": [
+        "agrupar/resumir a 4 items para acelerar el ritmo",
+        "5 items exactos, en el mismo orden que el post"
+      ],
+      "choice": "5 items, mismo orden del post, sin inventar ni resumir",
+      "reason": "el post enumera exactamente 5 trabajos con su propio orden logico (leads -> recordatorios -> facturacion -> agenda -> FAQ) — alterar el orden o el conteo violaria la regla anti-claims de la mision (no inventar contenido que el post no declara).",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan — tempo/energia didactica",
+      "options_considered": [
+        "mantener el mismo tempo del reel 1 (128 BPM) por continuidad",
+        "130 BPM, driving/momentum, distinto del tenso->esperanzador del reel 1"
+      ],
+      "choice": "130 BPM, corporate-tech instrumental, mood 'driving/momentum'",
+      "reason": "el reel didactico necesita energia constante que sostenga los 5 items sin distraer — un tempo con sensacion de progreso encaja mejor que el arco emocional del gancho. Dentro de la banda 120-140 exigida.",
+      "confidence": 0.7
+    }
+  ]
+}
