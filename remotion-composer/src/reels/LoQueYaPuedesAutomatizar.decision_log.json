@@ -1,0 +1,52 @@
+{
+  "reel": "lo-que-ya-puedes-automatizar",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes — runtime HIBRIDO (Remotion + HyperFrames), presentado explicito",
+      "options_considered": [
+        "100% Remotion (TagRevealList para todo, sin HyperFrames)",
+        "100% HyperFrames (todo el reel en HTML/CSS)",
+        "HIBRIDO: intake_beat en Remotion (TagRevealList) + checklist_delegable en HyperFrames (HTML/CSS puro)"
+      ],
+      "choice": "renderer_family=animation, render_runtime=HIBRIDO (remotion + hyperframes), composition_mode=atelier",
+      "reason": "El bloque de 5 items (checklist_delegable) es una lista larga y estatica — HyperFrames renderiza tipografia mas nitida y barata para ese caso especifico, mismo patron GO'd 2 veces (clinicas, abogados). El resto del reel (intake_beat, cold_open, caveat, brand_close) usa los componentes Remotion ya probados. 100% HyperFrames hubiera perdido la integracion de Audio/Sequence nativa de Remotion que ya resuelve el ducking de musica.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que 0 escenas i2v en este reel",
+      "options_considered": [
+        "agregar un i2v de agente revisando su telefono durante intake_beat",
+        "cero i2v, presupuesto de hero completo para reel 1 y reel 3"
+      ],
+      "choice": "cero i2v en este reel",
+      "reason": "el reel es 100% didactico (QUE se automatiza) — un i2v aqui competiria con el checklist denso por atencion sin aportar informacion nueva. El presupuesto de '1 hero maximo por reel' de la serie se concentra en el gancho (reel 1) y el reel de limites/credibilidad (reel 3), donde el i2v SI dramatiza algo que el texto solo no logra.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia",
+      "options_considered": [
+        "mismo BPM que reel 1 (128)",
+        "132 BPM, mas upbeat, para el reel de mayor densidad informativa"
+      ],
+      "choice": "132 BPM, corporate-tech instrumental, four-on-the-floor confiado",
+      "reason": "el reel es el mas largo (46s) y el mas denso en informacion — un tempo ligeramente mas alto ayuda a sostener energia durante el bloque HyperFrames de 20s sin volverse plano. Dentro de la banda 120-140 exigida.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Fidelidad de los 5 items del checklist al post (sin inventar capacidades)",
+      "options_considered": [
+        "agregar una 6a tarea generica ('mas eficiencia') para redondear el checklist",
+        "exactamente 5 items, cada uno trazable a una seccion especifica del post"
+      ],
+      "choice": "5 items, cada uno con seccion de origen documentada en el .script.md",
+      "reason": "la regla dura de la mision prohibe inventar claims; cada item del checklist debe poder senalarse a un parrafo real del post. Ninguna capacidad se agrega que el post no describa explicitamente.",
+      "confidence": 0.9
+    }
+  ]
+}
