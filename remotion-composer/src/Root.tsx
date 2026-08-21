@@ -42,6 +42,10 @@ import { LaDiferenciaQueImporta, LaDiferenciaQueImportaProps, LA_DIFERENCIA_QUE_
 import { LosCincoTrabajosDeLaIa, LosCincoTrabajosDeLaIaProps, LOS_CINCO_TRABAJOS_DE_LA_IA_TOTAL_FRAMES } from "./reels/LosCincoTrabajosDeLaIa";
 import { TresNegociosTresResultados, TresNegociosTresResultadosProps, TRES_NEGOCIOS_TRES_RESULTADOS_TOTAL_FRAMES } from "./reels/TresNegociosTresResultados";
 import { CincoSenalesDeQueEstasListo, CincoSenalesDeQueEstasListoProps, CINCO_SENALES_DE_QUE_ESTAS_LISTO_TOTAL_FRAMES } from "./reels/CincoSenalesDeQueEstasListo";
+import { AlquilarOComprar, AlquilarOComprarProps, ALQUILAR_O_COMPRAR_TOTAL_FRAMES } from "./reels/AlquilarOComprar";
+import { CuantoCuestaCadaUno, CuantoCuestaCadaUnoProps, CUANTO_CUESTA_CADA_UNO_TOTAL_FRAMES } from "./reels/CuantoCuestaCadaUno";
+import { CuandoElegirCadaUno, CuandoElegirCadaUnoProps, CUANDO_ELEGIR_CADA_UNO_TOTAL_FRAMES } from "./reels/CuandoElegirCadaUno";
+import { LoQueDecidioDmpConsulting, LoQueDecidioDmpConsultingProps, LO_QUE_DECIDIO_DMP_CONSULTING_TOTAL_FRAMES } from "./reels/LoQueDecidioDmpConsulting";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -762,6 +766,64 @@ export const Root: React.FC = () => {
           sfxWhooshSrc: "",
           tail_padding_seconds: 0,
         } as CincoSenalesDeQueEstasListoProps}
+      />
+      <Composition
+        id="AlquilarOComprar"
+        component={AlquilarOComprar}
+        durationInFrames={ALQUILAR_O_COMPRAR_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as AlquilarOComprarProps}
+      />
+      <Composition
+        id="CuantoCuestaCadaUno"
+        component={CuantoCuestaCadaUno}
+        durationInFrames={CUANTO_CUESTA_CADA_UNO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          costModelTableSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          tail_padding_seconds: 0,
+        } as CuantoCuestaCadaUnoProps}
+      />
+      <Composition
+        id="CuandoElegirCadaUno"
+        component={CuandoElegirCadaUno}
+        durationInFrames={CUANDO_ELEGIR_CADA_UNO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          whenToChooseTableSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          tail_padding_seconds: 0,
+        } as CuandoElegirCadaUnoProps}
+      />
+      <Composition
+        id="LoQueDecidioDmpConsulting"
+        component={LoQueDecidioDmpConsulting}
+        durationInFrames={LO_QUE_DECIDIO_DMP_CONSULTING_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueDecidioDmpConsultingProps}
       />
     </>
   );
