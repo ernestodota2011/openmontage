@@ -1,0 +1,35 @@
+{
+  "reel": "lo-que-te-cuesta-facturar-a-mano",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.5,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra el problema vivido, no decora"},
+        "weak_motion": {"score": 0.4, "reason": "1 de 5 escenas es video real (i2v) — proporcion tipica de un gancho de 30s"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.6, "reason": "4 de 5 escenas (80%) tipografia/stat_card — gancho de 30s, desviacion consciente y declarada"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico mas alla del hero declarado"}
+      }
+    },
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MCU","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "motion_led", "valid": true, "motion_ratio": 0.2, "motion_cuts": 1, "slide_cuts": 4, "still_cuts": 0, "nota": "gancho corto de 30s con 1 hero i2v real — el ratio bajo es tipico de este formato en las 4 series anteriores (mismo patron GO'd)"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "escena unica i2v — sin multi-plano que encadenar, PASS por diseno (mismo patron que VeintiunVecesMasProbable)"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "$30-$100 y 200+ horas son afirmaciones PROPIAS del post (parrafos 3-4 de 'Los costos ocultos'), citadas sin atribucion externa porque el post no las atribuye a un tercero. CERO cifras de Marino HVAC en este reel (reservadas para el reel 3, con atribucion completa)."}
+  },
+  "assets_generated": {
+    "still": {"model": "fal-ai/nano-banana-pro", "resolution": "2K", "output_format": "jpeg", "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73b6c/wq3NlKzIYpc88DaYe8GJD_BTArxlzS.jpg"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73b76/S7q9txG44503-E5rmwoH1_output.mp4", "verificado_por_video_producer": "file_size 5962556 bytes, formato mp4 — pendiente ffprobe formal post-composicion (sin checkout local en esta sesion)"},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 130, "length_ms_requested": 30500, "cost_usd": 0.305, "url": "https://v3b.fal.media/files/b/0aa73b82/DByStDIeqB1ihQCAmh0so_music_generated.mp3"},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo — mismo asset reusado en las 4 series anteriores)", "cost_usd": 0.0},
+    "total_cost_usd_est": 1.015
+  },
+  "post_render_verify": {
+    "status": "pendiente",
+    "nota": "esta corrida es PRE-RENDER (auto-score razonado, sin checkout local de Node/Remotion en esta sesion). El verify real (ffprobe + LUFS + BPM medido + coherence_guard + escaneo de paleta + recorte/zoom de brand_close) lo hace video-producer sobre el MP4 real DESPUES del render de devops — ver handoff en ReelsHvacSerie.README.md."
+  }
+}

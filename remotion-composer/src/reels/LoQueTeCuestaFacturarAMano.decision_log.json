@@ -1,0 +1,53 @@
+{
+  "reel": "lo-que-te-cuesta-facturar-a-mano",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion, 100% motion-autorado (sin i2v)",
+        "render_runtime=remotion con 1 escena hero i2v real (Kling O1) + el resto tipografia/stat cinetica",
+        "render_runtime=hyperframes para toda la pieza"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "Es el GANCHO de la serie (30-45s, doctrina: problema vivido + mira lo que es posible). Un gancho 100% tipografico pierde el enganche humano de los primeros segundos. HyperFrames no aporta nada aqui (sin UI/datos densos en este reel especifico; el bloque denso vive en el reel 2). Mismo patron GO'd en las 4 series anteriores.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Modelo i2v y parametros del hero",
+      "options_considered": [
+        "Kling 3.0 (o3), volumen/default",
+        "Kling O1 solo start_image_url, sin encadenar (un solo plano aislado)",
+        "Veo 3.1 (hero+audio nativo)"
+      ],
+      "choice": "Kling O1 image-to-video, solo start_image_url (sin end_image_url), duration=5s",
+      "reason": "Un solo plano aislado (no hay multi-plano que encadenar). Veo 3.1 se descarto por costo/latencia sin necesitar audio nativo. duration='5' explicito desde el inicio (P-11: evitar 422 por duracion fuera de {5,10} sin end_image_url) — la escena Remotion dura exactamente 5.0s, sin discrepancia asset/composicion. Still de entrada en 2K JPEG directo (P-06: evita el ciclo descarga-recompresion-resubida del limite de 10MB de Kling).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz dura de la mision)",
+      "options_considered": [
+        "tono atmosferico/tenso sin drive",
+        "130 BPM, four-on-the-floor, tenso-pero-esperanzador"
+      ],
+      "choice": "130 BPM, corporate-tech instrumental, four-on-the-floor, tenso-pero-esperanzador",
+      "reason": "la directriz de la mision es DURA (120-140 BPM con drive, BPM declarado) y aplica a TODA la serie. 130 BPM balancea el agotamiento del dueno (el gancho) con el drive ritmico exigido.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Por que este reel NO lleva ninguna cifra de Marino HVAC",
+      "options_considered": [
+        "adelantar la cifra de Marino ($4,400/mes) en el gancho para maximo impacto",
+        "reservar TODAS las cifras de Marino para el reel 3 (caso real), este reel usa solo las cifras propias/genericas del post"
+      ],
+      "choice": "reservar las cifras de Marino para el reel 3",
+      "reason": "regla dura de la mision: usar SOLO las cifras del post con su atribucion EXACTA en el MISMO frame. Las cifras de Marino llevan una atribucion especifica (\"estimaciones nuestras a partir de los datos del cliente\") que no tiene sentido fuera del contexto del caso real — adelantarlas aqui las descontextualizaria de su atribucion. Las cifras genericas ($30-100, 200+ horas) SI son propias del post sin necesidad de atribucion externa, por eso son las que abren la serie.",
+      "confidence": 0.9
+    }
+  ]
+}

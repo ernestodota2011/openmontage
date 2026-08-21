@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "hero_i2v",
+    "description": "Dueno de HVAC exhausto revisando facturas de papel tarde en la noche, calculadora, lampara tungsteno sobre near-black — i2v real (Kling O1, push-in sutil)",
+    "shot_language": {"shot_size": "MCU", "camera_movement": "locked-off, push-in muy sutil", "lighting_key": "tungsteno calido sobre near-black"},
+    "shot_intent": "establece el problema humano vivido en los primeros 5s",
+    "hero_moment": true,
+    "information_role": "apertura emocional del gancho",
+    "texture_keywords": ["i2v real", "papeles de trabajo", "calculadora", "luz tungsteno"]
+  },
+  {
+    "id": "stat_reveal",
+    "type": "stat_card",
+    "description": "StatReveal $30-$100 + label, cifra PROPIA del post sin atribucion externa",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "dramatiza el costo por error, fiel al parrafo 3 del post",
+    "hero_moment": false,
+    "information_role": "cifra central del gancho",
+    "texture_keywords": ["stat grande", "tipografia mono para la cifra"]
+  },
+  {
+    "id": "hidden_cost",
+    "type": "animation",
+    "description": "KineticHeadline 'Mas de 200 horas al ano...' fiel al parrafo 4 del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "amplia el costo de errores puntuales al costo de tiempo administrativo acumulado",
+    "hero_moment": false,
+    "information_role": "segunda cifra del gancho",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Esto no tiene que seguir asi.' + EmberThread sweep",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "bisagra de marca hacia el cierre — promesa sin vender aun",
+    "hero_moment": false,
+    "information_role": "bridge emocional",
+    "texture_keywords": ["ember sweep", "hold deliberado"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
