@@ -1,181 +1,138 @@
 # Serie "reels-consultoria-serie" — 8ª y ÚLTIMA serie de la línea `reels-del-blog`
 
-> [!warning] Estado: PRE-PRODUCCIÓN COMPLETA, pendiente de render (2026-08-21)
-> Handoff de `video-producer` a `devops-aetherlogik-homelab`. Rama
-> `aetherlogik/reels-consultoria-serie` del fork `ernestodota2011/openmontage`,
-> partida de `aetherlogik/reels-ia-miami-serie` HEAD
-> (`26a6dc1c0a0667a6fd40701c7d302d44c6f6c6f2`). Los 4 `.tsx` de reel
-> están escritos, tipados, y **registrados en `Root.tsx`** (4 imports +
-> 4 `<Composition>`, mismo patrón exacto que las 27 composiciones ya
-> existentes) — pero **`video-producer` NO corrió `npx remotion
-> compositions` real** (sin checkout local de Node/el fork en esta
-> sesión, doctrina P-12 de `aetherlogik-video`): **primer gate a correr
-> por devops**, exactamente como en las 2 series anteriores.
+> [!warning] Veredicto: **NO-GO (dirigido)** — 1 solo defecto encontrado, fix ya pusheado, falta re-render de video (2026-08-21)
+> Los 4 reels fueron renderizados por `devops-aetherlogik-homelab` (HEAD `ff2e7d5`; gate `npx remotion compositions`
+> pasó; `tsc` 0; `hf lint` 0/0, bloque HyperFrames en 28s). El verify final INDEPENDIENTE de `video-producer`
+> (descarga propia de R2 + `ffmpeg`/`ffprobe`/`python` locales, sin confiar en el reporte de devops) confirma
+> **técnico/audio/coherencia/paleta/contenido/CTA todo PASS** — pero encontró **1 defecto sistémico de autoría**
+> (no de devops, no del componente compartido): en los 4 reels, la palabra de acento ember (`accentWord`) nunca
+> se pintó de ember porque se pasó CON puntuación pegada (`"Gratis."`, `"persona."`, `"plan:"`, `"real."`) —
+> `KineticHeadline` limpia la puntuación de la palabra antes de comparar pero NO limpia el prop, así que la
+> comparación nunca coincide y el highlight silenciosamente no aplica. **El fix ya está pusheado** (commit
+> `1116b2e`, 4 líneas, sin puntuación) — falta que devops re-renderice el video (el audio NO cambia, ya está en
+> banda). Ver `Video-problemas.md` P-19 para el detalle completo del hallazgo.
 
-Fuente del blog: `consultoria-ia-gratuita-diagnostico-paso-a-paso.md`
-(D:\aetherlogik-astro) — el post del **EMBUDO/CONVERSIÓN**: a
-diferencia de las 7 series anteriores (educativas), esta es la que
-lleva a **agendar** el diagnóstico gratuito.
+Fuente del blog: `consultoria-ia-gratuita-diagnostico-paso-a-paso.md` (D:\aetherlogik-astro) — el post del
+**EMBUDO/CONVERSIÓN**: a diferencia de las 7 series anteriores (educativas), esta es la que lleva a **agendar**
+el diagnóstico gratuito.
 
 ## Los 4 reels
 
-| # | Reel (composition id) | Tipo | Duración | Música (BPM declarado) | CTA |
+| # | Reel (composition id) | Tipo | Duración | Música (BPM decl./medido) | CTA |
 |---|---|---|---|---|---|
-| 1 | `LoQueNoSabesDeTuNegocio` | Gancho | 30.0s (720f) | 128 BPM, tenso→esperanzador | interno → reel 2 |
-| 2 | `AsiSonLosTreintaMinutos` | Didáctico (proceso paso a paso, HyperFrames) | 37.0s (888f) | 132 BPM, driving/metódico | interno → reel 3 |
-| 3 | `LoQueRecibesDespues` | Didáctico (caso real, Marino HVAC) | 34.0s (816f) | 124 BPM, warm/resolving | interno → reel 4 |
-| 4 | `PorQueEsGratisAgendaAhora` | Cierre — **CTA MÁS FUERTE de las 8 series** | 35.0s (840f) | 136 BPM, energético/urgente-optimista | **REAL: cal.com/aetherlogik/discovery** |
+| 1 | `LoQueNoSabesDeTuNegocio` | Gancho | 30.0s | 128 / 127.7 | interno → reel 2 |
+| 2 | `AsiSonLosTreintaMinutos` | Didáctico (proceso, HyperFrames) | 37.0s | 132 / 133.3 | interno → reel 3 |
+| 3 | `LoQueRecibesDespues` | Didáctico (caso real, Marino HVAC) | 34.0s | 124 / 125.0 | interno → reel 4 |
+| 4 | `PorQueEsGratisAgendaAhora` | Cierre — **CTA MÁS FUERTE de las 8 series** | 35.0s | 136 / 136.4 | **REAL: cal.com/aetherlogik/discovery** |
 
-Todos 24fps, 1080×1920 (9:16), `tail_padding_seconds: 0` (duración
-exacta). Los frame plans exactos están comentados al tope de cada
-`.tsx`.
+## Verify independiente — detalle por reel
 
-## Manifiesto de assets generados (fal.ai, agencia BYOK)
+### Técnico (ffprobe, re-medido) — 4/4 PASS
+Los 4: h264, 1080×1920, 24fps, aac 48000Hz estéreo. Duraciones EXACTAS: 30.0/37.0/34.0/35.0s, `curl` 200 en los 4.
 
-| Asset | Reel | Modelo | Costo | URL (fal.media — TEMPORAL, ~24h) |
-|---|---|---|---|---|
-| still hero (2K JPEG) | 1 | `fal-ai/nano-banana-pro` | $0.15 | https://v3b.fal.media/files/b/0aa73f7e/hCtUhOuPLVf-tl28aeTxY_Un3kpx7x.jpg |
-| hero i2v (5s) | 1 | `fal-ai/kling-video/o1/image-to-video` | $0.56 | https://v3b.fal.media/files/b/0aa73fa4/xnULnsPZ6iV4strpopoeZ_output.mp4 |
-| música (30s, 128 BPM) | 1 | `fal-ai/elevenlabs/music` | $0.30 | https://v3b.fal.media/files/b/0aa73f7f/Dio_osLoZ3SigXNXvzlk2_music_generated.mp3 |
-| música (37s, 132 BPM) | 2 | `fal-ai/elevenlabs/music` | $0.37 | https://v3b.fal.media/files/b/0aa73f93/1WYCXYJPth-Rb_HLUJ4YY_music_generated.mp3 |
-| still hero (2K JPEG) | 3 | `fal-ai/nano-banana-pro` | $0.15 | https://v3b.fal.media/files/b/0aa73f7e/TyEYpKdTD4e09gyWf_8wK_YOIMNcQ6.jpg |
-| hero i2v (5s) | 3 | `fal-ai/kling-video/o1/image-to-video` | $0.56 | https://v3b.fal.media/files/b/0aa73fa4/foh4k5DxwF8J6K3bT-xFB_output.mp4 |
-| música (34s, 124 BPM) | 3 | `fal-ai/elevenlabs/music` | $0.34 | https://v3b.fal.media/files/b/0aa73f80/T-zG7lap1udkF_8VAuI4t_music_generated.mp3 |
-| música (35s, 136 BPM) | 4 | `fal-ai/elevenlabs/music` | $0.35 | https://v3b.fal.media/files/b/0aa73f80/EosJxCvWyhU9bZWqs2M75_music_generated.mp3 |
-| **Total assets** | | | **$2.78** | dentro del presupuesto de $25 |
+### Audio (LUFS/TP, re-medido con `loudnorm` + corroborado con `astats`) — 4/4 PASS
 
-> [!danger] P-07 — `video-producer` NUNCA toca credenciales de R2
-> Las URLs de arriba son **fal.media, temporales (~24h)**.
-> `video-producer` NO las archivó a R2 (no tiene ni debe tener acceso a
-> `~/.aetherlogik/secrets/r2.env`). **Instrucción explícita a
-> `devops-aetherlogik-homelab`**: descargar los 6 assets + el clip
-> HyperFrames renderizado (ver Paso 1 abajo) y subirlos a
-> `agency/reels-consultoria-serie/assets/` por la vía segura ya
-> establecida (config in-situ, nunca argv/`Read` de un `.env`), **ANTES
-> de que expiren las URLs de fal.media**. Actualizar los 4
-> `remotion-composer/props/*.json` con las URLs R2 reales tras
-> archivar (mismo patrón que las 6 series anteriores).
+| Reel | LUFS medido | TP medido | TP `astats` | Veredicto TP | BPM decl. | BPM medido | Δ |
+|---|---|---|---|---|---|---|---|
+| 1 | -14.49 | -1.93 | -1.933 dB | pass | 128 | 127.7 | 0.3 |
+| 2 | -14.03 | **-1.05** | -1.114 dB | **pass — margen más ajustado de la serie (0.05dB), CONFIRMADO ≤ -1.0 por 2 métodos** | 132 | 133.3 | 1.3 |
+| 3 | -14.07 | -1.82 | -1.821 dB | pass | 124 | 125.0 | 1.0 |
+| 4 | -13.63 | -1.11 | -1.336 dB | pass | 136 | 136.4 | 0.4 |
 
-El isotipo real (`logoSrc`) ya está en R2 en los 4 props:
-`https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp`
-(no se genera con IA).
+Los 4 en banda -14±0.5 LUFS, los 4 con true peak negativo y ≤ -1.0 dBTP. El reel 2 (el que el coordinador marcó
+"ojo") queda confirmado dentro de banda por medición independiente, con el margen más ajustado de la serie
+(0.05dB) — recomendación para futuras series del catálogo: re-mux con `TP=-2.0` desde el primer pase (doctrina
+P-15) habría dado más colchón.
 
-Sin SFX nuevos generados en esta serie (los 4 `sfx*Src` quedan como
-cadena vacía en los props — opcionales por diseño en los `.tsx`, ver
-`{sfxXSrc && (...)}`). Si devops quiere reforzar sync de audio, puede
-reusar un SFX ya archivado de una serie anterior (p. ej.
-`agency/reels-hvac-serie/assets/sfx-ding-checklist.mp3` para el reel 2,
-o un `sfx-chime` archivado de `reels-ia-miami-serie`/`reels-hvac-serie`
-para el reel 3) — opcional, no bloqueante.
+### Coherencia entre planos (los 2 heroes i2v — reels 1 y 3)
+- **Reel 1** (`cold_open_hero`, 2.5s/4.9s): mismo personaje, mismo escritorio/lámpara/estantería/papeles, luz
+  tungsteno consistente, push-in leve, sin drift. **Pass.**
+- **Reel 3** (`cold_open_hero`, 1.0s/4.5s): mismo personaje, mismo taller/estantería de cobre/van HVAC, luz
+  golden-hour consistente, push-in leve, sin drift. **Pass.**
 
-## Paso 1 — Bloque HyperFrames del reel 2 (`asi-son-los-treinta-minutos-timeline`) — pendiente de render
+### Paleta (escaneo programático HSV)
+0.0% cian/violeta en los 4 reels salvo el hero del reel 3 (1.57%/0.86% — tonos naturales de cielo/sombra de la
+foto golden-hour, mismo patrón ya explicado y aceptado en `reels-ia-miami-serie`, muy por debajo de umbral neón).
+Sin cards, sin glow, sin lavanda/violeta en ningún frame. **Pass en los 4.**
 
-Composición HTML/CSS pura (`data-no-timeline`, sin GSAP) en
-`hyperframes-compositions/asi-son-los-treinta-minutos-timeline/index.html`:
-barra de tiempo 0-30min con 3 segmentos proporcionales (33%/50%/17% =
-10/15/5 minutos) que se rellenan en cascada + 3 tarjetas boxless (tick
-ember + minutos + título + detalle) sincronizadas. Contrato de 6
-atributos + `data-no-timeline` ya presente en el `#stage` desde la
-autoría (verificar con `hf lint .` de todas formas, doctrina P-10).
+### Beat-pixel-check ($4,400 de Marino con atribución, reel 3, t=15.0s)
+"$4,400/mes" + "recuperados en facturación, más 9 horas libres por semana" + "Marino HVAC, Miami . estimación de
+AetherLogik a partir de los datos del cliente." — los tres en el MISMO frame, confirmado en píxeles reales
+(no solo en el código). Cifra idéntica al mismo caso ya usado en `reels-hvac-serie` y `reels-ia-miami-serie`.
+**Pass.**
 
-Comando canónico (lo ejecuta devops, `aetherlogik-hyperframes`):
-```bash
-python scripts/ssh_helper.py --host pve1 "pct start 128"
-python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /ruta/al/checkout/hyperframes-compositions/asi-son-los-treinta-minutos-timeline && /usr/local/bin/hf lint . && /usr/local/bin/hf render -c index.html -o asi-son-los-treinta-minutos-timeline.mp4'"
-```
-(usar la ruta absoluta `/usr/local/bin/hf` — `pct exec` no hereda
-`/usr/local/bin` en `$PATH` de sesión no-interactiva, gotcha ya
-documentado 3 veces en la línea). Verificar `ffprobe`: `1080×1920,
-h264, 24fps, duration=20.000000` exacto. Archivar a R2 en
-`agency/reels-consultoria-serie/assets/asi-son-los-treinta-minutos-timeline.mp4`
-y actualizar `phasesTimelineSrc` en
-`remotion-composer/props/asi-son-los-treinta-minutos.json`.
+### Barra de 30 minutos legible (reel 2, HyperFrames, t=13.0s/22.5s)
+Barra de tiempo 0→30min con 3 segmentos proporcionales (33%/50%/17% = 10/15/5 min) rellenándose en cascada + 3
+tarjetas con minutos+título+detalle, todo legible, literal a la sección "Cómo transcurre la sesión de 30
+minutos" del post. **Pass.**
 
-## Paso 2 — Gate de entrada (ANTES de renderizar)
+### CTA de agenda del reel 4 — MÁXIMO RIGOR (promesa comercial de la agencia)
+- `objections_beat` (t=16.0s): las 3 reassurances ("Tarjeta de crédito → No se pide.", "Compromiso → Ninguno.",
+  "Si no hay buen fit → Te lo decimos directo.") literales del post. **Pass.**
+- `cal_final` (t=22.0s): "30 min" + "eliges un horario. Ernesto te llama exactamente a esa hora." — literal de
+  la mecánica de agenda del post. **Pass.**
+- `brand_close_cta` (t=31.0s, recorte+ampliación 3× de la banda de texto): "cal.com/aetherlogik/discovery .
+  agenda tu diagnostico gratuito ->" — coincide EXACTO con el link real del cierre del post, centrado, márgenes
+  simétricos en las 2 líneas, sin bleed. **Pass.**
+- **Fidelidad del proceso completo vs. lo que el post promete**: confirmado — cada elemento mostrado en la serie
+  (30 min gratis, las 3 fases con sus rangos exactos de minutos, sin tarjeta/sin compromiso, honestidad si no
+  hay fit, mecánica de agenda) es literal o parafraseo directo del post, sin ningún embellecimiento. **Pass.**
 
-```bash
-git fetch && git checkout aetherlogik/reels-consultoria-serie && git pull
-cd remotion-composer && npm install
-npx tsc --noEmit                         # debe dar exit 0
-npx remotion compositions src/index.tsx  # DEBE listar las 4 composiciones nuevas — este es el gate real de "completo" (P-12)
-```
-Las 4 deben aparecer con `24.00fps`, `1080x1920` y las duraciones
-exactas: `LoQueNoSabesDeTuNegocio` 720f (30.00s),
-`AsiSonLosTreintaMinutos` 888f (37.00s), `LoQueRecibesDespues` 816f
-(34.00s), `PorQueEsGratisAgendaAhora` 840f (35.00s). Si alguna no
-aparece, `video-producer` **declaró explícito** en este README que NO
-corrió esta verificación él mismo — el wireado de `Root.tsx` está
-hecho siguiendo el patrón exacto de las 27 composiciones existentes,
-pero no fue verificado por render real.
+### `brand_close` centrado (reels 1, 2 y 3 — confirma que el fix P-13 sigue vigente)
+Los 3 `brand_close` internos se recortaron+ampliaron 3×: texto centrado, márgenes simétricos en ambos lados, sin
+bleed en ninguno — el fix de P-13 (`BrandClose.tsx`, componente compartido) sigue vigente sin regresión en esta
+8ª serie.
 
-## Paso 3 — Render Remotion (los 4, ProRes HQ, SECUENCIAL — nunca en paralelo, CT 128 de 6GB)
+### Defecto encontrado — `accentWord` con puntuación (P-19, nuevo)
+En 4/4 reels, la palabra de acento (`accentWord` de `KineticHeadline`) se pasó CON puntuación pegada al texto
+tal como aparece en la línea (`"Gratis."`, `"persona."`, `"plan:"`, `"real."`) — pero el componente compara la
+palabra ya limpia de puntuación contra el prop SIN limpiar, así que el highlight ember nunca se aplicó (se
+renderizó en blanco/near-white como el resto del texto). Confirmado en píxeles en los 4 casos:
+`reveal_30min` (reel 1, "Gratis."), `ernesto_conduce` (reel 2, "persona."), `que_recibes` (reel 3, "plan:"),
+`reason` (reel 4, "real."). **NO** es una violación del `brand_palette_guard` (no aparece ningún color
+prohibido), **NO** afecta ninguna cifra/claim, y **NO** toca el CTA del reel 4 en sí (`brand_close_cta` usa
+`accentColor` directo sobre el `<div>` del `url`, no el mecanismo `accentWord`) — pero es un defecto real de
+craft que silenciaba el acento ember justo en 4 palabras clave de la serie, incluida "Gratis." del gancho.
+Fix pusheado (commit `1116b2e`, 4 props corregidos a su forma sin puntuación) — **video-producer decidió no
+declarar GO con un defecto conocido y trivialmente arreglable en la ÚLTIMA serie de la línea**, siguiendo el
+mismo criterio ya aplicado en P-13 (no se ship-ea un defecto de craft conocido cuando el fix es barato).
 
-```bash
-npx remotion render src/index.tsx LoQueNoSabesDeTuNegocio out/lo-que-no-sabes-de-tu-negocio-master.mov --props=./props/lo-que-no-sabes-de-tu-negocio.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
-npx remotion render src/index.tsx AsiSonLosTreintaMinutos out/asi-son-los-treinta-minutos-master.mov --props=./props/asi-son-los-treinta-minutos.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
-npx remotion render src/index.tsx LoQueRecibesDespues out/lo-que-recibes-despues-master.mov --props=./props/lo-que-recibes-despues.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
-npx remotion render src/index.tsx PorQueEsGratisAgendaAhora out/por-que-es-gratis-agenda-ahora-master.mov --props=./props/por-que-es-gratis-agenda-ahora.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
-```
-(Renderizar `AsiSonLosTreintaMinutos` DESPUÉS de tener
-`phasesTimelineSrc` archivado en R2 y actualizado en el props JSON —
-Paso 1 antes que Paso 3 para ese reel.)
+## Handoff a devops-aetherlogik-homelab — re-render dirigido (video-only)
 
-## Paso 4 — Finishing FFmpeg (recipe premium-craft-standards.md §6, TP=-2.0 desde el primer pase)
+1. `git pull` en `aetherlogik/reels-consultoria-serie` (HEAD `a60f5de` o posterior — trae el fix `1116b2e`).
+2. Re-renderizar SOLO el video de los 4 reels (mismos comandos ProRes del Paso 3 original, mismos `props/*.json`
+   — no cambia ningún asset ni audio):
+   ```bash
+   npx remotion render src/index.tsx LoQueNoSabesDeTuNegocio out/lo-que-no-sabes-de-tu-negocio-master-v2.mov --props=./props/lo-que-no-sabes-de-tu-negocio.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
+   npx remotion render src/index.tsx AsiSonLosTreintaMinutos out/asi-son-los-treinta-minutos-master-v2.mov --props=./props/asi-son-los-treinta-minutos.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
+   npx remotion render src/index.tsx LoQueRecibesDespues out/lo-que-recibes-despues-master-v2.mov --props=./props/lo-que-recibes-despues.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
+   npx remotion render src/index.tsx PorQueEsGratisAgendaAhora out/por-que-es-gratis-agenda-ahora-master-v2.mov --props=./props/por-que-es-gratis-agenda-ahora.json --codec=prores --prores-profile=hq --image-format=png --color-space=bt709
+   ```
+3. Finishing FFmpeg: **reusar el mismo audio ya calibrado** de cada `-v1.mp4` (extraerlo con `-c:a copy` del v1,
+   NO volver a medir/mezclar loudnorm — el mix de audio no cambió) y aplicar SOLO la cadena de video (curva +
+   eq + unsharp + vignette + CRF16 + aq-mode) sobre el master v2, luego mux con el audio del v1:
+   ```bash
+   ffmpeg -i <master-v2>.mov -i <v1>.mp4 -vf "curves=all='0/0.045 0.75/0.78 1/0.96',eq=saturation=0.92:contrast=1.06:gamma=1.0,unsharp=5:5:0.4:5:5:0.0,vignette=angle=PI/5" -map 0:v -map 1:a -c:v libx264 -crf 16 -preset slow -x264-params aq-mode=2:aq-strength=1.2 -c:a copy <slug>-v2.mp4
+   ```
+4. Subir a R2 en `agency/reels-consultoria-serie/<slug>-v2.mp4` (los `-v1` NO se borran hasta que
+   `video-producer` confirme el v2 — mismo protocolo que P-13).
+5. `video-producer` re-verifica SOLO los 4 frames afectados (14.0s/reel1, ~26s/reel2, ~9s/reel3, ~7s/reel4 —
+   los timestamps exactos de `reveal_30min`/`ernesto_conduce`/`que_recibes`/`reason`) + un `ffprobe` de sanidad
+   (duración/audio idénticos al v1) y emite el **GO final de la serie y de la línea completa (8/8)**.
 
-Receta exacta — CRF 16, curva SIN el punto `0.25/0.22` (crushea luma
-60-120, P-01/P-08), `aq-mode=2:aq-strength=1.2`, `acompressor`
-pre-`loudnorm`, **`TP=-2.0` en la pasada 2 desde el primer intento**
-(P-15 — evita el ciclo de re-mux que necesitaron 2/4 reels de
-`reels-hvac-serie` con `TP=-1.0`):
+## Costos
 
-```bash
-ffmpeg -i <master>.mov -vf "curves=all='0/0.045 0.75/0.78 1/0.96',eq=saturation=0.92:contrast=1.06:gamma=1.0,unsharp=5:5:0.4:5:5:0.0,vignette=angle=PI/5" -c:v libx264 -crf 16 -preset slow -x264-params aq-mode=2:aq-strength=1.2 -c:a copy <intermedio>.mp4
-# Audio: medir loudnorm pasada 1 -> acompressor threshold=-18dB:ratio=3:attack=15:release=200:makeup=2 -> loudnorm pasada 2 con TP=-2.0, I recalibrado por el offset medido (NO asumir el mismo offset entre reels, doctrina de la casa)
-```
-Verificar POST-HOC (nunca confiar en el reporte del comando): LUFS en
-banda -14±0.5, true peak ≤ -1.0 dBTP en el archivo FINAL entregado.
+Assets de pre-producción: **$2.78** (2 stills + 2 i2v + 4 música). Sin costo adicional en este ciclo de fix
+(no se generó ningún asset nuevo, solo texto/color).
 
-## Paso 5 — Subida a R2 + verify
+## 📌 Para memoria (parciales — el cierre final de línea queda pendiente del v2)
 
-Subir los 4 finales a `agency/reels-consultoria-serie/<slug>-v1.mp4`.
-`video-producer` correrá el verify independiente (ffprobe + LUFS/TP
-re-medidos + BPM por autocorrelación + spot-check visual con
-recorte+zoom 3-4× de TODO texto libre — brand_close, atribución del
-caso Marino HVAC, la URL de agenda del reel 4 — doctrina P-13) apenas
-estén en R2.
-
-## Gates pre-render (auto-score de video-producer, sin checkout local — ver `.gates.json` de cada reel)
-
-Los 4 reels puntúan `slideshow_risk` en banda "strong" (0.45-0.5
-promedio), `variation_checker` sin violaciones, `delivery_promise`
-válido para su tipo declarado (`typography_led` los 4, con 1 hero i2v
-en reels 1 y 3), y `anti_claims_audit` PASS en los 4 (toda cifra/frase
-es literal o paráfrasis directa del post). El `brand_palette_guard` y
-el `coherence_guard` reales se corren sobre el MP4 renderizado — quedan
-pendientes hasta el Paso 5.
-
-## Handoffs pendientes
-
-- **`devops-aetherlogik-homelab`**: Pasos 1-5 completos (HyperFrames
-  render del reel 2 → gate de entrada → 4 renders Remotion → finishing
-  FFmpeg TP=-2.0 → R2).
-- **`video-producer`** (cuando los 4 estén en R2): verify final
-  independiente + `final_review` + cierre de la LÍNEA COMPLETA
-  `reels-del-blog` (8/8 series).
-
-## 📌 Para memoria
-
-- **8ª y ÚLTIMA serie de la línea `reels-del-blog`** — cierra el ciclo
-  educativo→conversión de la línea completa (chatbot-whatsapp →
-  clínicas → abogados → inmobiliarios → hvac → ia-miami →
-  n8n-vs-zapier [en paralelo, otra sesión] → **consultoria
-  [conversión]**).
-- Primera serie de la línea cuyo CTA final NO es interno — el reel 4
-  lleva la URL de agenda real (`cal.com/aetherlogik/discovery`),
-  coherente con ser la serie del fondo de embudo.
-- El bloque HyperFrames de esta serie (`asi-son-los-treinta-minutos-timeline`)
-  es el 6º de la línea, mismo patrón "bloques densos/procesos ->
-  HyperFrames" pero con un DEVICE nuevo (barra de tiempo proporcional,
-  no una lista de nodos de peso igual) — vale la pena registrarlo como
-  variante reusable en `aetherlogik-hyperframes` si aparece otro
-  proceso con fases de duración desigual.
+- **8ª y ÚLTIMA serie de la línea `reels-del-blog`** — primera vez que el propio `video-producer` encuentra Y
+  corrige un defecto de su propia autoría en el verify final (no un defecto de devops ni del componente
+  compartido) — nuevo gotcha P-19 en `Video-problemas.md`: `accentWord` de `KineticHeadline` exige el prop SIN
+  puntuación, aunque la palabra en el texto la lleve.
+- Primera serie de la línea cuyo CTA final NO es interno — el reel 4 lleva la URL de agenda real
+  (`cal.com/aetherlogik/discovery`), coherente con ser la serie del fondo de embudo — y pasó el verify de
+  máximo rigor sin ningún hallazgo (el único defecto de la serie no toca el CTA).
+- El bloque HyperFrames (`asi-son-los-treinta-minutos-timeline`) es el 6º de la línea, con un device nuevo
+  (barra de tiempo proporcional, no lista de nodos de peso igual) — confirmado legible en píxeles.
