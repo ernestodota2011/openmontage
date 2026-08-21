@@ -49,14 +49,42 @@
     }
   },
   "assets_generated": {
-    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 122, "url": "https://v3b.fal.media/files/b/0aa728ef/glBrABWNPBOWRnYqy10kq_music_generated.mp3", "cost_usd_est": 0.45},
-    "sfx_phase_tick": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728f2/Ga3vikrl331WD9J37f46o_sound_effect.mp3", "cost_usd": 0.001},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 122, "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/music.mp3", "cost_usd_est": 0.45},
+    "sfx_phase_tick": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/sfx-phase-tick.mp3", "cost_usd": 0.001},
+    "hyperframes_block": {"model": "HyperFrames (autorado, no generativo)", "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-sin-romper-nada/proceso-y-honestidad.mp4", "note": "720 frames/24fps/30.0s exactos, archivado a R2 por devops 2026-08-21."},
     "stills_or_i2v": "NINGUNO — reel 100% motion-autorado (Remotion + HyperFrames), cero costo de assets generativos visuales",
-    "total_cost_usd_est": 0.451,
-    "note": "El clip HyperFrames (`processAndHonestySrc`) NO existe todavia — requiere que devops corra `hf render` en el CT 128 y archive el resultado antes de poder rellenar el props JSON de este reel. Ver ReelsChatbotSerie.README.md."
+    "total_cost_usd_est": 0.451
   },
-  "pending_post_render_gates": {
-    "coherence_guard": "no aplica en el sentido estricto (sin i2v), pero SI corre continuidad de paleta entre el bloque Remotion y el bloque HyperFrames compuesto — exactamente el riesgo que introduce mezclar 2 motores; verificar con especial atencion en el corte de entrada/salida de process_and_honesty.",
-    "final_review": "ffprobe + frame-sampling >=4 frames (incluyendo AL MENOS 1 frame dentro del bloque HyperFrames) + promise_preservation + subtitle_check. Pendiente del render."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "devops-aetherlogik-homelab",
+    "artifact": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-v1.mp4",
+    "verdict": "GO tecnico (verify-gate de devops; falta el final_review completo de video-producer con promise/subtitle antes de considerarlo oficialmente listo para publicar)",
+    "hf_lint": "0 errors, 0 warnings (data-composition-id/data-start/data-duration/data-fps/data-width/data-height + data-no-timeline, los 6 atributos base presentes)",
+    "hyperframes_render": "720/720 frames, 42.5s wall-time (sin el impuesto de 45s del poller — data-no-timeline confirmado funcionando). ffprobe: h264 1080x1920 24fps 30.000000s exactos.",
+    "tsc_noemit": "exit 0, 0 errores (HEAD 297871b)",
+    "remotion_render": "1080/1080 frames, exit 0. ffprobe master ProRes: 1080x1920 24fps 45.000000s exactos, audio PCM 48kHz stereo (musica+sfx bakeados por Remotion).",
+    "finishing": "mismo recipe corregido de reel2 v2/reel3: curves SIN el punto 0.25/0.22 (crushea luma 60-120, justo donde vive texto de UI pequeno) + eq/unsharp/vignette + libx264 -crf 16 -x264-params aq-mode=2:aq-strength=1.2, SIN noise (ni el bloque HyperFrames ni los bookends de tipografia lo usan).",
+    "audio_calibracion": {
+      "intento_1": "acompressor(threshold=-20dB:ratio=6:attack=5:release=80:makeup=1) + loudnorm single-pass I=-14.0 dynamic (mismo target que convergio en reel3) -> medicion post-hoc independiente: -12.46 LUFS, FUERA de -14+-0.5. Descartado antes de subir a R2 (nunca se publico).",
+      "intento_2_GO": "mismo acompressor + loudnorm 2 pasadas propiamente calibrado (medir con print_format=json, aplicar pasada 2 con measured_I/measured_TP/measured_LRA/measured_thresh/offset + linear=true) sobre el mismo mix comprimido -> medicion post-hoc independiente: -13.98 LUFS, DENTRO de target. Leccion: el offset empirico de un mix NO se transfiere a otro (misma familia que la doctrina 'una medicion en un clon vale para el mecanismo, no la configuracion') — el 2-pass lineal es mas robusto que adivinar un target I por iteracion cuando el mix es nuevo."
+    },
+    "independent_ffprobe": {
+      "codec_video": "h264, 1080x1920, 24fps",
+      "codec_audio": "aac, 48000Hz, stereo",
+      "duration_s": 45.0,
+      "size_bytes": 5253379,
+      "bit_rate_bps": 933934,
+      "faststart_verified_byte_level": "moov offset 40 < mdat offset 32233 — real, no solo la flag"
+    },
+    "visual_spotcheck": {
+      "frames_sampled_s": [1.5, 10.0, 18.0, 19.0, 20.0, 21.0, 23.0, 28.0, 36.0, 42.0],
+      "hyperframes_block_frames": "10.0s, 18.0s, 19.0s, 20.0s, 21.0s, 23.0s, 28.0s caen dentro del bloque HyperFrames (frames 96-816, 4.0s-34.0s) — mas de 1 frame verificado ahi, incluyendo la region MAS densa en texto de la serie (roadmap FASE 1/2/3 + checklist 'cuando NO tiene sentido').",
+      "hallazgo_investigado": "20.0s-21.0s salio casi negro en la primera pasada — se investigo con frames adicionales (18/19/21/23s) para descartar defecto de la curva de finishing: CONFIRMADO como transicion/hold real entre la escena de roadmap y la escena de checklist (contenido crece en brillo antes y despues, 18.0s y 23.0s ambos nitidos). No es un crush de contraste.",
+      "verdict": "texto de UI (roadmap FASE 1/2/3, checklist, headlines kineticos, brand close) legible con buen contraste en TODOS los frames con contenido — el fix de curva heredado de reel2/reel3 sostiene en el reel con mas densidad de texto de la serie. Paleta ember-only/near-black, boxless, cero cian/violeta/lavanda/glow en los 10 frames vistos. Integracion HyperFrames->Remotion visualmente perfecta (sin salto de paleta/estilo en el corte de entrada 4.0s / salida 34.0s)."
+    },
+    "promise_preservation": {"verdict": "pass", "detail": "roadmap de 3 fases + checklist de honestidad se muestran tal como planeado en el scene_plan"},
+    "subtitle_check": {"verdict": "pass", "detail": "todo el copy vive en pantalla (kinetic typography + HyperFrames), no hay caption fuera de cuadro"},
+    "handoff": "artefacto tecnicamente verificado por devops. Falta el final_review completo (promise/subtitle con ojos de video-producer, no solo devops) antes del sign-off de publicacion."
   }
 }
