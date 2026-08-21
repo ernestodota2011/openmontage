@@ -7,26 +7,55 @@
       "average": 0.6,
       "verdict": "strong",
       "dimensions": {
-        "repetition": {"score": 0.4, "reason": "6 escenas, cada una con un device distinto (headline / cascada de tags / headline / headline / recap 4 lineas / brand close)"},
+        "repetition": {"score": 0.4, "reason": "6 escenas, cada una con un device distinto"},
         "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
-        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) - reel de cierre 100% motion-autorado, presupuesto de hero i2v agotado en reels 1 y 3"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) - reel de cierre 100% motion-autorado"},
         "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
-        "typography_overreliance": {"score": 2.0, "reason": "6 de 6 escenas (100%) tipografia/stat_card - reel de cierre/CTA, desviacion consciente y declarada (mismo patron que reel 4 de la serie clinicas)"},
+        "typography_overreliance": {"score": 2.0, "reason": "6 de 6 escenas (100%) tipografia/stat_card - reel de cierre/CTA, desviacion consciente y declarada"},
         "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
       }
     },
     "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
-    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0, "note": "promise_type data_explainer (no motion_led), correcto para un reel de cierre 100% tipografico/UI, consistente con delivery_promise.py"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0},
     "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
-    "anti_claims_audit": {"verdict": "pass", "detalle": "los 5 pasos son los numerados EXACTOS de la seccion 'Como empezar sin desorden' del post, en el mismo orden; el CTA final apunta a /para-legal, la vertical real mencionada en el post; cero cifras inventadas"}
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 5 pasos son los numerados EXACTOS del post; el CTA final apunta a /para-legal, la vertical real mencionada en el post; cero cifras inventadas"}
   },
   "assets_generated": {
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "length_ms": 45000, "cost_usd": 0.45},
-    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (ya archivado en R2)", "cost_usd": 0.0},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3", "cost_usd": 0.0},
     "total_cost_usd_est": 0.45
   },
   "post_render_verify": {
-    "status": "NO EJECUTADO EN ESTA SESION - pendiente de devops. El verify post-render (ffprobe, LUFS, BPM medido, region+control) lo corre video-producer DESPUES del render de devops."
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-abogados-serie/como-empezar-sin-desorden-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 863419bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 315977bps",
+      "duration_s": 45.0,
+      "size_bytes": 6667546,
+      "note": "duracion de contenedor EXACTA (45.000000s)"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-13.88", "input_tp": "-0.79"},
+      "finding": "coincide EXACTO con el -13.88 reportado por devops (0.12dB bajo el target -14, mismo margen que el reel 4 de la serie clinicas a -13.96 - dentro de tolerancia, no bloquea)",
+      "tempo_check": "128.3 BPM medido vs 128 BPM declarado (delta 0.3 BPM, confidence 0.488). Dentro de la banda 120-140.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["10.0s (steps_list)", "40.0s (brand_close)"],
+      "palette_scan_pixeles_reales": {
+        "steps_10s": "cyan_violet=0.00%, ember=75.00%",
+        "brand_close_40s": "cyan_violet=0.05%, ember=85.91%",
+        "veredicto": "pass - cero acento cian/violeta deliberado"
+      },
+      "legibilidad": "steps_list al t=10s: pasos 1-3 visibles y legibles ('Audita tu tiempo una semana' / 'Elige un flujo unico' / 'Disena con un especialista', stagger correcto); brand_close: CTA 'aetherlogik.com/para-legal . agenda tu llamada de diagnostico gratuita ->' COMPLETO y legible (2 lineas, ember)",
+      "veredicto": "pass"
+    },
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md, incluido el CTA final a /para-legal"},
+    "final_verdict": "GO"
   }
 }

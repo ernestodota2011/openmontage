@@ -19,7 +19,7 @@
     "delivery_promise": {"promise_type": "hybrid", "valid": true, "motion_ratio": 0.167, "motion_cuts": 1, "slide_cuts": 5, "still_cuts": 0},
     "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "no aplica en pre-produccion - solo 1 escena i2v, sin multi-plano que encadenar"},
-    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 limites y las 2 citas (human_connection, responsibility_beat) son fieles/casi textuales al post; cero cifras, cero garantias exageradas sobre lo que la IA reemplaza"}
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 limites y las 2 citas son fieles/casi textuales al post; cero cifras, cero garantias exageradas"}
   },
   "assets_generated": {
     "hero_still": {"model": "fal-ai/nano-banana-pro", "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"}, "cost_usd": 0.15},
@@ -28,6 +28,42 @@
     "total_cost_usd_est": 1.16
   },
   "post_render_verify": {
-    "status": "NO EJECUTADO EN ESTA SESION - pendiente de devops. El verify post-render (ffprobe, LUFS, BPM medido, region+control, coherence_guard) lo corre video-producer DESPUES del render de devops."
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-abogados-serie/lo-que-la-ia-no-puede-hacer-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 1326005bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 313160bps",
+      "duration_s": 45.0,
+      "size_bytes": 9253747,
+      "note": "duracion de contenedor EXACTA (45.000000s)"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.01", "input_tp": "-2.34"},
+      "finding": "coincide EXACTO con el -14.01 reportado por devops.",
+      "tempo_check": "120.0 BPM medido vs 120 BPM declarado (delta 0.0 BPM, match exacto; confidence 0.431). Extremo bajo de la banda 120-140, confirmado dentro de rango.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["2.5s y 5.0s (cold_open_hero, i2v real, para coherence_guard)", "10.0/14.0s (limits_list)", "40.0s (brand_close)"],
+      "palette_scan_pixeles_reales": {
+        "cold_open_hero_2.5s": "cyan_violet=0.02%, ember=97.97%",
+        "cold_open_hero_5.0s": "cyan_violet=0.01%, ember=98.34%",
+        "limits_10s": "cyan_violet=0.00%, ember=72.45%",
+        "limits_14s": "cyan_violet=0.00%, ember=73.41%",
+        "brand_close_40s": "cyan_violet=0.03%, ember=85.63%",
+        "veredicto": "pass - cero acento cian/violeta deliberado en los 5 frames"
+      },
+      "legibilidad": "limits_list al t=14s: los 4 limites completos y legibles ('1 Ejercer juicio legal estrategico' / '2 Sustituir la relacion con tu cliente' / '3 Garantizar cumplimiento normativo' / '4 Asumir responsabilidad profesional') + caption; brand_close correcto",
+      "hero_i2v_pen_note": "la pluma roja es un objeto narrativo real (herramienta de correccion legal), no un acento de UI/diseno - mismo criterio que el 2.95% incidental absuelto en el reel 1 de la serie clinicas; no aparece en la banda cian/violeta del escaneo",
+      "veredicto": "pass"
+    },
+    "coherence_guard": {
+      "status": "pass",
+      "detalle": "2 frames (2.5s, 5.0s) del unico plano i2v: mismo abogado, mismo despacho/biblioteca/lampara, misma paleta calida, solo la mano y la pluma se mueven al marcar el documento; sin drift."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md"},
+    "final_verdict": "GO"
   }
 }
