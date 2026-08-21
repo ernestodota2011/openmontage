@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>cuanto-cuesta-cada-uno-tabla</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0d0d0d 0%, #0a0a0a 60%, #050505 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #stage { width: 1080px; height: 1920px; position: relative; }
+  .header {
+    position: absolute; top: 130px; left: 0; right: 0; text-align: center;
+    font-size: 38px; font-weight: 700; color: #F5F5F5; letter-spacing: -0.02em;
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    padding: 0 90px;
+  }
+  .col-headers {
+    position: absolute; top: 260px; left: 90px; right: 90px; display: flex;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.9s forwards;
+  }
+  .col-header { flex: 1; text-align: center; font-size: 30px; font-weight: 800; letter-spacing: 0.04em; }
+  .col-header.zapier { color: #9AA0A6; }
+  .col-header.n8n { color: #F5F5F5; }
+  .hairline {
+    position: absolute; top: 340px; left: 540px; width: 2px; height: 0; background: #FF6B1A;
+    animation: growLine 1.1s cubic-bezier(0.16,1,0.3,1) 1.2s forwards;
+  }
+  @keyframes growLine { to { height: 1420px; } }
+  .rows { position: absolute; top: 380px; left: 90px; right: 90px; display: flex; flex-direction: column; }
+  .row {
+    display: flex; padding: 62px 0; opacity: 0; transform: translateY(24px);
+    animation-duration: 0.8s; animation-timing-function: cubic-bezier(0.16,1,0.3,1); animation-fill-mode: both;
+  }
+  .cell { flex: 1; text-align: center; padding: 0 46px; }
+  .cell .label { font-size: 16px; letter-spacing: 0.1em; color: #6b6f73; text-transform: uppercase; margin-bottom: 10px; }
+  .cell .value { font-size: 26px; font-weight: 600; color: #F5F5F5; line-height: 1.32; }
+  .cell.zapier .value { color: #d4d4d4; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  #row1 { animation-name: fadeUp; animation-delay: 2.0s; }
+  #row2 { animation-name: fadeUp; animation-delay: 7.5s; }
+  #row3 { animation-name: fadeUp; animation-delay: 13.0s; }
+  #row4 { animation-name: fadeUp; animation-delay: 18.5s; }
+</style>
+</head>
+<body>
+  <div
+    id="stage"
+    data-composition-id="cuanto-cuesta-cada-uno-tabla"
+    data-start="0"
+    data-duration="26"
+    data-fps="24"
+    data-width="1080"
+    data-height="1920"
+    data-no-timeline
+  >
+    <div class="header">Como cobra cada uno</div>
+    <div class="col-headers">
+      <div class="col-header zapier">ZAPIER</div>
+      <div class="col-header n8n">N8N</div>
+    </div>
+    <div class="hairline"></div>
+    <div class="rows">
+      <div class="row" id="row1">
+        <div class="cell zapier"><div class="label">Modelo</div><div class="value">Por tarea ejecutada</div></div>
+        <div class="cell n8n"><div class="label">Modelo</div><div class="value">Costo fijo de servidor</div></div>
+      </div>
+      <div class="row" id="row2">
+        <div class="cell zapier"><div class="label">Plan inicial</div><div class="value">100 tareas gratis al mes</div></div>
+        <div class="cell n8n"><div class="label">Plan inicial</div><div class="value">Automatizaciones ilimitadas</div></div>
+      </div>
+      <div class="row" id="row3">
+        <div class="cell zapier"><div class="label">Al crecer</div><div class="value">La factura escala con tu volumen</div></div>
+        <div class="cell n8n"><div class="label">Al crecer</div><div class="value">El costo no cambia con el volumen</div></div>
+      </div>
+      <div class="row" id="row4">
+        <div class="cell zapier"><div class="label">Para empezar</div><div class="value">Sin infraestructura que mantener</div></div>
+        <div class="cell n8n"><div class="label">Para empezar</div><div class="value">Requiere implementacion tecnica</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
