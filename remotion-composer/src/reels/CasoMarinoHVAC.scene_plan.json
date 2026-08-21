@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open_technician",
+    "type": "video",
+    "description": "Tecnico de HVAC revisa el panel de una unidad condensadora exterior junto a un negocio pequeno, luz dorada de atardecer en Miami, telefono con brillo ember apenas visible en el bolsillo",
+    "shot_language": {"shot_size": "MS", "camera_movement": "dolly_in_slow", "lighting_key": "golden hour tungsteno-ember, sombra natural"},
+    "shot_intent": "ancla el reel en la realidad de campo con la que abre el post: 'sus tecnicos estan en el campo todo el dia'",
+    "hero_moment": true,
+    "information_role": "establece el contexto real del caso sin decirlo con texto",
+    "texture_keywords": ["golden hour", "grano de pelicula", "palmeras desenfocadas", "herramienta en mano"]
+  },
+  {
+    "id": "problem_context",
+    "type": "stat_card",
+    "description": "Tipografia cinetica: 'Las llamadas interrumpen el trabajo. Los mensajes se acumulan sin responder.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "bisagra: el problema especifico de Marino HVAC, tomado del post",
+    "hero_moment": false,
+    "information_role": "contexto del caso",
+    "texture_keywords": ["mask reveal"]
+  },
+  {
+    "id": "qualify_tags",
+    "type": "stat_card",
+    "description": "Lista boxless de 4 tags ember que se revelan en secuencia: Servicio, Zona, Urgencia, Siguiente paso",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, boxless"},
+    "shot_intent": "muestra los pasos reales que el bot verifica (post: servicio/zona/urgencia/cita), SIN inventar metricas",
+    "hero_moment": false,
+    "information_role": "dato duro del proceso, no del resultado",
+    "texture_keywords": ["tick vertical ember", "lista boxless"]
+  },
+  {
+    "id": "chat_flow_demo",
+    "type": "animation",
+    "description": "Mismo patron del piloto (typing -> reply -> tarjeta de cita) con copy especifica de Marino HVAC",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, tick y confirmacion en ember"},
+    "shot_intent": "demo del producto sobre el caso real, no generico",
+    "hero_moment": false,
+    "information_role": "como se resuelve el caso en la practica",
+    "texture_keywords": ["indicador de escritura", "tarjeta de cita confirmada"]
+  },
+  {
+    "id": "outcome_line",
+    "type": "stat_card",
+    "description": "Tipografia cinetica: 'Los tecnicos dejan de interrumpirse. El dueno ve que leads entraron y en que etapa estan.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "cierra el arco del caso citando fielmente el resultado cualitativo que describe el post",
+    "hero_moment": false,
+    "information_role": "resultado del caso, sin cifras inventadas",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA a /para-hvac y al siguiente reel",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la pagina del sector y a la serie",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
