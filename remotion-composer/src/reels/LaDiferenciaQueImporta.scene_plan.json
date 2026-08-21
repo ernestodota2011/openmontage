@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "i2v",
+    "description": "Hero i2v real: dueno de negocio en Miami, solo de noche, telefono con mensajes sin responder",
+    "shot_language": {"shot_size": "MS", "camera_movement": "slow push-in", "lighting_key": "tungsten warm, near-black shadows"},
+    "shot_intent": "establece el dolor vivido antes de cualquier cifra",
+    "hero_moment": true,
+    "information_role": "apertura emocional del reel",
+    "texture_keywords": ["i2v Kling O1", "tungsten", "telefono glow"]
+  },
+  {
+    "id": "stat_reveal",
+    "type": "stat_card",
+    "description": "StatReveal '21 veces' — benchmark externo MIT/InsideSales atribuido en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "da peso objetivo al dolor de la escena anterior",
+    "hero_moment": false,
+    "information_role": "cifra externa atribuida",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "distinction",
+    "type": "animation",
+    "description": "KineticHeadline: distincion herramienta vs sistema de IA a medida, tal como la presenta el post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "instala el concepto central del post antes de listar beneficios",
+    "hero_moment": false,
+    "information_role": "distincion conceptual",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline + EmberThread bridge: 'Esto no tiene que seguir asi.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black con barrido ember"},
+    "shot_intent": "bisagra emocional hacia el cierre de marca",
+    "hero_moment": false,
+    "information_role": "bridge",
+    "texture_keywords": ["ember sweep"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA al reel 2 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, sin venta directa (formula gancho->siguiente)",
+    "hero_moment": false,
+    "information_role": "CTA interno de la serie",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

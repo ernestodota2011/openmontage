@@ -1,0 +1,8 @@
+{
+  "heroVideoSrc": "https://v3b.fal.media/files/b/0aa73db2/mojEW5UCVmNHVDZh5A1U9_output.mp4",
+  "musicSrc": "https://v3b.fal.media/files/b/0aa73da7/SXCXeBhqCa-_pWbRgZ6G2_music_generated.mp3",
+  "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
+  "sfxWhooshSrc": "https://media.aetherlogik.com/agency/reels-clinicas-serie/shared/sfx-whoosh.mp3",
+  "tail_padding_seconds": 0,
+  "_devops_note": "heroVideoSrc y musicSrc son URLs TEMPORALES de fal.media (expiran ~24h desde 2026-08-21). Antes de renderizar: archivar ambas a R2 (agency/reels-ia-miami-serie/assets/la-diferencia-que-importa-hero-i2v.mp4 y .../la-diferencia-que-importa-musica.mp3, via la via segura ya establecida — nunca argv ni Read/grep de un .env, P-07) y actualizar este JSON con las URLs de media.aetherlogik.com antes de correr el render."
+}

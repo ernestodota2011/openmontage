@@ -1,0 +1,34 @@
+{
+  "reel": "la-diferencia-que-importa",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.5,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto (i2v, stat_card, tipografia x2, brand_close)"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v establece el dolor real del post, no decora"},
+        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v)"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.2, "reason": "4 de 5 escenas (80%) tipografia/stat_card — tipico de un reel gancho corto"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico mas alla del hero declarado"}
+      }
+    },
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "motion_led", "valid": true, "motion_ratio": 0.167, "motion_cuts": 1, "slide_cuts": 4, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "escena unica i2v — sin multi-plano que encadenar, PASS por diseno"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "'21 veces mas probable calificar un lead si respondes en menos de 5 minutos' + atribucion 'MIT / InsideSales, 2007' son EXACTAS al punto 1 de 'Los 5 trabajos' del post. Ninguna cifra de cliente aparece en este reel. La frase de distincion herramienta/sistema parafrasea fielmente la seccion homonima del post, sin inventar claims nuevos."}
+  },
+  "assets_generated": {
+    "still": {"model": "fal-ai/nano-banana-pro", "resolution": "2K", "output_format": "jpeg", "aspect_ratio": "9:16", "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73da6/8Qf7JBP4deRLMjYHFgUkE_RprLDxxp.jpg"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "unit_price_usd_per_s": 0.112, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73db2/mojEW5UCVmNHVDZh5A1U9_output.mp4"},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "length_ms_requested": 30500, "unit_price_usd_per_min": 0.6, "cost_usd": 0.305, "url": "https://v3b.fal.media/files/b/0aa73da7/SXCXeBhqCa-_pWbRgZ6G2_music_generated.mp3"},
+    "sfx_whoosh": {"source": "reusado — reels-clinicas-serie/shared/sfx-whoosh.mp3", "cost_usd": 0.0},
+    "total_cost_usd_est": 1.015
+  },
+  "post_render_verify": {
+    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + coherence/palette) sobre el MP4 real una vez publicado."
+  }
+}

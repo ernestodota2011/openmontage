@@ -1,0 +1,51 @@
+{
+  "reel": "la-diferencia-que-importa",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes",
+      "options_considered": [
+        "100% Remotion atelier con 1 hero i2v (Kling O1, 5s, still 2K)",
+        "100% tipografia sin ningun i2v, para maximizar presupuesto en reels posteriores"
+      ],
+      "choice": "renderer_family=animation, render_runtime=remotion, composition_mode=atelier, 1 escena i2v (cold_open_hero)",
+      "reason": "el gancho de una serie se beneficia de un momento humano real antes de cualquier cifra — mismo patron GO'd en las 5 series anteriores. El presupuesto de 'maximo 1 hero i2v por reel' se reparte: este reel y el reel 3 (casos reales) llevan 1 cada uno; los reels 2 y 4 son 100% tipografia/HyperFrames.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Que cifra abre el reel — externa vs de cliente",
+      "options_considered": [
+        "abrir con una cifra de cliente (ej. Marino HVAC $4,400/mes)",
+        "abrir con el benchmark EXTERNO (MIT/InsideSales, 21 veces) y reservar las cifras de cliente para el reel 3"
+      ],
+      "choice": "benchmark externo MIT/InsideSales, atribuido en el mismo frame",
+      "reason": "mezclar una cifra de cliente en el reel 1 (gancho) diluiria su impacto cuando aparezca de nuevo, resumida, en el reel 3 — y el gancho generalista no debe anclarse a UN cliente/vertical especifico cuando el post es el paraguas de todos. El benchmark externo es universal y verificable.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia del gancho",
+      "options_considered": [
+        "mantener un tono uniforme de principio a fin",
+        "128 BPM, tenso que resuelve hacia esperanzador (dip en distinction, sube en tease_possible)"
+      ],
+      "choice": "128 BPM, corporate-tech instrumental, arco tenso->esperanzador",
+      "reason": "el gancho vive del contraste emocional (dolor nocturno -> posibilidad) — un arco de energia refuerza la narrativa sin necesitar mas escenas. Dentro de la banda 120-140 exigida por la mision.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "CTA — siguiente reel vs venta directa",
+      "options_considered": [
+        "cerrar ya con el link de diagnostico gratuito",
+        "cerrar apuntando al reel 2 de la serie (formula GO-4/4)"
+      ],
+      "choice": "CTA al reel 2, sin venta directa",
+      "reason": "fiel a la formula ganadora de las 5 series anteriores: solo el ULTIMO reel de una serie vende. Vender en el reel 1 quema el hook antes de establecer el valor completo del contenido.",
+      "confidence": 0.95
+    }
+  ]
+}
