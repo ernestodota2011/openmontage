@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline 'No necesitas una transformacion completa.' — sin costo de asset",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "abre el cierre bajando la barrera percibida de entrada",
+    "hero_moment": false,
+    "information_role": "apertura del reel de cierre",
+    "texture_keywords": ["tipografia cinetica", "sin i2v"]
+  },
+  {
+    "id": "steps_list",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 4 requisitos, fieles a la seccion 'Que necesitas para automatizar tu facturacion' del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "muestra que la barrera de entrada es baja y concreta",
+    "hero_moment": false,
+    "information_role": "los 4 requisitos reales",
+    "texture_keywords": ["cascada de tags", "stagger 70f"]
+  },
+  {
+    "id": "caveat",
+    "type": "animation",
+    "description": "KineticHeadline sobre la FAQ de fallback manual, fiel al post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "corta la objecion de riesgo antes de que se instale",
+    "hero_moment": false,
+    "information_role": "el limite honesto del reel de cierre",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "vertical_mention",
+    "type": "animation",
+    "description": "KineticHeadline presentando la vertical /para-hvac",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "conecta el contenido generico con la oferta especifica de HVAC",
+    "hero_moment": false,
+    "information_role": "mencion de vertical",
+    "texture_keywords": ["palabra clave en ember", "sfx whoosh"]
+  },
+  {
+    "id": "series_recap",
+    "type": "animation",
+    "description": "KineticHeadline recap de los 4 titulos de la serie, stagger lento, cierra en 'Esto.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, grade sutil"},
+    "shot_intent": "amarra la serie completa antes del CTA final",
+    "hero_moment": false,
+    "information_role": "recap de serie",
+    "texture_keywords": ["stagger lento", "FilmGrade"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA FINAL de conversion (/para-hvac, diagnostico gratuito)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA de conversion real",
+    "hero_moment": false,
+    "information_role": "CTA final",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

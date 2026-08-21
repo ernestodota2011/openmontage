@@ -1,0 +1,33 @@
+{
+  "reel": "lo-que-necesitas-para-automatizar",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.55,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "6 escenas, cada una con un device distinto (incluido el signature device series_recap)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) — reel de cierre 100% motion-autorado, mismo patron GO'd que ComoEmpiezasSinPerderLeads"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.9, "reason": "6 de 6 escenas (100%) tipografia/UI/stat_card — reel de cierre, desviacion consciente y declarada"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica — cero escenas i2v en este reel"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 items de steps_list, el timeline de 2-4 semanas, el caveat de fallback manual, y las 3 plataformas nombradas (QuickBooks/ServiceTitan/Jobber) son citas directas del post; el CTA final (/para-hvac, diagnostico gratuito) es EXACTAMENTE el del post. Cero cifras inventadas."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 134, "length_ms_requested": 45500, "cost_usd": 0.455, "url": "https://v3b.fal.media/files/b/0aa73b6e/rcFdS7eRSjEjMjrCknVpn_music_generated.mp3"},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.455
+  },
+  "post_render_verify": {
+    "status": "pendiente",
+    "nota": "esta corrida es PRE-RENDER. El verify real lo hace video-producer sobre el MP4 real DESPUES del render de devops — ver handoff en ReelsHvacSerie.README.md."
+  }
+}

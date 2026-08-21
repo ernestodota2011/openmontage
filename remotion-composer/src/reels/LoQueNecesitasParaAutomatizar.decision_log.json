@@ -1,0 +1,35 @@
+{
+  "reel": "lo-que-necesitas-para-automatizar",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion, 100% motion-autorado (sin i2v, sin HyperFrames)",
+        "agregar un tercer i2v de cierre",
+        "render_runtime=hyperframes para el steps_list"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 0 i2v, 0 HyperFrames",
+      "reason": "es el CIERRE de la serie — doctrina de reparto de recursos generativos (2 heroes i2v por serie, ya usados en reels 1 y 3; el bloque denso ya vive en HyperFrames en el reel 2). Un tercer i2v o un segundo HyperFrames diluirian el presupuesto sin agregar informacion nueva. Mismo patron GO'd en ComoEmpiezasSinPerderLeads.tsx.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Music plan — tempo/energia",
+      "options_considered": ["tono neutro sin drive", "134 BPM, confiado y energico para el cierre"],
+      "choice": "134 BPM, corporate-tech instrumental confiado, four-on-the-floor",
+      "reason": "directriz dura de la mision (120-140 BPM). 134 BPM es el mas alto de los 4 reels, deliberado: el cierre necesita el mayor drive para llevar al CTA de conversion.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Por que el CTA final apunta a /para-hvac y no al reel 1 (loop)",
+      "options_considered": ["loop de vuelta al reel 1", "CTA de conversion directo a /para-hvac + diagnostico gratuito"],
+      "choice": "CTA de conversion a /para-hvac + diagnostico gratuito",
+      "reason": "este ES el ultimo reel de la serie (los 3 anteriores apuntan 'al proximo video'). El post cierra con exactamente este CTA ('Agenda tu diagnostico gratuito' -> cal.com) y la vertical /para-hvac — se preserva tal cual, sin inventar un CTA distinto.",
+      "confidence": 0.9
+    }
+  ]
+}
