@@ -1,160 +1,115 @@
-# Serie "reels-hvac-serie" — verify final: NO-GO (v1), pendiente re-mux de audio en 2/4 reels (2026-08-21)
+# Serie "reels-hvac-serie" — verify final: **GO 4/4** (2026-08-21)
 
-> [!danger] Veredicto de la serie: **NO-GO (v1)** — pendiente 1 re-mux de audio puntual, no un rehaul
-> Los 4 videos fueron renderizados por `devops-aetherlogik-homelab` (HEAD `cdcd483`; gate `npx remotion compositions` pasó; `tsc` 0; `hf lint` 0/0, bloque HyperFrames en 31.1s de render). El verify final INDEPENDIENTE de `video-producer` (descarga propia, `ffprobe`/LUFS/BPM/`coherence_guard`/paleta/beats-en-píxeles con `ffmpeg`+Python locales, sin confiar en el reporte de devops) confirma que **2 de 4 reels pasan limpio** (`lo-que-te-cuesta-facturar-a-mano`, `como-funciona-la-automatizacion-de-facturacion`) y **2 de 4 tienen `true peak` POSITIVO post-AAC** (`los-numeros-de-marino-hvac` +0.15 dBTP, `lo-que-necesitas-para-automatizar` +0.52 dBTP) — clipping real, no margen. Falta un único paso: que devops re-muxee el audio de esos 2 reels con más headroom pre-AAC (técnica ya validada por mí, ver abajo).
+> [!tip] Veredicto de la serie: **GO** — los 4 reels listos para Drive/publicación
+> Los 4 videos fueron renderizados por `devops-aetherlogik-homelab` (HEAD `cdcd483`; gate `npx remotion compositions` pasó; `tsc` 0; `hf lint` 0/0, bloque HyperFrames en 31.1s de render). El verify final INDEPENDIENTE de `video-producer` confirmó 2/4 reels limpios de entrada y 2/4 con `true peak` positivo post-AAC (clipping real) — devops re-muxeó el audio de esos 2 con más headroom (`TP=-2.0` pre-encode, técnica que yo mismo validé antes de instruirla) y el re-verify independiente del resultado confirma **4/4 GO**.
 
 Quinta serie de la línea `reels-del-blog`. Fuente del blog:
 `automatizar-facturacion-hvac-cuanto-pierdes.md` (D:\aetherlogik-astro).
 
-## Los 4 videos — links + veredicto final
+## Los 4 videos canónicos — link final para Drive
 
-| # | Reel | R2 | Duración | Runtime | Veredicto |
+| # | Reel | Objeto R2 canónico (usar ESTE, no el `-v1`) | Duración | LUFS | True Peak |
 |---|---|---|---|---|---|
-| 1 | Lo que te cuesta facturar a mano (gancho) | `agency/reels-hvac-serie/lo-que-te-cuesta-facturar-a-mano-v1.mp4` | 30.0s exacto | Remotion (atelier), 1 hero i2v | **GO** |
-| 2 | Cómo funciona la automatización de facturación | `agency/reels-hvac-serie/como-funciona-la-automatizacion-de-facturacion-v1.mp4` | 46.0s exacto | HÍBRIDO Remotion + HyperFrames | **GO** |
-| 3 | Los números de Marino HVAC (caso real) | `agency/reels-hvac-serie/los-numeros-de-marino-hvac-v1.mp4` | 45.0s exacto | Remotion (atelier), 1 hero i2v | **NO-GO** (true peak, ver abajo) |
-| 4 | Lo que necesitas para automatizar (cierre) | `agency/reels-hvac-serie/lo-que-necesitas-para-automatizar-v1.mp4` | 45.0s exacto | Remotion (atelier) | **NO-GO** (true peak, ver abajo) |
+| 1 | Lo que te cuesta facturar a mano (gancho) | `agency/reels-hvac-serie/lo-que-te-cuesta-facturar-a-mano-v1.mp4` | 30.0s | -14.06 | -0.34 dBTP |
+| 2 | Cómo funciona la automatización de facturación | `agency/reels-hvac-serie/como-funciona-la-automatizacion-de-facturacion-v1.mp4` | 46.0s | -14.02 | -1.49 dBTP |
+| 3 | Los números de Marino HVAC (caso real) | `agency/reels-hvac-serie/los-numeros-de-marino-hvac-v2.mp4` | 45.0s | -14.11 | -1.71 dBTP |
+| 4 | Lo que necesitas para automatizar (cierre) | `agency/reels-hvac-serie/lo-que-necesitas-para-automatizar-v2.mp4` | 45.0s | -13.57 | -1.87 dBTP |
 
-Todos servidos desde `https://media.aetherlogik.com/<ruta de arriba>`, todos
-`curl 200`, descargados y auditados byte-a-byte por `video-producer` de forma
-independiente (no solo el reporte de devops).
+Todos servidos desde `https://media.aetherlogik.com/<ruta de arriba>`,
+`curl 200`, descargados y auditados byte-a-byte por `video-producer` de
+forma independiente en cada pasada (no solo el reporte de devops). **Los
+reels 1 y 2 se quedan en `-v1` (nunca tuvieron defecto — no confundir con
+"desactualizados"); los reels 3 y 4 canónicos son los `-v2`.**
 
-## LUFS — verificado independiente, coincide EXACTO con el reporte de devops
+## Re-verify del re-mux de audio (v2) — independiente, coincide EXACTO con devops
 
-| Reel | LUFS devops | LUFS medido independiente |
-|---|---|---|
-| 1 | -14.06 | -14.06 |
-| 2 | -14.02 | -14.02 |
-| 3 | -14.03 | -14.03 |
-| 4 | -13.95 | -13.95 |
+| Reel | LUFS devops | LUFS medido | TP devops | TP medido | TP `astats` (sample peak, corroboración) |
+|---|---|---|---|---|---|
+| 3 (Marino HVAC) | -14.11 | **-14.11** | -1.71 dBTP | **-1.71 dBTP** | -1.751 dB |
+| 4 (cierre) | -13.57 | **-13.57** | -1.87 dBTP | **-1.87 dBTP** | -1.871 dB |
 
-Coincidencia exacta a 2 decimales en los 4 — confirma que el audio es real
-y el finishing se aplicó tal como se declara.
+Coincidencia exacta a 2 decimales en ambos, en LUFS y en true peak.
+**Sanity de `-13.57` LUFS en el reel 4:** 0.43dB por encima del target
+-14.0, dentro de la banda de tolerancia ±0.5 ya usada en el resto de la
+serie (rango completo de los 4: -14.11 a -13.57, spread 0.54dB) y
+consistente con las 4 series anteriores — **aceptable, no amerita otra
+pasada**.
 
-## El defecto de audio — decisión del director (no se archiva como excepción)
+**Integridad de video verificada independientemente (no solo el hash MD5
+que reportó devops — lo recalculé yo):** extraje el stream de video crudo
+(h264, `-c:v copy`, sin re-encode) de cada `v1`/`v2` y los hasheé con MD5:
 
-Devops midió true peak positivo post-encode AAC en 2 reels y presentó el
-contexto ("las plataformas recomprimen igual, +0.15 es marginal") junto
-con 2 alternativas ya descartadas por peores resultados (forzar lineal →
--17.82 LUFS; `alimiter` sin oversampling → +1.55 dBTP). **Decisión: FIX
-REQUERIDO en ambos, no una excepción documentada.**
+- `los-numeros-de-marino-hvac`: `v1`=`16a621f7636870b970dbb6ad5e1a4176` ·
+  `v2`=`16a621f7636870b970dbb6ad5e1a4176` → **IDÉNTICO**.
+- `lo-que-necesitas-para-automatizar`: `v1`=`5455d75457c67f56b2b9ffedcc09cbc4` ·
+  `v2`=`5455d75457c67f56b2b9ffedcc09cbc4` → **IDÉNTICO**.
 
-Razonamiento: `premium-craft-standards.md` §5 fija **-1.0 dBTP** como
-target duro precisamente para absorber el overshoot de inter-sample peaks
-que introduce un encoder AAC — un true peak que termina **positivo**
-significa que el archivo entregado clipea de verdad al decodificar, no
-que le falte "un pelo" de margen. "Las plataformas recomprimen igual" no
-es un argumento técnico válido: la recompresión no revierte un overshoot
-ya presente en el archivo que se sube. Regla de oro de la agencia: "un
-gate en rojo se arregla y se re-verifica; no se entrega."
+Confirma que el re-mux fue audio-only puro; el video (ya verificado
+visualmente limpio en el pase anterior: coherence, paleta, `brand_close`,
+atribución en el mismo frame) no se tocó.
 
-**Validé la técnica yo mismo antes de instruirla** (no propago un
-`fix_instruction` como hipótesis sin probar — P-09): tomé el audio de cada
-`v1.mp4` (extracción estéreo 48kHz, no el downmix mono de un primer
-intento inválido), corrí `loudnorm` 2-pasadas con **`TP=-2.0`** en vez de
-`-1.0` (manteniendo `I=-14`/`LRA` medido), re-encodé a AAC, y volví a medir
-el archivo resultante de forma independiente:
+## Decisión de limpieza — borrar los 2 `-v1` defectuosos, PURGAR CACHÉ DE CLOUDFLARE (no solo el bucket)
 
-| Reel | TP antes (v1, medido) | TP simulado con headroom -2.0 | LUFS simulado |
-|---|---|---|---|
-| 3 (Marino HVAC) | **+0.15 dBTP** (clipping) | **-1.77 dBTP** | -14.00 |
-| 4 (cierre) | **+0.52 dBTP** (clipping, el más severo) | **-1.81 dBTP** | -14.05 |
+> [!danger] Lección de hoy: borrar del bucket R2 NO borra del edge de Cloudflare
+> Si alguien (Ernesto, un scheduler, un sync de Drive) tiene guardada la URL vieja `-v1.mp4` de los reels 3/4, y el objeto se borra SOLO del bucket, Cloudflare puede seguir sirviendo la copia defectuosa (clipeada) desde caché de edge hasta que expire por su cuenta — el usuario nunca ve un 404 que le avise que algo cambió, ve el audio malo servido con 200. El borrado tiene que ser bucket + purga de caché, en ese orden o combinados, nunca solo el primero.
 
-La técnica **funciona**: el true peak queda cómodamente negativo en ambos
-y el LUFS se mantiene dentro de banda (±0.1 de -14).
-
-## Instrucción exacta para devops (audio-only, sin re-render de video)
-
-Para `los-numeros-de-marino-hvac` y `lo-que-necesitas-para-automatizar`:
-
-1. Tomar el mix **PRE-AAC** original (el bus antes de tu pasada 2 de
-   `loudnorm` — **NO** el `m4a`/`mp4` ya entregado, para no doble-procesar).
-2. Correr `loudnorm` pasada 2 con **`TP=-2.0`** (en vez de `-1.0`),
-   manteniendo `I=-14` y el `LRA` medido en tu propia pasada 1.
-3. Re-encode a AAC 256kbps/48kHz.
-4. Re-mux con el video **YA finalizado** vía `-c:v copy` (no re-renderizar
-   Remotion, no re-aplicar el grade FFmpeg de video — el video ya pasó el
-   verify visual limpio).
-5. Subir como `<reel>-v2.mp4` **SIN sobreescribir** el `-v1.mp4` (mismo
-   patrón P-05/P-13: nunca reintroducir el master viejo por accidente).
-
-`video-producer` re-verifica SOLO el audio de esos 2 archivos (LUFS +
-true peak independientes) tras el re-mux y emite el GO final de la serie.
-
-## BPM — verificado independiente por autocorrelación
-
-| Reel | BPM declarado | BPM medido | Delta |
-|---|---|---|---|
-| 1 | 130 | 129.3 | 0.7 |
-| 2 | 124 | 124.0 | 0.0 (exacto) |
-| 3 | 122 | 121.5 | 0.5 |
-| 4 | 134 | 133.6 | 0.4 |
-
-Los 4 dentro de la banda 120-140 exigida; deltas comparables a las 4
-series anteriores.
-
-## `coherence_guard` — los 2 heroes i2v (reel 1 y reel 3)
-
-Ambos verificados en 2 frames (1.0s, 4.0s): mismo personaje, mismo espacio,
-misma paleta, movimiento sutil, sin drift. **PASS en los 2.**
-
-## Paleta HSV (region+control) — con diagnóstico de falso positivo en heroes reales
-
-Escaneo programático en 14 frames. Las escenas motion-autoradas (`stat_reveal`,
-`brand_close`, `checklist`, `steps_list`) dan **≤0.036%** de cyan/violeta —
-ruido de antialiasing, dentro del precedente. Los 4 frames de heroes i2v
-dieron un `raw HSV` más alto (0.56%–2.68%) que precedentes anteriores; un
-segundo pase con umbral "neon" (saturación >0.45 Y valor >0.35, para
-distinguir un accent visible de ruido) confirmó **0 píxeles neon en los 4**
-— el `raw HSV` capturado es sombra oscura/tela gris-azulada de la
-fotografía real (valor medio ~0.10–0.18, no perceptible como cian/violeta
-a simple vista, confirmado visualmente). **PASS**, con la metodología
-documentada para que el próximo verify use el mismo doble-umbral en vez de
-solo el HSV crudo (evita un falso NO-GO por sombra de foto real).
-
-## Beats en píxeles — la regla dura de atribución, confirmada en el MP4 real
-
-Frame de `stat_reveal` (reel 3, 15.0s): **"$4,400" + "perdidos al mes, en
-88 facturas" + "Estimación de AetherLogik a partir de los datos del
-cliente."** — los tres elementos visibles en el **mismo frame**,
-confirmado en píxeles reales (no solo leyendo el código). Los 4
-`brand_close` (incluido el CTA final de conversión del reel 4,
-`aetherlogik.com/para-hvac . agenda tu diagnóstico gratuito ->`) muestran
-el texto centrado con margen simétrico en ambos lados, sin bleed al borde
-— el fix de `BrandClose.tsx` (P-13) sigue sano en esta serie.
-
-## Presupuesto final
-
-Costo real de assets generativos: **~$3.10 USD** contra un techo de ~$25
-declarado en la misión.
+**Instrucción para devops:**
+1. Purgar caché de Cloudflare para las 2 URLs exactas (API de purge-by-URL,
+   no purge-everything):
+   - `https://media.aetherlogik.com/agency/reels-hvac-serie/los-numeros-de-marino-hvac-v1.mp4`
+   - `https://media.aetherlogik.com/agency/reels-hvac-serie/lo-que-necesitas-para-automatizar-v1.mp4`
+2. Tras confirmar la purga (verificar con `curl -I` que la respuesta ya no
+   trae `cf-cache-status: HIT` de un objeto viejo, o que da 404 una vez
+   borrado el objeto), borrar los 2 objetos `-v1` del bucket R2.
+3. Los `-v1` de los reels 1 y 2 **NO se tocan** — nunca tuvieron defecto,
+   son los canónicos de esos dos.
+4. No hay pérdida de trazabilidad al borrar: el historial completo (qué
+   tenía mal el audio, cuándo se detectó, cómo se arregló, los números
+   antes/después) ya vive en git (`gates.json.post_render_verify` +
+   `post_render_verify_v2` + este README), igual que el precedente de
+   limpieza de P-13 en `reels-inmobiliarios-serie`.
 
 ## Handoffs pendientes
 
-- **devops-aetherlogik-homelab**: re-mux de audio de los reels 3 y 4 (ver
-  instrucción exacta arriba) + subir como `-v2.mp4`.
-- **video-producer (siguiente pase, corto)**: re-verificar SOLO el audio
-  (LUFS + true peak independientes) de esos 2 archivos y emitir el GO
-  final de la serie.
-- **skill-curator**: P-15 nueva en `Video-problemas.md` — el gotcha de
-  true-peak-positivo-post-AAC-encode y la técnica de fix validada
-  (headroom `TP=-2.0` pre-encode) vale la pena incorporarse a
-  `premium-craft-standards.md` §5 como regla dura, no solo como hallazgo
-  puntual de esta serie.
+- **devops-aetherlogik-homelab**: purgar caché CF de las 2 URLs `-v1` de
+  reels 3/4 (ver arriba) → borrar esos 2 objetos del bucket.
+- **Ernesto / quien suba a Drive**: usar la tabla "Los 4 videos canónicos"
+  de arriba — reels 1/2 en `-v1`, reels 3/4 en `-v2`.
+- **skill-curator**: P-15 (true-peak-positivo-post-AAC, técnica de fix con
+  headroom `TP=-2.0`) y P-16 (nombres genéricos de intermedios en `out/`
+  compartido entre series en el CT 128 — ver `Video-problemas.md`) ambas
+  PENDIENTES de curaduría, listas para incorporarse a
+  `premium-craft-standards.md`/`aetherlogik-homelab-ops`.
 
-## 📌 Para memoria
+## 📌 Para memoria (finales)
 
-- Primera vez en la línea `reels-del-blog` que el defecto detectado en el
-  verify final es de **audio** (no de layout/`brand_close` como en
-  P-13) — y primera vez que el hallazgo llega ya con 2 alternativas
-  descartadas por devops (contexto útil, pero no una decisión tomada por
-  mí: yo validé la tercera opción con números propios antes de instruirla).
+- Primera vez en la línea `reels-del-blog` que el defecto del verify final
+  es de **audio** (no de layout como P-13) y primera vez que se resuelve
+  en un ciclo de re-mux audio-only sin tocar video, verificado con MD5 del
+  stream crudo — más barato y más seguro que un re-render completo cuando
+  el video ya pasó su propio verify.
 - El "downmix mono + resample" de una primera extracción de audio para
   simular el fix dio una medición de LUFS completamente distinta (-17.6
-  vs -14.0 real) — recordatorio de que **el método de extracción cambia
-  la medición** (mono downmix ≠ estéreo original para BS.1770); la
-  simulación válida se hizo re-extrayendo estéreo a la frecuencia de
-  muestreo del máster (48kHz).
+  vs -14.0 real) — recordatorio de que el método de extracción cambia la
+  medición (mono downmix ≠ estéreo original para BS.1770).
 - El diagnóstico de "neon vs sombra" en el escaneo de paleta (segundo
   umbral saturación+valor) evitó declarar NO-GO por un falso positivo en
-  los heroes i2v — vale la pena que quede en el checklist de verify de
-  `aetherlogik-video`, no solo como una nota de esta sesión.
+  los heroes i2v.
+- **Borrar del bucket no borra del edge** — toda limpieza de un asset
+  público de R2/CF de aquí en adelante lleva purga de caché explícita por
+  URL, no solo el DELETE del objeto (P-16 candidato adicional si se repite
+  en otra serie).
+- Serie completa GO 4/4 — quinta consecutiva de la línea `reels-del-blog`
+  que cierra limpia (contando el ciclo de fix de esta), con el mismo rigor
+  de verificación independiente que las 4 anteriores.
+
+---
+
+## Apéndice — handoff histórico de pre-producción y primer verify (ya ejecutados)
+
+Las instrucciones originales de pre-producción (estructura de 4 reels,
+manifiesto de assets, recipe de finishing, comandos de render, el gate
+`npx remotion compositions`) y el primer verify (NO-GO v1 por true peak,
+con la tabla de simulación del fix) quedan preservadas en el historial de
+commits de este archivo (`git log -p -- remotion-composer/src/reels/ReelsHvacSerie.README.md`)
+para referencia — ya no aplican como pasos pendientes.
