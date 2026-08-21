@@ -27,6 +27,21 @@
     "total_cost_usd_est": 0.455
   },
   "post_render_verify": {
-    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + brand guard) sobre el MP4 real una vez publicado, y confirma que el link/CTA final es correcto y legible (recorte+ampliacion del texto libre, doctrina de la skill)."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/cinco-senales-de-que-estas-listo-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 45.0, "size_bytes": 6062194, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -13.93, "lufs_medido_independiente": -13.93,
+      "true_peak_dbtp_devops_reportado": -1.94, "true_peak_dbtp_medido_independiente": -1.94,
+      "true_peak_astats_sample_peak_db": -1.964,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass — negativo, sin clipping",
+      "bpm_declarado": 132, "bpm_medido_autocorrelacion": 133.3, "bpm_delta": 1.3
+    },
+    "palette_scan": {"metodo": "HSV region+control, muestreo de 2 frames (12.0s five_signals, 40.0s brand_close)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "cta_legibility_check": {"escena": "brand_close, frame 40.0s", "metodo": "recorte + ampliacion 2x de la banda de texto (doctrina de la skill — no se da por buena a resolucion de frame completo)", "hallazgo": "'cal.com/aetherlogik/discovery . agenda tu auditoria gratuita ->' legible, centrado, margenes simetricos, coincide EXACTO con el link del cierre real del post", "veredicto": "pass"},
+    "visual_spotcheck": {"brand_close": "tagline '30 minutos, sin costo, sin compromiso.' + CTA real centrado, sin bleed (fix de P-13 confirmado sin regresion)", "veredicto": "pass"},
+    "final_verdict": "GO"
   }
 }

@@ -29,6 +29,31 @@
     "total_cost_usd_est": 1.165
   },
   "post_render_verify": {
-    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + coherence/palette + beat-pixel-check de las 3 atribuciones) sobre el MP4 real una vez publicado."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/tres-negocios-tres-resultados-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 45.0, "size_bytes": 9418850, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.00, "lufs_medido_independiente": -14.00,
+      "true_peak_dbtp_devops_reportado": -1.77, "true_peak_dbtp_medido_independiente": -1.77,
+      "true_peak_astats_sample_peak_db": -1.769,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass — negativo, sin clipping",
+      "bpm_declarado": 126, "bpm_medido_autocorrelacion": 125.0, "bpm_delta": 1.0
+    },
+    "coherence_guard": {"frames_muestreados": ["1.0s", "4.0s"], "veredicto": "pass", "detalle": "misma mujer, misma puerta/fachada/palmeras de Miami, luz golden-hour consistente, push-in leve entre los 2 frames, sin drift"},
+    "beat_pixel_check": {
+      "escenas": ["case_clinic 9.5s", "case_dmp 17.5s", "case_marino 25.5s"],
+      "hallazgo": "los 3 casos muestran cifra + label + atribucion DIFERENCIADA en el MISMO frame, confirmado en pixeles reales: clinica='+125 horas / por semana recuperadas por el equipo de coordinacion / Red de clinicas de EE. UU. . cifras reportadas por la propia clinica.'; DMP='$36,000 / en tiempo recuperado al ano, en capacidad de trabajo / DMP Consulting Services, Houston/Katy TX . estimacion de AetherLogik a partir de los datos del cliente.'; Marino='$4,400/mes / recuperados en facturacion, mas 9 horas libres por semana / Marino HVAC, Miami . estimacion de AetherLogik a partir de los datos del cliente.' — la atribucion diferenciada (cliente vs estimacion propia) es CORRECTA y visible en cada frame, no generica",
+      "veredicto": "pass"
+    },
+    "palette_scan": {
+      "metodo": "HSV region+control + segundo umbral 'neon' (satuacion>0.55 y valor>0.45 dentro de la banda cian/violeta)",
+      "hero_1s_4s": "0.7% RAW cyan_violet en ambos frames (mean_sat=0.33, mean_val~0.20 dentro de la banda — tonos naturales de cielo/sombra de la foto), 0 pixeles 'neon' en ambos",
+      "resto_de_frames": "0.0% cyan_violet",
+      "veredicto": "pass"
+    },
+    "visual_spotcheck": {"brand_close": "tagline con referencia cruzada (/para-clinicas, /para-hvac) + CTA interno de 2 lineas centrado, margenes simetricos (crop+zoom 2x confirmado), sin bleed", "veredicto": "pass"},
+    "final_verdict": "GO"
   }
 }

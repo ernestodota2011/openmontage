@@ -28,6 +28,21 @@
     "total_cost_usd_est": 0.375
   },
   "post_render_verify": {
-    "status": "PENDIENTE — requiere DOS renders de devops: (1) hf lint . && hf render sobre hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/ (comando canonico de aetherlogik-hyperframes) -> archivar el MP4 resultante a R2 y wirearlo en props.fiveJobsChecklistSrc, (2) render Remotion de la composicion completa + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + hf lint en 0/0 confirmado) sobre el MP4 final una vez publicado."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/los-cinco-trabajos-de-la-ia-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 37.0, "size_bytes": 4449643, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -13.96, "lufs_medido_independiente": -13.96,
+      "true_peak_dbtp_devops_reportado": -1.91, "true_peak_dbtp_medido_independiente": -1.91,
+      "true_peak_astats_sample_peak_db": -1.959,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass — negativo, sin clipping",
+      "bpm_declarado": 130, "bpm_medido_autocorrelacion": 130.4, "bpm_delta": 0.4
+    },
+    "hyperframes_render_check": {"hf_lint_reportado_por_devops": "0/0", "tiempo_render_reportado_por_devops": "31.4s", "nota_de_alcance": "video-producer NO tiene acceso SSH al CT 128 y no re-corrio hf lint el mismo — esta cifra es la reportada por devops, declarado explicito (no se presenta como verificacion independiente). Lo que SI se verifico independientemente es el resultado en pixeles: frame 14.0s extraido y mirado, 3/5 items visibles con nodos ember correctos, tipografia legible, sin cian/violeta."},
+    "palette_scan": {"metodo": "HSV region+control, muestreo de 2 frames (14.0s HyperFrames, 32.0s brand_close)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "visual_spotcheck": {"brand_close": "tagline + CTA interno de 2 lineas centrado, margenes simetricos (crop+zoom 2x confirmado), sin bleed", "veredicto": "pass"},
+    "final_verdict": "GO"
   }
 }

@@ -29,6 +29,22 @@
     "total_cost_usd_est": 1.015
   },
   "post_render_verify": {
-    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + coherence/palette) sobre el MP4 real una vez publicado."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/la-diferencia-que-importa-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 30.0, "size_bytes": 6839302, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.06, "lufs_medido_independiente": -14.06,
+      "true_peak_dbtp_devops_reportado": -1.96, "true_peak_dbtp_medido_independiente": -1.96,
+      "true_peak_astats_sample_peak_db": -1.971,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass — negativo, sin clipping (P-15 preventivo funciono: TP=-2.0 desde la primera pasada, sin necesitar re-mux)",
+      "bpm_declarado": 128, "bpm_medido_autocorrelacion": 127.7, "bpm_delta": 0.3
+    },
+    "coherence_guard": {"frames_muestreados": ["1.0s", "4.0s"], "veredicto": "pass", "detalle": "mismo personaje, misma oficina/escritorio/lampara/ventana, luz tungsteno consistente, push-in leve entre los 2 frames, sin drift"},
+    "beat_pixel_check": {"escena": "stat_reveal, frame 8.5s", "hallazgo": "'21 veces' + 'mas probable calificar un lead si respondes en menos de 5 minutos' + 'MIT / InsideSales, 2007.' LOS TRES visibles en el MISMO frame, confirmado en pixeles reales", "veredicto": "pass"},
+    "palette_scan": {"metodo": "HSV region+control, muestreo de 4 frames (1.0s, 4.0s, 8.5s, 25.0s)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "visual_spotcheck": {"brand_close": "tagline + CTA interno de 2 lineas centrado, margenes simetricos (crop+zoom 2x confirmado), sin bleed", "veredicto": "pass"},
+    "final_verdict": "GO"
   }
 }
