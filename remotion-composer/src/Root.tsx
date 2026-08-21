@@ -26,6 +26,10 @@ import { ElCicloQueTeCuestaHoras, ElCicloQueTeCuestaHorasProps, EL_CICLO_QUE_TE_
 import { AsiFuncionaLaAutomatizacionReal, AsiFuncionaLaAutomatizacionRealProps, ASI_FUNCIONA_LA_AUTOMATIZACION_REAL_TOTAL_FRAMES } from "./reels/AsiFuncionaLaAutomatizacionReal";
 import { CasoRealMedicinaEstetica, CasoRealMedicinaEsteticaProps, CASO_REAL_MEDICINA_ESTETICA_TOTAL_FRAMES } from "./reels/CasoRealMedicinaEstetica";
 import { LoQueCambiaEnTuClinica, LoQueCambiaEnTuClinicaProps, LO_QUE_CAMBIA_EN_TU_CLINICA_TOTAL_FRAMES } from "./reels/LoQueCambiaEnTuClinica";
+import { UnTercioDeTuDia, UnTercioDeTuDiaProps, UN_TERCIO_DE_TU_DIA_TOTAL_FRAMES } from "./reels/UnTercioDeTuDia";
+import { LoQueYaPuedesDelegar, LoQueYaPuedesDelegarProps, LO_QUE_YA_PUEDES_DELEGAR_TOTAL_FRAMES } from "./reels/LoQueYaPuedesDelegar";
+import { LoQueLaIaNoPuedeHacer, LoQueLaIaNoPuedeHacerProps, LO_QUE_LA_IA_NO_PUEDE_HACER_TOTAL_FRAMES } from "./reels/LoQueLaIaNoPuedeHacer";
+import { ComoEmpezarSinDesorden, ComoEmpezarSinDesordenProps, COMO_EMPEZAR_SIN_DESORDEN_TOTAL_FRAMES } from "./reels/ComoEmpezarSinDesorden";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -512,6 +516,64 @@ export const Root: React.FC = () => {
           sfxRiserSrc: "",
           tail_padding_seconds: 0,
         } as LoQueCambiaEnTuClinicaProps}
+      />
+      <Composition
+        id="UnTercioDeTuDia"
+        component={UnTercioDeTuDia}
+        durationInFrames={UN_TERCIO_DE_TU_DIA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as UnTercioDeTuDiaProps}
+      />
+      <Composition
+        id="LoQueYaPuedesDelegar"
+        component={LoQueYaPuedesDelegar}
+        durationInFrames={LO_QUE_YA_PUEDES_DELEGAR_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          tareasDelegablesSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueYaPuedesDelegarProps}
+      />
+      <Composition
+        id="LoQueLaIaNoPuedeHacer"
+        component={LoQueLaIaNoPuedeHacer}
+        durationInFrames={LO_QUE_LA_IA_NO_PUEDE_HACER_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueLaIaNoPuedeHacerProps}
+      />
+      <Composition
+        id="ComoEmpezarSinDesorden"
+        component={ComoEmpezarSinDesorden}
+        durationInFrames={COMO_EMPEZAR_SIN_DESORDEN_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as ComoEmpezarSinDesordenProps}
       />
     </>
   );
