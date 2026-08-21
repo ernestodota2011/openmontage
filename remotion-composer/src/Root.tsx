@@ -22,6 +22,10 @@ import { TresMensajesDeAnoche, TresMensajesDeAnocheProps, TRES_MENSAJES_TOTAL_FR
 import { QueHaceUnChatbotReal, QueHaceUnChatbotRealProps, QUE_HACE_UN_CHATBOT_REAL_TOTAL_FRAMES } from "./reels/QueHaceUnChatbotReal";
 import { CasoMarinoHVAC, CasoMarinoHVACProps, CASO_MARINO_HVAC_TOTAL_FRAMES } from "./reels/CasoMarinoHVAC";
 import { ComoSeConstruyeSinRomperNada, ComoSeConstruyeSinRomperNadaProps, COMO_SE_CONSTRUYE_TOTAL_FRAMES } from "./reels/ComoSeConstruyeSinRomperNada";
+import { ElCicloQueTeCuestaHoras, ElCicloQueTeCuestaHorasProps, EL_CICLO_QUE_TE_CUESTA_HORAS_TOTAL_FRAMES } from "./reels/ElCicloQueTeCuestaHoras";
+import { AsiFuncionaLaAutomatizacionReal, AsiFuncionaLaAutomatizacionRealProps, ASI_FUNCIONA_LA_AUTOMATIZACION_REAL_TOTAL_FRAMES } from "./reels/AsiFuncionaLaAutomatizacionReal";
+import { CasoRealMedicinaEstetica, CasoRealMedicinaEsteticaProps, CASO_REAL_MEDICINA_ESTETICA_TOTAL_FRAMES } from "./reels/CasoRealMedicinaEstetica";
+import { LoQueCambiaEnTuClinica, LoQueCambiaEnTuClinicaProps, LO_QUE_CAMBIA_EN_TU_CLINICA_TOTAL_FRAMES } from "./reels/LoQueCambiaEnTuClinica";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -447,6 +451,67 @@ export const Root: React.FC = () => {
           sfxPhaseTickSrc: "",
           tail_padding_seconds: 0,
         } as ComoSeConstruyeSinRomperNadaProps}
+      />
+      <Composition
+        id="ElCicloQueTeCuestaHoras"
+        component={ElCicloQueTeCuestaHoras}
+        durationInFrames={EL_CICLO_QUE_TE_CUESTA_HORAS_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as ElCicloQueTeCuestaHorasProps}
+      />
+      <Composition
+        id="AsiFuncionaLaAutomatizacionReal"
+        component={AsiFuncionaLaAutomatizacionReal}
+        durationInFrames={ASI_FUNCIONA_LA_AUTOMATIZACION_REAL_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          sfxConfirmSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as AsiFuncionaLaAutomatizacionRealProps}
+      />
+      <Composition
+        id="CasoRealMedicinaEstetica"
+        component={CasoRealMedicinaEstetica}
+        durationInFrames={CASO_REAL_MEDICINA_ESTETICA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxConfirmSrc: "",
+          tail_padding_seconds: 0,
+        } as CasoRealMedicinaEsteticaProps}
+      />
+      <Composition
+        id="LoQueCambiaEnTuClinica"
+        component={LoQueCambiaEnTuClinica}
+        durationInFrames={LO_QUE_CAMBIA_EN_TU_CLINICA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          queCambiaSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxRiserSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueCambiaEnTuClinicaProps}
       />
     </>
   );
