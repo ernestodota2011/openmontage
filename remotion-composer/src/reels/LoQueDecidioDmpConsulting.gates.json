@@ -22,12 +22,37 @@
     "anti_claims_audit": {"verdict": "pass", "detalle": "'1,440 horas' y '+160 citas' son EXACTOS del post con la MISMA atribucion literal ('estimacion de AetherLogik a partir de los datos del cliente'). La cita de Mayli Parra es textual. El caso de la empresa de limpieza NO se nombra (el post tampoco lo hace) — se evita fabricar una identidad de cliente inexistente. El CTA final coincide EXACTO con el link del post."}
   },
   "assets_generated": {
-    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 118, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3", "file_size_bytes": 624058},
+    "music_v1": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 118, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3", "file_size_bytes": 624058, "estado": "DESCARTADA — medida en 117.6 BPM real, bajo el piso duro de 120 (ver post_render_verify)"},
+    "music_v2": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa740da/VI07Z2B6FKdxog-YQJGv4_music_generated.mp3", "file_size_bytes": 624894, "bpm_medido_independiente_por_video_producer": 125.0, "estado": "VALIDADA — dentro de banda 120-140, ya referenciada en props/lo-que-decidio-dmp-consulting.json"},
     "sfx_whoosh": {"nota": "COMPARTIDO con el reel 1 de esta misma serie — costo ya contado en AlquilarOComprar.gates.json", "cost_usd": 0.0},
-    "total_cost_usd_est": 0.39
+    "total_cost_usd_est": 0.78
   },
   "post_render_verify": {
-    "status": "PENDING",
-    "nota": "no renderizado aun. Ademas del gate estandar (npx remotion compositions, ffprobe, LUFS/TP), el verify de este reel exige confirmar EN PIXELES que cada cifra + su atribucion aparecen en el MISMO frame (mismo metodo beat-pixel-check de TresNegociosTresResultados) y que el CTA final coincide EXACTO con cal.com/aetherlogik/discovery."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia de R2 + ffmpeg/ffprobe/python locales, sin confiar en el reporte de devops)",
+    "artifact_v1": "https://media.aetherlogik.com/agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 39.0, "size_bytes": 5476546, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.02, "lufs_medido_independiente": -14.02,
+      "true_peak_dbtp_devops_reportado": -1.99, "true_peak_dbtp_medido_independiente": -1.99,
+      "true_peak_astats_sample_peak_db": -1.986,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass",
+      "bpm_declarado_preproduccion": 118,
+      "bpm_medido_independiente": 117.6,
+      "bpm_hallazgo": "FALLA — 118 declarado y 117.6 medido caen ambos POR DEBAJO del piso duro de 120 BPM de la directriz de Ernesto ('musica movida, 120-140 BPM'). El error de origen fue de PRE-PRODUCCION: la mision citaba una banda floja '118-128' en su propio texto de contexto, que video-producer copio sin validar contra el piso duro real de la directriz (120). Ningun gate de la plataforma verifica BPM contra la directriz de marca — es un gap de proceso, no solo de este reel."
+    },
+    "beat_pixel_check": {
+      "case_stat_horas_t9s": "'1,440 horas' + 'recuperadas al ano al automatizar con n8n' + atribucion 'DMP Consulting Services, Houston/Katy TX . estimacion de AetherLogik a partir de los datos del cliente.' LOS TRES visibles en el MISMO frame, confirmado en pixeles reales",
+      "case_stat_citas_t16s": "'+160 citas' + 'adicionales cada mes, sin contratar personal' + la MISMA atribucion en el MISMO frame, confirmado en pixeles reales",
+      "quote_t22s": "cita completa de Mayli Parra + atribucion '— Mayli Parra, DMP Consulting Services' en el MISMO frame, texto EXACTO al del post",
+      "honest_note_t28s": "'Para un caso simple, la respuesta honesta a veces es Zapier.' con 'honesta' como UNICA palabra ember de la escena",
+      "cta_t35s": "CTA REAL 'cal.com/aetherlogik/discovery . agenda tu diagnostico gratuito ->' verificado legible con recorte+ampliacion 4x — centrado, margenes simetricos en las 2 lineas, coincide EXACTO con el link del post",
+      "veredicto": "pass en los 5 puntos"
+    },
+    "palette_scan": {"metodo": "HSV region+control programatico, 6 frames muestreados (2s/9s/16s/22s/28s/35s)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "logo_check": {"veredicto": "pass", "detalle": "sin logos de terceros en este reel"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "final_verdict": "NO-GO CONDICIONAL sobre -v1 — unico hallazgo: BPM real 117.6 bajo el piso duro de 120. TODO lo demas (tecnico, LUFS/TP, atribuciones en frame, cita, CTA, paleta, logos) es PASS. Fix APLICADO: pista v2 regenerada y medida independientemente en 125.0 BPM (fal-ai/elevenlabs/music, 39053ms, +$0.39), musicSrc de props/lo-que-decidio-dmp-consulting.json YA apunta a la ruta R2 versionada -v2 (commit 8230c549). PENDIENTE de devops: archivar el asset musical v2 + re-renderizar SOLO esta composicion (sin dependencias HyperFrames, reel 100% Remotion, 0 i2v — re-render completo es mas simple y seguro que un re-mux manual del AAC ya mezclado, evita el patron de aplicar un fix a ciegas sobre un archivo derivado) + finishing FFmpeg (misma recipe, TP=-2.0) -> entregar como -v2.mp4, conservando -v1 para trazabilidad hasta que se decida limpieza de R2."
   }
 }
