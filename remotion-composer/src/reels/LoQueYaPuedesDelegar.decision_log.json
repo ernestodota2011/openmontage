@@ -1,0 +1,52 @@
+{
+  "reel": "lo-que-ya-puedes-delegar",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion 100% (TagRevealList para las 9 tareas, sin HyperFrames)",
+        "render_runtime HIBRIDO: Remotion para intake_beat + HyperFrames para las 5 tareas restantes (checklist denso)",
+        "render_runtime=hyperframes para todo el reel"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime HIBRIDO (remotion + hyperframes), composition_mode=atelier",
+      "reason": "El post lista 6 categorias de tareas delegables; dramatizar las 6 con el mismo device de Remotion (TagRevealList) repetido caeria en 'typography_overreliance'/hero-component-spine. Se separa intake (la categoria mas 'conversacional', apta para TagRevealList con 4 filas cortas) de las otras 5 (mas densas, aptas para un checklist HyperFrames con nodos que se iluminan) - mismo patron GO'd en LoQueCambiaEnTuClinica.tsx de la serie clinicas, que uso HyperFrames para el bloque mas denso de UI/datos del reel.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que este reel NO lleva escena i2v",
+      "options_considered": [
+        "agregar un hero i2v de 'coordinadora/paralegal capturando datos de intake'",
+        "cero escenas i2v, reservar el presupuesto de hero a los reels 1 y 3"
+      ],
+      "choice": "cero escenas i2v en este reel",
+      "reason": "El reel 2 es 100% didactico (lista de tareas) - un i2v aqui competiria por atencion con el checklist denso y no aporta informacion nueva. La doctrina permite maximo 1 hero por reel, no exige 1 hero POR reel; distribuir los 2 heroes del presupuesto de la serie entre el gancho (reel 1, establece el problema humano) y el reel de limites (reel 3, dramatiza el juicio humano retenido) rinde mas persuasion por dolar que uno en cada reel.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan - tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "tono neutro/de fondo para no competir con el checklist denso",
+        "132 BPM, drive alto, energia de checklist"
+      ],
+      "choice": "132 BPM, corporate-tech instrumental, four-on-the-floor, energia de checklist forward-moving",
+      "reason": "la directriz de la mision es DURA (banda 120-140, nada de ambient). 132 BPM es el mas alto de la serie porque este es el reel MAS denso de informacion (9 tareas en total) - el drive ritmico ayuda a que el checklist se lea como progreso, no como lista aburrida.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Fidelidad de las 9 tareas listadas",
+      "options_considered": [
+        "resumir/fusionar categorias del post para caber en menos items",
+        "listar las 6 categorias del post tal cual, sin fusionar ni omitir ninguna (4 en intake_beat + 5 en checklist)"
+      ],
+      "choice": "las 6 categorias del post completas, repartidas 4+5 entre las 2 escenas",
+      "reason": "el post estructura la seccion en 6 categorias claras con bullets; fusionar categorias para acortar el reel arriesgaria tergiversar el alcance real de lo delegable (regla dura anti-invencion). Se preserva el ORDEN del post en ambas escenas.",
+      "confidence": 0.9
+    }
+  ]
+}

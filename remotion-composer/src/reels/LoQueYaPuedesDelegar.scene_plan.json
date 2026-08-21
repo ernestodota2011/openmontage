@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'Estas tareas ya se pueden delegar a la IA.' - abre el reel didactico sin costo de asset",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "promesa clara del reel: esto es la lista de lo que YA se puede delegar hoy",
+    "hero_moment": false,
+    "information_role": "apertura del reel didactico",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "intake_beat",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 4 capacidades de intake/calificacion, fieles a los 4 bullets del post: info basica, calificacion de area de practica, agenda directa, documentos previos",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "dramatiza la primera categoria del post (intake y calificacion) con su propio device antes del bloque denso de HyperFrames",
+    "hero_moment": false,
+    "information_role": "intake y calificacion de clientes (seccion 2 del post)",
+    "texture_keywords": ["cascada de tags", "tick ember"]
+  },
+  {
+    "id": "checklist_delegable",
+    "type": "animation",
+    "description": "Clip HyperFrames (checklist de 5 items, autorado en HTML/CSS puro): gestion documental, redaccion de primera instancia, comunicacion con clientes, seguimiento de deadlines, investigacion legal preliminar - los 5 encabezados EXACTOS restantes del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, UI densa"},
+    "shot_intent": "cubre el resto del catalogo de tareas delegables del post en un solo bloque denso y legible, evitando repetir el device de intake_beat",
+    "hero_moment": false,
+    "information_role": "tareas delegables 2-6 del post (bloque denso de datos)",
+    "texture_keywords": ["UI checklist", "HyperFrames", "nodos ember"]
+  },
+  {
+    "id": "caveat",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'Esto no reemplaza la consulta personal. La hace mas productiva.' - cita fiel del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "evita que el reel se lea como 'la IA reemplaza al abogado' - matiza con la propia frase del post",
+    "hero_moment": false,
+    "information_role": "matiz de honestidad (cierra la seccion 'tareas que ya se pueden delegar')",
+    "texture_keywords": ["hold deliberado", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie (lo que la IA NO puede hacer)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

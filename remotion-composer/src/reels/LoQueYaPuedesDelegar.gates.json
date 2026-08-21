@@ -1,0 +1,33 @@
+{
+  "reel": "lo-que-ya-puedes-delegar",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py - SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.6,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "5 escenas, cada una con un device distinto (headline / cascada de tags / HyperFrames UI / headline / brand close)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 5 escenas es video real (i2v) - reel 100% motion-autorado/UI, presupuesto de hero i2v reservado a reels 1 y 3"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 2.0, "reason": "5 de 5 escenas (100%) tipografia/UI/stat_card - reel didactico, desviacion consciente y declarada (mismo patron que reel 2 de la serie clinicas)"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "still_cuts": 0, "note": "promise_type data_explainer (no motion_led) - correcto para un reel 100% didactico/UI, consistente con delivery_promise.py (texto animado NO cuenta como motion real, por eso NO se declara motion_led)"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "las 9 tareas listadas (4 en intake_beat + 5 en checklist_delegable) son los encabezados/bullets TEXTUALES de la seccion 'Tareas que ya se pueden delegar a la IA' del post, sin agregar ni quitar ninguna; cero cifras inventadas"}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 132, "length_ms": 46000, "cost_usd": 0.46},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (ya archivado en R2)", "cost_usd": 0.0},
+    "hyperframes_clip": {"note": "asset NO generativo - renderizado por devops en el CT 128 desde hyperframes-compositions/tareas-legales-delegables/index.html (este commit); costo de composicion = 0, costo de render = infra existente", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.46
+  },
+  "post_render_verify": {
+    "status": "NO EJECUTADO EN ESTA SESION - pendiente de devops (render Remotion + render HyperFrames del checklist). El verify post-render (ffprobe, LUFS, BPM medido, region+control, hf lint 0/0) lo corre video-producer DESPUES del render de devops."
+  }
+}
