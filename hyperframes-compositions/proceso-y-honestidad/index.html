@@ -85,15 +85,18 @@
     100% CSS (@keyframes + cubic-bezier(0.16,1,0.3,1), el mismo easing del
     craft de aetherlogik-video) — sin GSAP, por eso el elemento raiz lleva
     `data-no-timeline` (evita el impuesto de 45s del poller documentado en
-    la skill). Paleta ember-only, boxless: NINGUN elemento de este archivo
-    tiene fondo/borde/boxShadow tipo tarjeta — solo texto, un circulo de
-    nodo (outline, no relleno hasta que se enciende) y lineas de texto.
+    la skill). `data-composition-id` + `data-width`/`data-height` agregados
+    2026-08-21 tras el hallazgo de `hf lint` (faltaban los 3 atributos que
+    identifican la composicion y su resolucion de salida al motor). Paleta
+    ember-only, boxless: NINGUN elemento de este archivo tiene
+    fondo/borde/boxShadow tipo tarjeta — solo texto, un circulo de nodo
+    (outline, no relleno hasta que se enciende) y lineas de texto.
     Render (lo ejecuta devops, NO video-producer): pct start 128 ->
     hf lint . && hf render -c index.html -o proceso-y-honestidad.mp4 ->
     pct stop 128. Duracion/fps del render deben forzarse a 24fps/720
     frames si el default de `hf` no coincide con el plan de arriba.
   -->
-  <div id="stage" data-no-timeline>
+  <div id="stage" data-no-timeline data-composition-id="proceso-y-honestidad" data-width="1080" data-height="1920">
 
     <section id="section-process" class="section">
       <div id="process-kicker">Cómo se construye, fase por fase</div>
