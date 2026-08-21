@@ -19,6 +19,9 @@ import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
 import { LaHoraRobada, LaHoraRobadaProps, LA_HORA_ROBADA_TOTAL_FRAMES } from "./reels/LaHoraRobada";
 import { LaHoraRobadaV2, LaHoraRobadaV2Props, LA_HORA_ROBADA_V2_TOTAL_FRAMES } from "./reels/LaHoraRobadaV2";
 import { TresMensajesDeAnoche, TresMensajesDeAnocheProps, TRES_MENSAJES_TOTAL_FRAMES } from "./reels/TresMensajesDeAnoche";
+import { QueHaceUnChatbotReal, QueHaceUnChatbotRealProps, QUE_HACE_UN_CHATBOT_REAL_TOTAL_FRAMES } from "./reels/QueHaceUnChatbotReal";
+import { CasoMarinoHVAC, CasoMarinoHVACProps, CASO_MARINO_HVAC_TOTAL_FRAMES } from "./reels/CasoMarinoHVAC";
+import { ComoSeConstruyeSinRomperNada, ComoSeConstruyeSinRomperNadaProps, COMO_SE_CONSTRUYE_TOTAL_FRAMES } from "./reels/ComoSeConstruyeSinRomperNada";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -398,6 +401,52 @@ export const Root: React.FC = () => {
           sfxPunchSrc: "",
           tail_padding_seconds: 0,
         } as TresMensajesDeAnocheProps}
+      />
+      <Composition
+        id="QueHaceUnChatbotReal"
+        component={QueHaceUnChatbotReal}
+        durationInFrames={QUE_HACE_UN_CHATBOT_REAL_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as QueHaceUnChatbotRealProps}
+      />
+      <Composition
+        id="CasoMarinoHVAC"
+        component={CasoMarinoHVAC}
+        durationInFrames={CASO_MARINO_HVAC_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          coldOpenSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxDingSrc: "",
+          sfxChimeSrc: "",
+          tail_padding_seconds: 0,
+        } as CasoMarinoHVACProps}
+      />
+      <Composition
+        id="ComoSeConstruyeSinRomperNada"
+        component={ComoSeConstruyeSinRomperNada}
+        durationInFrames={COMO_SE_CONSTRUYE_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          processAndHonestySrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxPhaseTickSrc: "",
+          tail_padding_seconds: 0,
+        } as ComoSeConstruyeSinRomperNadaProps}
       />
     </>
   );
