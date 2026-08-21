@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline 'Asi funciona, paso a paso.' — sin costo de asset, transicion directa desde el cierre del reel 1",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "abre el reel didactico anunciando el contenido",
+    "hero_moment": false,
+    "information_role": "apertura del reel didactico",
+    "texture_keywords": ["tipografia cinetica", "sin i2v"]
+  },
+  {
+    "id": "intake_beat",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 4 QualifyTag: Llegada / Trabajo / Precios / Sincronizacion, fieles a los parrafos 2-3 del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "explica la fase de captura en campo",
+    "hero_moment": false,
+    "information_role": "que se captura automaticamente al llegar",
+    "texture_keywords": ["cascada de tags", "stagger 40f"]
+  },
+  {
+    "id": "factura_automatica",
+    "type": "screen_demo",
+    "description": "Clip HyperFrames (HTML/CSS puro, sin GSAP, data-no-timeline): checklist de 5 pasos, cada uno una sintesis textual de una frase del post (GPS, fotos/codigo de barras, precios cargados, factura generada sola, envio+pago inmediato)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, UI limpia"},
+    "shot_intent": "el bloque denso de informacion del reel — 20s dedicados a demostrar el alcance real de la automatizacion de facturacion",
+    "hero_moment": false,
+    "information_role": "las 5 capacidades centrales del post",
+    "texture_keywords": ["HyperFrames", "checklist tipografico", "nodos que se iluminan"]
+  },
+  {
+    "id": "caveat",
+    "type": "animation",
+    "description": "KineticHeadline 'Para casos especiales, puedes exigir aprobacion manual antes de enviar.' — fiel al ultimo parrafo de la seccion",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "corta cualquier lectura de 'automatizacion sin control' antes de que se instale",
+    "hero_moment": false,
+    "information_role": "el limite honesto dentro del reel didactico",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

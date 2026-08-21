@@ -1,0 +1,35 @@
+{
+  "reel": "como-funciona-la-automatizacion-de-facturacion",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.6,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "5 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 5 escenas es video real (i2v) — reel 100% motion-autorado/UI, mismo patron GO'd que LoQueYaPuedesAutomatizar"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 2.0, "reason": "5 de 5 escenas (100%) tipografia/UI/stat_card — reel didactico, desviacion consciente y declarada"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "escaneo del HTML/CSS de facturacion-automatica-checklist: 0 hex fuera de la paleta ember, 0 box-shadow/glow, sin cards con fondo (nodos son circulos de 20px, no cards)"},
+    "coherence_guard": {"status": "no aplica — cero escenas i2v en este reel"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 tags de intake_beat y los 5 items del checklist HyperFrames son sintesis TEXTUAL de parrafos especificos del post ('Como funciona la automatizacion de facturacion'), sin agregar ninguna capacidad no descrita; cero cifras inventadas"},
+    "hyperframes_lint": {"status": "pendiente", "nota": "hf lint . lo corre devops en el CT 128 (video-producer no tiene SSH al CT) — la composicion declara el contrato COMPLETO de 6 atributos + data-no-timeline desde el primer intento (ver decision_log d-004), pero la verificacion real es re-correr hf lint, no leer el HTML"}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 46500, "cost_usd": 0.465, "url": "https://v3b.fal.media/files/b/0aa73b6e/zpGplxQj84Qx-2JLCb4U4_music_generated.mp3"},
+    "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "duration_s": 0.6, "cost_usd": 0.0012, "url": "https://v3b.fal.media/files/b/0aa73b84/fBlv6S4NmB4YU0jtMPGWN_sound_effect.mp3"},
+    "hyperframes_clip": {"note": "pendiente de render por devops en el CT 128 desde hyperframes-compositions/facturacion-automatica-checklist/index.html; hf lint . && hf render, comando canonico de la skill aetherlogik-hyperframes", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.4662
+  },
+  "post_render_verify": {
+    "status": "pendiente",
+    "nota": "esta corrida es PRE-RENDER. El verify real lo hace video-producer sobre el MP4 real DESPUES del render de devops (incluye hf lint 0/0 confirmado, no solo leido) — ver handoff en ReelsHvacSerie.README.md."
+  }
+}

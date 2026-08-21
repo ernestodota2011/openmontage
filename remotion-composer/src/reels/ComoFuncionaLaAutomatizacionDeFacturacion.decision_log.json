@@ -1,0 +1,49 @@
+{
+  "reel": "como-funciona-la-automatizacion-de-facturacion",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes — por que HIBRIDO Remotion+HyperFrames",
+      "options_considered": [
+        "100% Remotion (TagRevealList/StatCard para los 5 pasos tambien)",
+        "100% HyperFrames para todo el reel",
+        "HIBRIDO: Remotion para cold_open/intake_beat/caveat/brand_close, HyperFrames SOLO para el bloque denso de 5 pasos"
+      ],
+      "choice": "HIBRIDO",
+      "reason": "presenta AMBOS runtimes explicitamente (regla dura del AGENT_GUIDE: 'Present Both Composition Runtimes'). El bloque de 5 pasos es el mas denso de informacion de la serie (20s, cada item con su propio nodo/track) — HyperFrames (HTML/CSS puro) da mas control de layout fino para esa densidad que recrearlo en Remotion, y es el mismo patron GO'd en LoQueYaPuedesAutomatizar.tsx/LoQueYaPuedesDelegar.tsx de las 2 series anteriores. El resto del reel (headlines, tags, brand_close) usa los primitivos Remotion existentes, mas baratos y ya probados.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que 0 escenas i2v en este reel",
+      "options_considered": [
+        "agregar un i2v de un tecnico usando el telefono en el campo",
+        "0 i2v, presupuesto generativo concentrado en reels 1 y 3"
+      ],
+      "choice": "0 i2v",
+      "reason": "mismo patron de reparto de recursos generativos que las 4 series anteriores (2 heroes i2v por serie de 4 reels, siempre en el gancho y el caso real). Este reel es 100% explicativo/procedural; un i2v aqui competiria con el checklist HyperFrames por atencion sin agregar informacion nueva.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia",
+      "options_considered": ["ambient sin drive", "124 BPM, procedural, driving"],
+      "choice": "124 BPM, corporate-tech instrumental, procedural y confiado",
+      "reason": "directriz dura de la mision (120-140 BPM). 124 BPM da espacio a la densidad informativa del checklist sin perder el drive ritmico exigido.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Contrato de atributos del #stage de HyperFrames",
+      "options_considered": [
+        "solo agregar data-composition-id (el unico marcado 'required' en la doc de atributos)",
+        "agregar el contrato COMPLETO de 6 atributos NO-NEGOCIABLES + data-no-timeline"
+      ],
+      "choice": "contrato completo de 6 atributos (data-composition-id, data-start=0, data-duration=20, data-fps=24, data-width=1080, data-height=1920) + data-no-timeline (la composicion es 100% CSS, sin GSAP/window.__timelines)",
+      "reason": "P-10 de Video-problemas.md: 'arreglar lo que el linter nombro' no es lo mismo que 'dejar el linter en 0' — el contrato del agent-builder de HyperFrames trata los 6 atributos como un set, no como opcionales individuales. Se declaro el set completo desde el primer intento, evitando el ciclo de 2 commits que peno P-10.",
+      "confidence": 0.9
+    }
+  ]
+}
