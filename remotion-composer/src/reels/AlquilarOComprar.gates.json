@@ -27,7 +27,23 @@
     "total_cost_usd_est": 0.3012
   },
   "post_render_verify": {
-    "status": "PENDING",
-    "nota": "no renderizado aun por devops-aetherlogik-homelab. Antes de declarar GO: correr npx remotion compositions src/index.tsx (confirmar que AlquilarOComprar aparece con 720f/24fps/1080x1920), render + finishing FFmpeg (recipe TP=-2.0 de premium-craft-standards.md), y el verify independiente completo (ffprobe + LUFS/TP + frames clave + brand_palette_guard sobre pixeles reales) que hace video-producer sobre el MP4 real."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia de R2 + ffmpeg/ffprobe/python locales, sin confiar en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-n8n-zapier-serie/alquilar-o-comprar-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 30.0, "size_bytes": 4400144, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -13.98, "lufs_medido_independiente": -13.98,
+      "true_peak_dbtp_devops_reportado": -1.87, "true_peak_dbtp_medido_independiente": -1.87,
+      "true_peak_astats_sample_peak_db": -1.914,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass",
+      "bpm_declarado": 128, "bpm_medido_independiente": 127.7, "bpm_delta": 0.3, "bpm_verdict": "pass — dentro de banda 120-140"
+    },
+    "beat_pixel_check": {"escena": "metaphor_split, t=8s", "hallazgo": "ZAPIER/Alquilar + N8N/Comprar con sus descriptores completos visibles en el MISMO frame, hairline ember unico separador, sin cards", "veredicto": "pass"},
+    "palette_scan": {"metodo": "HSV region+control programatico, 5 frames muestreados (2s/8s/15s/20s/26s)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "logo_check": {"veredicto": "pass", "detalle": "ZAPIER/N8N son referencias tipograficas propias (label de texto plano), sin ningun logo de terceros reproducido"},
+    "visual_spotcheck": {"brand_close": "isotipo + wordmark two-tone + tagline + CTA interno de 2 lineas centrado, margenes simetricos (recorte+zoom confirmado), sin bleed", "veredicto": "pass"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "final_verdict": "GO"
   }
 }
