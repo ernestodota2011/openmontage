@@ -32,5 +32,19 @@
       "objections_beat_cal_final_brand_close_cta": "pass — sin defectos"
     },
     "final_verdict": "NO-GO (targeted) — CTA de agenda y todo lo demas PASS con maximo rigor; el unico defecto (accentWord de la escena reason) NO toca el CTA; requiere re-render de video (audio no cambia)"
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "re-render video-only (fix accentWord commit 1116b2e), audio muxeado por copia del -v1 ya calibrado",
+    "run_by": "video-producer, verificacion INDEPENDIENTE — MAXIMO RIGOR (CTA de agenda, promesa comercial de la agencia; ultimo reel de la ultima serie de la linea)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/por-que-es-gratis-agenda-ahora-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 35.0, "size_bytes": 4211322, "http_status": 200},
+    "audio_spotcheck": {"nota": "no re-medido individualmente en esta pasada (sanity de LUFS/TP se corrio sobre el reel 1 de la serie, mismo procedimiento de mux por copia); ffprobe confirma codec/samplerate/canales/duracion identicos al v1", "veredicto": "pass (por construccion — mux -c:a copy)"},
+    "visual_spotcheck": {
+      "reason_7.0s": "FIX CONFIRMADO EN PIXELES — 'real.' se renderiza en ember (#ff6b1a), no en blanco.",
+      "brand_close_cta_31.0s_zoom3x": "RE-VERIFICADO — 'cal.com/aetherlogik/discovery . agenda tu diagnostico gratuito ->' intacto, centrado, margenes simetricos, sin bleed. Sin regresion del fix respecto al v1 (el mecanismo accentWord no toca este texto).",
+      "veredicto": "pass"
+    },
+    "final_verdict": "GO"
   }
 }
