@@ -1,0 +1,43 @@
+{
+  "reel": "como-se-construye-sin-romper-nada",
+  "date": "2026-08-20",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes — render_runtime del bloque process_and_honesty (AMBOS runtimes presentados, regla dura del AGENT_GUIDE)",
+      "options_considered": [
+        "remotion: construir un componente Roadmap/Checklist nuevo en React+spring, coherente con el resto del catalogo",
+        "hyperframes: HTML/CSS/GSAP, capturado por el navegador headless, compuesto como MP4",
+        "hybrid dentro del mismo bloque (mezclar ambos)"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=HYBRID (remotion para cold_open/human_line/brand_close, hyperframes para process_and_honesty), composition_mode=atelier",
+      "reason": "El contenido de process_and_honesty es 100% declarativo (texto + estados on/off de 6 elementos con delays fijos) sin necesidad de fisica de spring ni de logica de React — el caso de libro de HyperFrames segun su propia skill. Remotion no tiene ningun componente de roadmap/timeline reusable (KPIGrid es para metricas, no aplica sin fabricar numeros — ver tambien CasoMarinoHVAC.decision_log.json d-003). Construirlo en Remotion habria sido reinventar en React lo que CSS ya resuelve nativo. Se acota a UN bloque de UN reel (no se generaliza HyperFrames a toda la serie) para no fragmentar el pipeline de render de devops sin necesidad real en los otros 3 reels.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-002",
+      "topic": "Fidelidad al post — las 3 fases y los 3 casos de honestidad",
+      "options_considered": ["resumir/parafrasear libremente", "citar las 3+3 exactas, mismo orden"],
+      "choice": "las 3 fases y los 3 casos exactos del post, mismo orden, sin agregar ni quitar",
+      "reason": "doctrina anti-claims + el propio brief de la mision: 'la honestidad de cuando NO conviene eso ES la marca' — diluirla o generalizarla le habria quitado precision al argumento.",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-003",
+      "topic": "CTA de cierre — diagnostico vs venta directa",
+      "options_considered": ["CTA a un paquete/precio", "CTA al diagnostico (como cierra el post)"],
+      "choice": "CTA a `aetherlogik.com/diagnostico`, replicando el cierre real del post ('agenda una llamada de diagnostico... no te vendemos un paquete')",
+      "reason": "consistencia con el post fuente y con la voz de marca (concierge no-tecnico, nunca hard-sell).",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan — tempo/energia + tratamiento de la mitad honestidad",
+      "options_considered": ["un solo nivel de energia para todo el reel", "122 BPM con retirada de capas en la mitad honestidad, luego build de cierre"],
+      "choice": "122 BPM, steady driving pulse, 3 pulsos ritmicos que evocan las 3 fases, retirada a textura mas intima en la mitad honestidad, build calido al cierre",
+      "reason": "directriz de tempo/energia de Ernesto (120-140 BPM) aplicada con matiz: el reel de cierre necesita drive para las fases, pero la seccion de honestidad ('cuando NO tiene sentido') pide mas espacio/intimidad para que el tono no se sienta como venta agresiva — la musica sigue la estructura editorial, no solo el tempo objetivo.",
+      "confidence": 0.7
+    }
+  ]
+}

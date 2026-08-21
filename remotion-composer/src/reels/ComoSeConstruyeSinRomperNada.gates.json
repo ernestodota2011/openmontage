@@ -1,0 +1,62 @@
+{
+  "reel": "como-se-construye-sin-romper-nada",
+  "run_date": "2026-08-20",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada; sin checkout local del fork ni instalacion de HyperFrames en esta sesion — ver notas de pendientes abajo)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.6,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "4 escenas, cada una con su propio device (kinetic / roadmap+checklist HyperFrames / kinetic / brand close) — sin repetir ningun visual"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada fase y cada caso de honestidad citan el post directamente"},
+        "weak_motion": {"score": 1.0, "reason": "2 de 4 escenas son camara/texto estatico (cold_open_hook, human_line); el bloque HyperFrames SI tiene motion de UI real (fades/translates escalonados) pero no movimiento de camara — riesgo mas alto de la serie en esta dimension, aceptado por ser un reel de cierre deliberadamente mas sobrio/editorial"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y trazable al post en las 4 escenas"},
+        "typography_overreliance": {"score": 1.0, "reason": "2 de 4 escenas (50%) son tipografia pura — bajo el umbral critico 60%, pero el mas alto proporcionalmente de la serie; mitigado porque el bloque central (process_and_honesty, 720 de 1080 frames = 67% de la duracion total) es UI animada, no texto estatico"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "cero pretension cinematica, reel explicitamente editorial"}
+      }
+    },
+    "variation_checker": {
+      "score": 0.3,
+      "verdict": "strong",
+      "violations": [],
+      "suggestions": [],
+      "shot_size_diversity": ["MS", "MS", "MS", "MS"],
+      "generic_language_check": "0 instancias de lenguaje generico ('modern/sleek/cutting-edge/stunning')",
+      "nota": "shot_size uniforme (MS) en las 4 escenas es una limitacion real de este reel — no hay ECU/CU porque no hay UI de chat aqui; se documenta en vez de forzar variedad artificial"
+    },
+    "delivery_promise": {
+      "promise_type": "hybrid",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.5,
+      "motion_cuts": 2,
+      "slide_cuts": 2,
+      "still_cuts": 0,
+      "note": "process_and_honesty (animation, HyperFrames) + brand_close (animation) = motion. cold_open_hook + human_line (stat_card) = slide. 50% — declarado hybrid, no motion_led, honestamente."
+    },
+    "brand_palette_guard": {
+      "verdict": "pendiente de verificacion real",
+      "counts": {"critical": "no medido", "warning": "no medido"},
+      "note": "El HTML de hyperframes-compositions/proceso-y-honestidad/index.html se auto-audito linea por linea al escribirlo: NINGUN elemento usa background/border/boxShadow tipo tarjeta (todo es texto + un circulo outline que solo cambia border-color/background al 'encenderse', ambos a --accent), y los UNICOS colores del archivo son las 4 variables CSS del playbook (bg/accent/text/muted) — pero esto es una revision de codigo fuente, NO una medicion sobre pixeles renderizados. La verificacion real (`hf lint` + frame-sampling post-render) es OBLIGATORIA antes del GO — no se declara 'pass' sin haberla corrido."
+    },
+    "tsc_noemit": {
+      "status": "PENDIENTE (lado Remotion) — mismo motivo que los otros 2 reels",
+      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` antes de renderizar el lado Remotion."
+    },
+    "hf_lint": {
+      "status": "PENDIENTE — no ejecutable desde esta sesion (video-producer no tiene acceso al CT 128 por diseno; hf lint corre EN el CT)",
+      "required_before_render": "devops corre `hf lint .` sobre hyperframes-compositions/proceso-y-honestidad/ ANTES de `hf render`. Si marca `missing_data_no_timeline`, revisar que el atributo siga en `#stage` (deberia estar presente en el HTML tal como se entrega). Cualquier otro hallazgo de lint se corrige antes de renderizar, no se ignora."
+    }
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 122, "url": "https://v3b.fal.media/files/b/0aa728ef/glBrABWNPBOWRnYqy10kq_music_generated.mp3", "cost_usd_est": 0.45},
+    "sfx_phase_tick": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728f2/Ga3vikrl331WD9J37f46o_sound_effect.mp3", "cost_usd": 0.001},
+    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado (Remotion + HyperFrames), cero costo de assets generativos visuales",
+    "total_cost_usd_est": 0.451,
+    "note": "El clip HyperFrames (`processAndHonestySrc`) NO existe todavia — requiere que devops corra `hf render` en el CT 128 y archive el resultado antes de poder rellenar el props JSON de este reel. Ver ReelsChatbotSerie.README.md."
+  },
+  "pending_post_render_gates": {
+    "coherence_guard": "no aplica en el sentido estricto (sin i2v), pero SI corre continuidad de paleta entre el bloque Remotion y el bloque HyperFrames compuesto — exactamente el riesgo que introduce mezclar 2 motores; verificar con especial atencion en el corte de entrada/salida de process_and_honesty.",
+    "final_review": "ffprobe + frame-sampling >=4 frames (incluyendo AL MENOS 1 frame dentro del bloque HyperFrames) + promise_preservation + subtitle_check. Pendiente del render."
+  }
+}
