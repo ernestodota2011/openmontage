@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "hero_i2v",
+    "description": "Alain Marino junto a su van de servicio, Miami de dia (golden hour), sosteniendo el telefono con una factura digital limpia, satisfecho — i2v real (Kling O1, push-in sutil)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked-off, push-in muy sutil", "lighting_key": "golden hour calido"},
+    "shot_intent": "establece el RESULTADO humano en los primeros 5s, contraste deliberado con el problema del reel 1",
+    "hero_moment": true,
+    "information_role": "apertura del caso real",
+    "texture_keywords": ["i2v real", "van de servicio", "golden hour", "telefono con factura"]
+  },
+  {
+    "id": "before_after",
+    "type": "animation",
+    "description": "KineticHeadline 'Antes de automatizar, perdia $50 por cada trabajo.' fiel al post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "establece el punto de partida del caso, antes de la cifra grande",
+    "hero_moment": false,
+    "information_role": "contexto del caso",
+    "texture_keywords": ["mask reveal", "cifra en ember"]
+  },
+  {
+    "id": "stat_reveal",
+    "type": "stat_card",
+    "description": "StatReveal $4,400 + label ('perdidos al mes, en 88 facturas') + atribucion COMPLETA en el mismo frame ('Estimacion de AetherLogik a partir de los datos del cliente')",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "la cifra central del caso, con su atribucion inseparable",
+    "hero_moment": false,
+    "information_role": "cifra central + atribucion",
+    "texture_keywords": ["stat grande", "atribucion en el mismo frame"]
+  },
+  {
+    "id": "outcome_reveal",
+    "type": "stat_card",
+    "description": "TagRevealList 3 tags: TIEMPO (36h liberadas) / RETORNO (<2 meses) / RESULTADO (facturas correctas desde la 1a vez)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "los 3 resultados reales del caso, en cascada",
+    "hero_moment": false,
+    "information_role": "resultados del caso",
+    "texture_keywords": ["cascada de tags", "stagger 60f"]
+  },
+  {
+    "id": "quote_line",
+    "type": "animation",
+    "description": "KineticHeadline con la cita textual de Alain Marino, atribuida en el mismo frame via HeadlineOverlay",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, intimo"},
+    "shot_intent": "cierra el caso con la voz humana del cliente",
+    "hero_moment": false,
+    "information_role": "testimonio atribuido",
+    "texture_keywords": ["cita textual", "atribucion visible"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

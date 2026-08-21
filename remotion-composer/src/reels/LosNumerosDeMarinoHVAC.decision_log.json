@@ -1,0 +1,57 @@
+{
+  "reel": "los-numeros-de-marino-hvac",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "Por que un nombre de composicion DISTINTO de 'CasoMarinoHVAC' (ya existente en el fork)",
+      "options_considered": [
+        "reusar/editar la composicion CasoMarinoHVAC existente (reels-chatbot-serie) para este angulo",
+        "crear una composicion nueva con nombre distinto"
+      ],
+      "choice": "composicion nueva: LosNumerosDeMarinoHVAC",
+      "reason": "CasoMarinoHVAC ya existe en el fork (main), autorado para reels-chatbot-serie con un angulo distinto (el asistente de IA en WhatsApp, sin cifras — el post fuente de ESE reel no daba numeros para el caso). Este reel cubre el angulo de FACTURACION con cifras EXACTAS y exclusivas de esta seccion del post ($50, 88, $4,400, 36 horas). Reusar el mismo componente/ID colisionaria en Root.tsx y confundiria dos guiones distintos bajo el mismo nombre — se crea una composicion nueva, calcada del H2 real del post ('Caso real: los numeros de Marino HVAC').",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-002",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion, 100% motion-autorado (sin i2v)",
+        "render_runtime=remotion con 1 escena hero i2v real (Kling O1) + el resto tipografia/stat cinetica",
+        "render_runtime=hyperframes para toda la pieza"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "es el reel de CASO REAL — necesita mostrar al cliente real. HyperFrames no aporta nada a un caso humano (no hay UI/datos densos aqui, ese bloque vive en el reel 2). Mismo patron GO'd en CasoRealMedicinaEstetica.tsx/CasoMarinoHVAC.tsx de series anteriores.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-003",
+      "topic": "Modelo i2v y parametros del hero",
+      "options_considered": ["Kling 3.0 (o3), volumen/default", "Kling O1 solo start_image_url, duration=5s", "Veo 3.1"],
+      "choice": "Kling O1 image-to-video, solo start_image_url, duration=5s",
+      "reason": "un solo plano aislado, mismo patron que reel 1 (ver su decision_log d-002). duration='5' explicito desde el inicio (P-11).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan — tempo/energia",
+      "options_considered": ["tono documental sin drive", "122 BPM, calido pero con drive"],
+      "choice": "122 BPM, corporate-tech instrumental calido, mid-tempo",
+      "reason": "directriz dura de la mision (120-140 BPM, con drive, aplicada a TODA la serie incluido el caso real). 122 BPM es el mas bajo del rango exigido — deliberado, para dejar espacio a las cifras sin perder el piso minimo de energia.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-005",
+      "topic": "Por que la cifra central ($4,400) lleva su atribucion EN EL MISMO FRAME",
+      "options_considered": [
+        "mostrar '$4,400' sin la nota de estimacion (el post ya lo aclara en su propio texto)",
+        "cifra + nota de estimacion en el mismo frame, preservando el footnote exacto del post"
+      ],
+      "choice": "cifra + nota de estimacion en el mismo frame",
+      "reason": "regla dura de la mision: usar SOLO las cifras del post con la atribucion EXACTA en el MISMO frame. El post mismo marca esta cifra con el comentario 'vara: derivada nuestra' y el footnote explicito 'Estas cifras son estimaciones nuestras a partir de los datos del cliente' — es una cifra de CLIENTE (mas sensible que una atribucion a un tercero publicado como HBR), por eso el rigor es maximo: cada reel debe ser autocontenido en sus afirmaciones sin depender del blog para dar el contexto.",
+      "confidence": 0.95
+    }
+  ]
+}
