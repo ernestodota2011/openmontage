@@ -1,0 +1,51 @@
+{
+  "reel": "como-empiezas-sin-perder-leads",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes",
+      "options_considered": [
+        "agregar un i2v de cierre (agente feliz cerrando venta)",
+        "100% Remotion atelier, sin i2v, sin HyperFrames"
+      ],
+      "choice": "renderer_family=animation, render_runtime=remotion, composition_mode=atelier, 0 escenas generativas",
+      "reason": "el presupuesto de hero i2v de la serie ya se agoto (reel 1 + reel 3); un i2v adicional aqui diluiria el foco del cierre (que es informativo: pasos + CTA) y encarece sin necesidad. El bloque denso de datos ya vive en HyperFrames en el reel 2 — repetirlo aqui seria redundante.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "CTA final — a que vertical y con que URL exacta",
+      "options_considered": [
+        "aetherlogik.com/blog generico",
+        "aetherlogik.com/para-real-estate (la vertical exacta enlazada en el post) + mencion del diagnostico gratuito"
+      ],
+      "choice": "aetherlogik.com/para-real-estate + 'agenda tu diagnostico gratuito'",
+      "reason": "el post mismo enlaza '/para-real-estate' como 'automatizacion inmobiliaria' y cierra con 'Agenda tu diagnostico gratuito -> cal.com/aetherlogik/discovery' — se preserva el CTA real del contenido de origen, sin inventar una URL nueva.",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia de cierre optimista",
+      "options_considered": [
+        "mantener 124 BPM del reel 3 por continuidad",
+        "130 BPM, resolviendo hacia arriba para el cierre de la serie"
+      ],
+      "choice": "130 BPM, corporate-tech instrumental, mood 'resolutivo y optimista'",
+      "reason": "el ultimo reel de una serie de gancho->didactico->limites->cierre se beneficia de resolver energeticamente hacia arriba, no de sostener el tono serio del reel 3. Dentro de la banda 120-140 exigida.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "Los 4 items de steps_list — por que 4 y no los 5 numerados de la serie abogados",
+      "options_considered": [
+        "inventar un 5o paso generico para igualar el patron visual de 5 items de la serie abogados",
+        "4 items, fieles a los 3 pasos EXPLICITOS del FAQ + la frase de trabajo en paralelo como 4o item"
+      ],
+      "choice": "4 items, sin inventar un 5o paso",
+      "reason": "el post de agentes inmobiliarios NO enumera 5 pasos como el de abogados (que si tenia una lista numerada de 5); tiene 3 pasos explicitos en prosa + una mencion de trabajo en paralelo. Forzar un 5o item generico violaria la regla anti-claims de la mision. La longitud de la lista sigue al contenido real del post, no al patron visual de la serie anterior.",
+      "confidence": 0.9
+    }
+  ]
+}

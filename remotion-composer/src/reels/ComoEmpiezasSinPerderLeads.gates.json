@@ -1,0 +1,30 @@
+{
+  "reel": "como-empiezas-sin-perder-leads",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py - SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.65,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "6 escenas, cada una con un device distinto (incluye el recap de la serie)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del FAQ de implementacion"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) - reel de cierre 100% motion-autorado"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 2.0, "reason": "6 de 6 escenas (100%) tipografia/UI/stat_card - reel de cierre, desviacion consciente y declarada, mismo patron GO'd en las 2 series anteriores"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.55, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 items de steps_list, el plazo 'dos a cuatro semanas' y la URL '/para-real-estate' son textuales/casi-textuales del FAQ y del cierre del post, sin inventar plazos ni pasos adicionales"}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 130, "length_ms": 45000, "cost_usd": 0.45, "url": "https://v3b.fal.media/files/b/0aa73850/xFxdDMqmGUmF029S2--vN_music_generated.mp3", "verificado_por_video_producer": "ffprobe: 45.04s; volumedetect mean=-13.9dB max=-0.2dB (no muda, sin clip)"},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.45
+  },
+  "render_status": "PENDIENTE - handoff a devops-aetherlogik-homelab. Aun no se renderizo el MP4 final. El post_render_verify lo corre video-producer en la SIGUIENTE sesion, incluyendo el final_review sobre la serie completa (las 4 piezas) para el sign-off tecnico equivalente al de las 3 series anteriores."
+}

@@ -30,6 +30,10 @@ import { UnTercioDeTuDia, UnTercioDeTuDiaProps, UN_TERCIO_DE_TU_DIA_TOTAL_FRAMES
 import { LoQueYaPuedesDelegar, LoQueYaPuedesDelegarProps, LO_QUE_YA_PUEDES_DELEGAR_TOTAL_FRAMES } from "./reels/LoQueYaPuedesDelegar";
 import { LoQueLaIaNoPuedeHacer, LoQueLaIaNoPuedeHacerProps, LO_QUE_LA_IA_NO_PUEDE_HACER_TOTAL_FRAMES } from "./reels/LoQueLaIaNoPuedeHacer";
 import { ComoEmpezarSinDesorden, ComoEmpezarSinDesordenProps, COMO_EMPEZAR_SIN_DESORDEN_TOTAL_FRAMES } from "./reels/ComoEmpezarSinDesorden";
+import { VeintiunVecesMasProbable, VeintiunVecesMasProbableProps, VEINTIUN_VECES_MAS_PROBABLE_TOTAL_FRAMES } from "./reels/VeintiunVecesMasProbable";
+import { LoQueYaPuedesAutomatizar, LoQueYaPuedesAutomatizarProps, LO_QUE_YA_PUEDES_AUTOMATIZAR_TOTAL_FRAMES } from "./reels/LoQueYaPuedesAutomatizar";
+import { CuandoEntraElHumano, CuandoEntraElHumanoProps, CUANDO_ENTRA_EL_HUMANO_TOTAL_FRAMES } from "./reels/CuandoEntraElHumano";
+import { ComoEmpiezasSinPerderLeads, ComoEmpiezasSinPerderLeadsProps, COMO_EMPIEZAS_SIN_PERDER_LEADS_TOTAL_FRAMES } from "./reels/ComoEmpiezasSinPerderLeads";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -574,6 +578,64 @@ export const Root: React.FC = () => {
           sfxWhooshSrc: "",
           tail_padding_seconds: 0,
         } as ComoEmpezarSinDesordenProps}
+      />
+      <Composition
+        id="VeintiunVecesMasProbable"
+        component={VeintiunVecesMasProbable}
+        durationInFrames={VEINTIUN_VECES_MAS_PROBABLE_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as VeintiunVecesMasProbableProps}
+      />
+      <Composition
+        id="LoQueYaPuedesAutomatizar"
+        component={LoQueYaPuedesAutomatizar}
+        durationInFrames={LO_QUE_YA_PUEDES_AUTOMATIZAR_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          tareasDelegablesSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueYaPuedesAutomatizarProps}
+      />
+      <Composition
+        id="CuandoEntraElHumano"
+        component={CuandoEntraElHumano}
+        durationInFrames={CUANDO_ENTRA_EL_HUMANO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          tail_padding_seconds: 0,
+        } as CuandoEntraElHumanoProps}
+      />
+      <Composition
+        id="ComoEmpiezasSinPerderLeads"
+        component={ComoEmpiezasSinPerderLeads}
+        durationInFrames={COMO_EMPIEZAS_SIN_PERDER_LEADS_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as ComoEmpiezasSinPerderLeadsProps}
       />
     </>
   );

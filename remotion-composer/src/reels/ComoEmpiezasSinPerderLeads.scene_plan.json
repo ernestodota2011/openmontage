@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline 'Implementar esto no toma meses.' — sin costo de asset",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "quiebra la objecion mas comun antes de entrar a los pasos",
+    "hero_moment": false,
+    "information_role": "apertura del reel de cierre",
+    "texture_keywords": ["tipografia cinetica", "sin i2v"]
+  },
+  {
+    "id": "steps_list",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 4 QualifyTag: los pasos de implementacion del FAQ del post (mapear flujos, configurar CRM/fuentes, entrenar mensajes, trabajar en paralelo)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "responde con precision la objecion de tiempo/complejidad",
+    "hero_moment": false,
+    "information_role": "los pasos reales de implementacion",
+    "texture_keywords": ["cascada de tags", "stagger 70f"]
+  },
+  {
+    "id": "caveat",
+    "type": "animation",
+    "description": "KineticHeadline 'No es reemplazar tu CRM. Es que trabaje contigo, no en su contra.' — fiel a la seccion de integracion",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "corta el miedo de 'voy a tener que migrar todo mi stack'",
+    "hero_moment": false,
+    "information_role": "el limite honesto sobre integracion",
+    "texture_keywords": ["una palabra en ember"]
+  },
+  {
+    "id": "vertical_mention",
+    "type": "animation",
+    "description": "KineticHeadline 'Automatizacion para agentes inmobiliarios, sin perder ni un lead.' — presenta la vertical /para-real-estate",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "conecta el reel con la pagina de conversion real",
+    "hero_moment": false,
+    "information_role": "mencion de la vertical",
+    "texture_keywords": ["headline de marca"]
+  },
+  {
+    "id": "series_recap",
+    "type": "animation",
+    "description": "KineticHeadline de 4 lineas que resume los 3 reels anteriores + 'Esto.' como cierre — FilmGrade aplicado",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio, grado filmico"},
+    "shot_intent": "amarra la serie completa antes del cierre de marca",
+    "hero_moment": false,
+    "information_role": "recap de la serie",
+    "texture_keywords": ["stagger largo", "grano sutil"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA FINAL de conversion (/para-real-estate + diagnostico gratuito)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de venta directa de la serie completa",
+    "hero_moment": false,
+    "information_role": "CTA de conversion",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
