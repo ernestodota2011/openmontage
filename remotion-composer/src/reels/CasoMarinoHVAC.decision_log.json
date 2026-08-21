@@ -1,0 +1,50 @@
+{
+  "reel": "caso-marino-hvac",
+  "date": "2026-08-20",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "cinematic puro (todo el reel en footage i2v generado)",
+        "explainer puro (cero i2v, solo UI/tipografia)",
+        "hibrido: 1 hero i2v real + resto motion-autorado"
+      ],
+      "choice": "renderer_family=hybrid (cinematic+explainer), render_runtime=remotion, composition_mode=atelier",
+      "reason": "El post describe un caso real con un componente fisico genuino (tecnicos en el campo) que amerita UN plano real para anclar el reel en la realidad — pero el resto del caso (calificacion, chat, resultado) es interaccion digital, mejor servido por UI autorada. Un reel 100% i2v habria arriesgado 'fotos vivas' sin sustancia; uno 100% UI habria perdido la textura humana del caso. HyperFrames se considero para qualify_tags pero se descarto (d-003 abajo).",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-002",
+      "topic": "Anti-claims — auditoria de cifras del caso Marino HVAC",
+      "options_considered": [
+        "inventar/estimar una cifra plausible de mejora (ej. '40% mas leads capturados')",
+        "usar SOLO las afirmaciones cualitativas que el post declara, sin numeros"
+      ],
+      "choice": "cero cifras inventadas; solo las afirmaciones cualitativas exactas del post",
+      "reason": "regla de oro de la mision: 'usa SOLO las cifras que estan en el post con su atribucion EXACTA — no inventes ni redondees'. El post NO da ninguna cifra para este caso especifico (a diferencia de la cita HBR/InsideSales del reel 1, que SI tiene atribucion exacta). Inventar una habria sido una fabricacion de claims, prohibida de raiz.",
+      "confidence": 1.0
+    },
+    {
+      "id": "d-003",
+      "topic": "qualify_tags — Remotion (TagRevealList nuevo) vs HyperFrames vs KPIGrid existente",
+      "options_considered": [
+        "KPIGrid (componente Remotion existente) con metricas fabricadas",
+        "HyperFrames (HTML/CSS) para una lista de tags",
+        "componente Remotion nuevo, boxless, sin numeros"
+      ],
+      "choice": "TagRevealList (Remotion, nuevo, boxless, sin valores numericos)",
+      "reason": "KPIGrid exige `value: number` por metrica — forzarlo aqui habria significado inventar datos (ver d-002). HyperFrames es mas pesado de lo que este contenido justifica (una lista de 4 renglones de texto no necesita un segundo motor de render ni un job aparte en el CT); se reserva para el reel 4 donde el contenido SI lo amerita (ver ComoSeConstruyeSinRomperNada.decision_log.json d-001).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan — tempo/energia (directriz de Ernesto, coherente con reel 2)",
+      "options_considered": ["mantener tono ambient del piloto", "126 BPM, calido, con un swell emocional a 2/3 del reel"],
+      "choice": "126 BPM, modern soul/tech-pop, calidez Miami (congas/shaker sutiles), un swell hacia el final",
+      "reason": "misma directriz de tempo/energia (120-140 BPM) que el reel 2, pero con caracter mas humano/calido — este reel es un caso REAL, no un explainer puro; el brief lo declara explicitamente para que la musica combine urgencia con calidez, no solo urgencia.",
+      "confidence": 0.75
+    }
+  ]
+}

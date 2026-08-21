@@ -1,0 +1,76 @@
+{
+  "reel": "caso-marino-hvac",
+  "run_date": "2026-08-20",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada; sin checkout local del fork en esta sesion — ver tsc_noemit)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.55,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "6 escenas, 5 devices distintos (el bridge EmberThread se reusa 2 veces DENTRO de este reel, como el piloto lo hizo dentro del suyo — uso documentado, no repeticion de contenido)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena esta atada a un pasaje textual del post"},
+        "weak_motion": {"score": 0.5, "reason": "2 escenas de camara estatica (problem_context, outcome_line) sobre 6 — aceptable, son bisagras deliberadas, no relleno"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y trazable al post en las 6 escenas"},
+        "typography_overreliance": {"score": 1.0, "reason": "3 de 6 escenas (50%) son tipografia/tags sin movimiento de personaje o camara (problem_context, qualify_tags, outcome_line) — bajo el umbral critico de 60%, pero es el reel con mas dependencia tipografica de la serie; aceptado porque el hero i2v real + el chat UI cargan el peso visual"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "un solo plano real, tratado con moderacion (dolly sutil, sin pretender ser un cortometraje)"}
+      }
+    },
+    "variation_checker": {
+      "score": 0.4,
+      "verdict": "strong",
+      "violations": [],
+      "suggestions": [],
+      "shot_size_diversity": ["MS", "MS", "MS", "ECU", "MS", "MS"],
+      "generic_language_check": "0 instancias de lenguaje generico ('modern/sleek/cutting-edge/stunning')"
+    },
+    "delivery_promise": {
+      "promise_type": "hybrid",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.5,
+      "motion_cuts": 3,
+      "slide_cuts": 3,
+      "still_cuts": 0,
+      "note": "cold_open_technician (video real) + chat_flow_demo (animation) + brand_close (animation) = motion. problem_context + qualify_tags + outcome_line tipadas stat_card = slide (tipografia/tags no cuentan como motion real per doctrina). 50% honesto — declarado 'hybrid', NO 'motion_led' (no alcanzaria el umbral 70% de motion_led y no se fuerza la clasificacion para pasar el gate)."
+    },
+    "brand_palette_guard": {
+      "verdict": "revise",
+      "counts": {"critical": 0, "warning": 2},
+      "violations": [
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.bubble"},
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.appointment_card"}
+      ],
+      "note": "TagRevealList es boxless por diseno (0 warnings) — nueva evidencia de que evitar KPIGrid/tarjetas fue tambien una decision de marca, no solo anti-claims. El i2v hero se genero con negativos anti cian/violeta/teal explicitos; verificado visualmente en 3 frames de sanity-check (identidad/ropa/luz consistentes, sin warping, 5 dedos, cero cian/violeta — ver nota de verificacion abajo)."
+    },
+    "tsc_noemit": {
+      "status": "PENDIENTE — no verificable desde esta sesion (mismo motivo que reel 2)",
+      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` en el CT 128 antes de renderizar."
+    }
+  },
+  "assets_generated": {
+    "still_reference_4k": {"model": "fal-ai/nano-banana-pro", "url": "https://v3b.fal.media/files/b/0aa728fa/skAmOK-OWA6IX14I7cmOt_XF9apfYF.png", "resolution": "4K (1080x1920 aprox), 18.6MB", "cost_usd": 0.15, "nota": "still de archivo/referencia; NO se uso como input de i2v por exceder el limite de 10MB de Kling (P-03 del registro de problemas) — se regenero a 2K JPEG para el i2v (ver siguiente entrada)"},
+    "still_i2v_input_2k": {"model": "fal-ai/nano-banana-pro", "url": "https://v3b.fal.media/files/b/0aa7291b/82ZomjfT5QYZCOn2-HoDD_eunr6gy5.jpg", "resolution": "1536x2752 JPEG, 1.09MB", "cost_usd": 0.15},
+    "cold_open_video": {
+      "model": "fal-ai/kling-video/v2.5-turbo/pro/image-to-video",
+      "url": "https://v3b.fal.media/files/b/0aa72913/xBbl3dBo1wiGWDilYl__o_output.mp4",
+      "duration_s_actual": 5.041667,
+      "resolution": "1076x1924",
+      "codec": "h264",
+      "cost_usd": 0.35
+    },
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "url": "https://v3b.fal.media/files/b/0aa728ed/yQx1_FqDiGjh5AQM6RYn5_music_generated.mp3", "cost_usd_est": 0.45},
+    "sfx_ding": {"model": "reusado del piloto (cero costo adicional)", "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3", "cost_usd": 0},
+    "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728ef/blLPj2DOcrfJr5y9A0Nxr_sound_effect.mp3", "cost_usd": 0.001},
+    "total_cost_usd_est": 1.101,
+    "note": "URLs de fal.media (CDN temporal, incluye el output_mp4 de Kling ~13.5MB). Devops debe re-hostear a R2 antes de ~24-48h."
+  },
+  "cold_open_visual_verification": {
+    "method": "ffprobe (duracion/resolucion/codec) + ffmpeg -ss <t> -frames:v 1 en 3 puntos (0.3s/2.5s/4.7s), mirados directamente con el tool Read por video-producer en esta sesion",
+    "ffprobe": {"codec_name": "h264", "width": 1076, "height": 1924, "avg_frame_rate": "24/1", "duration_s": 5.041667},
+    "visual_result": "Movimiento minimo y contenido (el tecnico ajusta el multimetro con la mano), identidad/vestuario/iluminacion consistentes entre los 3 frames, sin warping visible, manos bien formadas (5 dedos, sin deformacion), brillo ember en el telefono presente en los 3 frames, cero cian/violeta, luz dorada calida constante, sin texto/logo/watermark."
+  },
+  "pending_post_render_gates": {
+    "coherence_guard": "requiere el MP4 renderizado real + los 2 stills como referencia de keyframe. Pendiente del render en CT 128.",
+    "final_review": "ffprobe + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  }
+}
