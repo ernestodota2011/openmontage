@@ -30,6 +30,12 @@ import { FilmGrade } from "../components/FilmGrade";
  * llama exactamente a esa hora... 30 minutos") es literal de la seccion
  * de cierre del post.
  *
+ * FIX (2026-08-21, verify final de video-producer, pixeles reales del
+ * MP4 renderizado): `accentWord="real."` NUNCA matcheaba (mismo
+ * defecto que LoQueNoSabesDeTuNegocio.tsx — KineticHeadline compara la
+ * palabra YA limpia de puntuacion contra el prop, que se paso CON
+ * punto). Corregido a `accentWord="real"`.
+ *
  * Frame plan @24fps: cold_open 96f (4.0s) + reason 144f (6.0s) +
  * objections_beat 192f (8.0s) + cal_final 168f (7.0s) + brand_close_cta
  * 240f (10.0s) = 840f = 35.000s exacto (tail_padding_seconds: 0 en
@@ -108,7 +114,7 @@ export const PorQueEsGratisAgendaAhora: React.FC<PorQueEsGratisAgendaAhoraProps>
       <Sequence from={START2} durationInFrames={S2} name="reason">
         <KineticHeadline
           lines={["Porque solo queremos trabajar", "donde podemos generar", "un impacto real."]}
-          accentWord="real."
+          accentWord="real"
           fontSize={36}
           position="center"
         />

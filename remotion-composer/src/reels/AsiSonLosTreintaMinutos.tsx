@@ -31,6 +31,12 @@ import { FilmGrade } from "../components/FilmGrade";
  * una de las 3 fases y sus minutos son literales del post, sin inventar
  * ni redondear a otro reparto de tiempo.
  *
+ * FIX (2026-08-21, verify final de video-producer, pixeles reales del
+ * MP4 renderizado): `accentWord="persona."` NUNCA matcheaba (mismo
+ * defecto que LoQueNoSabesDeTuNegocio.tsx — KineticHeadline compara la
+ * palabra YA limpia de puntuacion contra el prop, que se paso CON
+ * punto). Corregido a `accentWord="persona"`.
+ *
  * Frame plan @24fps: cold_open 96f (4.0s) + phases_timeline 480f
  * (20.0s) [clip HyperFrames] + ernesto_conduce 120f (5.0s) + brand_close
  * 192f (8.0s) = 888f = 37.000s exacto (tail_padding_seconds: 0 en props).
@@ -122,7 +128,7 @@ export const AsiSonLosTreintaMinutos: React.FC<AsiSonLosTreintaMinutosProps> = (
       <Sequence from={START3} durationInFrames={S3} name="ernesto_conduce">
         <KineticHeadline
           lines={["Lo conduce Ernesto Hernandez,", "fundador, en persona.", "No un guion generico."]}
-          accentWord="persona."
+          accentWord="persona"
           fontSize={36}
           position="center"
         />

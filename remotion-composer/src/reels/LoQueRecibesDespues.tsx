@@ -29,6 +29,12 @@ import { FilmGrade } from "../components/FilmGrade";
  * TresNegociosTresResultados.tsx — mismo cliente, mismo caso, cifra
  * ancla identica, sin inventar variante).
  *
+ * FIX (2026-08-21, verify final de video-producer, pixeles reales del
+ * MP4 renderizado): `accentWord="plan:"` NUNCA matcheaba (mismo
+ * defecto que LoQueNoSabesDeTuNegocio.tsx — KineticHeadline compara la
+ * palabra YA limpia de puntuacion contra el prop, que se paso CON
+ * dos-puntos). Corregido a `accentWord="plan"`.
+ *
  * Frame plan @24fps: cold_open_hero 120f (5.0s) + que_recibes 144f
  * (6.0s) + stat_reveal_marino 216f (9.0s) + honesty_beat 144f (6.0s) +
  * brand_close 192f (8.0s) = 816f = 34.000s exacto
@@ -105,7 +111,7 @@ export const LoQueRecibesDespues: React.FC<LoQueRecibesDespuesProps> = ({
       <Sequence from={START2} durationInFrames={S2} name="que_recibes">
         <KineticHeadline
           lines={["No te quedas con notas.", "Recibes un plan: que automatizar,", "como funciona, que esperar."]}
-          accentWord="plan:"
+          accentWord="plan"
           fontSize={34}
           position="center"
         />

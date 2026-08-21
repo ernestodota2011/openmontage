@@ -32,6 +32,16 @@ import { FilmGrade } from "../components/FilmGrade";
  * compromiso", "sin letra pequena" son literales del primer parrafo y
  * la seccion "¿Realmente es gratuito...?" del post.
  *
+ * FIX (2026-08-21, verify final de video-producer, pixeles reales del
+ * MP4 renderizado): `accentWord="Gratis."` NUNCA matcheaba —
+ * KineticHeadline compara la palabra YA limpia de puntuacion
+ * (`word.replace(/[.,;:!?¡¿"']/g, "")`) contra `accentWord.toLowerCase()`
+ * SIN limpiar; al pasar el punto en el prop, "gratis" (limpio) nunca
+ * es igual a "gratis." (con punto) y la palabra clave del gancho
+ * ("Gratis.") se renderizaba en blanco, no en ember. Corregido a
+ * `accentWord="Gratis"` (sin puntuacion) — mismo patron ya usado
+ * correctamente en `accentWord="30"` de la escena anterior.
+ *
  * Frame plan @24fps: cold_open_hero 120f (5.0s) + hook_question 168f
  * (7.0s) + reveal_30min 120f (5.0s) + sin_letra_pequena 120f (5.0s) +
  * brand_close 192f (8.0s) = 720f = 30.000s exacto
@@ -129,7 +139,7 @@ export const LoQueNoSabesDeTuNegocio: React.FC<LoQueNoSabesDeTuNegocioProps> = (
       <Sequence from={START3} durationInFrames={S3} name="reveal_30min">
         <KineticHeadline
           lines={["30 minutos.", "Gratis.", "Sin compromiso."]}
-          accentWord="Gratis."
+          accentWord="Gratis"
           fontSize={62}
           position="center"
         />
