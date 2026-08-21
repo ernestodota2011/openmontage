@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Proceso y Honestidad — Reel 4 (chatbot-whatsapp-para-negocios)</title>
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --accent: #FF6B1A;
+    --text: #F5F5F5;
+    --muted: #9AA0A6;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 1080px; height: 1920px;
+    background: var(--bg); overflow: hidden;
+    font-family: Inter, system-ui, sans-serif; color: var(--text);
+  }
+  #stage { position: relative; width: 1080px; height: 1920px; background: var(--bg); }
+  .section { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  /* ---- Seccion A: build_process (0s - 16s) ---- */
+  #section-process {
+    opacity: 1;
+    animation: fade-out 0.8s var(--ease) 15.6s forwards;
+  }
+  #process-kicker {
+    font-size: 26px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase;
+    opacity: 0; transform: translateY(16px);
+    animation: fade-up 0.8s var(--ease) 0.6s forwards;
+  }
+  .phase-track { position: relative; width: 780px; margin-top: 90px; display: flex; flex-direction: column; gap: 140px; }
+  .phase-row { display: flex; align-items: center; gap: 32px; opacity: 0; transform: translateX(-24px); }
+  .phase-node { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--muted); flex-shrink: 0; background: transparent; }
+  .phase-label-num { font-size: 22px; color: var(--muted); font-weight: 700; }
+  .phase-label-title { font-size: 34px; color: var(--text); font-weight: 700; }
+  .phase-label-sub { font-size: 22px; color: var(--muted); margin-top: 4px; }
+
+  #phase-1 { animation: fade-in-x 0.7s var(--ease) 2.0s forwards; }
+  #phase-1-node { animation: node-light 0.01s linear 2.0s forwards; }
+  #phase-2 { animation: fade-in-x 0.7s var(--ease) 6.0s forwards; }
+  #phase-2-node { animation: node-light 0.01s linear 6.0s forwards; }
+  #phase-3 { animation: fade-in-x 0.7s var(--ease) 10.5s forwards; }
+  #phase-3-node { animation: node-light 0.01s linear 10.5s forwards; }
+
+  /* ---- Seccion B: honesty_checklist (16s - 30s) ---- */
+  #section-honesty {
+    opacity: 0;
+    animation: fade-in 0.8s var(--ease) 15.8s forwards;
+  }
+  #honesty-kicker {
+    font-size: 26px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase;
+    opacity: 0; transform: translateY(16px);
+    animation: fade-up 0.8s var(--ease) 17.0s forwards;
+  }
+  #honesty-title {
+    font-size: 46px; color: var(--text); font-weight: 800; margin-top: 14px; text-align: center;
+    opacity: 0; transform: translateY(16px);
+    animation: fade-up 0.8s var(--ease) 17.3s forwards;
+  }
+  #honesty-title .accent { color: var(--accent); }
+  .honesty-list { width: 800px; margin-top: 70px; display: flex; flex-direction: column; gap: 56px; }
+  .honesty-row { display: flex; align-items: flex-start; gap: 22px; opacity: 0; transform: translateY(18px); }
+  .honesty-mark { font-size: 30px; color: var(--muted); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .honesty-text { font-size: 30px; color: var(--text); line-height: 1.4; }
+
+  #honesty-1 { animation: fade-up 0.7s var(--ease) 18.0s forwards; }
+  #honesty-2 { animation: fade-up 0.7s var(--ease) 21.5s forwards; }
+  #honesty-3 { animation: fade-up 0.7s var(--ease) 25.0s forwards; }
+
+  @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes fade-in-x { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes node-light { from { border-color: var(--muted); background: transparent; } to { border-color: var(--accent); background: var(--accent); } }
+</style>
+</head>
+<body>
+  <!--
+    Composicion HyperFrames standalone (CLI global `hf`, ver skill
+    aetherlogik-hyperframes). Viewport = resolucion de salida exacta
+    (1080x1920, igual que el resto de la serie). Duracion total 30.0s
+    @24fps = 720 frames (384f build_process + 336f honesty_checklist),
+    100% CSS (@keyframes + cubic-bezier(0.16,1,0.3,1), el mismo easing del
+    craft de aetherlogik-video) — sin GSAP, por eso el elemento raiz lleva
+    `data-no-timeline` (evita el impuesto de 45s del poller documentado en
+    la skill). Paleta ember-only, boxless: NINGUN elemento de este archivo
+    tiene fondo/borde/boxShadow tipo tarjeta — solo texto, un circulo de
+    nodo (outline, no relleno hasta que se enciende) y lineas de texto.
+    Render (lo ejecuta devops, NO video-producer): pct start 128 ->
+    hf lint . && hf render -c index.html -o proceso-y-honestidad.mp4 ->
+    pct stop 128. Duracion/fps del render deben forzarse a 24fps/720
+    frames si el default de `hf` no coincide con el plan de arriba.
+  -->
+  <div id="stage" data-no-timeline>
+
+    <section id="section-process" class="section">
+      <div id="process-kicker">Cómo se construye, fase por fase</div>
+      <div class="phase-track">
+        <div id="phase-1" class="phase-row">
+          <div id="phase-1-node" class="phase-node"></div>
+          <div>
+            <div class="phase-label-num">FASE 1</div>
+            <div class="phase-label-title">Captura básica</div>
+            <div class="phase-label-sub">El bot responde y envía un resumen a tu equipo</div>
+          </div>
+        </div>
+        <div id="phase-2" class="phase-row">
+          <div id="phase-2-node" class="phase-node"></div>
+          <div>
+            <div class="phase-label-num">FASE 2</div>
+            <div class="phase-label-title">Calificación</div>
+            <div class="phase-label-sub">Filtra por servicio, ubicación y urgencia</div>
+          </div>
+        </div>
+        <div id="phase-3" class="phase-row">
+          <div id="phase-3-node" class="phase-node"></div>
+          <div>
+            <div class="phase-label-num">FASE 3</div>
+            <div class="phase-label-title">Integración</div>
+            <div class="phase-label-sub">Conecta con tu calendario, CRM o sistema de tickets</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-honesty" class="section">
+      <div id="honesty-kicker">La honestidad también es marca</div>
+      <div id="honesty-title">Cuándo <span class="accent">NO</span> tiene sentido</div>
+      <div class="honesty-list">
+        <div id="honesty-1" class="honesty-row">
+          <div class="honesty-mark">—</div>
+          <div class="honesty-text">Tienes 2 clientes al mes y los conoces por nombre.</div>
+        </div>
+        <div id="honesty-2" class="honesty-row">
+          <div class="honesty-mark">—</div>
+          <div class="honesty-text">Tu problema real es que no tienes leads, no que los pierdas.</div>
+        </div>
+        <div id="honesty-3" class="honesty-row">
+          <div class="honesty-mark">—</div>
+          <div class="honesty-text">Quieres que "haga todo" sin que nadie lo supervise.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
