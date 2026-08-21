@@ -1,0 +1,11 @@
+{
+  "reel": "por-que-es-gratis-agenda-ahora",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {"id":"d-001","topic":"3 ejes","options_considered":["HyperFrames para las 3 reassurances (consistente con el reel 2 de esta serie)","TagRevealList nativo de Remotion, ya GO'd en CasoMarinoHVAC.tsx de reels-hvac-serie"],"choice":"renderer_family=explainer, render_runtime=remotion, composition_mode=atelier (TagRevealList reusado)","reason":"3 items cortos (label+value) no necesitan la densidad visual de HyperFrames — TagRevealList ya es un componente atelier (boxless, ember, ya GO'd), y usar Remotion aqui evita un 2o render HyperFrames en la serie sin ganancia visual proporcional al costo.","confidence":0.75},
+    {"id":"d-002","topic":"i2v — por que 0 en este reel","options_considered":["agregar un 3er hero i2v para el cierre","0 escenas i2v, presupuesto ya agotado en reel 1 y reel 3"],"choice":"0 escenas i2v","reason":"doctrina de la serie: 2 heroes i2v totales — este reel de cierre se sostiene con tipografia + StatReveal + brand_close, priorizando la claridad del CTA sobre un asset adicional.","confidence":0.9},
+    {"id":"d-003","topic":"CTA real vs CTA interno — unico reel de la linea con URL de venta","options_considered":["CTA interno apuntando de vuelta al reel 1 (loop de la serie)","CTA real: cal.com/aetherlogik/discovery, literal del post"],"choice":"CTA real de agenda","reason":"la mision es explicita: esta es la serie de CONVERSION, y el reel 4 lleva el CTA mas fuerte — coincide EXACTO con el link real del cierre del post ('Agenda tu diagnostico gratuito ->' -> cal.com/aetherlogik/discovery).","confidence":0.95},
+    {"id":"d-004","topic":"Music plan — tempo/energia del cierre","options_considered":["mantener el tempo del reel 3 (124 BPM) por continuidad","136 BPM, energetico/urgente-pero-optimista, el mas alto de la serie"],"choice":"136 BPM, energetico/urgente-pero-optimista","reason":"el cierre de venta necesita la energia mas alta de los 4 reels para acompanar el CTA — dentro de la banda 120-140, el limite superior es apropiado para el reel que pide la accion.","confidence":0.8}
+  ]
+}

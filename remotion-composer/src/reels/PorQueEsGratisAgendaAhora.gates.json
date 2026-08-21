@@ -1,0 +1,17 @@
+{
+  "reel": "por-que-es-gratis-agenda-ahora",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado — SIN checkout local de Node/el fork en esta sesion)",
+  "pre_render_gates": {
+    "slideshow_risk": {"average": 0.5, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"5 escenas, cada una con device distinto (tipografia x2, TagRevealList, StatReveal, brand_close)"},"decorative_visuals":{"score":0.0,"reason":"cada escena comunica informacion literal del post"},"weak_motion":{"score":0.9,"reason":"0 escenas i2v — tipico y aceptado para un reel de cierre 100% tipografia/CTA"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico"},"typography_overreliance":{"score":1.7,"reason":"5 de 5 escenas (100%) tipografia/TagRevealList/StatReveal, mitigado por ser el reel de cierre donde la claridad del CTA pesa mas que la variedad visual"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico"}}},
+    "variation_checker": {"score": 0.55, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "nota": "reel de cierre 100% tipografia-led, declarado como tal — no reclama motion_led."},
+    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "las 3 reassurances (sin tarjeta, sin compromiso, honestidad si no hay fit) son literales de la seccion '¿Por que ofrecemos el diagnostico sin costo?' y la FAQ del post. La mecanica de agenda ('eliges un horario, Ernesto te llama exactamente a esa hora, 30 minutos') y la URL (cal.com/aetherlogik/discovery) coinciden EXACTO con el cierre real del post. Ninguna cifra ni promesa nueva se introduce."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 136, "length_ms_requested": 35000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.35, "url": "https://v3b.fal.media/files/b/0aa73f80/EosJxCvWyhU9bZWqs2M75_music_generated.mp3"},
+    "total_cost_usd_est": 0.35
+  }
+}

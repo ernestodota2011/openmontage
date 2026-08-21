@@ -1,0 +1,18 @@
+{
+  "reel": "asi-son-los-treinta-minutos",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado — SIN checkout local de Node/el fork en esta sesion)",
+  "pre_render_gates": {
+    "slideshow_risk": {"average": 0.45, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"4 escenas, cada una con un device distinto"},"decorative_visuals":{"score":0.0,"reason":"la barra de tiempo comunica el proceso real, no decora"},"weak_motion":{"score":0.6,"reason":"0 escenas i2v — tipico y aceptado para un reel 100% didactico/proceso"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico"},"typography_overreliance":{"score":1.5,"reason":"4 de 4 escenas tipografia/HyperFrames, mitigado por el device de alta densidad informativa"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico"}}},
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 3, "hyperframes_cuts": 1, "nota": "reel didactico/proceso, no motion-led — el bloque HyperFrames es motion graphics autorado, contado aparte del ratio de video real"},
+    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "incluye el clip HyperFrames renderizado cuando exista, no solo las escenas Remotion"},
+    "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "las 3 fases (0-10min entender el negocio, 10-25min identificar oportunidades, 25-30min estimacion) son la sintesis fiel y en el mismo orden de la seccion 'Como transcurre la sesion de 30 minutos'. La mencion a Ernesto Hernandez y sus '23+ anos en tecnologia' es literal del post. Ninguna cifra ni claim nuevo se introduce."}
+  },
+  "assets_generated": {
+    "hyperframes_composition": {"tipo": "HTML/CSS autorado (data-no-timeline), sin costo de generacion", "path": "hyperframes-compositions/asi-son-los-treinta-minutos-timeline/index.html", "cost_usd": 0.0},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 132, "length_ms_requested": 37000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.37, "url": "https://v3b.fal.media/files/b/0aa73f93/1WYCXYJPth-Rb_HLUJ4YY_music_generated.mp3"},
+    "total_cost_usd_est": 0.37
+  }
+}

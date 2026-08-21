@@ -1,0 +1,11 @@
+{
+  "reel": "asi-son-los-treinta-minutos",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {"id":"d-001","topic":"3 ejes","options_considered":["TagRevealList de Remotion para las 3 fases (patron mas simple, ya usado en el reel 4 de esta misma serie para las objections)","HyperFrames (barra de tiempo segmentada, HTML/CSS puro) para el bloque denso de las 3 fases"],"choice":"renderer_family=hybrid, render_runtime=hyperframes (bloque central) + remotion (resto), composition_mode=atelier","reason":"la mision instruye explicitamente 'proceso paso a paso -> HyperFrames'. Una barra de tiempo proporcional (10/15/5 min) con 3 tarjetas boxless tiene mejor legibilidad y comunica la DURACION relativa de cada fase mejor que un TagRevealList generico de pesos iguales — mismo patron 'bloques densos -> HyperFrames' ya GO'd 6 veces.","confidence":0.85},
+    {"id":"d-002","topic":"i2v — por que 0 en este reel","options_considered":["agregar un hero i2v de apoyo (ej. Ernesto en llamada)","0 escenas i2v, presupuesto reservado para reel 1 y reel 3"],"choice":"0 escenas i2v","reason":"doctrina de la serie: maximo 2 heroes i2v totales (reel 1 problema, reel 3 resolucion) — este reel didactico se sostiene con HyperFrames + tipografia.","confidence":0.9},
+    {"id":"d-003","topic":"3 fases exactas — sin inventar una 4a ni reordenar","options_considered":["resumir a 2 fases para acelerar el ritmo","3 fases exactas, mismos rangos de minutos y orden del post"],"choice":"3 fases exactas, mismo orden y minutos del post","reason":"el post enumera exactamente 3 bloques de tiempo con sus propios rangos (0-10/10-25/25-30) — alterar el reparto violaria la regla anti-claims (la promesa comercial exacta de la agencia).","confidence":0.95},
+    {"id":"d-004","topic":"Music plan — tempo/energia didactica","options_considered":["mantener el tempo del reel 1 (128 BPM) por continuidad","132 BPM, driving/metodico, distinto del arco tenso-esperanzador del reel 1"],"choice":"132 BPM, corporate-tech instrumental, mood driving/metodico","reason":"el reel necesita energia constante que sostenga el paso a paso sin distraer del contenido — dentro de la banda 120-140 exigida.","confidence":0.7}
+  ]
+}

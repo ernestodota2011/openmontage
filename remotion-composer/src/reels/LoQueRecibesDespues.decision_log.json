@@ -1,0 +1,11 @@
+{
+  "reel": "lo-que-recibes-despues",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {"id":"d-001","topic":"3 ejes","options_considered":["carril templated con StatCard nativo (mas rapido)","atelier: StatReveal + KineticHeadline hand-authored + hero i2v"],"choice":"renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier","reason":"el caso real es la prueba social mas fuerte de la serie de conversion — merece el mismo nivel atelier que el resto de la linea, no el carril templated.","confidence":0.9},
+    {"id":"d-002","topic":"i2v — 2o y ultimo hero del presupuesto de la serie","options_considered":["0 i2v en este reel (solo StatReveal + tipografia)","1 hero i2v: dueno de HVAC en golden-hour, resolucion visual del arco abierto en reel 1"],"choice":"1 hero i2v","reason":"el reel 3 es donde el post entrega la resolucion emocional del arco (de la incertidumbre del reel 1 al alivio del caso real) — un hero i2v de apoyo refuerza esa resolucion visualmente, dentro del presupuesto de 2 heroes/serie ya decidido en el reel 1.","confidence":0.85},
+    {"id":"d-003","topic":"cifra del caso — reusar la EXACTA del post, sin variante","options_considered":["usar solo el titular '$4,400/mes' sin las 9 horas","usar la cifra completa: $4,400/mes + 9 horas libres/semana, exacta del post"],"choice":"cifra completa, exacta del post","reason":"el post da ambas cifras juntas en la misma frase ('Alain recupero aproximadamente $4,400 mensuales... y libero las nueve horas semanales') — separarlas perderia contexto; inventar una cifra distinta violaria la regla anti-claims.","confidence":0.95},
+    {"id":"d-004","topic":"Music plan — tempo/energia de resolucion","options_considered":["mantener el tempo del reel 2 (132 BPM) por continuidad","124 BPM, warm/resolving, mismo mood que los reels de 'caso real' de series anteriores"],"choice":"124 BPM, warm/resolving","reason":"el reel 3 de las series anteriores (casos reales) usa un tempo mas bajo y calido para acompanar la resolucion emocional — dentro de la banda 120-140.","confidence":0.7}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "reel": "lo-que-no-sabes-de-tu-negocio",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {"id":"d-001","topic":"3 ejes","options_considered":["renderer_family=explainer, render_runtime=remotion, composition_mode=templated (mas rapido)","renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier"],"choice":"renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier","reason":"es el reel gancho de la serie de conversion (la mas importante de las 8) — atelier con hero i2v humano + KineticHeadline hand-authored es el nivel de calidad que exige un gancho de venta, no el carril templated.","confidence":0.9},
+    {"id":"d-002","topic":"i2v — reparto del presupuesto de la serie","options_considered":["3 heroes i2v (uno por reel con contenido humano)","2 heroes i2v, repartidos entre reel 1 (problema) y reel 3 (caso real/resolucion)"],"choice":"2 heroes i2v: reel 1 y reel 3","reason":"mismo patron GO'd en las 6 series anteriores (max 1 hero por reel, 2 heroes totales por serie de 4 reels) — los reels 2 (proceso) y 4 (cierre/CTA) se sostienen con motion-autorado, sin necesitar un tercer hero.","confidence":0.85},
+    {"id":"d-003","topic":"fidelidad al post — sin inventar cifras ni promesas nuevas","options_considered":["agregar una cifra de impacto especulativa en el gancho para 'vender mas fuerte'","cero cifras de resultado en el gancho — solo la oferta literal (30 min/gratis/sin compromiso)"],"choice":"cero cifras de resultado, solo la oferta literal","reason":"el post NO da ninguna cifra de resultado antes de la seccion del caso Marino HVAC (reel 3) — inventar una cifra de impacto en el gancho violaria la regla anti-claims y adelantaria informacion que el post reserva para mas adelante.","confidence":0.95},
+    {"id":"d-004","topic":"Music plan — tempo/energia del gancho","options_considered":["mantener el tempo tenso todo el reel (sin arco)","128 BPM con arco tenso-a-esperanzador (mismo patron que reel 1 de reels-ia-miami-serie)"],"choice":"128 BPM, arco tenso-a-esperanzador","reason":"el reel pasa de un problema vivido (incertidumbre) a una promesa concreta (30 min/gratis) — el arco musical acompana esa transicion emocional, dentro de la banda 120-140 exigida por la mision.","confidence":0.75}
+  ]
+}
