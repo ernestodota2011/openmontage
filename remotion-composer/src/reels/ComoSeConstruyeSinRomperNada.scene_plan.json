@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cold_open_hook",
+    "type": "stat_card",
+    "description": "Tipografia cinetica: 'No necesitas cambiar todo tu sistema.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "desactiva el miedo mas comun antes de explicar el proceso",
+    "hero_moment": true,
+    "information_role": "promesa de entrada del reel de cierre",
+    "texture_keywords": ["mask reveal"]
+  },
+  {
+    "id": "process_and_honesty",
+    "type": "animation",
+    "description": "Bloque HyperFrames (30s): roadmap Fase 1/2/3 (nodos que se iluminan en secuencia) seguido de un checklist de 3 casos 'cuando NO tiene sentido'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, boxless, motion de UI real (fade/translate por CSS, no solo texto estatico)"},
+    "shot_intent": "muestra el proceso Y la honestidad como UNA sola pieza narrativa continua — el checklist de 'no lo recomiendo' es tan protagonista como el roadmap de fases",
+    "hero_moment": true,
+    "information_role": "el nucleo del reel: proceso + honestidad, ambos citados del post",
+    "texture_keywords": ["roadmap de nodos", "crossfade entre secciones", "checklist boxless"]
+  },
+  {
+    "id": "human_line",
+    "type": "stat_card",
+    "description": "Tipografia cinetica: 'No necesitas un departamento de IT. Necesitas claridad.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "cita fiel del post, resume el proceso completo en una linea humana",
+    "hero_moment": false,
+    "information_role": "puente hacia el cierre",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al diagnostico (unico CTA comercial directo de la serie)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca y de serie: la honestidad de la seccion anterior ES el gancho de venta",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
