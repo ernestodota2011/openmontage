@@ -24,8 +24,49 @@
   "assets_generated": {
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 132, "length_ms": 46000, "cost_usd": 0.46, "url": "https://v3b.fal.media/files/b/0aa73850/5-yIDLfln4gYFUZjE8xc-_music_generated.mp3", "verificado_por_video_producer": "ffprobe: 45.98s; volumedetect mean=-13.6dB max=-1.2dB (no muda, sin clip)"},
     "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
-    "hyperframes_clip": {"note": "AUN NO RENDERIZADO. Composicion autorada en hyperframes-compositions/seguimiento-inmobiliario-delegable/index.html, 100% CSS (data-no-timeline correcto, contrato de 6 atributos del #stage completo). devops debe correr 'hf lint . && hf render -c index.html -o seguimiento-inmobiliario-delegable.mp4' en el CT 128 ANTES de renderizar la composicion Remotion de este reel (el resultado alimenta tareasDelegablesSrc en props/lo-que-ya-puedes-automatizar.json).", "cost_usd": 0.0},
+    "hyperframes_clip": {"note": "renderizado por devops en el CT 128 desde hyperframes-compositions/seguimiento-inmobiliario-delegable/index.html; hf lint 0/0 confirmado por devops, sin impuesto de timeline", "cost_usd": 0.0},
     "total_cost_usd_est": 0.46
   },
-  "render_status": "PENDIENTE - handoff a devops-aetherlogik-homelab. Orden de render: (1) hf lint + hf render del bloque HyperFrames, (2) sustituir tareasDelegablesSrc en el props JSON con esa salida, (3) render Remotion de la composicion completa, (4) finishing FFmpeg + subida a R2. El post_render_verify lo corre video-producer en la SIGUIENTE sesion."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-inmobiliarios-serie/lo-que-ya-puedes-automatizar-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 712556bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 318657bps",
+      "duration_s": 46.0,
+      "size_bytes": 5963515
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.07", "input_tp": "-0.99"},
+      "finding": "coincide EXACTO con el -14.07 reportado por devops",
+      "tempo_check": "autocorrelacion propia (mismo metodo numpy/scipy que el resto de la serie): 132.2 BPM medido vs 132 BPM declarado (delta 0.2 BPM). Dentro de la banda 120-140 exigida.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["20.0s y 30.0s (checklist_delegable, bloque HyperFrames)", "42.0s (brand_close)"],
+      "palette_scan_pixeles_reales": {
+        "metodo": "escaneo HSV region+control (Python/PIL/numpy), denominador = pixel coloreado",
+        "hyperframes_20s": "cyan_violet=0.07%, ember=20.79% (0.3% del frame - solo 2 items+kicker visibles a esa hora)",
+        "hyperframes_30s": "cyan_violet=0.08%, ember=22.21% (0.6% del frame)",
+        "close_42s": "cyan_violet=0.35%, ember=79.30%",
+        "veredicto": "pass - cero acento cian/violeta deliberado en ninguno de los 3 frames"
+      },
+      "legibilidad": {
+        "hyperframes_30s": "pass - los 5 items del checklist ('Seguimiento las 24 horas...', 'Calificacion automatica...', 'Mensajes personalizados...', 'Sincronizacion completa con tu CRM', 'Programacion de visitas y recordatorios') TODOS legibles con buen contraste, integrados sin friccion visual con el catalogo Remotion (mismo kicker/tipografia/paleta/dot ember)",
+        "brand_close_42s": "FAIL - DEFECTO REAL confirmado recortando y ampliando 4x la banda de texto: el CTA ('aetherlogik.com/blog . cuando entra el humano, en el proximo video ->') envuelve a 2 lineas y AMBAS quedan pegadas al borde IZQUIERDO del frame, sin margen (vs el cierre limpio y centrado de los reels 1 y 4). El texto sigue siendo 100% legible (ningun caracter cortado) pero rompe el 'aire' de la doctrina boxless y es visualmente inconsistente entre reels de la MISMA serie."
+      },
+      "veredicto": "FAIL - ver root_cause_fix"
+    },
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "hyperframes_integration": {"status": "pass", "detalle": "confirmado por devops: hf lint 0/0, sin impuesto de timeline; verificado en pixeles reales por video-producer: el clip se integra sin salto visual perceptible con las escenas Remotion adyacentes"},
+    "root_cause_fix": {
+      "commit": "706d449 (rama aetherlogik/reels-inmobiliarios-serie)",
+      "detalle": "BrandClose.tsx (componente COMPARTIDO por las 4 series) no aplicaba maxWidth/textAlign al div del url, a diferencia del tagline que si los tenia. Se agrego textAlign:'center' + maxWidth:'82%' al div del url, mismo patron que ya usaba tagline. Fix aditivo, sin tocar props ni firma del componente. Registrado como P-13 en Video-problemas.md.",
+      "accion_requerida": "devops debe RE-RENDERIZAR este reel (mismos assets/props, solo cambio el componente compartido) + re-subir a R2 sobre el mismo path; video-producer re-verifica solo el brand_close tras el re-render"
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md"},
+    "final_verdict": "NO-GO - requiere re-render (root cause ya fijo en el fork) + re-verify del brand_close"
+  }
 }
