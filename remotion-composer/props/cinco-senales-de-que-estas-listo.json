@@ -1,7 +1,6 @@
 {
-  "musicSrc": "https://v3b.fal.media/files/b/0aa73da8/rXKybvREZzCjhEjD13GqX_music_generated.mp3",
+  "musicSrc": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/assets/cinco-senales-de-que-estas-listo-musica.mp3",
   "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
   "sfxWhooshSrc": "https://media.aetherlogik.com/agency/reels-clinicas-serie/shared/sfx-whoosh.mp3",
-  "tail_padding_seconds": 0,
-  "_devops_note": "musicSrc es una URL TEMPORAL de fal.media (expira ~24h desde 2026-08-21). Antes de renderizar: archivar a agency/reels-ia-miami-serie/assets/cinco-senales-de-que-estas-listo-musica.mp3 (via la via segura ya establecida, P-07) y actualizar este JSON con la URL de media.aetherlogik.com antes de correr el render."
+  "tail_padding_seconds": 0
 }
