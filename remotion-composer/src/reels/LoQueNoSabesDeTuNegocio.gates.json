@@ -30,5 +30,18 @@
       "brand_close": "pass — isotipo real, wordmark AetherLogik dos tonos, tagline, URL centrada con margenes simetricos (P-13 vigente)"
     },
     "final_verdict": "NO-GO (targeted) — todo pass salvo el accentWord de reveal_30min; requiere re-render de video (audio no cambia)"
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "re-render video-only (fix accentWord commit 1116b2e), audio muxeado por copia del -v1 ya calibrado",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia de R2 + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/lo-que-no-sabes-de-tu-negocio-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 30.0, "size_bytes": 6211681, "http_status": 200},
+    "audio_spotcheck": {"lufs_medido_independiente": -14.49, "true_peak_dbtp_medido_independiente": -1.93, "coincidencia": "identico al v1 a 2 decimales (loudnorm print_format=json, input_i/input_tp) — confirma mux de audio por copia sin cambios", "veredicto": "pass"},
+    "visual_spotcheck": {
+      "reveal_30min_14.0s": "FIX CONFIRMADO EN PIXELES — 'Gratis.' se renderiza en ember (#ff6b1a), no en blanco. accentWord ya matchea tras el fix de puntuacion.",
+      "veredicto": "pass"
+    },
+    "final_verdict": "GO"
   }
 }
