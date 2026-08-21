@@ -24,11 +24,31 @@
   "assets_generated": {
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 49000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.49, "url": "https://v3b.fal.media/files/b/0aa73f90/W7bSq9LxtHTYhDF4gESdV_music_generated.mp3", "file_size_bytes": 783718},
     "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "duration_s": 0.5, "unit_price_usd_per_s": 0.002, "cost_usd": 0.001, "url": "https://v3b.fal.media/files/b/0aa73f7f/MZDKqDZ7FRw7PVHZ0rJKu_sound_effect.mp3", "file_size_bytes": 8821, "nota": "COMPARTIDO con el reel 3 de esta misma serie — costo contado una sola vez en el total de la serie (ver README)"},
-    "hyperframes_render": {"nota": "clip cost_model_table lo renderiza devops en el CT 128 (hf render) — sin costo de API, solo CPU", "cost_usd": 0.0},
+    "hyperframes_render": {"nota": "clip cost_model_table lo renderizo devops en el CT 128 (hf render, 26.0s) — sin costo de API, solo CPU", "cost_usd": 0.0},
     "total_cost_usd_est": 0.491
   },
   "post_render_verify": {
-    "status": "PENDING",
-    "nota": "requiere PRIMERO el bloque HyperFrames renderizado aparte (hf lint . && hf render sobre hyperframes-compositions/cuanto-cuesta-cada-uno-tabla/) antes del render Remotion — mismo orden que las 2 series anteriores que usaron este patron. Luego npx remotion compositions, render + finishing FFmpeg (TP=-2.0), y el verify independiente completo de video-producer sobre el MP4 real."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia de R2 + ffmpeg/ffprobe/python locales, sin confiar en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-n8n-zapier-serie/cuanto-cuesta-cada-uno-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 49.0, "size_bytes": 6025167, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.07, "lufs_medido_independiente": -14.07,
+      "true_peak_dbtp_devops_reportado": -1.91, "true_peak_dbtp_medido_independiente": -1.91,
+      "true_peak_astats_sample_peak_db": -1.922,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "true_peak_verdict": "pass",
+      "bpm_declarado": 124, "bpm_medido_independiente": 125.0, "bpm_delta": 1.0, "bpm_verdict": "pass — dentro de banda 120-140"
+    },
+    "beat_pixel_check": {
+      "cost_model_table_hyperframes": "las 4 filas (modelo/plan inicial/al crecer/para empezar) legibles con zoom, texto EXACTO al del post, sin logos de Zapier/n8n (solo labels tipograficos ZAPIER/N8N)",
+      "clinic_example_t33s": "'600-800' + 'tareas al mes — lo que gastaria una clinica dental automatizando citas y facturacion' + disclaimer 'Ejemplo del post. No es un cliente de AetherLogik.' EN EL MISMO frame",
+      "veredicto": "pass en los 2 puntos"
+    },
+    "palette_scan": {"metodo": "HSV region+control programatico, 8 frames muestreados (filas de tabla + cold_open/clinic/takeaway/close)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "logo_check": {"veredicto": "pass"},
+    "visual_spotcheck": {"brand_close": "centrado, margenes simetricos, CTA interno a reel 3 exacto", "veredicto": "pass"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "final_verdict": "GO"
   }
 }
