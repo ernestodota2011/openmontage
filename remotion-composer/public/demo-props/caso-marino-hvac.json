@@ -3,7 +3,7 @@
   "musicSrc": "https://media.aetherlogik.com/agency/reels-chatbot-serie/caso-marino-hvac/music.mp3",
   "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
   "sfxDingSrc": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3",
-  "sfxChimeSrc": "https://v3b.fal.media/files/b/0aa728ef/blLPj2DOcrfJr5y9A0Nxr_sound_effect.mp3",
+  "sfxChimeSrc": "https://v3b.fal.media/files/b/0aa72a47/wNuYyBU0peq3_3GmNOLXd_sound_effect.mp3",
   "tail_padding_seconds": 0,
-  "_pending": "sfxChimeSrc BLOQUEADO: la URL fal.media devuelve 404 (confirmado por devops 2026-08-21, headers limpios, no transitorio -- no es UA-blocking ni timing). El asset se perdio antes de poder archivarse a R2. Requiere que video-producer regenere el sfx via fal-ai/elevenlabs/sound-effects/v2 y entregue la nueva URL antes de que devops pueda renderizar este reel. Los otros 4 assets (coldOpenSrc, musicSrc, still-reference-4k, still-i2v-input-2k) SI se archivaron a R2 sin problema (agency/reels-chatbot-serie/caso-marino-hvac/)."
+  "_pending": "sfxChimeSrc REGENERADO 2026-08-21 (fal-ai/elevenlabs/sound-effects/v2, mismo brief: 'Warm short two-note confirmation chime, premium and gentle, under 0.5 seconds, for an appointment-confirmed UI moment', duration_seconds:0.5). Verificado antes de commitear: curl -I -> HTTP 200, Content-Length 8821 (coincide con file_size del job). Es una URL fal.media TEMPORAL -- devops debe archivarla a R2 (agency/reels-chatbot-serie/caso-marino-hvac/) igual que ya hizo con los otros 4 assets, y reemplazar este valor por la URL de R2 antes de renderizar."
 }
