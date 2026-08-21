@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline: Zapier cobra por tarea, n8n cobra por servidor",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "plantea la pregunta del reel (modelo de cobro)",
+    "hero_moment": false,
+    "information_role": "apertura",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "cost_model_table",
+    "type": "animation",
+    "description": "Tabla HyperFrames de 2 columnas: modelo de cobro Zapier vs n8n, 4 filas EXACTAS del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static (CSS reveal)", "lighting_key": "editorial ember sobre near-black, boxless"},
+    "shot_intent": "comunica la diferencia de modelo de cobro con densidad de informacion real",
+    "hero_moment": true,
+    "information_role": "comparativa densa",
+    "texture_keywords": ["HyperFrames", "tabla de 2 columnas", "hairline ember"]
+  },
+  {
+    "id": "clinic_example",
+    "type": "stat_card",
+    "description": "StatReveal '600-800' — ejemplo HIPOTETICO del post (clinica dental), marcado explicitamente como no-cliente",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "da un ejemplo concreto de cuando el volumen empuja hacia un plan empresarial de Zapier",
+    "hero_moment": false,
+    "information_role": "ejemplo ilustrativo (no cliente real, marcado en pantalla)",
+    "texture_keywords": ["stat card", "disclaimer en frame"]
+  },
+  {
+    "id": "key_takeaway",
+    "type": "animation",
+    "description": "KineticHeadline: si el volumen crece, la matematica cambia",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "cierra el argumento del reel antes del CTA",
+    "hero_moment": false,
+    "information_role": "conclusion",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA al reel 3 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, sin venta directa",
+    "hero_moment": false,
+    "information_role": "CTA interno de la serie",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

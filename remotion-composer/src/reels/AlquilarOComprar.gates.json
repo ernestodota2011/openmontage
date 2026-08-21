@@ -1,0 +1,33 @@
+{
+  "reel": "alquilar-o-comprar",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion, mismo patron declarado en las 6 series anteriores)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.4,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "5 escenas, 4 devices distintos (headline, split-compare, headline+ember, brand_close) — la unica repeticion es KineticHeadline en 3 de 5, esperable en un gancho 100% tipografico"},
+        "decorative_visuals": {"score": 0.0, "reason": "cero escenas i2v/decorativas — 0 heroes en toda la serie por decision d-001, ninguna imagen sin funcion informativa"},
+        "weak_motion": {"score": 0.8, "reason": "0 de 5 escenas son video real — reel 100% tipografia/comparativa autorada, clasificado honestamente como data_explainer en delivery_promise, no motion_led"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.3, "reason": "4 de 5 escenas (80%) son tipografia/comparativa pura — esperable y honesto para un gancho comparativo sin footage"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "el reel no reclama produccion cinematografica en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico (modern/sleek/stunning)"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "still_cuts": 0, "nota": "clasificado honestamente como data_explainer (no motion_led) porque 0 escenas son video/animacion real — evita la trampa de reclamar motion_led con solo tipografia (doctrina: Remotion text_card/chart NO cuentan como movimiento real)"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "SplitCompare usa UN solo elemento ember (el hairline estructural) — ningun color nuevo introducido, ambos lados en near-white sin sesgo de color hacia ninguna herramienta"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "la metafora alquilar/comprar es LITERAL/casi textual del post ('Es como alquilar un apartamento...' / 'Es como comprar una casa...', parrafos 21-22). Ninguna cifra ni claim de terceros en este reel."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "length_ms_requested": 30000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.30, "url": "https://v3b.fal.media/files/b/0aa73f7b/-dkFNz-vR4UBMVRqvNyBR_music_generated.mp3", "file_size_bytes": 480698},
+    "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "duration_s": 0.6, "unit_price_usd_per_s": 0.002, "cost_usd": 0.0012, "url": "https://v3b.fal.media/files/b/0aa73f7f/OPE4Ad3Gs5427560K1WjJ_sound_effect.mp3", "file_size_bytes": 10493, "nota": "COMPARTIDO con el reel 4 de esta misma serie — costo contado una sola vez en el total de la serie (ver README)"},
+    "total_cost_usd_est": 0.3012
+  },
+  "post_render_verify": {
+    "status": "PENDING",
+    "nota": "no renderizado aun por devops-aetherlogik-homelab. Antes de declarar GO: correr npx remotion compositions src/index.tsx (confirmar que AlquilarOComprar aparece con 720f/24fps/1080x1920), render + finishing FFmpeg (recipe TP=-2.0 de premium-craft-standards.md), y el verify independiente completo (ffprobe + LUFS/TP + frames clave + brand_palette_guard sobre pixeles reales) que hace video-producer sobre el MP4 real."
+  }
+}

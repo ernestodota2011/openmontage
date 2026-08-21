@@ -1,0 +1,45 @@
+{
+  "reel": "cuanto-cuesta-cada-uno",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "render_runtime de la tabla comparativa — Remotion vs HyperFrames",
+      "options_considered": [
+        "construir la tabla de 2 columnas como componente React en Remotion (mas control de easing/springs)",
+        "autorarla en HyperFrames (HTML/CSS puro, mismo contrato ya GO'd 2 veces en la linea)"
+      ],
+      "choice": "render_runtime=hyperframes para esta escena puntual (reel sigue siendo composition_mode=atelier en su totalidad)",
+      "reason": "la mision pide explicitamente HyperFrames para comparativas/tablas densas. El patron de checklist ya esta GO'd 2 veces (reels-ia-miami-serie, reels-chatbot-serie) con el contrato de 6 atributos + data-no-timeline resuelto — extenderlo a 2 columnas es menor riesgo que escribir un componente React nuevo desde cero para el mismo resultado visual.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Ejemplo de la clinica dental — tratarlo como cifra real vs marcarlo hipotetico",
+      "options_considered": [
+        "presentar '600-800 tareas/mes' como si fuera un dato verificado",
+        "marcarlo explicitamente en pantalla como el ejemplo hipotetico que es (el post dice 'imagina una clinica dental')"
+      ],
+      "choice": "marcarlo con un disclaimer en pantalla",
+      "reason": "presentarlo sin marca seria fabricar un caso real inexistente — viola la regla dura anti-claims de la mision ('sin inventar cifras ni claims de terceros'). El post mismo lo introduce con 'imagina', asi que ocultar esa condicionalidad seria tergiversar la fuente.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan",
+      "options_considered": ["tono uniforme", "124 BPM sostenido con dip breve antes del ejemplo"],
+      "choice": "124 BPM, corporate-tech instrumental analitico",
+      "reason": "un reel de costos/numeros pide un tono mas 'analitico' que el gancho (128 BPM tenso->esperanzador) — dentro de la banda 120-140.",
+      "confidence": 0.7
+    },
+    {
+      "id": "d-004",
+      "topic": "CTA",
+      "options_considered": ["venta directa", "CTA al reel 3"],
+      "choice": "CTA al reel 3, sin venta directa",
+      "reason": "formula ganadora GO-4/4, ver d-004 de AlquilarOComprar.",
+      "confidence": 0.95
+    }
+  ]
+}

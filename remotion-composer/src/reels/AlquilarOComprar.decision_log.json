@@ -1,0 +1,48 @@
+{
+  "reel": "alquilar-o-comprar",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes y presupuesto de heroes i2v de TODA la serie",
+      "options_considered": [
+        "1 hero i2v en el gancho (mismo patron que las 6 series anteriores: dueno de negocio viviendo el dolor del post)",
+        "0 heroes i2v en TODA la serie — 100% atelier tipografico/comparativo + 2 tablas HyperFrames en los reels didacticos"
+      ],
+      "choice": "renderer_family=animation, render_runtime=remotion (con render_runtime=hyperframes para 2 escenas puntuales de los reels 2 y 3), composition_mode=atelier, 0 escenas i2v en toda la serie",
+      "reason": "el post es una comparativa TECNICA de dos herramientas de software, no una historia de un negocio con un dolor vivido especifico. Inventar una escena 'humana' (ej. un dueno de negocio decidiendo entre apps) seria una vineta no descrita por el post — el riesgo de que se lea como decorative_visuals (AI-slop) es mayor que el beneficio emocional. El post mismo da el mejor gancho visual posible: la metafora alquilar/comprar, que se dramatiza mejor con tipografia+comparativa que con footage generado.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-002",
+      "topic": "Componente para la metafora — nativo vs bespoke",
+      "options_considered": [
+        "reusar ComparisonCard.tsx del fork (ya existe, ahorra tiempo)",
+        "autorar SplitCompare.tsx nuevo, boxless y ember-only"
+      ],
+      "choice": "SplitCompare.tsx nuevo",
+      "reason": "ComparisonCard.tsx tiene fondo blanco, card con drop-shadow y colores hardcodeados azul/verde — viola boxless y el guard de marca. Reusarlo tal cual habria sido el tipo exacto de atajo que Rule Zero prohibe ('hero/marca = atelier, no templated').",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia del gancho",
+      "options_considered": [
+        "tono uniforme de principio a fin",
+        "128 BPM, sostenido, leve dip en distinction, sube en tease_next"
+      ],
+      "choice": "128 BPM, corporate-tech instrumental, con dip/rise en las escenas 3-4",
+      "reason": "un gancho puramente conceptual (sin footage) necesita el arco musical para no sentirse estatico — dentro de la banda 120-140 exigida por la mision.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "CTA — siguiente reel vs venta directa",
+      "options_considered": ["cerrar con el link de diagnostico gratuito", "cerrar apuntando al reel 2 de la serie"],
+      "choice": "CTA al reel 2, sin venta directa",
+      "reason": "fiel a la formula ganadora GO-4/4 de las 6 series anteriores: solo el ULTIMO reel vende.",
+      "confidence": 0.95
+    }
+  ]
+}

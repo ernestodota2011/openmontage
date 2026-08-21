@@ -1,0 +1,34 @@
+{
+  "reel": "cuanto-cuesta-cada-uno",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado — SIN checkout local de Node/el fork en esta sesion)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.32,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "5 escenas, la tabla HyperFrames es un device nuevo no repetido en la serie hasta ahora"},
+        "decorative_visuals": {"score": 0.0, "reason": "0 escenas i2v; el disclaimer del ejemplo hipotetico es informativo, no decorativo"},
+        "weak_motion": {"score": 0.6, "reason": "1 de 5 escenas es un clip HyperFrames real (animacion CSS con reveals reales); reduce el score frente a 0 video pero sigue clasificado como data_explainer"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 0.9, "reason": "3 de 5 escenas (60%) son tipografia/stat pura; la tabla HyperFrames y el ejemplo con StatReveal aportan variedad"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama produccion cinematografica"}
+      }
+    },
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "still_cuts": 0, "nota": "data_explainer honesto — la tabla HyperFrames es data-viz animada, no footage cinematico; no se reclama motion_led"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "la tabla usa solo ember en el hairline estructural; columna Zapier en gris apagado y n8n en near-white son jerarquia tipografica dentro de la paleta permitida, no un segundo acento"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "el modelo de cobro (task-based vs fixed) y '100 tareas gratis al mes' son EXACTOS del post. El ejemplo de la clinica dental esta marcado explicitamente como ejemplo hipotetico del post, no como cliente real — evita fabricar un caso inexistente."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 49000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.49, "url": "https://v3b.fal.media/files/b/0aa73f90/W7bSq9LxtHTYhDF4gESdV_music_generated.mp3", "file_size_bytes": 783718},
+    "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "duration_s": 0.5, "unit_price_usd_per_s": 0.002, "cost_usd": 0.001, "url": "https://v3b.fal.media/files/b/0aa73f7f/MZDKqDZ7FRw7PVHZ0rJKu_sound_effect.mp3", "file_size_bytes": 8821, "nota": "COMPARTIDO con el reel 3 de esta misma serie — costo contado una sola vez en el total de la serie (ver README)"},
+    "hyperframes_render": {"nota": "clip cost_model_table lo renderiza devops en el CT 128 (hf render) — sin costo de API, solo CPU", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.491
+  },
+  "post_render_verify": {
+    "status": "PENDING",
+    "nota": "requiere PRIMERO el bloque HyperFrames renderizado aparte (hf lint . && hf render sobre hyperframes-compositions/cuanto-cuesta-cada-uno-tabla/) antes del render Remotion — mismo orden que las 2 series anteriores que usaron este patron. Luego npx remotion compositions, render + finishing FFmpeg (TP=-2.0), y el verify independiente completo de video-producer sobre el MP4 real."
+  }
+}

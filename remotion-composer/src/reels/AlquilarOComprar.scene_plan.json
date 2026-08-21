@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline: pregunta directa Zapier vs n8n, sin sesgar hacia ninguna herramienta",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "plantea la pregunta central del post",
+    "hero_moment": false,
+    "information_role": "apertura",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "metaphor_split",
+    "type": "animation",
+    "description": "SplitCompare: metafora literal del post, alquilar (Zapier) vs comprar (n8n)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, boxless"},
+    "shot_intent": "instala la metafora central del post en una sola imagen mental",
+    "hero_moment": true,
+    "information_role": "comparativa conceptual",
+    "texture_keywords": ["split compare", "hairline ember"]
+  },
+  {
+    "id": "distinction",
+    "type": "animation",
+    "description": "KineticHeadline: consecuencia practica de la metafora (control de datos/infra)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "conecta la metafora con la consecuencia practica",
+    "hero_moment": false,
+    "information_role": "distincion conceptual",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "tease_next",
+    "type": "animation",
+    "description": "KineticHeadline + EmberThread bridge hacia el reel 2 (costos)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black con barrido ember"},
+    "shot_intent": "bisagra hacia el siguiente reel",
+    "hero_moment": false,
+    "information_role": "bridge",
+    "texture_keywords": ["ember sweep"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA al reel 2 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, sin venta directa (formula gancho->siguiente)",
+    "hero_moment": false,
+    "information_role": "CTA interno de la serie",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
