@@ -1,0 +1,51 @@
+{
+  "reel": "como-empezar-sin-desorden",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion 100% (sin HyperFrames, sin i2v)",
+        "render_runtime=hyperframes para el steps_list (checklist denso, igual que reel 2)"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=remotion 100%, composition_mode=atelier",
+      "reason": "El bloque denso de datos/checklist de la serie ya vive en HyperFrames en el reel 2 - repetir el runtime aqui para 5 items (vs 5 items en reel 2) no aporta variedad nueva y el TagRevealList ya demostro legibilidad en reels 2 y 3 para listas de tamano similar. Se reserva HyperFrames para el reel que MAS lo necesita (el checklist mas denso, con 9 tareas totales entre las 2 escenas).",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que este reel NO lleva escena i2v",
+      "options_considered": [
+        "agregar un hero i2v de cierre (abogado sonriendo, tiempo recuperado)",
+        "cero escenas i2v, cierre 100% tipografico + brand_close"
+      ],
+      "choice": "cero escenas i2v en este reel",
+      "reason": "el presupuesto de 2 heroes i2v de la serie ya se uso en reels 1 (problema) y 3 (limites/credibilidad) - un tercer hero en el reel de cierre no añade informacion nueva y arriesga diluir el foco del CTA. El series_recap + brand_close ya cumplen la funcion de cierre emocional sin necesitar mas footage generativo, mismo patron que LoQueCambiaEnTuClinica.tsx de la serie clinicas.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan - tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "tono triunfal/orquestal para el cierre de la serie",
+        "128 BPM, drive optimista, four-on-the-floor"
+      ],
+      "choice": "128 BPM, corporate-tech instrumental, four-on-the-floor, mood motivador/optimista",
+      "reason": "la directriz de la mision es DURA (banda 120-140, nada de ambient/orquestal) y aplica igual al reel de cierre. 128 BPM balancea el tono motivador del CTA con el drive ritmico exigido en toda la serie.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "CTA final: /para-legal + llamada de diagnostico, no un enlace generico",
+      "options_considered": [
+        "CTA generico a aetherlogik.com",
+        "CTA a /para-legal (la vertical real mencionada en el cierre del post) + la llamada de diagnostico del intro del post"
+      ],
+      "choice": "CTA a aetherlogik.com/para-legal + llamada de diagnostico gratuita",
+      "reason": "el post mismo cierra su ultima seccion con el enlace '/para-legal' y su intro invita a 'reservar una llamada de diagnostico... gratis, dura treinta minutos, sin compromiso' (cal.com/aetherlogik/discovery) - el CTA del reel de cierre debe ser fiel a esas 2 llamadas a la accion reales del post, no inventar una oferta nueva.",
+      "confidence": 0.85
+    }
+  ]
+}

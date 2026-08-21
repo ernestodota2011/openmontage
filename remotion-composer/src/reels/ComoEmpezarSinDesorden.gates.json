@@ -1,0 +1,32 @@
+{
+  "reel": "como-empezar-sin-desorden",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py - SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.6,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "6 escenas, cada una con un device distinto (headline / cascada de tags / headline / headline / recap 4 lineas / brand close)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) - reel de cierre 100% motion-autorado, presupuesto de hero i2v agotado en reels 1 y 3"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 2.0, "reason": "6 de 6 escenas (100%) tipografia/stat_card - reel de cierre/CTA, desviacion consciente y declarada (mismo patron que reel 4 de la serie clinicas)"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
+      }
+    },
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0, "note": "promise_type data_explainer (no motion_led), correcto para un reel de cierre 100% tipografico/UI, consistente con delivery_promise.py"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 5 pasos son los numerados EXACTOS de la seccion 'Como empezar sin desorden' del post, en el mismo orden; el CTA final apunta a /para-legal, la vertical real mencionada en el post; cero cifras inventadas"}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "length_ms": 45000, "cost_usd": 0.45},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (ya archivado en R2)", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.45
+  },
+  "post_render_verify": {
+    "status": "NO EJECUTADO EN ESTA SESION - pendiente de devops. El verify post-render (ffprobe, LUFS, BPM medido, region+control) lo corre video-producer DESPUES del render de devops."
+  }
+}

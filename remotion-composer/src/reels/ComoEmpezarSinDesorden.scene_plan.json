@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'La peor forma de automatizar: hacerlo todo a la vez.' - primera linea del post en esta seccion, casi textual",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "advierte contra el error mas comun antes de dar la lista de pasos",
+    "hero_moment": false,
+    "information_role": "apertura del reel de cierre/CTA",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "steps_list",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de los 5 pasos numerados EXACTOS del post: audita tu tiempo, elige un flujo unico, disena con un especialista, prueba con un caso piloto, documenta y ajusta",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "entrega el metodo concreto y accionable del post, en el mismo orden",
+    "hero_moment": false,
+    "information_role": "los 5 pasos del metodo (seccion 'como empezar sin desorden')",
+    "texture_keywords": ["cascada de tags", "tick ember", "numeracion"]
+  },
+  {
+    "id": "caveat",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'No compres software generico y esperes que se adapte. Disena para tu flujo real.' - parafrasea el paso 3 del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "refuerza el paso 3 (disenar con un especialista) como el matiz mas importante del metodo antes de presentar la vertical",
+    "hero_moment": false,
+    "information_role": "matiz sobre el paso 3",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "vertical_mention",
+    "type": "animation",
+    "description": "KineticHeadline: 'Automatizacion para despachos de abogados, sin agregar complejidad.' - presenta la vertical /para-legal mencionada al cierre del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "conecta el metodo generico con la oferta especifica de AetherLogik para el sector legal",
+    "hero_moment": false,
+    "information_role": "mencion de la vertical /para-legal",
+    "texture_keywords": ["sfx whoosh", "transicion"]
+  },
+  {
+    "id": "series_recap",
+    "type": "animation",
+    "description": "KineticHeadline de 4 lineas que recapitula los titulos de los 4 reels de la serie, cerrando en 'Esto.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "FilmGrade vignette, cierre de arco"},
+    "shot_intent": "amarra la serie completa como un solo arco narrativo antes del CTA final",
+    "hero_moment": false,
+    "information_role": "recapitulacion de la serie",
+    "texture_keywords": ["stagger de 4 lineas", "cierre de arco"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA FINAL a /para-legal (agenda de llamada), no al siguiente reel (este es el ultimo)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca y conversion de la serie completa",
+    "hero_moment": false,
+    "information_role": "CTA final de conversion",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
