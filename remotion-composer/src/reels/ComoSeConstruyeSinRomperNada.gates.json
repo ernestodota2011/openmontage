@@ -35,17 +35,15 @@
       "note": "process_and_honesty (animation, HyperFrames) + brand_close (animation) = motion. cold_open_hook + human_line (stat_card) = slide. 50% — declarado hybrid, no motion_led, honestamente."
     },
     "brand_palette_guard": {
-      "verdict": "pendiente de verificacion real",
+      "verdict": "pendiente de verificacion real en pre-render",
       "counts": {"critical": "no medido", "warning": "no medido"},
-      "note": "El HTML de hyperframes-compositions/proceso-y-honestidad/index.html se auto-audito linea por linea al escribirlo: NINGUN elemento usa background/border/boxShadow tipo tarjeta (todo es texto + un circulo outline que solo cambia border-color/background al 'encenderse', ambos a --accent), y los UNICOS colores del archivo son las 4 variables CSS del playbook (bg/accent/text/muted) — pero esto es una revision de codigo fuente, NO una medicion sobre pixeles renderizados. La verificacion real (`hf lint` + frame-sampling post-render) es OBLIGATORIA antes del GO — no se declara 'pass' sin haberla corrido."
+      "note": "El HTML se auto-audito linea por linea al escribirlo (revision de codigo fuente, no de pixeles). La medicion real sobre pixeles renderizados vive en post_render_video_producer_verify abajo."
     },
     "tsc_noemit": {
-      "status": "PENDIENTE (lado Remotion) — mismo motivo que los otros 2 reels",
-      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` antes de renderizar el lado Remotion."
+      "status": "corrido por devops antes del render: exit 0 (HEAD 297871b)"
     },
     "hf_lint": {
-      "status": "PENDIENTE — no ejecutable desde esta sesion (video-producer no tiene acceso al CT 128 por diseno; hf lint corre EN el CT)",
-      "required_before_render": "devops corre `hf lint .` sobre hyperframes-compositions/proceso-y-honestidad/ ANTES de `hf render`. Si marca `missing_data_no_timeline`, revisar que el atributo siga en `#stage` (deberia estar presente en el HTML tal como se entrega). Cualquier otro hallazgo de lint se corrige antes de renderizar, no se ignora."
+      "status": "corrido por devops antes del render: 0 errors, 0 warnings (HEAD ff904b7, contrato completo de 6 atributos + data-no-timeline)"
     }
   },
   "assets_generated": {
@@ -59,15 +57,15 @@
     "run_date": "2026-08-21",
     "run_by": "devops-aetherlogik-homelab",
     "artifact": "https://media.aetherlogik.com/agency/reels-chatbot-serie/como-se-construye-v1.mp4",
-    "verdict": "GO tecnico (verify-gate de devops; falta el final_review completo de video-producer con promise/subtitle antes de considerarlo oficialmente listo para publicar)",
+    "verdict": "GO tecnico (verify-gate de devops)",
     "hf_lint": "0 errors, 0 warnings (data-composition-id/data-start/data-duration/data-fps/data-width/data-height + data-no-timeline, los 6 atributos base presentes)",
     "hyperframes_render": "720/720 frames, 42.5s wall-time (sin el impuesto de 45s del poller — data-no-timeline confirmado funcionando). ffprobe: h264 1080x1920 24fps 30.000000s exactos.",
     "tsc_noemit": "exit 0, 0 errores (HEAD 297871b)",
     "remotion_render": "1080/1080 frames, exit 0. ffprobe master ProRes: 1080x1920 24fps 45.000000s exactos, audio PCM 48kHz stereo (musica+sfx bakeados por Remotion).",
     "finishing": "mismo recipe corregido de reel2 v2/reel3: curves SIN el punto 0.25/0.22 (crushea luma 60-120, justo donde vive texto de UI pequeno) + eq/unsharp/vignette + libx264 -crf 16 -x264-params aq-mode=2:aq-strength=1.2, SIN noise (ni el bloque HyperFrames ni los bookends de tipografia lo usan).",
     "audio_calibracion": {
-      "intento_1": "acompressor(threshold=-20dB:ratio=6:attack=5:release=80:makeup=1) + loudnorm single-pass I=-14.0 dynamic (mismo target que convergio en reel3) -> medicion post-hoc independiente: -12.46 LUFS, FUERA de -14+-0.5. Descartado antes de subir a R2 (nunca se publico).",
-      "intento_2_GO": "mismo acompressor + loudnorm 2 pasadas propiamente calibrado (medir con print_format=json, aplicar pasada 2 con measured_I/measured_TP/measured_LRA/measured_thresh/offset + linear=true) sobre el mismo mix comprimido -> medicion post-hoc independiente: -13.98 LUFS, DENTRO de target. Leccion: el offset empirico de un mix NO se transfiere a otro (misma familia que la doctrina 'una medicion en un clon vale para el mecanismo, no la configuracion') — el 2-pass lineal es mas robusto que adivinar un target I por iteracion cuando el mix es nuevo."
+      "intento_1": "acompressor + loudnorm single-pass I=-14.0 dynamic -> medicion post-hoc independiente: -12.46 LUFS, FUERA de -14+-0.5. Descartado antes de subir a R2 (nunca se publico).",
+      "intento_2_GO": "mismo acompressor + loudnorm 2 pasadas propiamente calibrado -> medicion post-hoc independiente: -13.98 LUFS, DENTRO de target. Leccion: el offset empirico de un mix NO se transfiere a otro mix nuevo — el 2-pass lineal es mas robusto que adivinar un target I por iteracion."
     },
     "independent_ffprobe": {
       "codec_video": "h264, 1080x1920, 24fps",
@@ -79,12 +77,55 @@
     },
     "visual_spotcheck": {
       "frames_sampled_s": [1.5, 10.0, 18.0, 19.0, 20.0, 21.0, 23.0, 28.0, 36.0, 42.0],
-      "hyperframes_block_frames": "10.0s, 18.0s, 19.0s, 20.0s, 21.0s, 23.0s, 28.0s caen dentro del bloque HyperFrames (frames 96-816, 4.0s-34.0s) — mas de 1 frame verificado ahi, incluyendo la region MAS densa en texto de la serie (roadmap FASE 1/2/3 + checklist 'cuando NO tiene sentido').",
-      "hallazgo_investigado": "20.0s-21.0s salio casi negro en la primera pasada — se investigo con frames adicionales (18/19/21/23s) para descartar defecto de la curva de finishing: CONFIRMADO como transicion/hold real entre la escena de roadmap y la escena de checklist (contenido crece en brillo antes y despues, 18.0s y 23.0s ambos nitidos). No es un crush de contraste.",
-      "verdict": "texto de UI (roadmap FASE 1/2/3, checklist, headlines kineticos, brand close) legible con buen contraste en TODOS los frames con contenido — el fix de curva heredado de reel2/reel3 sostiene en el reel con mas densidad de texto de la serie. Paleta ember-only/near-black, boxless, cero cian/violeta/lavanda/glow en los 10 frames vistos. Integracion HyperFrames->Remotion visualmente perfecta (sin salto de paleta/estilo en el corte de entrada 4.0s / salida 34.0s)."
+      "hyperframes_block_frames": "10.0s, 18.0s, 19.0s, 20.0s, 21.0s, 23.0s, 28.0s caen dentro del bloque HyperFrames (frames 96-816, 4.0s-34.0s) — mas de 1 frame verificado ahi, incluyendo la region MAS densa en texto de la serie.",
+      "hallazgo_investigado": "20.0s-21.0s salio casi negro en la primera pasada — investigado con frames adicionales, CONFIRMADO como transicion/hold real entre roadmap y checklist. No es un crush de contraste.",
+      "verdict": "texto de UI legible con buen contraste en TODOS los frames con contenido. Integracion HyperFrames->Remotion visualmente perfecta (sin salto de paleta/estilo en el corte 4.0s/34.0s)."
     },
     "promise_preservation": {"verdict": "pass", "detail": "roadmap de 3 fases + checklist de honestidad se muestran tal como planeado en el scene_plan"},
-    "subtitle_check": {"verdict": "pass", "detail": "todo el copy vive en pantalla (kinetic typography + HyperFrames), no hay caption fuera de cuadro"},
-    "handoff": "artefacto tecnicamente verificado por devops. Falta el final_review completo (promise/subtitle con ojos de video-producer, no solo devops) antes del sign-off de publicacion."
+    "subtitle_check": {"verdict": "pass", "detail": "todo el copy vive en pantalla (kinetic typography + HyperFrames), no hay caption fuera de cuadro"}
+  },
+  "post_render_video_producer_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer",
+    "verdict": "GO",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps",
+      "duration_s": 45.0,
+      "size_bytes": 5253379,
+      "video_bit_rate_bps": 729165,
+      "audio_bit_rate_bps": 198943,
+      "total_bit_rate_bps": 933934,
+      "faststart_verified_byte_level": "moov offset 32 < mdat offset 32225 — real"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-13.98", "input_tp": "-1.09", "input_lra": "3.00"},
+      "finding": "coincide EXACTO con el -13.98 reportado por devops.",
+      "tempo_check": "autocorrelacion del envelope de energia (mismo metodo que reel2/reel3): 122.7 BPM medido vs 122 BPM declarado — coincide dentro de 0.7 BPM. Tercer reel consecutivo de la serie donde el tempo medido confirma el brief declarado (127.9/128, 125.3/126, 122.7/122) — la directriz de Ernesto se cumplio con evidencia cuantitativa en TODA la serie, no solo en el primero.",
+      "retiro_en_beat_de_honestidad": "RMS por seccion: process/build [4.0-20.0s] mean=0.1574 vs honesty_checklist [20.0-34.0s] mean=0.1484 (~6% mas bajo) — retiro real pero MODESTO, consistente con el brief ('mas espacio', no un mute) y con la logica de musicVolume() en el TSX (duck a 0.6 con rampas de 20 frames). No es un mute dramatico porque el brief no lo pedia — es una reduccion de densidad, no de volumen puro; se documenta el numero real en vez de asumir que 'debia sonar mucho mas bajo'.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck_regiones_control": {
+      "metodo": "recorte+control (P-04): control = texto grande Remotion (cold_open_hook @2.0s, human_line @36.5s), medido en los 2 puntos MAS densos en texto del bloque HyperFrames (el roadmap con las 3 fases visibles @15.5s, y el checklist con los 3 casos visibles @30.5s) — el reel con mas texto de la serie, exactamente donde el fix de curva debia sostener bajo la maxima carga.",
+      "medicion": [
+        {"region": "cold_open_hook (control Remotion)", "mean_top2pct_luma": 249.6},
+        {"region": "human_line (control2 Remotion)", "mean_top2pct_luma": 249.7},
+        {"region": "brand_close wordmark (Remotion)", "mean_top2pct_luma": 246.8},
+        {"region": "HF roadmap denso, 3 fases @15.5s", "mean_top2pct_luma": 199.4, "block_var_dead_pct": 0.1},
+        {"region": "HF checklist denso, 3 items @30.5s", "mean_top2pct_luma": 250.2, "block_var_dead_pct": 0.0}
+      ],
+      "hallazgo": "el checklist (250.2) practicamente iguala el control Remotion (249.6-249.7) — legibilidad a la par de los bookends. El roadmap (199.4) es algo mas bajo pero eso es esperado: esa crop mezcla el kicker (muted, deliberadamente mas tenue), el titulo bold y el sub-label mas chico en un solo promedio — NO es un indicio de crushing (block-variance dead=0.1%, esencialmente cero bloques planos, contra 81.1% del propio control en su fondo near-black circundante). Ambos puntos de maxima densidad de texto pasan limpios.",
+      "palette_check_pixeles_reales": "hue de los pixeles saturados en los 2 frames densos: 97.6% y 91.4% en banda ember (10-55deg), 0.0% en banda cian/violeta (150-300deg) en ambos — el guard de marca se cumple en PIXELES renderizados, no solo en la revision de codigo fuente que quedo en pre_render_gates.",
+      "verdict": "pass — el bloque HyperFrames sostiene legibilidad y paleta bajo la maxima densidad de texto de la serie."
+    },
+    "integracion_visual_hyperframes_vs_remotion": {
+      "pregunta": "el bloque HyperFrames, ¿se siente 'de otro motor' frente a los bookends Remotion?",
+      "metodo": "inspeccion visual directa de los 9 frames muestreados + comparacion de tipografia/paleta/easing entre el bloque HyperFrames y los 4 momentos Remotion del mismo reel.",
+      "hallazgo": "NO se siente de otro motor. Misma familia tipografica (Inter/system-ui, mismo peso 700-800 en titulos), misma paleta exacta (bg #0A0A0A, accent #FF6B1A, text #F5F5F5, muted #9AA0A6 — los mismos 4 tokens de theme.ts, replicados a mano en el CSS del HTML), mismo caracter de easing (fade-up con offset vertical ~16px, comparable al mask-reveal de KineticHeadline aunque no sea la misma tecnica), boxless en ambos lados (ni el roadmap ni el checklist usan card/boxShadow, igual que los headlines Remotion). El corte de entrada (4.0s, cold_open_hook -> HyperFrames) y el de salida (34.0s, HyperFrames -> bridge ember -> human_line) no muestran salto de paleta ni de peso tipografico en los frames muestreados a ambos lados del corte.",
+      "verdict": "pass — primer uso en produccion de HyperFrames integrado sin fricción visual con el resto del catalogo Remotion de la serie."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO — reel 4 listo para publicar. Gate tecnico de la serie CERRADO (los 4 reels tienen GO)."
   }
 }
