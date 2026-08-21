@@ -1,0 +1,42 @@
+{
+  "reel": "lo-que-decidio-dmp-consulting",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "Usar el caso real del post vs mantener el patron 0-cliente de los reels 1-3",
+      "options_considered": [
+        "mantener el reel 4 tambien 100% conceptual, sin nombrar a DMP",
+        "usar el caso real (DMP Consulting Services + cita de Mayli Parra) que el post SI documenta con nombre e identidad publicos"
+      ],
+      "choice": "usar el caso real, con la atribucion literal del post",
+      "reason": "el post ya publica el nombre del cliente y una cita directa bajo acuerdo de confidencialidad SOLO para los datos sensibles, no para la identidad (el propio texto nombra 'DMP Consulting Services LLC' y 'Mayli Parra' explicitamente) — reusar informacion ya publica en el blog no es una nueva revelacion. Un caso real cierra la serie con mas peso que otro ejemplo hipotetico mas.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Nombrar o no la empresa de limpieza del ejemplo de Zapier",
+      "options_considered": ["inventar un nombre de negocio para dramatizar mejor", "dejarlo generico ('un caso simple'), fiel a que el post no le da nombre"],
+      "choice": "generico, sin nombre inventado",
+      "reason": "el post NO nombra a esta empresa (a diferencia de DMP) — inventar una identidad de cliente que no existe violaria la regla dura anti-claims/anti-testimonios fabricados de la agencia.",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-003",
+      "topic": "CTA final",
+      "options_considered": ["otro CTA interno (la serie ya termino)", "CTA real de conversion"],
+      "choice": "CTA real: cal.com/aetherlogik/discovery, identico al del post",
+      "reason": "es el ULTIMO reel de la serie — unico que vende, formula ganadora GO-4/4 de las 6 series anteriores.",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-004",
+      "topic": "Mantener 0 heroes i2v tambien en el cierre",
+      "options_considered": ["agregar 1 hero i2v aqui ya que es el reel con mas 'peso emocional' de la serie", "mantener la consistencia de 0 heroes de toda la serie"],
+      "choice": "mantener 0 heroes",
+      "reason": "mismo razonamiento de AlquilarOComprar d-001 — el caso se dramatiza mejor con StatReveal+cita que con una escena inventada de la oficina de DMP (que ni siquiera existe como referencia visual real). Consistencia de pipeline en toda la serie.",
+      "confidence": 0.75
+    }
+  ]
+}

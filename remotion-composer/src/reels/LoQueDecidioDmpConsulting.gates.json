@@ -1,0 +1,33 @@
+{
+  "reel": "lo-que-decidio-dmp-consulting",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado — SIN checkout local de Node/el fork en esta sesion)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.47,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.5, "reason": "2 StatReveal consecutivos (case_stat_horas/case_stat_citas) son el mismo device — ACEPTADO y declarado explicitamente (decision d-001/art-direction), mismo patron GO'd en TresNegociosTresResultados con 3 StatReveal consecutivos"},
+        "decorative_visuals": {"score": 0.0, "reason": "0 escenas i2v; toda escena tiene funcion informativa (cifra, cita o CTA)"},
+        "weak_motion": {"score": 0.9, "reason": "0 de 6 escenas son video real — reel de cierre 100% tipografia/stat, clasificado data_explainer"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.4, "reason": "5 de 6 escenas (~83%) son tipografia/stat/cita — esperable en un reel de cierre sin footage"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama produccion cinematografica"}
+      }
+    },
+    "variation_checker": {"score": 0.55, "verdict": "strong", "violations": ["2 StatReveal consecutivos — aceptado, mismo caso, cifras distintas, cada una con su propia atribucion; precedente GO'd en TresNegociosTresResultados"], "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0, "nota": "data_explainer honesto, sin reclamar motion_led"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "'1,440 horas' y '+160 citas' son EXACTOS del post con la MISMA atribucion literal ('estimacion de AetherLogik a partir de los datos del cliente'). La cita de Mayli Parra es textual. El caso de la empresa de limpieza NO se nombra (el post tampoco lo hace) — se evita fabricar una identidad de cliente inexistente. El CTA final coincide EXACTO con el link del post."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 118, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3", "file_size_bytes": 624058},
+    "sfx_whoosh": {"nota": "COMPARTIDO con el reel 1 de esta misma serie — costo ya contado en AlquilarOComprar.gates.json", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.39
+  },
+  "post_render_verify": {
+    "status": "PENDING",
+    "nota": "no renderizado aun. Ademas del gate estandar (npx remotion compositions, ffprobe, LUFS/TP), el verify de este reel exige confirmar EN PIXELES que cada cifra + su atribucion aparecen en el MISMO frame (mismo metodo beat-pixel-check de TresNegociosTresResultados) y que el CTA final coincide EXACTO con cal.com/aetherlogik/discovery."
+  }
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline: DMP Consulting Services coordinaba a 5 consultores bilingues a mano",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "introduce el caso real antes de las cifras",
+    "hero_moment": false,
+    "information_role": "apertura del caso",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "case_stat_horas",
+    "type": "stat_card",
+    "description": "StatReveal '1,440 horas' + atribucion REAL de cliente en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "da peso cuantitativo real al caso",
+    "hero_moment": true,
+    "information_role": "cifra de cliente atribuida",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "case_stat_citas",
+    "type": "stat_card",
+    "description": "StatReveal '+160 citas' + atribucion REAL de cliente en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "segunda cifra del mismo caso, distinta dimension (citas vs horas)",
+    "hero_moment": true,
+    "information_role": "cifra de cliente atribuida",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "quote",
+    "type": "text_card",
+    "description": "Cita textual de Mayli Parra + atribucion en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "humaniza el caso con la voz real de la clienta",
+    "hero_moment": false,
+    "information_role": "testimonio atribuido",
+    "texture_keywords": ["cita", "atribucion en frame"]
+  },
+  {
+    "id": "honest_note",
+    "type": "animation",
+    "description": "KineticHeadline: para un caso simple, la respuesta honesta a veces es Zapier",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "preserva el tono honesto/no-vendedor del post antes del CTA",
+    "hero_moment": false,
+    "information_role": "honestidad de marca",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA REAL (cal.com/aetherlogik/discovery)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de venta, unico reel de la serie que vende",
+    "hero_moment": false,
+    "information_role": "CTA real de conversion",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

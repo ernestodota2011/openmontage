@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline: uno es mas facil de empezar, el otro mas poderoso despues",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "plantea la tension facilidad vs poder del reel",
+    "hero_moment": false,
+    "information_role": "apertura",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "when_to_choose_table",
+    "type": "animation",
+    "description": "Tabla HyperFrames de 2 columnas: ELIGE ZAPIER SI vs ELIGE N8N SI, 4 criterios EXACTOS del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static (CSS reveal)", "lighting_key": "editorial ember sobre near-black, boxless"},
+    "shot_intent": "da al espectador un criterio de decision accionable",
+    "hero_moment": true,
+    "information_role": "comparativa densa / checklist de decision",
+    "texture_keywords": ["HyperFrames", "tabla de 2 columnas", "hairline ember"]
+  },
+  {
+    "id": "real_estate_example",
+    "type": "animation",
+    "description": "KineticHeadline: ejemplo HIPOTETICO del post (empresa de bienes raices), sin cifras inventadas",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "ilustra un caso de alta complejidad que justifica n8n",
+    "hero_moment": false,
+    "information_role": "ejemplo ilustrativo (no cliente real)",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "distinction_close",
+    "type": "animation",
+    "description": "KineticHeadline: no existe la opcion correcta en abstracto, existe la correcta para TU negocio",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "cierra el argumento del reel con personalizacion",
+    "hero_moment": false,
+    "information_role": "conclusion",
+    "texture_keywords": ["tipografia cinetica"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + tagline + CTA al reel 4 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, sin venta directa",
+    "hero_moment": false,
+    "information_role": "CTA interno de la serie",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

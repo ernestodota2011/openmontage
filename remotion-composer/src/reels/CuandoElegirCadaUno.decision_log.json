@@ -1,0 +1,39 @@
+{
+  "reel": "cuando-elegir-cada-uno",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "render_runtime de la tabla de criterios",
+      "options_considered": ["Remotion custom component", "HyperFrames, mismo patron del reel 2"],
+      "choice": "render_runtime=hyperframes, mismo layout base que cuanto-cuesta-cada-uno-tabla",
+      "reason": "reusar el layout DENTRO de la serie (2 reels didacticos consecutivos, misma forma de contenido: comparativa de criterios) es coherencia editorial — el riesgo de slideshow_risk.repetition se mitiga porque el CONTENIDO de cada tabla es totalmente distinto y cada reel tiene su propio cold_open/ejemplo/cierre alrededor.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Ejemplo de bienes raices — con o sin cifra",
+      "options_considered": ["inventar una cifra plausible para dar mas 'peso' al ejemplo", "dejarlo puramente cualitativo, sin numero, fiel a que el post no da ninguno"],
+      "choice": "sin cifra, 100% tipografico",
+      "reason": "el post describe el ejemplo de bienes raices en terminos de complejidad de proceso, sin ningun numero — inventar uno violaria la regla dura anti-claims.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Accent word del cierre",
+      "options_considered": ["acentuar 'correcta' (repetido 2 veces en el texto)", "acentuar 'TU' (aparece 1 sola vez)"],
+      "choice": "TU",
+      "reason": "la regla dura de marca exige UNA palabra en ember por composicion — 'correcta' aparece 2 veces en las lineas, lo que forzaria a acentuar ambas instancias o elegir arbitrariamente cual. 'TU' aparece una sola vez y es semanticamente el giro clave del argumento (de lo abstracto a lo personal).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan",
+      "options_considered": ["tono uniforme", "122 BPM, decisivo y estable"],
+      "choice": "122 BPM, corporate-tech instrumental decisivo",
+      "reason": "un reel de criterios de decision pide un tono mas 'firme'/estable que el analitico del reel 2 — dentro de la banda 120-140.",
+      "confidence": 0.7
+    }
+  ]
+}
