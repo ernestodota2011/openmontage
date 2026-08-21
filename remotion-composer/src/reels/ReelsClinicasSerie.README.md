@@ -7,6 +7,19 @@
 > sign-off tecnico final de `video-producer`, no una autorizacion de
 > publicacion.
 
+> [!warning] ACTUALIZACION 2026-08-21 (mismo dia) — defecto retroactivo encontrado y YA ARREGLADO en esta rama; pendiente re-render de 2/4
+> Auditoria de `video-producer` sobre `reels-inmobiliarios-serie` encontro un bug de LAYOUT en `BrandClose.tsx`
+> (componente COMPARTIDO por las 4 series): el `<div>` del `url` no tenia `maxWidth`/`textAlign:center` (a
+> diferencia del `tagline`, que si los tenia) — cuando el CTA es lo bastante largo para envolver a 2 lineas,
+> el texto queda pegado al borde izquierdo del frame sin margen. Confirmado con recorte+zoom 4x de la banda de
+> texto en **2 de 4 reels de ESTA serie**: `caso-real-medicina-estetica-v1.mp4` (reel 3) y
+> `lo-que-cambia-en-tu-clinica-v1.mp4` (reel 4). El texto sigue siendo 100% legible (ningun caracter cortado) —
+> el GO original de esta serie **NO se retira retroactivamente**, es un defecto estetico-menor, no de
+> comprension ni de marca (color/claims). El fix (mismo que `706d449` en `reels-inmobiliarios-serie`) ya esta
+> cherry-pickeado a ESTA rama (commit `5da357b`) — falta que devops re-renderice esos 2 reels (mismos
+> props/assets, solo cambio el componente) y video-producer re-verifique el `brand_close`. Detalle completo:
+> P-13 en `Video-problemas.md` y el handoff de `ReelsInmobiliariosSerie.README.md`.
+
 Continuacion de la formula ganadora GO-4/4 de `aetherlogik/reels-chatbot-serie`
 (ver `ReelsChatbotSerie.README.md`). Esta rama (`aetherlogik/reels-clinicas-serie`)
 parte de esa rama (HEAD `4c4501d`) para heredar `ChatThreadScene.tsx`,
@@ -20,8 +33,8 @@ brand-safe. Fuente del blog: `automatizar-citas-clinica-miami.md` (D:\aetherlogi
 |---|---|---|---|---|---|
 | 1 | El ciclo que te cuesta horas (gancho) | `agency/reels-clinicas-serie/el-ciclo-que-te-cuesta-horas-v1.mp4` | 30.0s exacto | Remotion (atelier) | **GO** |
 | 2 | Asi funciona la automatizacion real | `agency/reels-clinicas-serie/asi-funciona-la-automatizacion-real-v1.mp4` | 47.0s (contenedor 47.1s, ver nota AAC) | Remotion 100% (atelier) | **GO** |
-| 3 | Caso real: medicina estetica | `agency/reels-clinicas-serie/caso-real-medicina-estetica-v1.mp4` | 45.0s exacto | Remotion 100% (atelier, 1 hero i2v) | **GO** |
-| 4 | Lo que cambia en tu clinica | `agency/reels-clinicas-serie/lo-que-cambia-en-tu-clinica-v1.mp4` | 47.0s (contenedor 47.1s, ver nota AAC) | HIBRIDO Remotion + HyperFrames | **GO** |
+| 3 | Caso real: medicina estetica | `agency/reels-clinicas-serie/caso-real-medicina-estetica-v1.mp4` | 45.0s exacto | Remotion 100% (atelier, 1 hero i2v) | **GO** ⚠️ brand_close con defecto de layout, ver actualizacion arriba — fix listo, falta re-render |
+| 4 | Lo que cambia en tu clinica | `agency/reels-clinicas-serie/lo-que-cambia-en-tu-clinica-v1.mp4` | 47.0s (contenedor 47.1s, ver nota AAC) | HIBRIDO Remotion + HyperFrames | **GO** ⚠️ brand_close con defecto de layout, ver actualizacion arriba — fix listo, falta re-render |
 
 Todos servidos desde `https://media.aetherlogik.com/<ruta de arriba>`, todos
 verificados `curl 200` + descargados y auditados byte-a-byte por
@@ -139,10 +152,19 @@ techo de ~$25 declarado en la mision. Detalle linea por linea en el
    Corregido (`Root.tsx` commit `e6d86f4`); se agrego la seccion de
    auto-verificacion (`npx remotion compositions` como gate de entrada que
    corre devops) para toda serie futura.
+3. **P-13** (encontrado retroactivamente el 2026-08-21, mismo dia — ver
+   actualizacion al inicio de este documento) — `BrandClose.tsx` (el
+   componente compartido del cierre de marca) no le daba `maxWidth`/
+   `textAlign:center` al `<div>` del `url`, a diferencia del `tagline` —
+   el CTA se pegaba al borde del frame sin margen cuando envolvia a 2
+   lineas. Afecto a los reels 3 y 4 de ESTA serie. Fix ya cherry-pickeado
+   a esta rama (`5da357b`); pendiente re-render de esos 2 reels.
 
-Ninguno de los 2 llego a bloquear la publicacion final — P-11 se resolvio
-en el momento; P-12 se cazó antes del render de produccion (el intento
-diagnostico de devops nunca llego a producir output).
+Ninguno de los 3 llego a bloquear la publicacion final en su momento —
+P-11 se resolvio en el momento; P-12 se cazó antes del render de
+produccion; P-13 se encontro DESPUES del GO original (auditoria
+retroactiva de otra serie), por eso el GO no se retira pero queda
+pendiente un refresh antes de publicar en redes.
 
 ## Primer uso en produccion de HyperFrames en esta serie — resultado
 
@@ -154,17 +176,33 @@ friccion con el resto del catalogo Remotion, verificado en pixeles reales
 
 ## Handoffs pendientes
 
-- **Ernesto**: decidir publicacion en redes (orden, cadencia, canales).
-- Ninguno tecnico — los 4 videos estan verificados y listos.
+- **devops-aetherlogik-homelab**: re-renderizar `CasoRealMedicinaEstetica`
+  y `LoQueCambiaEnTuClinica` (esta rama, componente `BrandClose.tsx` ya
+  corregido en `5da357b`; mismos props/assets, sin cambios de duracion ni
+  de contenido) + finishing FFmpeg (misma recipe) + re-subir a R2 (sugerido
+  versionar el nombre, p.ej. `-v2.mp4`, para evitar cache stale de CF en
+  vez de sobreescribir el mismo path).
+- **video-producer**: re-verificar SOLO la escena `brand_close` de esos 2
+  reels tras el re-render (recorte+zoom del CTA, confirmar margen
+  simetrico).
+- **Ernesto**: decidir publicacion en redes (orden, cadencia, canales) —
+  y si prefiere esperar al refresh de los reels 3/4 antes de publicar esta
+  serie, o publicar ya (el defecto es menor y no afecta el mensaje).
 
 ## 📌 Para memoria
 
 - Serie CERRADA con GO 4/4, mismo patron que `reels-chatbot-serie`
-  (segunda serie consecutiva de la linea reels-del-blog en cerrar limpia).
+  (segunda serie consecutiva de la linea reels-del-blog en cerrar limpia
+  EN SU MOMENTO — el defecto P-13 se encontro despues, retroactivamente).
 - **P-11 y P-12** quedan documentados en `Video-problemas.md` para que
   `skill-curator` los cablee: P-11 a `aetherlogik-media` (routing Kling
   O1), P-12 a `aetherlogik-video` (definicion de "composicion lista" +
   paso de auto-verificacion `npx remotion compositions`).
+- **P-13** (nuevo): un bug de un componente COMPARTIDO puede quedar
+  invisible durante 2 series completas (chatbot escapo por CTAs cortos,
+  clinicas lo tuvo en 2/4) hasta que un CTA lo bastante largo lo dispara —
+  el spot-check visual necesita recorte+zoom de la banda de texto, no solo
+  lectura a resolucion completa.
 - El delta de BPM del reel 1 (1.3 BPM, el mas alto de la serie) sugiere que
   tracks de musica MAS CORTOS (30s vs 45-58s) tienen menos resolucion para
   el metodo de autocorrelacion — no bloqueante, pero vale la pena que un
