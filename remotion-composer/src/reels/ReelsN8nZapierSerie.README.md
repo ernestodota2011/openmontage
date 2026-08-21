@@ -31,17 +31,18 @@ reels 2 y 3), `composition_mode=atelier` en los 4.
 
 ## Manifiesto de assets generados (fal.ai) — costo real
 
-Presupuesto de la mision: **≤$25**. Costo real total: **≈$1.66**.
+Presupuesto de la mision: **≤$25**. Costo real total: **≈$2.44** (incluida la pista v2 del reel 4, ver verify final abajo).
 
 | Asset | Modelo | Parametros | Costo | URL fal.media (temporal, ~24h) | Tamano |
 |---|---|---|---|---|---|
 | Musica reel 1 | `fal-ai/elevenlabs/music` | 30000ms, 128 BPM declarado | $0.30 | `https://v3b.fal.media/files/b/0aa73f7b/-dkFNz-vR4UBMVRqvNyBR_music_generated.mp3` | 480,698 B |
 | Musica reel 2 | `fal-ai/elevenlabs/music` | 49000ms, 124 BPM declarado | $0.49 | `https://v3b.fal.media/files/b/0aa73f90/W7bSq9LxtHTYhDF4gESdV_music_generated.mp3` | 783,718 B |
 | Musica reel 3 | `fal-ai/elevenlabs/music` | 48000ms, 122 BPM declarado | $0.48 | `https://v3b.fal.media/files/b/0aa73f7c/Rd6IWahhkDR-1UCKE8FYt_music_generated.mp3` | 767,418 B |
-| Musica reel 4 | `fal-ai/elevenlabs/music` | 39000ms, 118 BPM declarado | $0.39 | `https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3` | 624,058 B |
+| Musica reel 4 (v1, **DESCARTADA**) | `fal-ai/elevenlabs/music` | 39000ms, 118 BPM declarado | $0.39 | `https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3` | 624,058 B |
+| Musica reel 4 (v2, **VALIDADA**) | `fal-ai/elevenlabs/music` | 39053ms, 124 BPM declarado, 125.0 medido | $0.39 | `https://v3b.fal.media/files/b/0aa740da/VI07Z2B6FKdxog-YQJGv4_music_generated.mp3` | 624,894 B |
 | SFX chip (compartido reels 2+3) | `fal-ai/elevenlabs/sound-effects/v2` | 0.5s | $0.001 | `https://v3b.fal.media/files/b/0aa73f7f/MZDKqDZ7FRw7PVHZ0rJKu_sound_effect.mp3` | 8,821 B |
 | SFX whoosh (compartido reels 1+4) | `fal-ai/elevenlabs/sound-effects/v2` | 0.6s | $0.0012 | `https://v3b.fal.media/files/b/0aa73f7f/OPE4Ad3Gs5427560K1WjJ_sound_effect.mp3` | 10,493 B |
-| **Total** | | | **≈$1.663** | | |
+| **Total** | | | **≈$2.443** | | |
 
 **0 stills, 0 i2v** — sin costo de imagen/video generativo (decision d-001
 de cada reel). Las 2 tablas HyperFrames (`hyperframes-compositions/`) las
@@ -340,3 +341,124 @@ serie) antes del sign-off GO/NO-GO oficial.
    a diferencia de `reels-ia-miami-serie` (README con receta simplificada desactualizada
    frente a `premium-craft-standards.md`) — evidencia de que la lección de esa serie se
    propagó al handoff de pre-producción de la siguiente, cerrando el loop.
+
+## Verify final INDEPENDIENTE de `video-producer` (2026-08-21) — veredicto de serie: **NO-GO CONDICIONAL (3/4 GO, 1/4 en fix)**
+
+> [!warning] La serie NO cierra GO todavia. 3 de 4 reels: GO. El reel 4 tiene UN hallazgo real (BPM), ya corregido en pre-produccion, PENDIENTE de re-render por devops.
+
+Descarga propia de los 4 `-v1.mp4` desde R2 (`curl` 200 x4) + `ffmpeg`/`ffprobe`/`python`
+locales (numpy puro, sin scipy) — **sin confiar en el reporte de devops**, mismo rigor
+independiente de las 6 series anteriores.
+
+### Tecnico (ffprobe, re-medido) — 4/4 exacto
+Los 4: h264, 1080x1920, 24fps, aac 48000Hz estereo. Duraciones EXACTAS: 30.0/49.0/48.0/39.0s.
+
+### Audio (LUFS/TP, re-medido — coincide EXACTO con lo reportado por devops en los 4)
+
+| Reel | LUFS devops | LUFS medido | TP devops | TP medido | TP `astats` | BPM declarado | **BPM medido** | Veredicto BPM |
+|---|---|---|---|---|---|---|---|---|
+| `AlquilarOComprar` | -13.98 | **-13.98** | -1.87 | **-1.87** | -1.914 dB | 128 | **127.7** | pass |
+| `CuantoCuestaCadaUno` | -14.07 | **-14.07** | -1.91 | **-1.91** | -1.922 dB | 124 | **125.0** | pass |
+| `CuandoElegirCadaUno` | -13.98 | **-13.98** | -1.78 | **-1.78** | -1.807 dB | 122 | **122.4** | pass |
+| `LoQueDecidioDmpConsulting` | -14.02 | **-14.02** | -1.99 | **-1.99** | -1.986 dB | 118 | **117.6** | **FALLA — bajo el piso de 120** |
+
+LUFS/TP coinciden EXACTOS a 2 decimales en los 4 (P-15 preventivo sigue funcionando,
+7ª serie consecutiva sin re-mux por loudness). El BPM medido por autocorrelacion (numpy
+puro, mismo metodo de `reels-ia-miami-serie`) coincide dentro de ±1.0 BPM del declarado
+en los 4 — **el problema no es la medicion, es el numero que se declaro**: 118 BPM
+(reel 4) esta bajo el piso duro de 120 de la directriz de Ernesto ("musica movida,
+120-140 BPM, declarado"). El texto de la propia mision citaba una banda floja
+"118-128" que video-producer copio sin cruzarla contra el piso real (120) — gap de
+proceso en la PRE-PRODUCCION, no en la generacion ni en el render.
+
+### Fix aplicado (mismo dia, antes de re-render)
+
+Pista v2 regenerada (`fal-ai/elevenlabs/music`, prompt explicito "124 BPM, moderately
+upbeat, clearly danceable pulse, not slow or ballad-like", 39053ms, +$0.39) y **medida
+independientemente por video-producer ANTES de propagarla**: **125.0 BPM** — dentro de
+banda. `props/lo-que-decidio-dmp-consulting.json` ya apunta a la ruta R2 versionada
+`lo-que-decidio-dmp-consulting-musica-v2.mp3` (commit `8230c549`).
+`LoQueDecidioDmpConsulting.gates.json` documenta el hallazgo completo (P-18).
+
+**Por que re-render completo y no un re-mux manual del AAC**: este reel no tiene
+dependencias HyperFrames ni i2v (100% Remotion) — un re-render completo desde el master
+es mas simple y mas seguro que editar el AAC ya mezclado del `-v1.mp4` (evita el patron
+de aplicar un fix a ciegas sobre un derivado sin reproducir la cadena completa, leccion
+P-09 de esta misma linea).
+
+### Coherencia entre planos
+No aplica en los 4 reels — 0 escenas i2v en toda la serie (decision d-001).
+
+### Paleta (escaneo programatico HSV region+control, 27 frames muestreados)
+**0.0% cian/violeta en los 27 frames de los 4 reels**, sin excepcion. Sin cards, sin
+glow, sin lavanda/violeta. El barrido EmberThread del reel 1 (t=20s) escanea ember=100%
+en pixeles coloreados — es el streak calido intencional de la escena bridge (motivo ya
+GO'd en las 6 series anteriores), no un fondo de color fuera de banda. Pass en los 4.
+
+### Sin logos de terceros reproducidos
+Las 2 tablas HyperFrames (reels 2 y 3) usan UNICAMENTE los labels tipograficos "ZAPIER"
+y "N8N" en texto plano — cero imagenes de logo de ninguna de las 2 marcas. Confirmado
+visualmente en las 4 filas x 2 tablas. Pass — cumple la restriccion explicita de la
+mision ("los logos de n8n/Zapier son marcas ajenas — referencias tipograficas propias,
+NO reproduzcas sus logos").
+
+### Beat-pixel-check (reel 4 — cifras, cita y CTA en el MISMO frame)
+- t=9s: **"1,440 horas"** + "recuperadas al ano al automatizar con n8n" + atribucion
+  "DMP Consulting Services, Houston/Katy TX . estimacion de AetherLogik a partir de los
+  datos del cliente." — LOS TRES en el MISMO frame.
+- t=16s: **"+160 citas"** + "adicionales cada mes, sin contratar personal" + la MISMA
+  atribucion — en el MISMO frame.
+- t=22s: cita completa de Mayli Parra + atribucion "— Mayli Parra, DMP Consulting
+  Services" — EN EL MISMO frame, texto EXACTO al del post.
+- t=35s (`brand_close`, CTA real): "cal.com/aetherlogik/discovery . agenda tu
+  diagnostico gratuito ->" — verificado con recorte+ampliacion 4x de la banda de texto
+  (doctrina P-13, nunca a resolucion de frame completo): centrado, margenes simetricos,
+  coincide EXACTO con el link de cierre del post.
+
+Pass en los 4 puntos.
+
+### `brand_close` de los 4 reels (confirma que el fix P-13 sigue vigente)
+Los 4 (`AlquilarOComprar`, `CuantoCuestaCadaUno`, `CuandoElegirCadaUno`,
+`LoQueDecidioDmpConsulting`) se inspeccionaron directamente: isotipo real +
+wordmark two-tone + tagline + CTA centrado, margenes simetricos en ambos lados, sin
+bleed en ninguno — los CTAs internos de los reels 1-3 son largos (2 lineas), exactamente
+el patron que dispara el bug de P-13 si regresa. Sin regresion.
+
+### Veredicto de serie
+
+| # | Reel | Veredicto |
+|---|---|---|
+| 1 | `AlquilarOComprar` | **GO** |
+| 2 | `CuantoCuestaCadaUno` | **GO** |
+| 3 | `CuandoElegirCadaUno` | **GO** |
+| 4 | `LoQueDecidioDmpConsulting` | **NO-GO CONDICIONAL** — unico hallazgo: BPM 117.6 (v1) bajo el piso de 120. Fix ya aplicado (pista v2, 125.0 BPM medido), pendiente re-render + re-verify. |
+
+**Serie: NO-GO hasta que el reel 4 se re-renderice con la pista v2 y se re-verifique.**
+Los reels 1-3 ya son entregables (`-v1.mp4`, sin excepcion) — no requieren tocarse.
+
+## Handoffs pendientes (actualizado tras verify final)
+
+- **`devops-aetherlogik-homelab`**: re-renderizar `LoQueDecidioDmpConsulting` con
+  `props/lo-que-decidio-dmp-consulting.json` YA actualizado (musicSrc -> pista v2) ->
+  finishing FFmpeg (misma recipe, TP=-2.0) -> subir como
+  `agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v2.mp4` (conservar `-v1`
+  para trazabilidad hasta decision de limpieza de R2, mismo patron de P-13).
+- **`video-producer`** (proxima sesion): re-verify del reel 4 `-v2.mp4` (ffprobe + LUFS/TP
+  + BPM medido independientemente, banda 120-140 esta vez) -> si pasa, GO de serie
+  completo, actualizar tabla de "Los 4 videos canonicos" y cerrar el veredicto aqui.
+- **Ernesto / quien suba a Drive**: esperar el GO completo de serie antes de publicar —
+  hoy solo 3/4 reels son entregables.
+
+## 📌 Para memoria (verify final)
+
+- Primer hallazgo REAL de contenido (no solo tooling) en el verify final de la linea
+  `reels-del-blog` desde que la disciplina de recalibrar `I`+`TP=-2.0` preventivo
+  empezo a rendir — y es de un tipo NUEVO: no un defecto de render/finishing, sino un
+  numero de PRE-PRODUCCION (BPM declarado) que nunca se cruzo contra el piso duro real
+  de la directriz de marca. Ningun gate de la plataforma (`slideshow_risk`,
+  `variation_checker`, `delivery_promise`, `brand_palette_guard`, `anti_claims_audit`)
+  verifica BPM — es un gap de cobertura de gate, no solo un error puntual de esta serie.
+  Registrado como P-18 en `Video-problemas.md` para que `skill-curator` lo cablee.
+- El costo de la correccion fue minimo (+$0.39, una llamada) porque se detecto ANTES
+  del render final del reel corregido — evidencia a favor de medir BPM independientemente
+  SIEMPRE en el verify, no solo cuando alguien lo senala explicitamente.
