@@ -1,0 +1,8 @@
+{
+  "heroVideoSrc": "https://v3b.fal.media/files/b/0aa73db3/w_xXR63SYz6_zdL3OQfre_output.mp4",
+  "musicSrc": "https://v3b.fal.media/files/b/0aa73dbc/eMiEL1yVqzVOMbupWmxKX_music_generated.mp3",
+  "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
+  "sfxChimeSrc": "https://media.aetherlogik.com/agency/reels-hvac-serie/assets/sfx-chime-stat.mp3",
+  "tail_padding_seconds": 0,
+  "_devops_note": "heroVideoSrc y musicSrc son URLs TEMPORALES de fal.media (expiran ~24h desde 2026-08-21). Antes de renderizar: archivar ambas a R2 (agency/reels-ia-miami-serie/assets/tres-negocios-tres-resultados-hero-i2v.mp4 y .../tres-negocios-tres-resultados-musica.mp3, via la via segura ya establecida, P-07) y actualizar este JSON con las URLs de media.aetherlogik.com antes de correr el render."
+}

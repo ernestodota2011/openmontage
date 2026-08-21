@@ -1,0 +1,82 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "i2v",
+    "description": "Hero i2v real: negocio en Miami de dia, establecimiento generico (no atado a un solo caso)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "slow push-in", "lighting_key": "golden daylight, near-black interior contrast"},
+    "shot_intent": "establece 'negocios reales' en plural antes de los 3 casos",
+    "hero_moment": true,
+    "information_role": "apertura de la seccion de casos",
+    "texture_keywords": ["i2v Kling O1", "golden hour", "palmeras"]
+  },
+  {
+    "id": "EmberThread_bridge_a",
+    "type": "transition",
+    "description": "Barrido ember de 0.5s entre el hero y el primer caso",
+    "shot_language": {"shot_size": "N/A", "camera_movement": "static", "lighting_key": "near-black con barrido ember"},
+    "shot_intent": "transicion de marca entre hero y datos",
+    "hero_moment": false,
+    "information_role": "bridge",
+    "texture_keywords": ["ember sweep"]
+  },
+  {
+    "id": "case_clinic",
+    "type": "stat_card",
+    "description": "StatReveal '+125 horas/semana' — cifra REPORTADA POR LA PROPIA CLINICA, atribuida en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "primer caso: escala de una red multi-sede",
+    "hero_moment": false,
+    "information_role": "caso 1 de 3, atribucion de cliente",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "case_dmp",
+    "type": "stat_card",
+    "description": "StatReveal '$36,000' — estimacion de AetherLogik a partir de datos del cliente, nombre publico DMP Consulting",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "segundo caso: consultoria bilingue de servicio",
+    "hero_moment": false,
+    "information_role": "caso 2 de 3, atribucion de estimacion propia",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "case_marino",
+    "type": "stat_card",
+    "description": "StatReveal '$4,400/mes' — estimacion de AetherLogik, nombre publico Marino HVAC, cifra ancla sin duplicar el detalle del reel dedicado de la serie hvac",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "tercer caso: negocio de servicio a domicilio",
+    "hero_moment": false,
+    "information_role": "caso 3 de 3, atribucion de estimacion propia",
+    "texture_keywords": ["stat card", "atribucion en frame"]
+  },
+  {
+    "id": "EmberThread_bridge_b",
+    "type": "transition",
+    "description": "Barrido ember de 0.5s entre los casos y la cita",
+    "shot_language": {"shot_size": "N/A", "camera_movement": "static", "lighting_key": "near-black con barrido ember"},
+    "shot_intent": "transicion de marca entre datos y voz humana",
+    "hero_moment": false,
+    "information_role": "bridge",
+    "texture_keywords": ["ember sweep"]
+  },
+  {
+    "id": "quote_line",
+    "type": "animation",
+    "description": "Cita textual de Mayli Parra (DMP Consulting), atribuida en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio, mas intimo"},
+    "shot_intent": "humaniza los 3 casos con una voz real y autorizada",
+    "hero_moment": false,
+    "information_role": "testimonio atribuido",
+    "texture_keywords": ["cita textual"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark + referencia a los tutoriales dedicados por vertical + CTA al reel 4 de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca, referencia cruzada a otros tutoriales de la linea",
+    "hero_moment": false,
+    "information_role": "CTA interno + referencia cruzada",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

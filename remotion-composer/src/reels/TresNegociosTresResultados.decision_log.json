@@ -1,0 +1,62 @@
+{
+  "reel": "tres-negocios-tres-resultados",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes",
+      "options_considered": [
+        "1 hero i2v ESPECIFICO por caso (3 heroes, uno por sector)",
+        "1 hero i2v GENERICO de apertura + StatReveal para los 3 casos"
+      ],
+      "choice": "renderer_family=animation, render_runtime=remotion, composition_mode=atelier, 1 sola escena i2v (cold_open_hero, generica)",
+      "reason": "la doctrina de la serie es maximo 1 hero i2v por reel. Con 3 casos de sectores distintos en el mismo reel, un hero especifico de UNO solo (ej. una clinica) distorsionaria el reparto de protagonismo entre los 3 — un hero generico de 'negocios reales de Miami' establece el tono sin favorecer a ningun caso.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Atribucion diferenciada por caso — regla anti-claims",
+      "options_considered": [
+        "usar la misma frase de atribucion generica para los 3 casos",
+        "atribucion EXACTA y DISTINTA por caso, fiel a como el post la declara para cada uno"
+      ],
+      "choice": "atribucion diferenciada: clinica='cifras reportadas por la propia clinica', DMP/Marino='estimacion de AetherLogik a partir de los datos del cliente'",
+      "reason": "el post mismo distingue explicitamente el origen de cada cifra (client-reported vs estimacion nuestra) — fusionar esa distincion en una sola frase generica violaria la regla de atribucion exacta de la mision y la doctrina de 'Atribucion de cifras' de la agencia (etiquetar derivaciones, atribuir datos de cliente).",
+      "confidence": 0.95
+    },
+    {
+      "id": "d-003",
+      "topic": "Por que NO repetir el detalle completo de Marino HVAC",
+      "options_considered": [
+        "replicar las 3 cifras completas de LosNumerosDeMarinoHVAC.tsx (serie hvac) para dar contexto completo",
+        "usar solo la cifra ancla ($4,400/mes + 9h/semana) y remitir al reel dedicado"
+      ],
+      "choice": "cifra ancla + referencia cruzada explicita en brand_close",
+      "reason": "la serie reels-hvac-serie ya tiene un reel completo dedicado a Marino HVAC con el desglose de $50/trabajo, 88 facturas/mes y 36h/mes. Repetirlo aqui es redundante dentro de la misma linea editorial y le resta tiempo de pantalla a los otros 2 casos (que no tienen reel propio). El brand_close remite explicitamente 'profundiza en tu sector' — cumple la instruccion de la mision de referenciar los otros tutoriales.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-004",
+      "topic": "Que cita usar — Mayli Parra vs Alain Marino",
+      "options_considered": [
+        "citar a Alain Marino (Marino HVAC)",
+        "citar a Mayli Parra (DMP Consulting Services)"
+      ],
+      "choice": "Mayli Parra",
+      "reason": "la cita de Alain Marino ya aparece citada en detalle dentro de LosNumerosDeMarinoHVAC.tsx (serie hvac, reel 3/4). Citar a Mayli Parra aqui evita duplicar el mismo testimonio textual entre dos series de la misma linea editorial y le da voz a un caso que NO tiene reel propio en ninguna otra serie.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-005",
+      "topic": "Music plan — tempo/energia de resolucion",
+      "options_considered": [
+        "mantener el tempo tenso del reel 1 por continuidad",
+        "126 BPM, calido y resolutivo, 'exito de negocio real'"
+      ],
+      "choice": "126 BPM, corporate-tech instrumental, mood 'warm/resolutivo'",
+      "reason": "el reel de casos reales debe sentirse como el pago del setup (reel 1 tenso, reel 2 didactico) — un tempo mas calido que resuelve encaja con 3 historias de exito reales. Dentro de la banda 120-140 exigida.",
+      "confidence": 0.75
+    }
+  ]
+}

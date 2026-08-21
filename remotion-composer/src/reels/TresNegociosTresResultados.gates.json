@@ -1,0 +1,34 @@
+{
+  "reel": "tres-negocios-tres-resultados",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.5,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "8 escenas (incluye 2 bridges), device distinto en cada beat principal (i2v, 3x stat_card con captions distintas, cita, brand_close)"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra 'negocios reales' plural, tono coherente con el contenido"},
+        "weak_motion": {"score": 0.45, "reason": "1 de 8 escenas es video real (i2v)"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.4, "reason": "6 de 8 escenas (75%) tipografia/stat_card, esperado para un reel de 3 casos de datos"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico mas alla del hero declarado"}
+      }
+    },
+    "variation_checker": {"score": 0.45, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "N/A", "MS", "MS", "MS", "N/A", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "motion_led", "valid": true, "motion_ratio": 0.111, "motion_cuts": 1, "slide_cuts": 7, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "escena unica i2v — sin multi-plano que encadenar, PASS por diseno"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "'+125 horas/semana' (clinica, atribuido como reportado por el cliente), '$36,000/ano' (DMP, atribuido como estimacion de AetherLogik), '$4,400/mes + 9h/semana' (Marino HVAC, atribuido como estimacion de AetherLogik) son EXACTAMENTE las cifras y su tipo de atribucion tal como el post las declara para cada caso. La cita de Mayli Parra es textual. Ningun numero se inventa ni se redondea."}
+  },
+  "assets_generated": {
+    "still": {"model": "fal-ai/nano-banana-pro", "resolution": "2K", "output_format": "jpeg", "aspect_ratio": "9:16", "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73da6/9g4cvvgCCnrsV8VMPG61a_Xz9gSmxS.jpg"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "unit_price_usd_per_s": 0.112, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73db3/w_xXR63SYz6_zdL3OQfre_output.mp4"},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "length_ms_requested": 45500, "unit_price_usd_per_min": 0.6, "cost_usd": 0.455, "url": "https://v3b.fal.media/files/b/0aa73dbc/eMiEL1yVqzVOMbupWmxKX_music_generated.mp3"},
+    "sfx_chime": {"source": "reusado — reels-hvac-serie/assets/sfx-chime-stat.mp3", "cost_usd": 0.0},
+    "total_cost_usd_est": 1.165
+  },
+  "post_render_verify": {
+    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + coherence/palette + beat-pixel-check de las 3 atribuciones) sobre el MP4 real una vez publicado."
+  }
+}
