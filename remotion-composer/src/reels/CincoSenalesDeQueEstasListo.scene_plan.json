@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "animation",
+    "description": "KineticHeadline: '¿Tu negocio esta listo? Reconoce al menos tres.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "abre el auto-diagnostico del cierre",
+    "hero_moment": false,
+    "information_role": "apertura del reel de cierre",
+    "texture_keywords": ["tipografia cinetica", "sin i2v"]
+  },
+  {
+    "id": "five_signals",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 5 QualifyTag: las 5 senales textuales del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "permite al espectador auto-calificarse contra el post",
+    "hero_moment": false,
+    "information_role": "las 5 senales reales de la seccion del post",
+    "texture_keywords": ["cascada de tags", "stagger 80f"]
+  },
+  {
+    "id": "faq_beat",
+    "type": "animation",
+    "description": "KineticHeadline: '¿Necesitas saber de tecnologia? No. Ese es nuestro trabajo.' — fiel a la FAQ",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "corta la objecion de 'no se de tecnologia'",
+    "hero_moment": false,
+    "information_role": "respuesta de FAQ",
+    "texture_keywords": ["una palabra en ember"]
+  },
+  {
+    "id": "series_recap",
+    "type": "animation",
+    "description": "KineticHeadline de 4 lineas que resume los 3 reels anteriores + 'Ahora, el tuyo.' — FilmGrade aplicado",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio, grado filmico"},
+    "shot_intent": "amarra la serie completa antes del cierre de marca",
+    "hero_moment": false,
+    "information_role": "recap de la serie",
+    "texture_keywords": ["stagger largo", "grano sutil"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA REAL de conversion (cal.com/aetherlogik/discovery)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de venta directa de la serie completa",
+    "hero_moment": false,
+    "information_role": "CTA REAL de conversion",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

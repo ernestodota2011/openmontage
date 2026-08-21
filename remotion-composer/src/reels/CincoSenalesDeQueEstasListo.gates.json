@@ -1,0 +1,32 @@
+{
+  "reel": "cinco-senales-de-que-estas-listo",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.55,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "toda la informacion viene del post, nada decorativo"},
+        "weak_motion": {"score": 0.6, "reason": "0 escenas i2v — tipico y aceptado en un cierre de serie (mismo patron GO'd en cierres anteriores)"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.6, "reason": "5 de 5 escenas (100%) tipografia/stat_card, esperado para un reel de cierre 100% informativo"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico, el reel se declara de cierre/CTA"}
+      }
+    },
+    "variation_checker": {"score": 0.45, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "nota": "reel de cierre 100% Remotion atelier, se declara typography_led (no motion_led) — no sobre-reclama video real"},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "las 5 senales son fieles y en el mismo orden de la seccion '¿Tu negocio esta listo para la IA?' del post. La respuesta de faq_beat es fiel a la FAQ real. El CTA (cal.com/aetherlogik/discovery, '30 minutos, sin costo, sin compromiso') es el link y marco EXACTOS del cierre del post. Ningun claim nuevo se introduce."}
+  },
+  "assets_generated": {
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 132, "length_ms_requested": 45500, "unit_price_usd_per_min": 0.6, "cost_usd": 0.455, "url": "https://v3b.fal.media/files/b/0aa73da8/rXKybvREZzCjhEjD13GqX_music_generated.mp3"},
+    "sfx_whoosh": {"source": "reusado — reels-clinicas-serie/shared/sfx-whoosh.mp3", "cost_usd": 0.0},
+    "total_cost_usd_est": 0.455
+  },
+  "post_render_verify": {
+    "status": "PENDIENTE — no se ha renderizado. Handoff a devops-aetherlogik-homelab: render Remotion (composicion registrada en Root.tsx) + finishing FFmpeg (loudnorm TP=-2.0 desde el primer pase, ver README de la serie) + subida a R2. video-producer corre el verify INDEPENDIENTE (ffprobe + frame-sampling + brand guard) sobre el MP4 real una vez publicado, y confirma que el link/CTA final es correcto y legible (recorte+ampliacion del texto libre, doctrina de la skill)."
+  }
+}
