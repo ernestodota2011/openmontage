@@ -34,6 +34,10 @@ import { VeintiunVecesMasProbable, VeintiunVecesMasProbableProps, VEINTIUN_VECES
 import { LoQueYaPuedesAutomatizar, LoQueYaPuedesAutomatizarProps, LO_QUE_YA_PUEDES_AUTOMATIZAR_TOTAL_FRAMES } from "./reels/LoQueYaPuedesAutomatizar";
 import { CuandoEntraElHumano, CuandoEntraElHumanoProps, CUANDO_ENTRA_EL_HUMANO_TOTAL_FRAMES } from "./reels/CuandoEntraElHumano";
 import { ComoEmpiezasSinPerderLeads, ComoEmpiezasSinPerderLeadsProps, COMO_EMPIEZAS_SIN_PERDER_LEADS_TOTAL_FRAMES } from "./reels/ComoEmpiezasSinPerderLeads";
+import { LoQueTeCuestaFacturarAMano, LoQueTeCuestaFacturarAManoProps, LO_QUE_TE_CUESTA_FACTURAR_A_MANO_TOTAL_FRAMES } from "./reels/LoQueTeCuestaFacturarAMano";
+import { ComoFuncionaLaAutomatizacionDeFacturacion, ComoFuncionaLaAutomatizacionDeFacturacionProps, COMO_FUNCIONA_LA_AUTOMATIZACION_DE_FACTURACION_TOTAL_FRAMES } from "./reels/ComoFuncionaLaAutomatizacionDeFacturacion";
+import { LosNumerosDeMarinoHVAC, LosNumerosDeMarinoHVACProps, LOS_NUMEROS_DE_MARINO_HVAC_TOTAL_FRAMES } from "./reels/LosNumerosDeMarinoHVAC";
+import { LoQueNecesitasParaAutomatizar, LoQueNecesitasParaAutomatizarProps, LO_QUE_NECESITAS_PARA_AUTOMATIZAR_TOTAL_FRAMES } from "./reels/LoQueNecesitasParaAutomatizar";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -636,6 +640,65 @@ export const Root: React.FC = () => {
           sfxWhooshSrc: "",
           tail_padding_seconds: 0,
         } as ComoEmpiezasSinPerderLeadsProps}
+      />
+      <Composition
+        id="LoQueTeCuestaFacturarAMano"
+        component={LoQueTeCuestaFacturarAMano}
+        durationInFrames={LO_QUE_TE_CUESTA_FACTURAR_A_MANO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueTeCuestaFacturarAManoProps}
+      />
+      <Composition
+        id="ComoFuncionaLaAutomatizacionDeFacturacion"
+        component={ComoFuncionaLaAutomatizacionDeFacturacion}
+        durationInFrames={COMO_FUNCIONA_LA_AUTOMATIZACION_DE_FACTURACION_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          facturacionAutomaticaSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          tail_padding_seconds: 0,
+        } as ComoFuncionaLaAutomatizacionDeFacturacionProps}
+      />
+      <Composition
+        id="LosNumerosDeMarinoHVAC"
+        component={LosNumerosDeMarinoHVAC}
+        durationInFrames={LOS_NUMEROS_DE_MARINO_HVAC_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChimeSrc: "",
+          tail_padding_seconds: 0,
+        } as LosNumerosDeMarinoHVACProps}
+      />
+      <Composition
+        id="LoQueNecesitasParaAutomatizar"
+        component={LoQueNecesitasParaAutomatizar}
+        durationInFrames={LO_QUE_NECESITAS_PARA_AUTOMATIZAR_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LoQueNecesitasParaAutomatizarProps}
       />
     </>
   );
