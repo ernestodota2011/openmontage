@@ -6,7 +6,7 @@
     "slideshow_risk": {"average": 0.5, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"5 escenas, cada una con un device distinto (i2v, tipografia x3 variantes, brand_close)"},"decorative_visuals":{"score":0.0,"reason":"el hero i2v comunica el problema real, no decora"},"weak_motion":{"score":0.8,"reason":"solo 1 de 5 escenas es video real — tipico y aceptado para un gancho tipografia-led con 1 hero"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico por escena"},"typography_overreliance":{"score":1.6,"reason":"4 de 5 escenas (80%) tipografia, mitigado por el hero i2v de apertura y la variedad de contenido (pregunta/oferta/honestidad) en cada beat"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico mas alla del hero, que si es i2v real"}}},
     "variation_checker": {"score": 0.6, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico (nada de 'moderno/elegante/innovador')"},
     "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.17, "motion_cuts": 1, "slide_cuts": 4, "nota": "el reel se declara gancho tipografia-led con 1 hero i2v de apertura — no reclama motion_led, por lo que el umbral del 70% no aplica."},
-    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "auto-score sobre el codigo/props; el escaneo real de pixeles lo hace video-producer en el verify post-render."},
+    "brand_palette_guard": {"verdict": "pass (confirmado en verify post-render)", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "1 sola escena i2v, sin encadenado first/last-frame — PASS por diseno, no aplica coherencia entre planos"},
     "anti_claims_audit": {"verdict": "pass", "detalle": "'30 minutos', 'gratis', 'sin compromiso', 'sin letra pequena', 'sin vender humo' son literales del primer parrafo y la FAQ del post. Ninguna cifra de resultado ni testimonio se introduce en este reel."}
   },
@@ -15,5 +15,20 @@
     "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "unit_price_usd_per_s": 0.112, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73fa4/xnULnsPZ6iV4strpopoeZ_output.mp4"},
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "length_ms_requested": 30000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.30, "url": "https://v3b.fal.media/files/b/0aa73f7f/Dio_osLoZ3SigXNXvzlk2_music_generated.mp3"},
     "total_cost_usd_est": 1.01
+  },
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia de R2 + ffmpeg/ffprobe/python locales, no confia en el reporte de devops)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/lo-que-no-sabes-de-tu-negocio-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 30.0, "size_bytes": 6223896, "http_status": 200},
+    "audio_spotcheck": {"lufs_medido_independiente": -14.49, "true_peak_dbtp_medido_independiente": -1.93, "true_peak_astats_corroboracion_db": -1.933, "lufs_verdict": "pass (banda -14+-0.5)", "true_peak_verdict": "pass", "bpm_declarado": 128, "bpm_medido_autocorrelacion": 127.7, "bpm_delta": 0.3},
+    "palette_scan": {"metodo": "HSV region, 4 frames muestreados (2.5s/4.9s hero, 26.0s brand_close)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "coherence_check": {"hero_frames": "2.5s vs 4.9s", "veredicto": "pass — mismo personaje/escritorio/lampara/papeles, push-in leve, sin drift"},
+    "visual_spotcheck": {
+      "hero": "pass — dueno solo de noche, papeles dispersos, luz tungsteno, texto overlay legible con scrim",
+      "reveal_30min": "DEFECTO ENCONTRADO — accentWord='Gratis.' con punto NUNCA matcheaba en KineticHeadline (compara la palabra YA limpia de puntuacion contra el prop que se paso CON punto). 'Gratis.' se renderizo en blanco, no en ember. Confirmado en pixeles (frame 14.0s). Fix pusheado (accentWord='Gratis', commit 1116b2e) — PENDIENTE RE-RENDER, no aplicado a este v1.",
+      "brand_close": "pass — isotipo real, wordmark AetherLogik dos tonos, tagline, URL centrada con margenes simetricos (P-13 vigente)"
+    },
+    "final_verdict": "NO-GO (targeted) — todo pass salvo el accentWord de reveal_30min; requiere re-render de video (audio no cambia)"
   }
 }

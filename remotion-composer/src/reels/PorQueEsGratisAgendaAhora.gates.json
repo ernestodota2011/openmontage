@@ -6,12 +6,31 @@
     "slideshow_risk": {"average": 0.5, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"5 escenas, cada una con device distinto (tipografia x2, TagRevealList, StatReveal, brand_close)"},"decorative_visuals":{"score":0.0,"reason":"cada escena comunica informacion literal del post"},"weak_motion":{"score":0.9,"reason":"0 escenas i2v — tipico y aceptado para un reel de cierre 100% tipografia/CTA"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico"},"typography_overreliance":{"score":1.7,"reason":"5 de 5 escenas (100%) tipografia/TagRevealList/StatReveal, mitigado por ser el reel de cierre donde la claridad del CTA pesa mas que la variedad visual"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico"}}},
     "variation_checker": {"score": 0.55, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
     "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 5, "nota": "reel de cierre 100% tipografia-led, declarado como tal — no reclama motion_led."},
-    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "brand_palette_guard": {"verdict": "pass (confirmado en verify post-render)", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
     "anti_claims_audit": {"verdict": "pass", "detalle": "las 3 reassurances (sin tarjeta, sin compromiso, honestidad si no hay fit) son literales de la seccion '¿Por que ofrecemos el diagnostico sin costo?' y la FAQ del post. La mecanica de agenda ('eliges un horario, Ernesto te llama exactamente a esa hora, 30 minutos') y la URL (cal.com/aetherlogik/discovery) coinciden EXACTO con el cierre real del post. Ninguna cifra ni promesa nueva se introduce."}
   },
   "assets_generated": {
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 136, "length_ms_requested": 35000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.35, "url": "https://v3b.fal.media/files/b/0aa73f80/EosJxCvWyhU9bZWqs2M75_music_generated.mp3"},
     "total_cost_usd_est": 0.35
+  },
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE — MAXIMO RIGOR (CTA de agenda, promesa comercial de la agencia)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/por-que-es-gratis-agenda-ahora-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 35.0, "size_bytes": 4210703, "http_status": 200},
+    "audio_spotcheck": {"lufs_medido_independiente": -13.63, "true_peak_dbtp_medido_independiente": -1.11, "true_peak_astats_corroboracion_db": -1.336, "lufs_verdict": "pass", "true_peak_verdict": "pass", "bpm_declarado": 136, "bpm_medido_autocorrelacion": 136.4, "bpm_delta": 0.4},
+    "palette_scan": {"metodo": "HSV region, 3 frames muestreados (16.0s objections, 22.0s cal_final, 31.0s brand_close_cta)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "cta_maximo_rigor": {
+      "objections_beat_16.0s": "pass — 3 reassurances LITERALES del post ('Tarjeta de credito -> No se pide.', 'Compromiso -> Ninguno.', 'Si no hay buen fit -> Te lo decimos directo.'), boxless, TagRevealList",
+      "cal_final_22.0s": "pass — '30 min' + 'eliges un horario. Ernesto te llama exactamente a esa hora.' LITERAL de la mecanica de agenda del post",
+      "brand_close_cta_31.0s_zoom3x": "pass — recorte+ampliacion 3x de la banda de texto confirma: 'cal.com/aetherlogik/discovery . agenda tu diagnostico gratuito ->' EXACTO al link real del cierre del post, centrado, margenes simetricos en las 2 lineas, sin bleed (P-13 vigente)",
+      "proceso_coincide_con_el_post": "CONFIRMADO — el proceso mostrado en TODA la serie (30 min gratis, 3 fases con sus rangos exactos de minutos, sin tarjeta/sin compromiso, honestidad si no hay fit, mecanica de agenda) es identico palabra por palabra o parafraseo directo del post, sin ningun elemento embellecido o inventado"
+    },
+    "visual_spotcheck": {
+      "reason": "DEFECTO ENCONTRADO — accentWord='real.' con punto NUNCA matcheaba, mismo defecto que reel 1. Fix pusheado (accentWord='real', commit 1116b2e) — PENDIENTE RE-RENDER. NO afecta el CTA en si (brand_close_cta usa accentColor directo sobre el div del url, no el mecanismo accentWord).",
+      "objections_beat_cal_final_brand_close_cta": "pass — sin defectos"
+    },
+    "final_verdict": "NO-GO (targeted) — CTA de agenda y todo lo demas PASS con maximo rigor; el unico defecto (accentWord de la escena reason) NO toca el CTA; requiere re-render de video (audio no cambia)"
   }
 }

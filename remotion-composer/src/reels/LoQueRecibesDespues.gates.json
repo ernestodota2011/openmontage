@@ -6,7 +6,7 @@
     "slideshow_risk": {"average": 0.45, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"5 escenas, cada una con device distinto"},"decorative_visuals":{"score":0.0,"reason":"el StatReveal comunica el caso real, no decora"},"weak_motion":{"score":0.6,"reason":"1 de 5 escenas es video real — tipico para un reel de caso con 1 hero"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico"},"typography_overreliance":{"score":1.4,"reason":"4 de 5 escenas (80%) tipografia/StatReveal, mitigado por el hero i2v y la cifra real atribuida"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico mas alla del hero real"}}},
     "variation_checker": {"score": 0.55, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
     "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.2, "motion_cuts": 1, "slide_cuts": 4, "nota": "reel de caso real tipografia-led con 1 hero i2v — no reclama motion_led."},
-    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "brand_palette_guard": {"verdict": "pass (confirmado en verify post-render)", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "1 sola escena i2v, sin encadenado — PASS por diseno"},
     "anti_claims_audit": {"verdict": "pass", "detalle": "la cifra '$4,400/mes' + '9 horas libres por semana' y la atribucion 'Marino HVAC, Miami . estimacion de AetherLogik a partir de los datos del cliente' son literales del post, mismo caso ya usado en 2 series anteriores de la linea. La frase honesty_beat parafrasea directamente 'si durante el diagnostico determinamos que la automatizacion no seria efectiva... tambien te lo decimos claramente'. Ninguna cifra nueva se introduce."}
   },
@@ -15,5 +15,20 @@
     "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "unit_price_usd_per_s": 0.112, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73fa4/foh4k5DxwF8J6K3bT-xFB_output.mp4"},
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 34000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.34, "url": "https://v3b.fal.media/files/b/0aa73f80/T-zG7lap1udkF_8VAuI4t_music_generated.mp3"},
     "total_cost_usd_est": 1.05
+  },
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/lo-que-recibes-despues-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 34.0, "size_bytes": 7838564, "http_status": 200},
+    "audio_spotcheck": {"lufs_medido_independiente": -14.07, "true_peak_dbtp_medido_independiente": -1.82, "true_peak_astats_corroboracion_db": -1.821, "lufs_verdict": "pass", "true_peak_verdict": "pass", "bpm_declarado": 124, "bpm_medido_autocorrelacion": 125.0, "bpm_delta": 1.0},
+    "palette_scan": {"metodo": "HSV region, 4 frames muestreados (1.0s/4.5s hero, 15.0s stat, 30.0s brand_close)", "cyan_violet_pct_max": 1.57, "veredicto": "pass — el 1.57%/0.86% en los frames del hero son tonos naturales de cielo/sombra de la foto golden-hour (ventana + van), no un color de acento introducido; mismo patron ya explicado y aceptado en reels-ia-miami-serie"},
+    "coherence_check": {"hero_frames": "1.0s vs 4.5s", "veredicto": "pass — mismo personaje/taller/estanteria de cobre/van HVAC, luz golden-hour consistente, push-in leve, sin drift"},
+    "beat_pixel_check_marino": {"frame": "15.0s", "contenido_confirmado": "$4,400/mes + 'recuperados en facturacion, mas 9 horas libres por semana' + 'Marino HVAC, Miami . estimacion de AetherLogik a partir de los datos del cliente.' TODOS en el MISMO frame", "veredicto": "pass — cifra y atribucion exactas del post, coincide con el mismo caso ya usado en 2 series anteriores"},
+    "visual_spotcheck": {
+      "que_recibes": "DEFECTO ENCONTRADO — accentWord='plan:' con dos-puntos NUNCA matcheaba, mismo defecto que reel 1. Fix pusheado (accentWord='plan', commit 1116b2e) — PENDIENTE RE-RENDER.",
+      "brand_close": "pass — centrado, margenes simetricos"
+    },
+    "final_verdict": "NO-GO (targeted) — todo pass salvo el accentWord de que_recibes; requiere re-render de video (audio no cambia)"
   }
 }

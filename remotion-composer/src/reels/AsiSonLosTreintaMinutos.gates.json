@@ -6,7 +6,7 @@
     "slideshow_risk": {"average": 0.45, "verdict": "strong", "dimensions": {"repetition":{"score":0.2,"reason":"4 escenas, cada una con un device distinto"},"decorative_visuals":{"score":0.0,"reason":"la barra de tiempo comunica el proceso real, no decora"},"weak_motion":{"score":0.6,"reason":"0 escenas i2v — tipico y aceptado para un reel 100% didactico/proceso"},"weak_shot_intent":{"score":0.0,"reason":"shot_intent declarado y especifico"},"typography_overreliance":{"score":1.5,"reason":"4 de 4 escenas tipografia/HyperFrames, mitigado por el device de alta densidad informativa"},"unsupported_cinematic_claims":{"score":0.0,"reason":"no reclama footage cinematico"}}},
     "variation_checker": {"score": 0.5, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
     "delivery_promise": {"promise_type": "typography_led", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 3, "hyperframes_cuts": 1, "nota": "reel didactico/proceso, no motion-led — el bloque HyperFrames es motion graphics autorado, contado aparte del ratio de video real"},
-    "brand_palette_guard": {"verdict": "pass (pendiente de escaneo real del MP4 renderizado)", "counts": {"critical": 0, "warning": 0}, "violations": [], "nota": "incluye el clip HyperFrames renderizado cuando exista, no solo las escenas Remotion"},
+    "brand_palette_guard": {"verdict": "pass (confirmado en verify post-render, incluido el clip HyperFrames)", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "sin escenas i2v — PASS por diseno, no aplica"},
     "anti_claims_audit": {"verdict": "pass", "detalle": "las 3 fases (0-10min entender el negocio, 10-25min identificar oportunidades, 25-30min estimacion) son la sintesis fiel y en el mismo orden de la seccion 'Como transcurre la sesion de 30 minutos'. La mencion a Ernesto Hernandez y sus '23+ anos en tecnologia' es literal del post. Ninguna cifra ni claim nuevo se introduce."}
   },
@@ -14,5 +14,20 @@
     "hyperframes_composition": {"tipo": "HTML/CSS autorado (data-no-timeline), sin costo de generacion", "path": "hyperframes-compositions/asi-son-los-treinta-minutos-timeline/index.html", "cost_usd": 0.0},
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 132, "length_ms_requested": 37000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.37, "url": "https://v3b.fal.media/files/b/0aa73f93/1WYCXYJPth-Rb_HLUJ4YY_music_generated.mp3"},
     "total_cost_usd_est": 0.37
+  },
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/asi-son-los-treinta-minutos-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 37.0, "size_bytes": 3749323, "http_status": 200},
+    "audio_spotcheck": {"lufs_medido_independiente": -14.03, "true_peak_dbtp_medido_independiente": -1.05, "true_peak_astats_corroboracion_db": -1.114, "lufs_verdict": "pass (banda -14+-0.5)", "true_peak_verdict": "pass — CONFIRMADO <= -1.0 dBTP, margen mas ajustado de la serie (solo 0.05dB), corroborado por 2 metodos independientes (loudnorm re-medido + astats sample peak)", "bpm_declarado": 132, "bpm_medido_autocorrelacion": 133.3, "bpm_delta": 1.3},
+    "palette_scan": {"metodo": "HSV region, 4 frames muestreados (6.0s/13.0s/22.5s timeline, 33.0s brand_close)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "hyperframes_render_check": {"hf_lint_reportado_por_devops": "0/0", "tiempo_render_reportado_por_devops": "28s", "nota_de_alcance": "video-producer no re-corrio hf lint (sin SSH al CT 128); lo que SI se verifico independientemente es el resultado en pixeles: barra de tiempo con 3 segmentos rellenandose en cascada + las 3 tarjetas de fase (minutos+titulo+detalle) legibles y fieles al post, confirmado en 2 timestamps distintos (13.0s y 22.5s)."},
+    "visual_spotcheck": {
+      "timeline": "pass — barra 0-30min con 3 segmentos proporcionales (33/50/17%), 3 fases con minutos+titulo+detalle EXACTOS al post, boxless, ember-only",
+      "ernesto_conduce": "DEFECTO ENCONTRADO — accentWord='persona.' con punto NUNCA matcheaba, mismo defecto que reel 1. Fix pusheado (accentWord='persona', commit 1116b2e) — PENDIENTE RE-RENDER.",
+      "brand_close": "pass — centrado, margenes simetricos"
+    },
+    "final_verdict": "NO-GO (targeted) — todo pass salvo el accentWord de ernesto_conduce; requiere re-render de video (audio no cambia)"
   }
 }
