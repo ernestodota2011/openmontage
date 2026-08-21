@@ -30,5 +30,18 @@
       "brand_close": "pass — centrado, margenes simetricos"
     },
     "final_verdict": "NO-GO (targeted) — todo pass salvo el accentWord de que_recibes; requiere re-render de video (audio no cambia)"
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "re-render video-only (fix accentWord commit 1116b2e), audio muxeado por copia del -v1 ya calibrado",
+    "run_by": "video-producer, verificacion INDEPENDIENTE",
+    "artifact": "https://media.aetherlogik.com/agency/reels-consultoria-serie/lo-que-recibes-despues-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 34.0, "size_bytes": 7815966, "http_status": 200},
+    "audio_spotcheck": {"nota": "no re-medido individualmente en esta pasada (sanity de LUFS/TP se corrio sobre el reel 1 de la serie, mismo procedimiento de mux por copia); ffprobe confirma codec/samplerate/canales/duracion identicos al v1", "veredicto": "pass (por construccion — mux -c:a copy)"},
+    "visual_spotcheck": {
+      "que_recibes_9.0s": "FIX CONFIRMADO EN PIXELES — 'plan:' se renderiza en ember (#ff6b1a), no en blanco.",
+      "veredicto": "pass"
+    },
+    "final_verdict": "GO"
   }
 }
