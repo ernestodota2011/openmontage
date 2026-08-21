@@ -1,0 +1,53 @@
+{
+  "reel": "un-tercio-de-tu-dia",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion, 100% motion-autorado (sin i2v)",
+        "render_runtime=remotion con 1 escena hero i2v real (Kling O1) + el resto tipografia/stat cinetica",
+        "render_runtime=hyperframes para toda la pieza"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "Es el GANCHO de la serie (30-45s, doctrina: 'el problema vivido + mira lo que es posible'). Un gancho 100% tipografico pierde el enganche humano de los primeros segundos. HyperFrames no aporta nada aqui (no hay UI/datos densos en este reel especifico, es puro problema humano — el bloque denso de datos vive en el reel 2). Un solo hero i2v respeta el limite de 'maximo 1 escena hero por reel'.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Modelo i2v y parametros del hero",
+      "options_considered": [
+        "Kling 3.0 (o3), volumen/default",
+        "Kling O1 solo start_image_url, sin encadenar (un solo plano aislado)",
+        "Veo 3.1 (hero+audio nativo)"
+      ],
+      "choice": "Kling O1 image-to-video, solo start_image_url (sin end_image_url), duration=5s",
+      "reason": "Es UN solo plano aislado (no hay multi-plano que encadenar en este reel) — la doctrina de coherencia reserva el encadenado end->start para varios planos, que no aplica aqui. Veo 3.1 se descarto por costo/latencia sin necesitar audio nativo (la musica la compone Remotion). Se aplico el fix de P-11 (Kling O1 rechaza duration fuera de {5,10} sin end_image_url) desde el inicio: duration='5' explicito.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz dura de Ernesto, vigente desde la serie chatbot)",
+      "options_considered": [
+        "tono atmosferico/tenso para el gancho (mas cinematico, sin drive)",
+        "126 BPM, four-on-the-floor, tenso-pero-esperanzador"
+      ],
+      "choice": "126 BPM, corporate-tech instrumental, four-on-the-floor, mood tenso-pero-esperanzador",
+      "reason": "la directriz de la mision es DURA y aplica a TODA la serie (nada de ambient, banda 120-140 con drive). 126 BPM balancea la tension del gancho (agotamiento del abogado) con el drive ritmico exigido.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Por que la unica cifra del reel lleva su atribucion completa en el MISMO frame",
+      "options_considered": [
+        "mostrar '1/3' sin fuente visible, dejar la atribucion para el blog",
+        "cifra + fuente exacta del post en el mismo frame ('Estudio de Clio del 2023, citado por la American Bar Association')"
+      ],
+      "choice": "cifra + atribucion completa en el mismo frame",
+      "reason": "la regla dura de la mision exige que TODA cifra lleve su atribucion exacta y cada reel debe ser autocontenido en sus afirmaciones (leccion d-004 de el-ciclo-que-te-cuesta-horas, serie clinicas). El post mismo antepone 'citado por la American Bar Association' a la cifra de Clio — se preserva esa doble atribucion tal cual.",
+      "confidence": 0.95
+    }
+  ]
+}

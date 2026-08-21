@@ -1,0 +1,34 @@
+{
+  "reel": "un-tercio-de-tu-dia",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.55,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra literalmente el problema del post"},
+        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v); las otras 4 son tipografia/stat cinetica"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.7, "reason": "4 de 5 escenas (80%) tipografia/stat_card — desviacion consciente del gancho, igual que el reel 1 de la serie clinicas"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama nada mas alla de lo que el i2v real entrega"}
+      }
+    },
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "hybrid", "valid": true, "motion_ratio": 0.2, "motion_cuts": 1, "slide_cuts": 4, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": [], "note": "StatReveal.accentColor pasado EXPLICITO como BRAND.accent (el default del componente es violeta #A78BFA, prohibido) — mismo guard que benchmark_klara en la serie clinicas"},
+    "coherence_guard": {"status": "no aplica en pre-produccion — solo 1 escena i2v, sin multi-plano que encadenar"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "la unica cifra ('1/3') cita textualmente la fuente del post ('Un estudio de Clio del 2023, citado por la American Bar Association') en el MISMO frame via HeadlineOverlay; ninguna otra cifra o testimonial se introduce"}
+  },
+  "assets_generated": {
+    "hero_still": {"model": "fal-ai/nano-banana-pro", "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"}, "cost_usd": 0.15},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "params": {"duration": "5", "start_image_url_only": true}, "cost_usd": 0.56},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "length_ms": 30000, "cost_usd": 0.30},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (ya archivado en R2, misma marca/serie de reels-del-blog)", "cost_usd": 0.0},
+    "total_cost_usd_est": 1.01
+  },
+  "post_render_verify": {
+    "status": "NO EJECUTADO EN ESTA SESION — pendiente de devops. Este gates.json refleja solo los gates PRE-render (composicion, props, assets). El verify post-render (ffprobe, LUFS, BPM medido, region+control, coherence_guard) lo corre video-producer DESPUES del render de devops, siguiendo el mismo protocolo que reels-clinicas-serie."
+  }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, camara locked-off): abogado solo de noche en su oficina, rodeado de carpetas y expedientes, hombro que se hunde de cansancio, mano que alcanza el telefono que suena. HeadlineOverlay abajo: 'Otra noche facturando... papeleo.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked_off", "lighting_key": "tungsteno calido sobre near-black, un solo foco de lampara de escritorio"},
+    "shot_intent": "establece el problema vivido en la primera escena, con cine real (no solo tipografia) para abrir con enganche",
+    "hero_moment": true,
+    "information_role": "cold open del gancho",
+    "texture_keywords": ["i2v hero real", "luz de lampara calida", "grano fino"]
+  },
+  {
+    "id": "stat_reveal",
+    "type": "stat_card",
+    "description": "StatReveal '1/3' + label 'de tu jornada, facturada', con HeadlineOverlay inferior citando la fuente EXACTA del post en el MISMO frame: 'Estudio de Clio (2023), citado por la American Bar Association.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "ancla el gancho en un dato real y atribuido (seccion 'por que automatizar' del post), no en una afirmacion suelta",
+    "hero_moment": false,
+    "information_role": "cifra central del post con atribucion completa",
+    "texture_keywords": ["una cifra en ember", "atribucion en el mismo frame"]
+  },
+  {
+    "id": "hidden_cost",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'El resto se va en correos, papeleo, y tareas que ya se pueden delegar.' — parafrasea el problema del post sin inventar cifras nuevas",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "conecta la cifra con el problema cotidiano (correos repetidos, papeleo, captura de datos) que el post nombra explicitamente",
+    "hero_moment": false,
+    "information_role": "a donde se va el resto de la jornada",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Esto no tiene que seguir asi.' + sweep EmberThread como puente hacia el cierre",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "sweep ember, transicion de marca"},
+    "shot_intent": "la promesa del reel: hay una salida, sin todavia explicar como (eso es el reel 2)",
+    "hero_moment": false,
+    "information_role": "tease hacia la serie",
+    "texture_keywords": ["sweep ember", "bridge"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
