@@ -342,9 +342,9 @@ serie) antes del sign-off GO/NO-GO oficial.
    frente a `premium-craft-standards.md`) — evidencia de que la lección de esa serie se
    propagó al handoff de pre-producción de la siguiente, cerrando el loop.
 
-## Verify final INDEPENDIENTE de `video-producer` (2026-08-21) — veredicto de serie: **NO-GO CONDICIONAL (3/4 GO, 1/4 en fix)**
+## Verify final INDEPENDIENTE de `video-producer` (2026-08-21) — veredicto de serie: **NO-GO CONDICIONAL (3/4 GO, 1/4 en fix)** — ⚠️ ESTADO SUPERADO, ver "Cierre GO de serie" al final del documento
 
-> [!warning] La serie NO cierra GO todavia. 3 de 4 reels: GO. El reel 4 tiene UN hallazgo real (BPM), ya corregido en pre-produccion, PENDIENTE de re-render por devops.
+> [!warning] La serie NO cierra GO todavia (snapshot historico). 3 de 4 reels: GO. El reel 4 tiene UN hallazgo real (BPM), ya corregido en pre-produccion, PENDIENTE de re-render por devops. **Este hallazgo se resolvio el mismo dia — ver la sección de cierre al final.**
 
 Descarga propia de los 4 `-v1.mp4` desde R2 (`curl` 200 x4) + `ffmpeg`/`ffprobe`/`python`
 locales (numpy puro, sin scipy) — **sin confiar en el reporte de devops**, mismo rigor
@@ -424,7 +424,7 @@ wordmark two-tone + tagline + CTA centrado, margenes simetricos en ambos lados, 
 bleed en ninguno — los CTAs internos de los reels 1-3 son largos (2 lineas), exactamente
 el patron que dispara el bug de P-13 si regresa. Sin regresion.
 
-### Veredicto de serie
+### Veredicto de serie (snapshot pre-fix)
 
 | # | Reel | Veredicto |
 |---|---|---|
@@ -435,19 +435,15 @@ el patron que dispara el bug de P-13 si regresa. Sin regresion.
 
 **Serie: NO-GO hasta que el reel 4 se re-renderice con la pista v2 y se re-verifique.**
 Los reels 1-3 ya son entregables (`-v1.mp4`, sin excepcion) — no requieren tocarse.
+**Ver "Cierre GO de serie" al final del documento — este bloqueo ya se resolvio.**
 
-## Handoffs pendientes (actualizado tras verify final)
+## Handoffs pendientes (actualizado tras verify final) — ⚠️ HISTORICO, ver seccion de cierre
 
-- **`devops-aetherlogik-homelab`**: re-renderizar `LoQueDecidioDmpConsulting` con
-  `props/lo-que-decidio-dmp-consulting.json` YA actualizado (musicSrc -> pista v2) ->
-  finishing FFmpeg (misma recipe, TP=-2.0) -> subir como
-  `agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v2.mp4` (conservar `-v1`
-  para trazabilidad hasta decision de limpieza de R2, mismo patron de P-13).
-- **`video-producer`** (proxima sesion): re-verify del reel 4 `-v2.mp4` (ffprobe + LUFS/TP
-  + BPM medido independientemente, banda 120-140 esta vez) -> si pasa, GO de serie
-  completo, actualizar tabla de "Los 4 videos canonicos" y cerrar el veredicto aqui.
-- **Ernesto / quien suba a Drive**: esperar el GO completo de serie antes de publicar —
-  hoy solo 3/4 reels son entregables.
+- ~~**`devops-aetherlogik-homelab`**: re-renderizar `LoQueDecidioDmpConsulting`...~~ COMPLETO (ver Cierre GO de serie).
+- ~~**`video-producer`** (proxima sesion): re-verify del reel 4 `-v2.mp4`...~~ COMPLETO (ver Cierre GO de serie).
+- **Ernesto / quien suba a Drive**: la serie ya tiene el GO completo (4/4) — ver la tabla de
+  "videos canonicos" en la sección de cierre para saber exactamente qué sufijo (`-v1`/`-v2`)
+  publicar de cada reel.
 
 ## 📌 Para memoria (verify final)
 
@@ -462,3 +458,129 @@ Los reels 1-3 ya son entregables (`-v1.mp4`, sin excepcion) — no requieren toc
 - El costo de la correccion fue minimo (+$0.39, una llamada) porque se detecto ANTES
   del render final del reel corregido — evidencia a favor de medir BPM independientemente
   SIEMPRE en el verify, no solo cuando alguien lo senala explicitamente.
+
+## Cierre GO de serie — re-verify independiente del reel 4 `-v2.mp4` (2026-08-21)
+
+> [!success] Serie completa: **GO 4/4.** El reel 4 se re-renderizó con la pista de música
+> corregida, se re-verificó de forma independiente (descarga propia de R2, `ffprobe`,
+> medición de LUFS/TP y BPM por autocorrelación, todo con herramientas locales, sin
+> confiar en el reporte de devops) y pasó los 4 puntos exigidos por la misión de cierre.
+
+### Técnico (ffprobe, re-medido sobre `-v2.mp4`)
+
+h264, 1080x1920, 24fps, AAC 48000Hz estéreo, duración exacta **39.000000s** — idéntico a
+la spec y al `-v1.mp4` descartado. Tamaño 4,537,269 B, HTTP 200, ETag R2
+`a3364923eeddae0eb98acdce7ffdb8ce` — coincide byte a byte con el MD5 de la descarga
+propia (integridad de transferencia confirmada).
+
+### Audio (LUFS/TP, re-medido independiente sobre `-v2.mp4`)
+
+`loudnorm` (medición, sin aplicar) + `astats` sample-peak como segundo método:
+**-14.24 LUFS / -1.29 dBTP** (coincide con lo reportado en la mision de cierre) — dentro
+de banda -14±0.5 LUFS y con true peak ≤ -1.0 dBTP. Pass.
+
+### BPM (autocorrelación FFT independiente, banda de música movida 120-140)
+
+Método propio (numpy puro, sin scipy): envolvente de energía log-comprimida + autocorrelación
+vía FFT, búsqueda acotada a 100-160 BPM (evita la ambigüedad de octava que sí aparece sin
+acotar — el pico crudo cae en la subarmónica ~62 BPM, musicalmente no plausible para
+"movida"), refinado con interpolación parabólica del pico.
+
+**Control de calibración**: el mismo método aplicado al `-v1.mp4` descartado dio
+**117.45 BPM** — coincide a 0.15 BPM del 117.6 ya documentado como la falla original,
+confirmando que el método está bien calibrado antes de confiar en la medición del v2.
+
+**Resultado v2: 124.21 BPM** (124.53 con hop más grueso, refinado a 124.21 con
+interpolación parabólica) — **dentro de la banda dura 120-140** de la directriz de marca
+de Ernesto, consistente con el 124 BPM declarado en el prompt de regeneración y con el
+125.0 BPM medido por video-producer antes del render (variación ~1 BPM entre mediciones
+independientes en momentos distintos del pipeline, dentro de tolerancia). **PASS.**
+
+### Integridad del stream de video (MD5 del h264 crudo, v1 vs v2)
+
+`ffmpeg -bsf:v h264_mp4toannexb` sobre ambos archivos + `md5sum`:
+
+| Archivo | MD5 stream h264 | Tamaño stream |
+|---|---|---|
+| `-v1.mp4` | `2395e733b05fbf7ac325b9909e524f3e` | 4,168,292 B |
+| `-v2.mp4` | `0c123febac377c046552bdb130532dc7` | 3,538,421 B |
+
+**Los hashes DIFIEREN** (igual que los tamaños) — confirma que devops hizo un
+**re-render completo** desde el master ProRes con la pista de audio v2 ya referenciada
+en los props, no un remux de audio sobre el video v1 (consistente con la instrucción del
+`gates.json` de evitar aplicar un fix a ciegas sobre un derivado, lección P-09). Por no
+ser remux, se exige spot-check visual completo del contenido — ejecutado a continuación,
+sin asumir que el video es idéntico al v1 solo porque debería serlo.
+
+### Spot-check visual (4 frames extraídos del `-v2.mp4` y vistos, no solo medidos)
+
+- **t=9s**: cifra **"1,440 horas"** + "recuperadas al año al automatizar con n8n" +
+  atribución **"DMP Consulting Services, Houston/Katy TX . estimación de AetherLogik a
+  partir de los datos del cliente."** — los tres en el mismo frame. Confirmado.
+- **t=16s**: cifra **"+160 citas"** + "adicionales cada mes, sin contratar personal" +
+  la misma atribución en el mismo frame. Confirmado.
+- **t=22s**: cita completa de Mayli Parra + atribución "— Mayli Parra, DMP Consulting
+  Services", texto exacto al del post, en el mismo frame. Confirmado.
+- **t=35s** (`brand_close`, CTA real): "cal.com/aetherlogik/discovery . agenda tu
+  diagnóstico gratuito ->" — verificado con recorte+ampliación 3x de la banda de texto
+  (doctrina P-13): **centrado, márgenes simétricos en ambos lados de las 2 líneas, sin
+  bleed** — el fix de `BrandClose.tsx` sigue vigente en el re-render completo. Isotipo
+  ember + wordmark two-tone + tagline presentes.
+
+Escaneo HSV region+control sobre los 4 frames: **0.0% cian/violeta** en los cuatro, sin
+excepción. Sin logos de terceros. Pass en todos los puntos.
+
+### Veredicto final del reel 4 y de la serie
+
+| # | Reel | Veredicto |
+|---|---|---|
+| 1 | `AlquilarOComprar` | **GO** (`-v1.mp4`, sin cambios) |
+| 2 | `CuantoCuestaCadaUno` | **GO** (`-v1.mp4`, sin cambios) |
+| 3 | `CuandoElegirCadaUno` | **GO** (`-v1.mp4`, sin cambios) |
+| 4 | `LoQueDecidioDmpConsulting` | **GO** (`-v2.mp4` — fix de BPM confirmado, técnico/LUFS/TP/beat-pixel/paleta todos pass) |
+
+**Serie `reels-n8n-zapier-serie`: GO 4/4.** `LoQueDecidioDmpConsulting.gates.json`
+tiene el bloque `post_render_verify_v2` con el detalle completo de esta verificación
+(commit `942009a`).
+
+### Los 4 videos canónicos (para publicar)
+
+| # | Reel | Objeto R2 canónico |
+|---|---|---|
+| 1 | Alquilar o comprar | `agency/reels-n8n-zapier-serie/alquilar-o-comprar-v1.mp4` |
+| 2 | Cuánto cuesta cada uno | `agency/reels-n8n-zapier-serie/cuanto-cuesta-cada-uno-v1.mp4` |
+| 3 | Cuándo elegir cada uno | `agency/reels-n8n-zapier-serie/cuando-elegir-cada-uno-v1.mp4` |
+| 4 | Lo que decidió DMP Consulting | `agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-**v2**.mp4` |
+
+⚠️ El reel 4 es el ÚNICO de la serie cuyo canónico es `-v2` (no `-v1`) — el `-v1` quedó
+descartado por el hallazgo de BPM (P-18).
+
+### Instrucción de limpieza R2 para `devops-aetherlogik-homelab`
+
+> [!warning] Borrar `lo-que-decidio-dmp-consulting-v1.mp4` de R2 CON purga CF (procedimiento estándar)
+> El `-v1` del reel 4 (`agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v1.mp4`,
+> 5,476,546 B) queda **descartado** — su único defecto (BPM 117.6, bajo el piso de 120) ya
+> está documentado en `LoQueDecidioDmpConsulting.gates.json` (`post_render_verify` +
+> `post_render_verify_v2`) y en `Video-problemas.md` P-18, así que no hay pérdida de
+> trazabilidad al borrar el binario. Mismo patrón de limpieza ya ejecutado para los 7
+> `-v1` defectuosos de P-13 (`reels-inmobiliarios-serie`/`reels-clinicas-serie`/
+> `reels-abogados-serie`): (1) borrar el objeto de R2, (2) purgar la URL en Cloudflare
+> (API o dashboard, para que el edge cache no siga sirviendo la versión con BPM bajo tras
+> el borrado del origen). Los `-v1.mp4` de los reels 1-3 NO se tocan — son el canónico
+> real de esos tres, sin sufijo `v2`.
+
+### 📌 Para memoria (cierre de serie)
+
+- Primer caso de la línea `reels-del-blog` donde el re-verify de cierre incluyó **dos
+  controles metodológicos explícitos** además de la medición directa: (a) calibración del
+  detector de BPM corriéndolo primero sobre el `-v1` conocido (117.45 medido vs 117.6 ya
+  documentado, confirma el método antes de confiar en el resultado del v2) y (b)
+  verificación de integridad por MD5 del stream de video crudo entre v1/v2 para decidir
+  si hacía falta un spot-check visual completo (los hashes difirieron → sí hacía falta,
+  y se hizo). Ninguno de los dos controles es exigido por los gates automáticos de la
+  plataforma — ambos vinieron de aplicar la doctrina "toda sonda lleva control"
+  (`feedback_toda_sonda_lleva_control`) al dominio de audio/video de este re-verify.
+- La ambigüedad de octava del detector de BPM por autocorrelación (pico crudo en ~62 BPM,
+  la mitad del tempo real ~124 BPM) es un gotcha reutilizable para cualquier verify futuro
+  que mida BPM por este método: acotar la búsqueda a la banda musicalmente plausible
+  (100-160 para música "movida") antes de confiar en el pico global de la autocorrelación.
