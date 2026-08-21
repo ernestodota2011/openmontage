@@ -1,0 +1,70 @@
+{
+  "reel": "que-hace-un-chatbot-real",
+  "run_date": "2026-08-20",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python. Ver nota tsc_noemit abajo.)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.4,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.5, "reason": "6 devices visuales distintos en 7 escenas (solo brand_close repite el formato del piloto, esperado); 2 escenas nuevas (QuickReplyBeat, EscalateBeat) evitan repetir la tarjeta de cita"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a una vineta exacta del post, ninguno es decorativo"},
+        "weak_motion": {"score": 0.0, "reason": "5 de 7 escenas tienen movimiento de UI real (contador, cascada, typing, sweep, spring de marca)"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 7 escenas"},
+        "typography_overreliance": {"score": 0.7, "reason": "2 de 7 escenas (28.6%) son tipografia pura (cold_open_hook, punch_montage) — bajo el umbral 60% de la doctrina, pero se documenta el numero real en vez de asumir 0"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "reel 100% UI/tipografia, no reclama nada cinematico"}
+      }
+    },
+    "variation_checker": {
+      "score": 0.3,
+      "verdict": "strong",
+      "violations": [],
+      "suggestions": ["considerar variar el fontSize del kicker HeadlineOverlay entre beats si un futuro corte se siente monotono"],
+      "shot_size_diversity": ["MS", "ECU", "MS", "ECU", "CU", "MS", "MS"],
+      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
+    },
+    "delivery_promise": {
+      "promise_type": "hybrid",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.7142857142857143,
+      "motion_cuts": 5,
+      "slide_cuts": 2,
+      "still_cuts": 0,
+      "note": "cold_open_hook y punch_montage tipados stat_card (tipografia NO cuenta como motion real, per doctrina); las 5 escenas de UI animada (incl. brand_close) SI cuentan. Declarado 'hybrid' (no 'motion_led') aunque el ratio ya supera 70%, por honestidad con la naturaleza mixta del reel — mismo criterio que uso el piloto."
+    },
+    "brand_palette_guard": {
+      "verdict": "revise",
+      "counts": {"critical": 0, "warning": 4},
+      "violations": [
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.bubble (cap1/cap2/cap3)"},
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.appointment_card (cap3)"},
+        {"severity": "warning", "kind": "card_boxless", "value": "escalate_badge (cap4)"}
+      ],
+      "note": "Mismas excepciones de UI-chrome ya aceptadas en el piloto (burbujas y tarjeta de cita necesitan bg+radius para leerse). La insignia de transferencia (cap4) usa el MISMO tratamiento boxless-con-borde que la tarjeta de cita — no introduce un device nuevo de card. 0 criticos: cero cian/violeta/lavanda/glow en ningun componente nuevo (revisado linea por linea: BRAND.accent/BRAND.text/BRAND.muted son los UNICOS colores usados en CapabilitySceneKit.tsx)."
+    },
+    "tsc_noemit": {
+      "status": "PENDIENTE — no verificable desde esta sesion",
+      "reason": "video-producer no tiene checkout local del fork con node_modules instalados en esta sesion (solo acceso vía github MCP, sin Bash contra el repo). NO se declara exit_code 0 sin haberlo corrido de verdad.",
+      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` en el CT 128 ANTES de renderizar; si hay errores, se corrigen y se re-verifica antes de proceder."
+    }
+  },
+  "assets_generated": {
+    "music": {
+      "model": "fal-ai/elevenlabs/music",
+      "prompt_bpm_declared": 128,
+      "prompt_energy_declared": "driving four-on-the-floor, warm analog synth, 2 builds/risers",
+      "url": "https://v3b.fal.media/files/b/0aa728ec/tLfw_2eikkN61E6VHjOP9_music_generated.mp3",
+      "cost_usd_est": 0.46
+    },
+    "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728f1/0SPX1-fEg-UUluBOroOqV_sound_effect.mp3", "cost_usd": 0.001},
+    "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728ef/Q9XlEoMfTTkm-JEhx8AZ9_sound_effect.mp3", "cost_usd": 0.0012},
+    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado, cero costo de assets generativos visuales",
+    "total_cost_usd_est": 0.4622,
+    "note": "URLs de fal.media (CDN temporal). Devops debe re-hostear a R2 antes de ~24-48h (ver ReelsChatbotSerie.README.md)."
+  },
+  "pending_post_render_gates": {
+    "coherence_guard": "no aplica en el sentido estricto (no hay i2v hero-frame que trackear), pero SI corre continuidad de paleta/tipografia entre escenas sobre el MP4 real. Pendiente del render.",
+    "final_review": "ffprobe + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "reel": "que-hace-un-chatbot-real",
+  "date": "2026-08-20",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion (reusar ChatThreadScene + 2 devices nuevos, cero HyperFrames)",
+        "render_runtime=hyperframes (reconstruir las 4 UI en HTML/CSS)",
+        "render_runtime=hybrid (mezclar ambos motores dentro del mismo reel)"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=remotion, composition_mode=atelier",
+      "reason": "El contenido de las 4 capacidades es literalmente UI de chat (el post las describe como interacciones de mensajeria) — ChatThreadScene ya es un componente GO'd en produccion (piloto) con el mismo lenguaje visual de marca. Reconstruir en HyperFrames habria duplicado trabajo sin ganar nada (Rule Zero: reusa conocimiento del motor, no lo dupliques) y habria fragmentado el pipeline de render de la serie a mitad de camino. HyperFrames se reserva para el reel 4, donde el contenido (roadmap de fases) SI es un caso nuevo que ningun componente Remotion existente cubre.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que 2 componentes nuevos (QuickReplyBeat, EscalateBeat) en vez de reusar ChatThreadBotReply 4 veces",
+      "options_considered": [
+        "reusar ChatThreadBotReply (typing->reply->card) para las 4 capacidades, solo cambiando texto",
+        "construir un device visual distinto por capacidad"
+      ],
+      "choice": "device distinto por capacidad (2 nuevos + 1 reuso justificado + 1 reuso de ChatThreadStack)",
+      "reason": "Repetir la tarjeta de cita 4 veces (para capacidades que NO son agendamiento) es exactamente el patron 'hero-component-spine' / 'branded slides, not a film' que la doctrina prohibe, y el slideshow_risk.repetition la habria marcado. La tarjeta de cita SOLO aparece donde el contenido genuinamente es una cita (beat 3).",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz nueva de Ernesto)",
+      "options_considered": [
+        "mantener el tono ambient/atmosferico del piloto",
+        "subir a 120-140 BPM con drive ritmico, perúsion presente y builds"
+      ],
+      "choice": "128 BPM, corporate-tech instrumental, driving four-on-the-floor, 2 builds/risers antes de cortes fuertes",
+      "reason": "Ernesto: 'el tono de la musica esta como que lento; seria bueno que fueran mas movidos' — directriz literal y obligatoria para TODA la serie desde esta sesion. 128 BPM cae en el centro del rango pedido (120-140), con drive ritmico audible y 2 momentos de build que empujan los cortes hacia cap4_escala y punch_montage.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Anti-claims — fidelidad a las 4 vinetas del post",
+      "options_considered": [
+        "parafrasear libremente las capacidades",
+        "citar las 4 vinetas EXACTAS del post, mismo orden"
+      ],
+      "choice": "las 4 vinetas exactas, mismo orden, sin agregar ni quitar",
+      "reason": "doctrina anti-claims: no inventar/reordenar lo que el post ya declara.",
+      "confidence": 0.95
+    }
+  ]
+}
