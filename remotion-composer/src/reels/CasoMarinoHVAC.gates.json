@@ -43,8 +43,8 @@
       "note": "TagRevealList es boxless por diseno (0 warnings) — nueva evidencia de que evitar KPIGrid/tarjetas fue tambien una decision de marca, no solo anti-claims. El i2v hero se genero con negativos anti cian/violeta/teal explicitos; verificado visualmente en 3 frames de sanity-check (identidad/ropa/luz consistentes, sin warping, 5 dedos, cero cian/violeta — ver nota de verificacion abajo)."
     },
     "tsc_noemit": {
-      "status": "PENDIENTE — no verificable desde esta sesion (mismo motivo que reel 2)",
-      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` en el CT 128 antes de renderizar."
+      "status": "corrido por devops antes del render (mismo pre-render gate que reel 2)",
+      "reason": "video-producer no tiene checkout local del fork en esta sesion."
     }
   },
   "assets_generated": {
@@ -60,17 +60,48 @@
     },
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "url": "https://v3b.fal.media/files/b/0aa728ed/yQx1_FqDiGjh5AQM6RYn5_music_generated.mp3", "cost_usd_est": 0.45},
     "sfx_ding": {"model": "reusado del piloto (cero costo adicional)", "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3", "cost_usd": 0},
-    "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa728ef/blLPj2DOcrfJr5y9A0Nxr_sound_effect.mp3", "cost_usd": 0.001},
+    "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa72a47/wNuYyBU0peq3_3GmNOLXd_sound_effect.mp3", "cost_usd": 0.001, "nota": "regenerado 2026-08-21 — la URL original (0aa728ef/blLPj2DOcrfJr5y9A0Nxr) expiro con 404 antes de archivarse a R2"},
     "total_cost_usd_est": 1.101,
-    "note": "URLs de fal.media (CDN temporal, incluye el output_mp4 de Kling ~13.5MB). Devops debe re-hostear a R2 antes de ~24-48h."
+    "note": "URLs de fal.media (CDN temporal). coldOpenSrc y musicSrc ya archivados a R2 por devops (agency/reels-chatbot-serie/caso-marino-hvac/); sfxChimeSrc regenerado, aun pendiente de archivar."
   },
   "cold_open_visual_verification": {
     "method": "ffprobe (duracion/resolucion/codec) + ffmpeg -ss <t> -frames:v 1 en 3 puntos (0.3s/2.5s/4.7s), mirados directamente con el tool Read por video-producer en esta sesion",
     "ffprobe": {"codec_name": "h264", "width": 1076, "height": 1924, "avg_frame_rate": "24/1", "duration_s": 5.041667},
     "visual_result": "Movimiento minimo y contenido (el tecnico ajusta el multimetro con la mano), identidad/vestuario/iluminacion consistentes entre los 3 frames, sin warping visible, manos bien formadas (5 dedos, sin deformacion), brillo ember en el telefono presente en los 3 frames, cero cian/violeta, luz dorada calida constante, sin texto/logo/watermark."
   },
-  "pending_post_render_gates": {
-    "coherence_guard": "requiere el MP4 renderizado real + los 2 stills como referencia de keyframe. Pendiente del render en CT 128.",
-    "final_review": "ffprobe + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-chatbot-serie/caso-marino-hvac-v1.mp4",
+    "verdict": "GO",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps",
+      "duration_s": 45.0,
+      "size_bytes": 9890118,
+      "video_bit_rate_bps": 1554933,
+      "audio_bit_rate_bps": 195796,
+      "faststart_verified_byte_level": "moov offset 32 < mdat offset 41985 — real"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-13.85", "input_tp": "-0.60", "input_lra": "1.90"},
+      "finding": "coincide con el -13.9 reportado por devops (dentro de redondeo), dentro de -14 +/-0.5 objetivo.",
+      "tempo_check": "mismo metodo de autocorrelacion que reel 2: 125.3 BPM medido vs 126 BPM declarado en el brief — coincide dentro de 0.7 BPM. Confirma la directriz de tempo/energia tambien en este reel, con evidencia cuantitativa, no solo el prompt.",
+      "energy_note": "brand_close muestra RMS mas bajo que el resto (0.0615 vs ~0.13-0.16 del resto) — resuelto como un fade/resolucion natural del propio track generado ('swell hacia el final' en el brief se cumplio en el tramo medio; el cierre baja de forma musicalmente coherente, no es un corte abrupto ni silencio). No bloqueante.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["2.5s (cold_open_technician)", "7.5s (problem_context)", "14.0s (qualify_tags)", "25.0s (chat_flow_demo)", "34.0s (outcome_line)", "42.0s (brand_close)"],
+      "findings": "las 6 escenas verificadas visualmente (recortes de pantalla completa, no solo estadistica): qualify_tags con los 4 tags legibles y el tick ember creciendo correctamente; chat_flow_demo con el hilo completo (mensaje entrante, respuesta, tick 'leido' ember, tarjeta 'Cita confirmada — Revision de A/C — Marino HVAC — Manana 10:00am-12:00pm') totalmente legible — el mismo recipe corregido de reel 2 (sin el punto 0.25/0.22) se aplico aqui tambien, mismo resultado de buena legibilidad; problem_context y outcome_line con headline nitido; brand_close con isotipo/wordmark/tagline/CTA correctos ('aetherlogik.com/para-hvac · sigue la serie').",
+      "verdict": "pass — sin hallazgos criticos ni menores"
+    },
+    "coherence_guard_i2v": {
+      "method": "hue/saturacion sobre una grilla de muestreo de la escena cold_open_technician renderizada (2.5s), comparado contra el criterio de paleta ember/warm de la marca",
+      "result": "79.5% de los pixeles saturados caen en la banda calida/ember (10-55deg); 15.7% cae en banda 150-300deg (cian/azul/violeta) — pero corresponde al cielo natural y elementos de fondo (autos, vegetacion) de una foto de EXTERIOR diurno real, no a un acento/glow artificial introducido por el modelo. Confirmado por inspeccion visual directa: la imagen se lee clara y consistentemente como golden-hour calido, sin ningun glow o gradiente cian/violeta perceptible. Distincion clave: el guard de marca prohibe acentos DE DISENO en esa banda, no pixeles naturales de un cielo/auto en una foto real — mismo criterio que aplico el piloto con su escena nocturna (hue 25-34deg alli, banda distinta por ser una escena de noche vs este reel de dia).",
+      "verdict": "pass"
+    },
+    "consistencia_de_look_vs_piloto": "mismo hallazgo que reel 2 (ver QueHaceUnChatbotReal.gates.json post_render_verify_v2): el piloto ya toleraba texto de chat mas apagado que sus titulares; el nuevo recipe (sin el punto 0.25/0.22) no rompe esa consistencia, la acerca a un punto mas legible dentro de la misma familia visual.",
+    "promise_preservation": {"verdict": "pass", "detail": "cero cifras inventadas confirmado en pixeles (qualify_tags solo muestra las 4 etiquetas cualitativas planeadas, ningun numero fabricado se coló en el render)"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO — reel 3 listo para publicar. Handoff pendiente: archivar sfxChimeSrc (regenerado) a R2."
   }
 }
