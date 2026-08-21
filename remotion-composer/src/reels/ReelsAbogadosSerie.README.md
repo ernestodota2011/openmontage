@@ -7,6 +7,23 @@
 > sign-off tecnico final de `video-producer`, no una autorizacion de
 > publicacion.
 
+> [!danger] ACTUALIZACION 2026-08-21 (mismo dia) — defecto retroactivo encontrado y YA ARREGLADO en esta rama; pendiente re-render de 3/4 (prioridad el reel 4, el CTA de conversion real)
+> Auditoria de `video-producer` sobre `reels-inmobiliarios-serie` encontro un bug de LAYOUT en `BrandClose.tsx`
+> (componente COMPARTIDO por las 4 series): el `<div>` del `url` no tenia `maxWidth`/`textAlign:center` (a
+> diferencia del `tagline`, que si los tenia) — cuando el CTA es lo bastante largo para envolver a 2 lineas,
+> el texto queda pegado al borde izquierdo del frame sin margen. Confirmado con recorte+zoom 4x de la banda de
+> texto en **3 de 4 reels de ESTA serie**: `lo-que-ya-puedes-delegar-v1.mp4` (reel 2),
+> `lo-que-la-ia-no-puede-hacer-v1.mp4` (reel 3) y `como-empezar-sin-desorden-v1.mp4` (reel 4). ==El reel 4 es
+> el mas importante de reparar: su `brand_close` lleva el **CTA FINAL de conversion real de la serie**
+> (`aetherlogik.com/para-legal . agenda tu llamada de diagnostico gratuita ->`), no un "mira el siguiente
+> reel" — es el que mas tiempo pasa en pantalla frente a un prospecto real.== El texto sigue siendo 100%
+> legible (ningun caracter cortado) — el GO original de esta serie **NO se retira retroactivamente**, es un
+> defecto estetico-menor, no de comprension ni de marca (color/claims). El fix (mismo que `706d449` en
+> `reels-inmobiliarios-serie`) ya esta cherry-pickeado a ESTA rama (commit `6fbf7e4`) — falta que devops
+> re-renderice esos 3 reels (mismos props/assets, solo cambio el componente) y video-producer re-verifique el
+> `brand_close` de cada uno. Detalle completo: P-13 en `Video-problemas.md` y el handoff de
+> `ReelsInmobiliariosSerie.README.md`.
+
 Tercera serie consecutiva de la linea `reels-del-blog`, misma formula GO-4/4
 de `aetherlogik/reels-chatbot-serie` y `aetherlogik/reels-clinicas-serie`
 (rama partida de esa HEAD `0812933` para heredar el catalogo brand-safe
@@ -18,9 +35,9 @@ intacto). Fuente del blog: `automatizacion-despachos-abogados-ia.md`
 | # | Reel | R2 | Duracion | Runtime | Veredicto |
 |---|---|---|---|---|---|
 | 1 | Un tercio de tu dia (gancho) | `agency/reels-abogados-serie/un-tercio-de-tu-dia-v1.mp4` | 30.0s exacto | Remotion (atelier), 1 hero i2v | **GO** |
-| 2 | Lo que ya puedes delegar | `agency/reels-abogados-serie/lo-que-ya-puedes-delegar-v1.mp4` | 46.0s exacto | HIBRIDO Remotion + HyperFrames | **GO** |
-| 3 | Lo que la IA no puede hacer | `agency/reels-abogados-serie/lo-que-la-ia-no-puede-hacer-v1.mp4` | 45.0s exacto | Remotion (atelier), 1 hero i2v | **GO** |
-| 4 | Como empezar sin desorden | `agency/reels-abogados-serie/como-empezar-sin-desorden-v1.mp4` | 45.0s exacto | Remotion (atelier) | **GO** |
+| 2 | Lo que ya puedes delegar | `agency/reels-abogados-serie/lo-que-ya-puedes-delegar-v1.mp4` | 46.0s exacto | HIBRIDO Remotion + HyperFrames | **GO** ⚠️ brand_close con defecto de layout, ver actualizacion arriba — fix listo, falta re-render |
+| 3 | Lo que la IA no puede hacer | `agency/reels-abogados-serie/lo-que-la-ia-no-puede-hacer-v1.mp4` | 45.0s exacto | Remotion (atelier), 1 hero i2v | **GO** ⚠️ brand_close con defecto de layout, ver actualizacion arriba — fix listo, falta re-render |
+| 4 | Como empezar sin desorden | `agency/reels-abogados-serie/como-empezar-sin-desorden-v1.mp4` | 45.0s exacto | Remotion (atelier) | **GO** ⚠️ **PRIORIDAD** — brand_close lleva el CTA final de conversion real, defecto de layout confirmado, ver actualizacion arriba — fix listo, falta re-render |
 
 Todos servidos desde `https://media.aetherlogik.com/<ruta de arriba>`,
 todos verificados `curl 200` + descargados y auditados byte-a-byte por
@@ -95,13 +112,14 @@ nodos chicos, no un acento de diseno.
   2.5s y 5.0s).
 - **Reel 4:** pasos 1-3 legibles al spot-check; `brand_close` con el CTA
   final COMPLETO y legible: "aetherlogik.com/para-legal . agenda tu
-  llamada de diagnostico gratuita ->".
+  llamada de diagnostico gratuita ->" — legible en su momento, pero VER
+  la actualizacion 2026-08-21 al inicio: este CTA es exactamente el que
+  tenia el defecto de layout (pegado al borde al envolver a 2 lineas).
 
 ## `coherence_guard` — los 2 heroes i2v (reel 1 y reel 3)
 
 Ambos son escena UNICA (sin multi-plano que encadenar, doctrina "1 hero
-maximo por reel"). Verificado en 2 frames por hero: mismo personaje,
-mismo espacio, misma paleta, sin drift. **PASS en los 2.**
+maximo por reel"). Verificado en 2 frames por hero. **PASS en los 2.**
 
 ## Presupuesto final
 
@@ -112,33 +130,46 @@ de ~$25 declarado en la mision. Detalle linea por linea en el
 
 ## Gotchas de esta serie
 
-Ninguno nuevo. P-11 (Kling O1 `duration` fuera de {5,10}) y P-12
-(composicion sin wirear en `Root.tsx`) — ambos conocidos de la serie
-clinicas — se evitaron proactivamente desde el diseno de esta serie (ver
-`ReelsAbogadosSerie.README.md`, seccion historica de handoff en el
-historial de commits): `duration:"5"` explicito en los 2 heroes desde el
-primer push, y `Root.tsx` + props JSON registrados en el MISMO handoff
-que las composiciones, no diferido.
+P-11 (Kling O1 `duration` fuera de {5,10}) y P-12 (composicion sin
+wirear en `Root.tsx`) — ambos conocidos de la serie clinicas — se
+evitaron proactivamente desde el diseno de esta serie: `duration:"5"`
+explicito en los 2 heroes desde el primer push, y `Root.tsx` + props JSON
+registrados en el MISMO handoff que las composiciones, no diferido.
+
+**P-13** (encontrado retroactivamente el 2026-08-21, mismo dia — ver
+actualizacion al inicio de este documento): `BrandClose.tsx` (componente
+compartido) no le daba `maxWidth`/`textAlign:center` al `<div>` del `url`
+— el CTA se pegaba al borde del frame sin margen al envolver a 2 lineas.
+Afecto a 3 de 4 reels de ESTA serie (el mas alto de las 3 series
+auditadas), incluyendo el CTA final de conversion del reel 4. Fix ya
+cherry-pickeado a esta rama (`6fbf7e4`); pendiente re-render de los 3
+reels.
 
 ## Handoffs pendientes
 
-- **Ernesto**: decidir publicacion en redes (orden, cadencia, canales).
-- Ninguno tecnico — los 4 videos estan verificados y listos.
+- **devops-aetherlogik-homelab**: re-renderizar `LoQueYaPuedesDelegar`,
+  `LoQueLaIaNoPuedeHacer` y `ComoEmpezarSinDesorden` (esta rama,
+  componente `BrandClose.tsx` ya corregido en `6fbf7e4`; mismos
+  props/assets, sin cambios de duracion ni de contenido) + finishing
+  FFmpeg (misma recipe) + re-subir a R2 (sugerido versionar el nombre,
+  p.ej. `-v2.mp4`, para evitar cache stale de CF). **Prioridad: el reel
+  4** — es el unico con venta directa/CTA de conversion real de la serie.
+- **video-producer**: re-verificar SOLO la escena `brand_close` de esos 3
+  reels tras el re-render.
+- **Ernesto**: decidir publicacion en redes — y si prefiere esperar al
+  refresh del reel 4 (el de conversion) antes de publicarlo, o publicar
+  ya (el defecto es menor y el CTA sigue siendo legible).
 
 ## 📌 Para memoria
 
 - Tercera serie consecutiva de la linea `reels-del-blog` en cerrar GO 4/4
-  limpio (chatbot, clinicas, abogados).
-- **Cero gotchas nuevos** — P-11 y P-12 se evitaron por diseno desde el
-  inicio en vez de descubrirse durante la ejecucion; vale la pena que
-  `skill-curator` note que el patron "aplicar la leccion de la serie
-  anterior proactivamente" funciono 2 series seguidas.
-- Duracion de contenedor exacta en los 4 reels (sin el +0.1s de padding
-  AAC que aparecio 2/4 veces en la serie anterior) — no hay evidencia
-  suficiente en 1 serie para escribirlo como regla, pero refuerza la
-  hipotesis ya documentada en `premium-craft-standards.md` de que el
-  padding correlaciona con colas de musica audibles en el ultimo frame
-  de `brand_close`.
+  limpio EN SU MOMENTO (chatbot, clinicas, abogados) — el defecto P-13 se
+  encontro despues, retroactivamente, auditando la 4a serie
+  (inmobiliarios).
+- **Esta serie tuvo la mayor incidencia del bug P-13 (3/4 reels)** de las
+  3 series auditadas — probablemente porque sus CTAs son en promedio los
+  mas largos (mencionan "despachos de abogados" + frases completas de
+  agenda), lo que dispara el wrap con mas frecuencia que CTAs mas cortos.
 - El metodo de BPM por autocorrelacion (reimplementado localmente en
   Python/numpy, sin depender del script del CT 128) dio deltas iguales o
   mejores que la corrida anterior (max 0.3 BPM vs 1.3 BPM) — util saber
