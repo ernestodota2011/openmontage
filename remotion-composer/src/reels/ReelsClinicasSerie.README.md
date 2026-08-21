@@ -1,4 +1,18 @@
-# Serie "reels-clinicas-serie" — pre-produccion COMPLETA, pendiente de render (2026-08-21)
+# Serie "reels-clinicas-serie" — pre-produccion + WIREADO completos, pendiente de render (2026-08-21)
+
+> [!danger] CORRECCION 2026-08-21 (post-bloqueo verificado por devops)
+> El handoff original de esta rama decia "pre-produccion COMPLETA" pero **NO
+> incluia el registro de las 4 composiciones en `Root.tsx` ni sus props
+> JSON** — devops intento renderizar y obtuvo `Error: Could not find
+> composition with ID ElCicloQueTeCuestaHoras` (root cause verificado con un
+> render real, ver `Server-pve1-bitacora-2026-08-21-openmontage-render-reels-clinicas-serie.md`).
+> Corregido en el commit `e6d86f4` (las 4 `<Composition>` + sus imports en
+> `Root.tsx`). Los 4 props JSON los creo devops en el mismo bloqueo (HEAD
+> `f6615b7`, `public/demo-props/*.json`) leyendo las interfaces reales de
+> cada `.tsx` — revisados abajo, coinciden con el diseño. Ver **P-12** en
+> `Video-problemas.md`: la definicion de "listo" de una composicion incluye
+> su registro en `Root.tsx` + su props JSON — la prueba es que
+> `npx remotion compositions` la liste, no que el `.tsx` exista.
 
 > [!warning] Esta serie NO esta renderizada. La mision explicita "NO renderizas" —
 > este documento es el handoff tecnico completo a `devops-aetherlogik-homelab`
@@ -27,14 +41,14 @@ el cierre de serie. Fusionar (2)+(3) o (3)+(4) habria forzado 2 asuntos
 distintos (mecanismo interno vs. resultado externo verificado) en el mismo
 video, contra la doctrina de "una idea por reel" de los didacticos.
 
-## Los 4 videos — assets + render pendiente
+## Los 4 videos — assets archivados + composicion wireada + render pendiente
 
-| # | Reel | Duracion picture | Runtime | Escenas i2v |
-|---|---|---|---|---|
-| 1 | `ElCicloQueTeCuestaHoras` (gancho) | 30.0s (720f) | Remotion (atelier) | 1 (cold_open_hero) |
-| 2 | `AsiFuncionaLaAutomatizacionReal` | 47.0s (1128f) | Remotion 100% (atelier) | 0 |
-| 3 | `CasoRealMedicinaEstetica` | 45.0s (1080f) | Remotion 100% (atelier) | 1 (cold_open_hero) |
-| 4 | `LoQueCambiaEnTuClinica` | 47.0s (1128f) | HIBRIDO Remotion + HyperFrames (atelier) | 0 |
+| # | Reel | Duracion picture | Runtime | Escenas i2v | `Root.tsx` |
+|---|---|---|---|---|---|
+| 1 | `ElCicloQueTeCuestaHoras` (gancho) | 30.0s (720f) | Remotion (atelier) | 1 (cold_open_hero) | wireada `e6d86f4` |
+| 2 | `AsiFuncionaLaAutomatizacionReal` | 47.0s (1128f) | Remotion 100% (atelier) | 0 | wireada `e6d86f4` |
+| 3 | `CasoRealMedicinaEstetica` | 45.0s (1080f) | Remotion 100% (atelier) | 1 (cold_open_hero) | wireada `e6d86f4` |
+| 4 | `LoQueCambiaEnTuClinica` | 47.0s (1128f) | HIBRIDO Remotion + HyperFrames (atelier) | 0 | wireada `e6d86f4` |
 
 Todos 9:16, 1080x1920, 24fps, `tail_padding_seconds: 0` en los props de cada
 composicion (duracion exacta, sin el padding fantasma de +1s ya resuelto en
@@ -58,32 +72,54 @@ midio 127.9/125.3/122.7 BPM contra 128/126/122 declarados, <1 BPM de margen).
 Esta sesion NO midio BPM real porque NO hubo render/mezcla — queda declarado
 como **NO VERIFICABLE hasta el post-render verify**, honesto en cada `gates.json`.
 
-## Manifiesto de assets generados (fal.ai, URLs CDN temporales — devops archiva a R2)
+## Manifiesto de assets — ARCHIVADOS a R2 por devops (ya no fal.media temporal)
 
-⚠️ Las URLs `v3b.fal.media` son temporales (expiran, no confirmado el plazo
-exacto — tratar como ~24-48h por precaucion, mismo criterio que la serie
-anterior). **`video-producer` NO tocó credenciales de R2** (P-07 del registro
-de problemas) — devops debe archivar estas URLs con la via segura ya
-establecida ANTES de que expiren.
+✅ Los 12 assets generativos + el clip HyperFrames del reel 4 ya estan
+archivados en R2 (`agency/reels-clinicas-serie/...`), verificados por devops
+con tamaño exacto + `curl -sSI` 200 (ver la bitacora del 2026-08-21). Los 4
+`public/demo-props/*.json` (HEAD `f6615b7`) ya apuntan a
+`https://media.aetherlogik.com/agency/reels-clinicas-serie/...`, no a las
+URLs `v3b.fal.media` originales (esas expiran; se dejan abajo solo como
+referencia historica del costo/modelo, NO usar para renderizar).
 
-| Asset | Reel | Modelo | URL | Tamaño | Costo |
-|---|---|---|---|---|---|
-| hero still | 1 | nano-banana-pro (2K jpeg) | `https://v3b.fal.media/files/b/0aa734ee/faAdWU-pquGDuPZbXcrDR_lVtQs1ry.jpg` | — | $0.15 |
-| hero i2v (5s) | 1 | kling-video/o1 | `https://v3b.fal.media/files/b/0aa734ef/QEFBp0mxP6wUhkga2Vizq_output.mp4` | 3,355,707 B | $0.56 |
-| music (38s→30.0s) | 1 | elevenlabs/music | `https://v3b.fal.media/files/b/0aa734f4/ITmvfENzu3dQV0iWwLQKz_music_generated.mp3` | 607,757 B | $0.38 |
-| sfx whoosh | 1/2 | elevenlabs/sound-effects/v2 | `https://v3b.fal.media/files/b/0aa734fb/8OkH83AjiXGipIpsotn_n_sound_effect.mp3` | 17,180 B | $0.002 |
-| music (58s→47.0s) | 2 | elevenlabs/music | `https://v3b.fal.media/files/b/0aa734e2/8B2LNpTZsS_Ixtq4_94ZU_music_generated.mp3` | 927,078 B | $0.58 |
-| sfx chip | 2 | elevenlabs/sound-effects/v2 | `https://v3b.fal.media/files/b/0aa734e7/dDF8uo4yZwtzaJyMIIW5-_sound_effect.mp3` | 17,180 B | $0.002 |
-| sfx confirm ding | 2/3 | elevenlabs/sound-effects/v2 | `https://v3b.fal.media/files/b/0aa734fc/0WPJvc5cuVvp6FAP6cPyu_sound_effect.mp3` | 17,180 B | $0.002 |
-| hero still | 3 | nano-banana-pro (2K jpeg) | `https://v3b.fal.media/files/b/0aa734f0/lnw59ofJfXAYkQVCbQzmK_VQUFKg8k.jpg` | — | $0.15 |
-| hero i2v (5s) | 3 | kling-video/o1 | `https://v3b.fal.media/files/b/0aa73503/00B4CIx-Btl5YKy387dvJ_output.mp4` | 8,024,813 B | $0.56 |
-| music (52s→45.0s) | 3 | elevenlabs/music | `https://v3b.fal.media/files/b/0aa734e3/Szw-VnP7SFCov__Nwb_0-_music_generated.mp3` | 833,037 B | $0.52 |
-| music (52s→47.0s) | 4 | elevenlabs/music | `https://v3b.fal.media/files/b/0aa734f9/pkKhryqS8cijNLFWtF9KC_music_generated.mp3` | 831,365 B | $0.52 |
-| sfx riser | 4 | elevenlabs/sound-effects/v2 | `https://v3b.fal.media/files/b/0aa734fc/ybEsvX9mNs246fLTmbxxK_sound_effect.mp3` | 24,703 B | $0.003 |
+**Props JSON verificados contra el diseño de cada `.tsx`** (releidos los 4
+archivos que devops creo en `public/demo-props/`): las claves coinciden
+EXACTO con las interfaces de props de cada composicion
+(`ElCicloQueTeCuestaHorasProps`/`AsiFuncionaLaAutomatizacionRealProps`/
+`CasoRealMedicinaEsteticaProps`/`LoQueCambiaEnTuClinicaProps`), `tail_padding_seconds:0`
+en los 4, y las rutas de asset coinciden con el manifiesto de archivado de la
+bitacora (incluida la decision de compartir `shared/sfx-whoosh.mp3` entre
+reels 1+2 y `shared/sfx-confirm-ding.mp3` entre reels 2+3, correcta — son el
+mismo asset fal.media, no hacia falta duplicarlo). **Sin discrepancias
+encontradas** — los 4 props quedan aprobados tal como los dejo devops.
+
+| Asset (fal.media original, SOLO referencia — NO USAR PARA RENDERIZAR) | Reel | Modelo | Tamaño | Costo |
+|---|---|---|---|---|
+| hero still | 1 | nano-banana-pro (2K jpeg) | 2,886,897 B | $0.15 |
+| hero i2v (5s) | 1 | kling-video/o1 | 3,355,707 B | $0.56 |
+| music (38s→30.0s) | 1 | elevenlabs/music | 607,757 B | $0.38 |
+| sfx whoosh (compartido 1+2) | 1/2 | elevenlabs/sound-effects/v2 | 17,180 B | $0.002 |
+| music (58s→47.0s) | 2 | elevenlabs/music | 927,078 B | $0.58 |
+| sfx chip | 2 | elevenlabs/sound-effects/v2 | 17,180 B | $0.002 |
+| sfx confirm ding (compartido 2+3) | 2/3 | elevenlabs/sound-effects/v2 | 17,180 B | $0.002 |
+| hero still | 3 | nano-banana-pro (2K jpeg) | 1,413,773 B | $0.15 |
+| hero i2v (5s) | 3 | kling-video/o1 | 8,024,813 B | $0.56 |
+| music (52s→45.0s) | 3 | elevenlabs/music | 833,037 B | $0.52 |
+| music (52s→47.0s) | 4 | elevenlabs/music | 831,365 B | $0.52 |
+| sfx riser | 4 | elevenlabs/sound-effects/v2 | 24,703 B | $0.003 |
+| clip HyperFrames (checklist, 20.0s) | 4 | hf render (`que-cambia-en-tu-clinica`) | 416,967 B | $0 (CPU, sin costo de API) |
+
+**Rutas R2 reales (las que usan los props JSON):**
+`agency/reels-clinicas-serie/el-ciclo-que-te-cuesta-horas/{hero-still.jpg,hero-i2v.mp4,music.mp3}`,
+`agency/reels-clinicas-serie/asi-funciona-la-automatizacion-real/{music.mp3,sfx-chip.mp3}`,
+`agency/reels-clinicas-serie/caso-real-medicina-estetica/{hero-still.jpg,hero-i2v.mp4,music.mp3}`,
+`agency/reels-clinicas-serie/lo-que-cambia-en-tu-clinica/{que-cambia-en-tu-clinica.mp4,music.mp3,sfx-riser.mp3}`,
+`agency/reels-clinicas-serie/shared/{sfx-whoosh.mp3,sfx-confirm-ding.mp3}`.
 
 **Costo total de assets generativos: ~$3.43 USD**, contra un techo de ~$25
 declarado en la mision. Detalle linea por linea en el `assets_generated` de
-cada `.gates.json`.
+cada `.gates.json` (esos siguen citando las URLs fal.media originales como
+registro historico del prompt/costo — el ARCHIVO real esta en R2).
 
 ⚠️ Todos los tracks de musica se generaron con **buffer** sobre el picture
 length (nunca al reves) — devops **recorta** (no loopea ni extiende) a la
@@ -97,29 +133,63 @@ UN plano aislado, no de encadenado first/last-frame). Se resolvio usando
 `duration:"5"` para ambos heroes de esta serie (reel 1 y reel 3) — el
 frame-plan de cada `cold_open_hero` (120f = 5.0s) ya coincide exacto.
 
+## Segundo gotcha (P-12, registrado en Video-problemas.md) — este handoff lo causo
+
+El primer draft de este README declaraba "pre-produccion COMPLETA" sin que
+ninguna de las 4 composiciones estuviera registrada en `Root.tsx` ni tuviera
+props JSON — devops lo descubrio con un render real fallido, no con una
+lectura de codigo. Corregido (`Root.tsx` commit `e6d86f4`; props JSON ya
+existian, creados por devops en el bloqueo). Ver la seccion
+**"Auto-verificacion antes del handoff"** mas abajo — se agrega a partir de
+esta serie para toda serie futura.
+
+## Auto-verificacion antes de declarar el handoff (NUEVO, por P-12)
+
+`video-producer` NO tiene un checkout local del fork con `node_modules`
+instalados en esta maquina (Windows, sin el CT) — no puede correr
+`npx remotion compositions` el mismo. Por eso este paso queda declarado como
+**gate de ENTRADA que devops corre PRIMERO**, antes de intentar el render de
+produccion, y su resultado se pega en la bitacora de la sesion:
+
+```bash
+cd /opt/openmontage/remotion-composer && npx remotion compositions src/index.tsx
+```
+
+Si alguna composicion nueva del handoff NO aparece en esa lista, el handoff
+NO estaba completo — se devuelve a `video-producer` para wirear `Root.tsx`
+antes de perder tiempo en `npm install`/`tsc`/discovery de props (que SI se
+corrieron en el bloqueo de esta serie y no habrian detectado el problema: un
+`.tsx` sin importar en ningun lado compila limpio con `tsc`, no falla).
+**La prueba de "completa" es que el render la encuentre, no que el archivo
+exista.**
+
 ## Comandos de render por reel (los ejecuta devops, NO video-producer)
 
 Reels 1, 2, 3 (100% Remotion):
 ```bash
 python scripts/ssh_helper.py --host pve1 "pct start 128"
+python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx remotion compositions src/index.tsx'"
 python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx tsc --noEmit'"
-python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx remotion render src/index.ts ElCicloQueTeCuestaHoras out/el-ciclo-master.mov --codec=prores --prores-profile=hq --image-format=png --color-space=bt709 --props=./props/el-ciclo.json'"
-# repetir para AsiFuncionaLaAutomatizacionReal y CasoRealMedicinaEstetica con sus props
+python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx remotion render src/index.tsx ElCicloQueTeCuestaHoras out/el-ciclo-master.mov --codec=prores --prores-profile=hq --image-format=png --color-space=bt709 --props=./public/demo-props/el-ciclo-que-te-cuesta-horas.json'"
+# repetir para AsiFuncionaLaAutomatizacionReal (--props=./public/demo-props/asi-funciona-la-automatizacion-real.json)
+# y CasoRealMedicinaEstetica (--props=./public/demo-props/caso-real-medicina-estetica.json)
 ```
 
-Reel 4 (HIBRIDO — 2 pasos: HyperFrames primero, Remotion despues):
+Reel 4 (HIBRIDO — 2 pasos: HyperFrames primero, Remotion despues; el paso
+HyperFrames ya esta COMPLETO, ver bitacora):
 ```bash
 python scripts/ssh_helper.py --host pve1 "pct start 128"
-python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/hyperframes-compositions/que-cambia-en-tu-clinica && hf lint . && hf render -c index.html -o que-cambia-en-tu-clinica.mp4'"
-# subir que-cambia-en-tu-clinica.mp4 como queCambiaSrc en los props de LoQueCambiaEnTuClinica
-python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx remotion render src/index.ts LoQueCambiaEnTuClinica out/lo-que-cambia-master.mov --codec=prores --prores-profile=hq --image-format=png --color-space=bt709 --props=./props/lo-que-cambia.json'"
+# Paso HyperFrames YA HECHO (0 errors/0 warnings, clip archivado en R2 y ya
+# referenciado en public/demo-props/lo-que-cambia-en-tu-clinica.json como
+# queCambiaSrc) — no repetir salvo que el clip cambie.
+python scripts/ssh_helper.py --host pve1 "pct exec 128 -- bash -c 'cd /opt/openmontage/remotion-composer && npx remotion render src/index.tsx LoQueCambiaEnTuClinica out/lo-que-cambia-master.mov --codec=prores --prores-profile=hq --image-format=png --color-space=bt709 --props=./public/demo-props/lo-que-cambia-en-tu-clinica.json'"
 python scripts/ssh_helper.py --host pve1 "pct stop 128"
 ```
 
-Los `props/*.json` de cada reel deben apuntar a las URLs de la tabla de
-arriba (o a sus copias ya archivadas en R2, si devops archiva primero) —
-**nombra la fuente por ruta exacta antes de renderizar** (P-05 del registro
-de problemas: no confiar en "el master" de memoria).
+Los 4 `public/demo-props/*.json` YA EXISTEN (creados por devops, verificados
+arriba contra el diseño) — **nombra la fuente por ruta exacta antes de
+renderizar** (P-05 del registro de problemas: no confiar en "el master" de
+memoria) sigue aplicando para los `out/*.mov` que produzca este render.
 
 ## Recipe de finishing EXACTO (aplicar tal cual, no "el CRF de siempre")
 
@@ -158,17 +228,19 @@ de problemas: no confiar en "el master" de memoria).
 5. `coherence_guard` sobre los 2 reels con i2v (aunque cada uno tiene solo 1
    escena i2v, sin multi-plano que encadenar — el gate corre igual como
    chequeo de paleta/similitud del unico plano).
-6. `hf lint` + `hf render` logs del reel 4 (confirmar 0/0, mismo resultado
-   que `proceso-y-honestidad` de la serie anterior).
+6. `hf lint` + `hf render` logs del reel 4 (ya confirmado 0/0 por devops en
+   el bloqueo, mismo resultado que `proceso-y-honestidad` de la serie
+   anterior — no hace falta re-correrlo salvo que el clip cambie).
 
 Un rojo en cualquiera de estos = se enruta el arreglo (asset/composicion/
 audio) y se re-verifica — la compuerta es un loop, no un sello.
 
 ## Handoffs pendientes
 
-- **devops-aetherlogik-homelab**: correr los 4 comandos de render + el
-  finishing exacto de arriba + subir a R2 (`agency/reels-clinicas-serie/`) +
-  archivar las 12 URLs fal.media de la tabla de assets ANTES de que expiren.
+- **devops-aetherlogik-homelab**: correr `npx remotion compositions` (debe
+  listar las 4 composiciones nuevas — confirma el fix de `Root.tsx`), luego
+  los 4 comandos de render (props ya archivados, rutas corregidas arriba) +
+  el finishing exacto + subir los 4 MP4 finales a R2 (`agency/reels-clinicas-serie/`).
 - **video-producer** (proxima sesion): verify post-render de los 4 MP4 con
   el checklist de arriba, y actualizar este README con los veredictos
   (mismo patron GO/NO-GO que `ReelsChatbotSerie.README.md`).
@@ -177,7 +249,14 @@ audio) y se re-verifica — la compuerta es un loop, no un sello.
 
 ## 📌 Para memoria
 
-- P-11 (nuevo, registrado en `Video-problemas.md`): Kling O1 exige
+- **P-12 (nuevo, registrado en `Video-problemas.md`):** pre-produccion
+  "completa" sin wireado ejecutable — la definicion de "listo" de una
+  composicion incluye su registro en `Root.tsx` + su props JSON; la prueba
+  es que `npx remotion compositions` la liste, no que el `.tsx` exista.
+  Pariente de `feedback_mecanismo_cableado_a_uno` (el archivo existe pero
+  nada lo consume). `tsc --noEmit` NO detecta este defecto (un `.tsx` sin
+  importar compila limpio).
+- P-11 (registrado en `Video-problemas.md`): Kling O1 exige
   `duration` ∈ {5,10} sin `end_image_url` — fijar `duration:"5"` desde el
   primer intento para un hero i2v de un solo plano aislado.
 - `nano-banana-pro` con `resolution:"2K"` + `output_format:"jpeg"` directo
