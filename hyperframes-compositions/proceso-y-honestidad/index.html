@@ -85,18 +85,35 @@
     100% CSS (@keyframes + cubic-bezier(0.16,1,0.3,1), el mismo easing del
     craft de aetherlogik-video) — sin GSAP, por eso el elemento raiz lleva
     `data-no-timeline` (evita el impuesto de 45s del poller documentado en
-    la skill). `data-composition-id` + `data-width`/`data-height` agregados
-    2026-08-21 tras el hallazgo de `hf lint` (faltaban los 3 atributos que
-    identifican la composicion y su resolucion de salida al motor). Paleta
-    ember-only, boxless: NINGUN elemento de este archivo tiene
-    fondo/borde/boxShadow tipo tarjeta — solo texto, un circulo de nodo
-    (outline, no relleno hasta que se enciende) y lineas de texto.
+    la skill; regla `missing_data_no_timeline` del linter oficial).
+
+    2026-08-21 — contrato COMPLETO del stage verificado contra el repo
+    oficial heygen-com/hyperframes (no solo el error que nombro `hf lint`
+    la 1a vez). Fuente primaria: `skills/motion-graphics/agents/builder.md`
+    ("The HF contract (non-negotiable): Root #stage carries
+    data-composition-id, data-start="0", data-duration=<s>, data-fps,
+    data-width, data-height") + `packages/cli/src/docs/data-attributes.md`
+    (`data-composition-id` marcado explicitamente "required"; `data-start`/
+    `data-duration` documentados en la seccion "Timing") + la regla de
+    lint `root_composition_missing_data_start` (error si falta
+    `data-start`). Los 6 atributos base + `data-no-timeline` (necesario
+    aparte, por ser CSS-puro sin GSAP) son el set COMPLETO — no hay mas
+    atributos de nivel-raiz documentados en el contrato oficial.
+
     Render (lo ejecuta devops, NO video-producer): pct start 128 ->
     hf lint . && hf render -c index.html -o proceso-y-honestidad.mp4 ->
-    pct stop 128. Duracion/fps del render deben forzarse a 24fps/720
-    frames si el default de `hf` no coincide con el plan de arriba.
+    pct stop 128.
   -->
-  <div id="stage" data-no-timeline data-composition-id="proceso-y-honestidad" data-width="1080" data-height="1920">
+  <div
+    id="stage"
+    data-composition-id="proceso-y-honestidad"
+    data-start="0"
+    data-duration="30"
+    data-fps="24"
+    data-width="1080"
+    data-height="1920"
+    data-no-timeline
+  >
 
     <section id="section-process" class="section">
       <div id="process-kicker">Cómo se construye, fase por fase</div>
