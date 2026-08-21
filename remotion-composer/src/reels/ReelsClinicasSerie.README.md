@@ -223,3 +223,34 @@ de assets, recipe de finishing exacto, comandos de render por reel, el
 bloqueo de `Root.tsx` y su correccion) quedan preservadas en el historial
 de commits de este archivo (`git log -p -- remotion-composer/src/reels/ReelsClinicasSerie.README.md`)
 para referencia de futuras series — ya no aplican como pasos pendientes.
+
+
+---
+
+## Refresh retroactivo — re-render de los 2 reels con el fix de `BrandClose.tsx` (2026-08-21)
+
+`devops-aetherlogik-homelab` re-renderizo `CasoRealMedicinaEstetica` y
+`LoQueCambiaEnTuClinica` sobre HEAD `ca09d5b` (incluye el fix `BrandClose.tsx`,
+commit `5da357b`), mismos props/assets, sin cambios de duracion ni contenido:
+
+- `tsc --noEmit`: 0 errores.
+- Ambos masters ProRes se renderizaron en paralelo (2 concurrentes, sin
+  incidentes de memoria en el CT 128).
+- Finishing FFmpeg identico (`finish_reel.py`: curves sin 0.25/0.22, CRF16,
+  aq-mode=2:aq-strength=1.2, sin noise, acompressor->loudnorm 2 pasadas por
+  mix). LUFS post-hoc medido sobre el archivo final: -13.99 (medicina) /
+  -13.93 (clinica), ambos dentro de banda -14+-0.5.
+- ffprobe: h264, 1080x1920, 24fps, duraciones 45.0s (medicina) y 47.1s
+  (clinica — mismo patron benigno de +0.1s de padding AAC ya documentado
+  arriba, no un defecto nuevo).
+- Spot-check visual del frame `brand_close` en ambos: CTA de 2 lineas
+  centrado con margen simetrico, sin bleed al borde.
+- Subidos a R2 con naming nuevo `-v2.mp4` (NO se sobreescribio el `-v1.mp4`
+  defectuoso — CF cachea por nombre, path nuevo evita servir el asset viejo
+  desde el edge): `caso-real-medicina-estetica-v2.mp4`,
+  `lo-que-cambia-en-tu-clinica-v2.mp4`, ambos verificados `curl` 200 con
+  `Content-Length` igual al tamano local. Los `-v1.mp4` NO se borraron
+  (limpieza pendiente de decision del director).
+
+**Pendiente:** `video-producer` re-verifica el `brand_close` de estos 2 y
+emite el GO final de la serie.
