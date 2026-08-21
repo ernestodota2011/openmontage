@@ -63,6 +63,28 @@
       "tecnica_validada_por_video_producer": "simulacion propia sobre audio extraido del v1.mp4 (stereo 48kHz, no el downmix mono que uso una corrida preliminar invalida): loudnorm 2-pasadas con TP=-2.0 (en vez de -1.0) manteniendo I=-14/LRA medido, re-encode AAC 256kbps, re-medido independientemente el archivo resultante -> true peak final -1.77dBTP (negativo, seguro), LUFS final -14.00 (dentro de banda). La tecnica FUNCIONA — no es una hipotesis sin probar.",
       "instruccion_exacta_para_devops": "re-mux SOLO audio (NO re-renderizar Remotion ni re-aplicar el grade de video): tomar el mix PRE-AAC original (el bus antes de tu pasada 2 de loudnorm, no el m4a/mp4 ya entregado, para evitar doble-procesamiento), correr loudnorm pasada 2 con TP=-2.0 (I=-14, LRA=el medido en tu pasada 1), re-encode a AAC 256kbps/48kHz, remux con el video ya finalizado via -c:v copy, subir como los-numeros-de-marino-hvac-v2.mp4 SIN sobreescribir el -v1.mp4 (P-05/P-13: nunca reintroducir el master viejo)"
     },
-    "final_verdict": "NO-GO (v1) — pendiente re-mux de audio, ver fix_required"
+    "final_verdict": "NO-GO (v1) — superado por post_render_verify_v2 abajo"
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "re-mux de audio solicitado tras fix_required de post_render_verify (headroom TP=-2.0 pre-AAC)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-hvac-serie/los-numeros-de-marino-hvac-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 45.0, "size_bytes": 9542938, "http_status": 200, "nota": "duracion identica a v1 (45.0s) — el re-mux no altero timing"},
+    "video_integrity_check": {
+      "metodo": "extraccion del stream de video crudo (h264, sin re-encode, -c:v copy) de v1 y v2, MD5 de cada extraccion — verificacion INDEPENDIENTE, no confio en el reporte de devops",
+      "md5_v1": "16a621f7636870b970dbb6ad5e1a4176",
+      "md5_v2": "16a621f7636870b970dbb6ad5e1a4176",
+      "veredicto": "IDENTICO — confirma que el re-mux fue audio-only, el video no se toco"
+    },
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.11,
+      "lufs_medido_independiente": -14.11,
+      "true_peak_dbtp_devops_reportado": -1.71,
+      "true_peak_dbtp_medido_independiente": -1.71,
+      "true_peak_astats_sample_peak_db": -1.751,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "veredicto": "pass — true peak negativo, clipping resuelto; LUFS -14.11 dentro de banda ±0.5"
+    },
+    "final_verdict": "GO"
   }
 }

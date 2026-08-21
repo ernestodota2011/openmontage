@@ -56,6 +56,29 @@
       "tecnica_validada_por_video_producer": "misma simulacion que el reel 3, sobre el audio propio de este reel: loudnorm 2-pasadas con TP=-2.0, I=-14, re-encode AAC 256kbps -> true peak final -1.81dBTP (negativo, seguro), LUFS final -14.05 (dentro de banda). Tecnica validada, no hipotesis.",
       "instruccion_exacta_para_devops": "identica a la del reel 3: re-mux SOLO audio desde el mix PRE-AAC original con TP=-2.0 (I=-14, LRA medido en tu pasada 1), AAC 256kbps/48kHz, remux con -c:v copy sobre el video ya finalizado, subir como lo-que-necesitas-para-automatizar-v2.mp4 SIN sobreescribir el -v1.mp4"
     },
-    "final_verdict": "NO-GO (v1) — pendiente re-mux de audio, ver fix_required"
+    "final_verdict": "NO-GO (v1) — superado por post_render_verify_v2 abajo"
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "trigger": "re-mux de audio solicitado tras fix_required de post_render_verify (headroom TP=-2.0 pre-AAC)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-hvac-serie/lo-que-necesitas-para-automatizar-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 45.0, "size_bytes": 6175386, "http_status": 200, "nota": "duracion identica a v1 (45.0s) — el re-mux no altero timing"},
+    "video_integrity_check": {
+      "metodo": "extraccion del stream de video crudo (h264, sin re-encode, -c:v copy) de v1 y v2, MD5 de cada extraccion — verificacion INDEPENDIENTE, no confio en el reporte de devops",
+      "md5_v1": "5455d75457c67f56b2b9ffedcc09cbc4",
+      "md5_v2": "5455d75457c67f56b2b9ffedcc09cbc4",
+      "veredicto": "IDENTICO — confirma que el re-mux fue audio-only, el video no se toco"
+    },
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -13.57,
+      "lufs_medido_independiente": -13.57,
+      "true_peak_dbtp_devops_reportado": -1.87,
+      "true_peak_dbtp_medido_independiente": -1.87,
+      "true_peak_astats_sample_peak_db": -1.871,
+      "coincidencia": "exacta a 2 decimales en LUFS y TP",
+      "sanity_lufs": "-13.57 esta 0.43dB por encima del target -14.0 — dentro de la banda de tolerancia ±0.5 ya usada en el resto de la serie (rango completo de los 4 reels: -14.11 a -13.57, spread 0.54dB) y en las 4 series anteriores. Aceptable, no requiere otra pasada.",
+      "veredicto": "pass — true peak negativo, clipping resuelto; LUFS dentro de banda"
+    },
+    "final_verdict": "GO"
   }
 }
