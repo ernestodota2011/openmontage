@@ -2,16 +2,17 @@
   "reel": "el-ciclo-que-te-cuesta-horas",
   "run_date": "2026-08-21",
   "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "correction_note": "Este gates.json reemplaza al del primer push. Al leer el codigo real de TagRevealList (no asumido) se encontro que manual_cycle usaba props `items`/`kicker` inexistentes — corregido a `tags: QualifyTag[]` + HeadlineOverlay separado para el caption. Sin ese fix, tsc habria fallado en devops (P-10 del registro de problemas: verificar releyendo el componente real, no de memoria).",
   "pre_render_gates": {
     "slideshow_risk": {
       "average": 0.5,
       "verdict": "strong",
       "dimensions": {
-        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto (i2v hero, cascada, headline, sweep, brand close) — ninguna se repite"},
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto (i2v hero, cascada de tags, headline, sweep, brand close) — ninguna se repite"},
         "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra literalmente el problema del post, no es decorativo"},
-        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v); las otras 4 son tipografia cinetica pura — declarado sin inflar, este reel es mayormente tipografico por diseno (es el gancho, no el didactico de UI)"},
+        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v); las otras 4 son tipografia cinetica pura — declarado sin inflar, es el gancho, no el didactico de UI"},
         "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 5 escenas"},
-        "typography_overreliance": {"score": 1.5, "reason": "4 de 5 escenas (80%) son tipografia/stat_card — SUPERA el umbral 60% de la doctrina. Declarado en rojo honestamente: es una desviacion consciente del gancho (menos costo, mas ritmo de golpes de texto), no un descuido; se compensa con el hero i2v real en la apertura y el ritmo creciente de manual_cycle, pero el numero cruza el umbral y se documenta sin maquillar."},
+        "typography_overreliance": {"score": 1.5, "reason": "4 de 5 escenas (80%) son tipografia/stat_card — SUPERA el umbral 60%. Declarado en rojo honestamente: desviacion consciente del gancho, no un descuido."},
         "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama nada cinematico mas alla de lo que el i2v real entrega"}
       }
     },
@@ -19,7 +20,7 @@
       "score": 0.4,
       "verdict": "strong",
       "violations": [],
-      "suggestions": ["si en revision humana el reel se siente demasiado tipografico, considerar un segundo micro-asset (B-roll corto) en manual_cycle — hoy deliberadamente no incluido para mantener el presupuesto y el ritmo"],
+      "suggestions": ["si en revision humana el reel se siente demasiado tipografico, considerar un segundo micro-asset en manual_cycle"],
       "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"],
       "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
     },
@@ -31,19 +32,19 @@
       "motion_cuts": 1,
       "slide_cuts": 4,
       "still_cuts": 0,
-      "note": "declarado 'hybrid', NO 'motion_led' — el ratio real (20%) esta lejos del 70% que exigiria motion_led. Es un gancho deliberadamente tipografico con UN momento de cine real; no se disfraza como mas cinematico de lo que es."
+      "note": "declarado 'hybrid', NO 'motion_led'. Gancho deliberadamente tipografico con UN momento de cine real."
     },
     "brand_palette_guard": {
       "verdict": "pass",
       "counts": {"critical": 0, "warning": 0},
       "violations": [],
-      "note": "sin componentes de UI con card/box en este reel (no hay chat UI); solo tipografia + hero i2v + BrandClose. El prompt del i2v excluyo explicitamente cian/violeta/neon; pendiente confirmar en pixeles reales durante el verify post-render (ver abajo)."
+      "note": "sin componentes de UI con card/box en este reel. TagRevealList es boxless por diseno (solo tick vertical ember + texto, sin fondo/borde). El prompt del i2v excluyo explicitamente cian/violeta/neon; pendiente confirmar en pixeles reales durante el verify post-render."
     },
     "coherence_guard": {
-      "status": "PENDIENTE — se corre sobre pixeles del MP4 renderizado, no aplica en pre-produccion. Solo 1 escena i2v en todo el reel (no hay multi-plano que encadenar), por lo que el riesgo de drift de personaje/mundo entre planos NO APLICA a este reel por construccion."
+      "status": "no aplica en pre-produccion — solo 1 escena i2v en todo el reel (sin multi-plano que encadenar)"
     },
     "tsc_noemit": {
-      "status": "PENDIENTE — lo corre devops antes de renderizar (mismo patron que la serie anterior). Este reel no agrega componentes nuevos (reusa KineticHeadline, TagRevealList, HeadlineOverlay, EmberThread, BrandClose, FilmGrade, todos ya GO'd), por lo que el riesgo de romper tsc es bajo."
+      "status": "PENDIENTE — lo corre devops antes de renderizar. Riesgo reducido tras la correccion de props de TagRevealList (ver correction_note)."
     }
   },
   "assets_generated": {
@@ -51,15 +52,14 @@
       "model": "fal-ai/nano-banana-pro",
       "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"},
       "url": "https://v3b.fal.media/files/b/0aa734ee/faAdWU-pquGDuPZbXcrDR_lVtQs1ry.jpg",
-      "cost_usd": 0.15,
-      "note": "2K jpeg de entrada (no 4K png) por P-06 del registro de problemas — evita el ciclo descarga->ffmpeg->re-subida por el limite de 10MB de Kling."
+      "cost_usd": 0.15
     },
     "hero_i2v": {
       "model": "fal-ai/kling-video/o1/image-to-video",
       "params": {"duration": "5", "start_image_url_only": true},
       "url": "https://v3b.fal.media/files/b/0aa734ef/QEFBp0mxP6wUhkga2Vizq_output.mp4",
       "cost_usd": 0.56,
-      "note": "gotcha nuevo (P-11 propuesto): sin end_image_url, Kling O1 rechaza duration=4 (422 'Duration only support 5 or 10 seconds when no refer image'); se uso duration=5, que coincide exacto con S1=120f del scene plan."
+      "note": "gotcha nuevo (P-11 propuesto en el handoff): sin end_image_url, Kling O1 rechaza duration=4 (422); se uso duration=5, coincide exacto con S1=120f."
     },
     "music": {
       "model": "fal-ai/elevenlabs/music",
@@ -68,11 +68,10 @@
       "url": "https://v3b.fal.media/files/b/0aa734f4/ITmvfENzu3dQV0iWwLQKz_music_generated.mp3",
       "generated_length_s": 38,
       "picture_length_s": 30.0,
-      "cost_usd": 0.38,
-      "note": "generado con 8s de buffer sobre el picture length; devops recorta a 30.0s exactos en finishing (no requiere loop/extension, solo trim). El BPM real solo se puede medir sobre el audio FINAL mezclado (metodo de la serie anterior) — PENDIENTE hasta el render."
+      "cost_usd": 0.38
     },
     "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fb/8OkH83AjiXGipIpsotn_n_sound_effect.mp3", "cost_usd": 0.002},
     "total_cost_usd_est": 1.092
   },
-  "post_render_verify": "PENDIENTE — esta sesion NO renderiza (instruccion explicita de la mision). El verify (ffprobe + frame-sampling region+control + loudnorm medido + tempo medido) lo corre video-producer DESPUES del handoff a devops, sobre el MP4 real. Ver ReelsClinicasSerie.README.md."
+  "post_render_verify": "PENDIENTE — esta sesion NO renderiza. El verify lo corre video-producer DESPUES del handoff a devops, sobre el MP4 real. Ver ReelsClinicasSerie.README.md."
 }

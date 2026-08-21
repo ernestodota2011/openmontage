@@ -1,0 +1,62 @@
+{
+  "reel": "caso-real-medicina-estetica",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion 100% motion-autorado, sin i2v (mas barato)",
+        "render_runtime=remotion con 1 escena hero i2v real que establezca el caso a mayor escala"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "Mismo patron que CasoMarinoHVAC de la serie anterior (1 hero i2v real): un caso real se beneficia de un momento de cine que lo diferencie de un reel puramente de datos, y respeta el limite de maximo 1 escena hero por reel.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-002",
+      "topic": "Aislamiento de cliente en el hero i2v",
+      "options_considered": [
+        "generar un ambiente clinico generico sin ninguna referencia a medicina estetica",
+        "generar el ambiente descrito por el post (coordinacion multi-sede) EXCLUYENDO explicitamente logos/marcas en el prompt"
+      ],
+      "choice": "generar el ambiente del post, con exclusion explicita de logos/marcas/nombres en el prompt positivo (Nano Banana Pro no tiene negative_prompt)",
+      "reason": "el post SI describe el contexto (red de clinicas de medicina estetica, multisede) sin nombrar al cliente — replicar ese nivel de detalle (sin identificar) es fiel al caso real sin violar el aislamiento de cliente. La instruccion explicita en el prompt ('no visible logos, brand names, or clinic names') es la unica via disponible en Nano Banana Pro (sin negative_prompt); se verificara en pixeles reales durante el post-render verify.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-003",
+      "topic": "3 StatReveal consecutivos vs 1 KPIGrid",
+      "options_considered": [
+        "KPIGrid con las 3 cifras simultaneas (mas compacto)",
+        "3 escenas StatReveal consecutivas, un hold de 7s cada una"
+      ],
+      "choice": "3 StatReveal consecutivos",
+      "reason": "un bento/grid de 3 metricas a la vez es exactamente el tell anti-slop de 'bento de metricas sin jerarquia'. Separar las 3 cifras en su propio momento de pantalla las deja respirar y las hace mas memorables — mismo principio de 'menos elementos, mas restriccion' del craft premium.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Music plan — tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "mantener 128 BPM del reel 2 (consistencia)",
+        "126 BPM, con un build hacia la revelacion de resultados"
+      ],
+      "choice": "126 BPM, corporate-tech instrumental, warm strings + pulso, un build confiado hacia los dos tercios (coincide con la entrada de las cifras)",
+      "reason": "dentro de la banda 120-140 exigida; ligeramente mas calido/orgulloso que el reel 2 (rol narrativo distinto: revelacion de resultados reales, no explicacion de mecanismo).",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-005",
+      "topic": "Anti-claims — fidelidad a las 3 cifras y su atribucion",
+      "options_considered": [
+        "redondear las cifras para que suenen mas contundentes ('mas de 100 horas', '2 de cada 3 llamadas')",
+        "citar las 3 cifras EXACTAS del post sin redondeo, con su atribucion completa en pantalla"
+      ],
+      "choice": "cifras exactas sin redondeo (+125, +66%, 99%) + escena de atribucion dedicada",
+      "reason": "regla dura de la mision: cero inventos ni redondeos. Redondear '+125' a '100+' o '66%' a 'dos tercios' seria una alteracion de la cifra reportada, aunque suene mas natural en video.",
+      "confidence": 0.95
+    }
+  ]
+}

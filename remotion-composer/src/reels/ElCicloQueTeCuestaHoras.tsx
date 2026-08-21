@@ -8,7 +8,7 @@ import {
 import { BRAND } from "../theme";
 import { KineticHeadline } from "../components/KineticHeadline";
 import { HeadlineOverlay } from "../components/HeadlineOverlay";
-import { TagRevealList } from "../components/TagRevealList";
+import { TagRevealList, QualifyTag } from "../components/TagRevealList";
 import { BrandClose } from "../components/BrandClose";
 import { EmberThread } from "../components/EmberThread";
 import { FilmGrade } from "../components/FilmGrade";
@@ -22,6 +22,15 @@ import { FilmGrade } from "../components/FilmGrade";
  * clinicas (el cold_open) — el resto de los 4 reels es 100% motion
  * autorado o hibrido con HyperFrames. Cero cifras en este reel (ver
  * decision_log d-004): las cifras atribuidas viven en los reels 3 y 4.
+ *
+ * CORREGIDO 2026-08-21 (commit siguiente al primer push): manual_cycle
+ * usaba props `items`/`kicker` que NO existen en TagRevealList (su
+ * interfaz real es `tags: QualifyTag[]` con `{label, value}` y
+ * `staggerFrames?`, verificado leyendo el componente real antes de
+ * corregir — nunca se habia corrido tsc sobre este archivo). El fix
+ * reemplaza el array de 6 strings por 6 `QualifyTag` (label = numero,
+ * value = el paso del ciclo) + un `HeadlineOverlay` de caption separado
+ * (TagRevealList no tiene prop `kicker`).
  *
  * Frame plan @24fps: cold_open_hero 120f (5.0s) + manual_cycle 192f (8.0s)
  * + hidden_cost 144f (6.0s) + tease_possible 96f (4.0s) + brand_close 168f
@@ -53,8 +62,6 @@ const START4 = START3 + S3; // 456
 const START5 = START4 + S4; // 552
 
 function musicVolume(frame: number): number {
-  // Baja un poco durante hidden_cost (el beat mas intimo/reflexivo) y sube
-  // de nuevo en tease_possible hacia el cierre.
   const dipStart = START3;
   const dipEnd = START3 + 14;
   const riseStart = START4 - 10;
@@ -66,13 +73,13 @@ function musicVolume(frame: number): number {
   return 1.0;
 }
 
-const MANUAL_CYCLE_ITEMS = [
-  "Llama",
-  "Revisa la agenda a mano",
-  "Confirma por telefono",
-  "Intenta recordar un dia antes",
-  "No contesta",
-  "Vuelve a empezar",
+const MANUAL_CYCLE_TAGS: QualifyTag[] = [
+  { label: "1", value: "Llama" },
+  { label: "2", value: "Revisa la agenda a mano" },
+  { label: "3", value: "Confirma por telefono" },
+  { label: "4", value: "Intenta recordar un dia antes" },
+  { label: "5", value: "No contesta" },
+  { label: "6", value: "Vuelve a empezar" },
 ];
 
 export const ElCicloQueTeCuestaHoras: React.FC<ElCicloQueTeCuestaHorasProps> = ({
@@ -91,7 +98,7 @@ export const ElCicloQueTeCuestaHoras: React.FC<ElCicloQueTeCuestaHorasProps> = (
         </Sequence>
       )}
 
-      {/* Scene 1 — cold_open_hero. UNICO i2v real de la serie clinicas: */}
+      {/* Scene 1 — cold_open_hero. UNICO i2v real de la serie clinicas. */}
       <Sequence from={START1} durationInFrames={S1} name="cold_open_hero">
         <AbsoluteFill style={{ background: BRAND.bg }}>
           <OffthreadVideo
@@ -103,9 +110,10 @@ export const ElCicloQueTeCuestaHoras: React.FC<ElCicloQueTeCuestaHorasProps> = (
         <HeadlineOverlay text="El telefono no para de sonar." position="bottom" scrim fontSize={36} />
       </Sequence>
 
-      {/* Scene 2 — manual_cycle. Cascada tipografica creciente (fiel al post). */}
+      {/* Scene 2 — manual_cycle. Cascada de 6 QualifyTag (fiel al ciclo del post) + caption. */}
       <Sequence from={START2} durationInFrames={S2} name="manual_cycle">
-        <TagRevealList items={MANUAL_CYCLE_ITEMS} kicker="El ciclo de cada cita, otra vez" />
+        <TagRevealList tags={MANUAL_CYCLE_TAGS} staggerFrames={26} />
+        <HeadlineOverlay text="El ciclo de cada cita, otra vez" position="bottom" scrim fontSize={30} />
       </Sequence>
 
       {/* Scene 3 — hidden_cost. Sin cifras (decision d-004): solo el costo en palabras. */}

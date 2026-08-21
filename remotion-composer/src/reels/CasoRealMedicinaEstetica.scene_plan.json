@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, camara locked-off): area de coordinacion de una red de clinicas de medicina estetica, dos coordinadoras sincronizando agendas de multiples sedes, SIN ningun logo/marca visible. HeadlineOverlay abajo con la frase de apertura del caso.",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked_off", "lighting_key": "luz natural calida + acento ember sutil en pantalla"},
+    "shot_intent": "establece que el mismo problema del reel 1 existe a mayor escala, con cine real",
+    "hero_moment": true,
+    "information_role": "cold open del caso real",
+    "texture_keywords": ["i2v hero real", "anonimizado", "grano fino"]
+  },
+  {
+    "id": "what_they_did",
+    "type": "stat_card",
+    "description": "Cascada de 4 QualifyTag (TagRevealList) con los 4 items EXACTOS que el post dice que se implementaron",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "muestra el alcance real de la implementacion antes de los resultados, fiel al post",
+    "hero_moment": false,
+    "information_role": "lo que se implemento (parrafo del caso real)",
+    "texture_keywords": ["cascada de 4 items", "tick ember"]
+  },
+  {
+    "id": "stat1_125h",
+    "type": "stat_card",
+    "description": "StatReveal '+125' / 'horas/semana recuperadas por el equipo de coordinacion', accentColor=ember explicito (el default del componente es violeta, override obligatorio)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember, hold deliberado"},
+    "shot_intent": "la primera cifra exacta del caso real, sin redondeos",
+    "hero_moment": false,
+    "information_role": "resultado 1 del caso real",
+    "texture_keywords": ["numero grande ember", "hold 7s"]
+  },
+  {
+    "id": "stat2_66",
+    "type": "stat_card",
+    "description": "StatReveal '+66%' / 'de capacidad de llamadas del equipo de setters', accentColor=ember explicito",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember, hold deliberado"},
+    "shot_intent": "segunda cifra exacta del caso real",
+    "hero_moment": false,
+    "information_role": "resultado 2 del caso real",
+    "texture_keywords": ["numero grande ember", "hold 7s"]
+  },
+  {
+    "id": "stat3_99",
+    "type": "stat_card",
+    "description": "StatReveal '99%' / 'de precision en la sincronizacion de resultados medicos entre sedes', accentColor=ember explicito",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember, hold deliberado"},
+    "shot_intent": "tercera cifra exacta del caso real, cierre de la trilogia de resultados",
+    "hero_moment": false,
+    "information_role": "resultado 3 del caso real",
+    "texture_keywords": ["numero grande ember", "hold 7s"]
+  },
+  {
+    "id": "attribution",
+    "type": "stat_card",
+    "description": "KineticHeadline pequeno y muted (NO CalloutBox — sus defaults son blanco/azul, fuera de marca): la vara de atribucion exacta del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "understated, near-black"},
+    "shot_intent": "honestidad sobre la fuente de las 3 cifras, en letra chica pero legible, tal como el post lo declara",
+    "hero_moment": false,
+    "information_role": "atribucion de datos",
+    "texture_keywords": ["texto chico muted", "sin ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
