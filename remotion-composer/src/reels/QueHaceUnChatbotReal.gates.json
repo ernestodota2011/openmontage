@@ -91,17 +91,51 @@
           "measurement": "mismo metodo de recorte+control aplicado a estas escenas: cap1_responde @9.5s mean_top2%=113.5 (55% mas oscuro que el control); cap3_agenda @24.0s mean_top2%=36.5 (85% mas oscuro); cap4_escala @33.0s: insignia 'Transferido a Ana' y mensaje entrante casi indistinguibles del fondo near-black a simple vista.",
           "block_variance_crushing_check": "varianza local 8x8 (mismo metodo P-04 del piloto): cold_open (control) avg_std=16.74, dead_blocks=23.2%; cap1_responde avg_std=4.56, dead=37.4%; cap3_agenda avg_std=2.31, dead=34.3% (avg_std CAE mas que en cap1 pese a dead% similar — el detalle fino que sobrevive es cada vez mas pobre).",
           "issue": "El texto de UI (burbujas de chat, tarjeta de cita, insignia de transferencia) se lee visiblemente apagado/con bajo contraste, empeorando progresivamente hacia el final del reel (cap4_escala es el peor). El headline grande (cold_open, punch_montage, brand_close) SI renderiza nitido — el defecto es especifico de texto pequeno sobre fondo near-black con relleno/box_shadow bajo, consistente con detalle fino siendo aplastado por una tasa de bits insuficiente para la densidad de esta composicion (706kbps es sensiblemente mas bajo que el ~1.69Mbps del piloto GO'd, que tenia MENOS escenas de UI de texto pequeno).",
-          "root_cause_hypothesis": "CRF de finishing probablemente por encima de la banda 16-18 recomendada para este tipo de contenido (mucho near-black + texto fino de bajo peso visual, similar en naturaleza al problema de grano aplastado del piloto P-01, pero aqui es texto en vez de grano). No es un bug de opacity/spring de Remotion: se verifico que en los 3 timestamps muestreados los springs/opacities de los elementos YA estaban asentados (frames suficientes desde su entrada), asi que el defecto vive en el encode, no en la composicion.",
-          "fix_status": "PENDIENTE — instruccion de fix abajo, no se toco el codigo (no es un bug de TSX)"
+          "root_cause_hypothesis_ORIGINAL_INCORRECTA": "CRF de finishing probablemente por encima de la banda 16-18 recomendada. ==CORREGIDO 2026-08-21 (ver post_render_verify_v2 abajo): el CRF YA ERA 16 — el diagnostico de 'subir CRF' estaba MAL. La causa raiz real era el punto `0.25/0.22` del filtro `curves` del finishing, que crusheaba especificamente luma 60-120 (justo donde vive el texto de UI pequeno). Devops reprodujo por efecto ANTES de aplicar mi receta (P-09) — de haber seguido mi fix_instruction original (bajar a CRF17, un CRF MAS ALTO que el 16 ya usado) el resultado habria EMPEORADO, no mejorado. Ver Video-problemas.md P-09.==",
+          "fix_status": "CORREGIDO en v2 — ver post_render_verify_v2 (GO)"
         }
       ]
     },
     "promise_preservation": {"verdict": "pass", "detail": "las 4 capacidades del post se muestran tal como se planeo; el defecto es de legibilidad de encode, no de contenido/promesa"},
     "subtitle_check": {"verdict": "pass", "detail": "todo el copy vive en pantalla; problema de contraste de encode aparte, el texto SIGUE siendo el correcto (no se perdio ningun caption)"},
-    "fix_instruction_for_next_render": {
-      "scope": "SOLO re-encode de video desde el master ProRes (`que-hace-un-chatbot-real-master.mov`, verificar tamano exacto ANTES de tocarlo — no repetir P-05 del piloto). El audio YA esta correcto (-14.13 LUFS medido independiente, tempo 127.9 BPM confirmado) — reusar el audio ya calibrado, NO recalibrar loudnorm de nuevo.",
-      "cambio": "bajar CRF a la banda 16-18 (empezar en CRF17; si el verify de abajo sigue mostrando bloques 'muertos' en las zonas de texto de UI, bajar a CRF16). Mantener el resto de la receta de-plastic igual (curves/eq/unsharp/vignette) — el problema es tasa de bits/CRF, no los filtros de color.",
-      "verify_exigido_antes_de_re-entregar": "1) ffprobe (bit_rate de video deberia subir de ~706kbps a un rango mas sano, sin techo — comparar contra el ~1.69Mbps del piloto como referencia, no como limite). 2) recorte+control en los MISMOS 3 timestamps (9.5s/24.0s/33.0s) con el mismo metodo (mean de luma del top 2% dentro del recorte de texto, comparado contra el control de cold_open_hook @1.5s) — el objetivo es que cap1/cap3/cap4 se acerquen a >=180 en vez de 113/36/casi-invisible. 3) varianza local 8x8 en las mismas 2 regiones (cap1 bubble, cap3 card) contra el v1 como control del defecto (igual que hizo devops en el piloto v2->v3)."
-    }
+    "fix_instruction_for_next_render_ORIGINAL": "PENDIENTE — DIAGNOSTICO INCORRECTO (ver arriba). Se conserva el texto original para trazabilidad, pero NO se siguio: 'bajar CRF a la banda 16-18 (empezar en CRF17)'. La causa raiz real era la curva de finishing (punto 0.25/0.22), no el CRF."
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-chatbot-serie/que-hace-un-chatbot-real-v2.mp4",
+    "verdict": "GO",
+    "diagnosis_correction_note": "P-09 (Video-problemas.md): mi fix_instruction de v1 diagnostico mal la causa raiz (proponia bajar CRF de 17 cuando el CRF YA era 16 — el fix habria sido CONTRAPRODUCENTE). Devops NO aplico mi receta a ciegas: reprodujo el defecto por efecto, identifico el punto real (`curves=...0.25/0.22...` del finishing, que crushea luma 60-120) y lo quito. Esto salvo la iteracion. Registrado como leccion de proceso, no solo de video.",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps",
+      "duration_s": 46.0,
+      "size_bytes": 6696516,
+      "video_bit_rate_bps": 958809,
+      "faststart_verified_byte_level": "moov offset 32 < mdat offset 33237 — real"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.13"},
+      "finding": "identico a v1 (el audio no se toco, solo el video) — coincide con el -14.1 reportado por devops.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "method": "mismo recorte+control que v1 en los mismos 3 timestamps criticos (9.5s/24.0s/33.0s), MAS inspeccion visual directa de los recortes (no solo el numero — leccion del propio v1, donde el numero solo sin mirar el pixel habria sobre-alarmado)",
+      "region_control_comparison": [
+        {"scene": "cap1_responde @9.5s", "v1_mean_top2pct": 113.5, "v2_mean_top2pct": 132.7, "delta": "+17%"},
+        {"scene": "cap3_agenda(msg) @24.0s", "v1_mean_top2pct": 36.5, "v2_mean_top2pct": 48.1, "delta": "+32%"},
+        {"scene": "cap4_escala @33.0s", "v1": "insignia y mensaje casi invisibles a simple vista", "v2": "insignia ember 'Transferido a Ana' y mensaje entrante NITIDOS y legibles a simple vista — mejora mas marcada de las 3"}
+      ],
+      "direct_visual_verdict": "confirmado con recortes de pantalla completa (no solo estadistica): las 3 regiones criticas de v1 ahora se leen con buen contraste en v2. cap2_califica (14.0s, no estaba en el hallazgo original de v1 pero se re-verifico por completitud) tambien legible con buen contraste.",
+      "cold_open_hook_control_unchanged": "251.5 (v1) vs 250.6 (v2) — el headline grande no se vio afectado por el cambio de curva, como se esperaba (el punto removido crushea 60-120, el headline vive cerca de 245+)."
+    },
+    "consistencia_de_look_vs_piloto": {
+      "pregunta": "la curva de finishing de la serie ya NO tiene el punto 0.25/0.22 que si tenia el piloto GO'd — juzgar si el look sigue siendo consistente con la marca.",
+      "metodo": "se descargo el MP4 final del piloto (tres-mensajes-de-anoche-v3.mp4) y se comparo visualmente frame a frame: burbujas de chat (9.0s del piloto) vs burbujas de este reel, y titular kinetico (17.0s del piloto, cita HBR) vs titulares de este reel.",
+      "hallazgo": "el piloto YA mostraba texto de burbujas de chat notablemente MAS apagado que sus propios titulares grandes (mismo patron que el defecto de v1, solo que mas leve — el piloto tenia MENOS escenas de UI de texto pequeno, asi que el problema nunca se acumulo lo suficiente para saltar en su propio verify). El titular kinetico del piloto SI es blanco crudo/nitido, igual que en v2 de esta serie. Es decir: 'texto de chat mas apagado que el titular' es una caracteristica YA PRESENTE en el piloto GO'd, no algo que esta serie introdujo — quitar el punto 0.25/0.22 acerca el texto de chat de v2 HACIA el nivel de contraste que el piloto ya toleraba, no lo aleja.",
+      "veredicto": "consistente — no amerita nota de ruptura de marca. Recomendacion para el proximo reel de marca (fuera de esta serie): considerar si el piloto mismo se beneficiaria del mismo ajuste de curva, dado que su propio texto de chat esta mas cerca del limite de legibilidad de lo ideal — no bloqueante, es una mejora futura, no un defecto retroactivo del piloto ya aprobado por Ernesto."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO — reel 2 listo para publicar. Handoff pendiente: archivar musicSrc/sfx a R2 en los props JSON si aun no se hizo."
   }
 }
