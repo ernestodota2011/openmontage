@@ -23,7 +23,7 @@
   },
   "assets_generated": {
     "music_v1": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 118, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa73f90/Dhz7GxgIVEC56RAJbtJ4f_music_generated.mp3", "file_size_bytes": 624058, "estado": "DESCARTADA — medida en 117.6 BPM real, bajo el piso duro de 120 (ver post_render_verify)"},
-    "music_v2": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa740da/VI07Z2B6FKdxog-YQJGv4_music_generated.mp3", "file_size_bytes": 624894, "bpm_medido_independiente_por_video_producer": 125.0, "estado": "VALIDADA — dentro de banda 120-140, ya referenciada en props/lo-que-decidio-dmp-consulting.json"},
+    "music_v2": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms_requested": 39000, "unit_price_usd_per_min": 0.6, "cost_usd": 0.39, "url": "https://v3b.fal.media/files/b/0aa740da/VI07Z2B6FKdxog-YQJGv4_music_generated.mp3", "file_size_bytes": 624894, "bpm_medido_independiente_por_video_producer": 125.0, "estado": "VALIDADA — dentro de banda 120-140, ya referenciada en props/lo-que-decidio-dmp-consulting.json, confirmada de nuevo sobre el MP4 final en post_render_verify_v2"},
     "sfx_whoosh": {"nota": "COMPARTIDO con el reel 1 de esta misma serie — costo ya contado en AlquilarOComprar.gates.json", "cost_usd": 0.0},
     "total_cost_usd_est": 0.78
   },
@@ -54,5 +54,42 @@
     "logo_check": {"veredicto": "pass", "detalle": "sin logos de terceros en este reel"},
     "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
     "final_verdict": "NO-GO CONDICIONAL sobre -v1 — unico hallazgo: BPM real 117.6 bajo el piso duro de 120. TODO lo demas (tecnico, LUFS/TP, atribuciones en frame, cita, CTA, paleta, logos) es PASS. Fix APLICADO: pista v2 regenerada y medida independientemente en 125.0 BPM (fal-ai/elevenlabs/music, 39053ms, +$0.39), musicSrc de props/lo-que-decidio-dmp-consulting.json YA apunta a la ruta R2 versionada -v2 (commit 8230c549). PENDIENTE de devops: archivar el asset musical v2 + re-renderizar SOLO esta composicion (sin dependencias HyperFrames, reel 100% Remotion, 0 i2v — re-render completo es mas simple y seguro que un re-mux manual del AAC ya mezclado, evita el patron de aplicar un fix a ciegas sobre un archivo derivado) + finishing FFmpeg (misma recipe, TP=-2.0) -> entregar como -v2.mp4, conservando -v1 para trazabilidad hasta que se decida limpieza de R2."
+  },
+  "post_render_verify_v2": {
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, re-verify INDEPENDIENTE del fix de BPM (descarga propia de R2 + ffmpeg/ffprobe/python locales, sin confiar en el reporte de devops ni en la medicion de music_v2 hecha antes del render)",
+    "artifact_v2": "https://media.aetherlogik.com/agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v2.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 48000Hz, 2ch", "duration_s": 39.0, "size_bytes": 4537269, "http_status": 200, "etag_r2": "a3364923eeddae0eb98acdce7ffdb8ce", "md5_descarga_propia": "a3364923eeddae0eb98acdce7ffdb8ce", "nota": "MD5 de la descarga coincide exacto con el ETag de R2 — integridad de la descarga confirmada"},
+    "audio_spotcheck": {
+      "lufs_medido_independiente": -14.24,
+      "true_peak_dbtp_medido_independiente": -1.29,
+      "true_peak_astats_sample_peak_db": -1.29,
+      "true_peak_verdict": "pass (banda -14+-0.5 LUFS, TP <= -1.0 dBTP)",
+      "bpm_metodo": "autocorrelacion FFT sobre envolvente de energia log-comprimida (numpy puro, sin scipy), banda de busqueda acotada 100-160 BPM para evitar ambiguedad de octava, refinado con interpolacion parabolica del pico",
+      "bpm_control_calibracion": "el mismo metodo aplicado a -v1.mp4 (control) dio 117.45 BPM — coincide a 0.15 BPM del 117.6 ya documentado en post_render_verify, confirma que el metodo esta bien calibrado",
+      "bpm_medido_independiente_v2": 124.21,
+      "bpm_medido_independiente_v2_hop_grueso": 124.53,
+      "bpm_declarado_preproduccion_v2": 124,
+      "bpm_medido_independiente_previo_al_render": 125.0,
+      "bpm_veredicto": "PASS — 124.21 BPM medido, dentro de banda dura 120-140 de la directriz de Ernesto, consistente con el 124 declarado y el 125.0 medido antes del render (variacion de ~1 BPM entre metodos/mediciones independientes, dentro de tolerancia)"
+    },
+    "video_integrity_check": {
+      "metodo": "MD5 del stream h264 crudo (annexb) extraido con ffmpeg -bsf:v h264_mp4toannexb, comparado v1 vs v2",
+      "md5_v1_h264": "2395e733b05fbf7ac325b9909e524f3e",
+      "md5_v2_h264": "0c123febac377c046552bdb130532dc7",
+      "resultado": "DIFIEREN (tamanos tambien distintos: v1=4,168,292B vs v2=3,538,421B) — confirma que devops hizo un RE-RENDER COMPLETO como se instruyo (no un remux de audio sobre el video v1), consistente con el razonamiento de post_render_verify de evitar aplicar el fix a ciegas sobre un derivado (leccion P-09)",
+      "consecuencia": "al no ser remux, se requiere spot-check visual completo del contenido de video (no solo confiar en que el video es identico al v1) — ejecutado abajo"
+    },
+    "beat_pixel_check": {
+      "case_stat_horas_t9s": "reconfirmado en pixeles reales del v2: '1,440 horas' + 'recuperadas al ano al automatizar con n8n' + atribucion 'DMP Consulting Services, Houston/Katy TX . estimacion de AetherLogik a partir de los datos del cliente.' LOS TRES en el MISMO frame",
+      "case_stat_citas_t16s": "reconfirmado: '+160 citas' + 'adicionales cada mes, sin contratar personal' + la MISMA atribucion en el MISMO frame",
+      "quote_t22s": "reconfirmado: cita completa de Mayli Parra + atribucion '— Mayli Parra, DMP Consulting Services' en el MISMO frame, texto EXACTO al del post",
+      "cta_t35s": "reconfirmado con recorte+ampliacion 3x de la banda del CTA: 'cal.com/aetherlogik/discovery . agenda tu diagnostico gratuito ->' en 2 lineas, CENTRADO, margenes simetricos en ambos lados, sin bleed — fix P-13 de BrandClose.tsx sigue vigente en el re-render",
+      "veredicto": "pass en los 4 puntos, sin regresion visual del re-render completo"
+    },
+    "palette_scan": {"metodo": "HSV region+control programatico sobre los 4 frames del beat_pixel_check (t9/t16/t22/t35)", "cyan_violet_pct_max": 0.0, "veredicto": "pass"},
+    "logo_check": {"veredicto": "pass", "detalle": "sin logos de terceros"},
+    "coherence_guard": {"status": "sin escenas i2v — no aplica, PASS por diseno"},
+    "final_verdict": "GO — fix de BPM confirmado por autocorrelacion independiente (124.21 BPM, banda 120-140), tecnico/LUFS/TP/atribuciones/cita/CTA/paleta todos PASS. Re-render completo (MD5 h264 difiere de v1) verificado visualmente sin regresion. Reel 4 de la serie reels-n8n-zapier-serie: GO. Serie completa (4/4): GO."
   }
 }
