@@ -23,13 +23,35 @@
   },
   "assets_generated": {
     "still": {"model": "fal-ai/nano-banana-pro", "resolution": "2K", "output_format": "jpeg", "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73b6c/wq3NlKzIYpc88DaYe8GJD_BTArxlzS.jpg"},
-    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73b76/S7q9txG44503-E5rmwoH1_output.mp4", "verificado_por_video_producer": "file_size 5962556 bytes, formato mp4 — pendiente ffprobe formal post-composicion (sin checkout local en esta sesion)"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73b76/S7q9txG44503-E5rmwoH1_output.mp4"},
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 130, "length_ms_requested": 30500, "cost_usd": 0.305, "url": "https://v3b.fal.media/files/b/0aa73b82/DByStDIeqB1ihQCAmh0so_music_generated.mp3"},
-    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo — mismo asset reusado en las 4 series anteriores)", "cost_usd": 0.0},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3", "cost_usd": 0.0},
     "total_cost_usd_est": 1.015
   },
   "post_render_verify": {
-    "status": "pendiente",
-    "nota": "esta corrida es PRE-RENDER (auto-score razonado, sin checkout local de Node/Remotion en esta sesion). El verify real (ffprobe + LUFS + BPM medido + coherence_guard + escaneo de paleta + recorte/zoom de brand_close) lo hace video-producer sobre el MP4 real DESPUES del render de devops — ver handoff en ReelsHvacSerie.README.md."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE (descarga propia + ffmpeg/ffprobe/python locales — no confia en el reporte de devops, solo lo contrasta)",
+    "artifact": "https://media.aetherlogik.com/agency/reels-hvac-serie/lo-que-te-cuesta-facturar-a-mano-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 96000Hz, 2ch", "duration_s": 30.0, "size_bytes": 6622396, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.06,
+      "lufs_medido_independiente": -14.06,
+      "coincidencia": "exacta a 2 decimales",
+      "true_peak_dbtp": -0.34,
+      "true_peak_verdict": "negativo (sin clipping), 0.66dB por encima del target -1.0dBTP pero dentro de tolerancia normal de mastering — NO requiere fix",
+      "bpm_declarado": 130,
+      "bpm_medido_autocorrelacion": 129.3,
+      "bpm_delta": 0.7
+    },
+    "coherence_guard": {"frames_muestreados": ["1.0s", "4.0s"], "veredicto": "pass", "detalle": "mismo personaje, mismo escritorio/escena, misma paleta tungsteno-sobre-near-black, movimiento sutil (mano/lapiz), sin drift"},
+    "palette_scan": {
+      "metodo": "HSV region+control (denominador=pixeles coloreados, no el frame completo) + segundo umbral 'neon' (sat>0.45 & val>0.35) para distinguir accent visible de ruido de sombra",
+      "brand_close_25s": "0.026% cyan/violeta del pixel coloreado",
+      "stat_reveal_8.5s": "0.000%",
+      "hero_1s_4s": "2.30%/2.68% cyan/violeta RAW, pero 0 pixeles 'neon' en ambos frames (media de valor ~0.10, ruido de sombra oscura en la foto real, no un accent visible — confirmado visualmente, sin cian/violeta perceptible)",
+      "veredicto": "pass"
+    },
+    "visual_spotcheck": {"brand_close": "CTA de 2 lineas centrado, margen simetrico en ambos lados, sin bleed al borde (fix P-13 confirmado en pixeles reales)", "veredicto": "pass"},
+    "final_verdict": "GO"
   }
 }

@@ -9,27 +9,60 @@
       "dimensions": {
         "repetition": {"score": 0.3, "reason": "6 escenas + 2 bridges, cada una con un device distinto"},
         "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra el resultado real del caso, no decora"},
-        "weak_motion": {"score": 0.4, "reason": "1 de 6 escenas es video real (i2v) — proporcion tipica de un reel de caso real de 45s"},
+        "weak_motion": {"score": 0.4, "reason": "1 de 6 escenas es video real (i2v)"},
         "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
-        "typography_overreliance": {"score": 1.6, "reason": "5 de 6 escenas (83%) tipografia/stat_card — reel de caso real, desviacion consciente y declarada, misma proporcion que CasoRealMedicinaEstetica"},
+        "typography_overreliance": {"score": 1.6, "reason": "5 de 6 escenas (83%) tipografia/stat_card"},
         "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico mas alla del hero declarado"}
       }
     },
     "variation_checker": {"score": 0.45, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
-    "delivery_promise": {"promise_type": "motion_led", "valid": true, "motion_ratio": 0.17, "motion_cuts": 1, "slide_cuts": 5, "still_cuts": 0, "nota": "reel de caso real de 45s con 1 hero i2v — mismo patron GO'd en CasoRealMedicinaEstetica/CasoMarinoHVAC de series anteriores"},
+    "delivery_promise": {"promise_type": "motion_led", "valid": true, "motion_ratio": 0.17, "motion_cuts": 1, "slide_cuts": 5, "still_cuts": 0},
     "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "escena unica i2v — sin multi-plano que encadenar, PASS por diseno"},
-    "anti_claims_audit": {"verdict": "pass", "detalle": "$50/trabajo, 88 facturas/mes, $4,400/mes, 36 horas/mes, <2 meses de retorno y la cita textual son EXACTAMENTE las cifras/afirmaciones que el post declara para el caso Marino HVAC, sin redondear ni inventar. La cifra central ($4,400) lleva su atribucion COMPLETA en el mismo frame, preservando el footnote exacto del post. Nombre del cliente publico tal cual el post lo usa, sin ningun otro dato del cliente."}
+    "anti_claims_audit": {"verdict": "pass", "detalle": "$50/trabajo, 88 facturas/mes, $4,400/mes, 36 horas/mes, <2 meses de retorno y la cita textual son EXACTAMENTE las cifras/afirmaciones que el post declara para el caso Marino HVAC. La cifra central lleva su atribucion COMPLETA en el mismo frame."}
   },
   "assets_generated": {
     "still": {"model": "fal-ai/nano-banana-pro", "resolution": "2K", "output_format": "jpeg", "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73b6d/7GyLI72S5IdwSZxacQ6U4_JmT7ebfk.jpg"},
-    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73b76/iX1uGwnkP23fiDK9gyfeC_output.mp4", "verificado_por_video_producer": "file_size 7684846 bytes, formato mp4 — pendiente ffprobe formal post-composicion (sin checkout local en esta sesion)"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "duration_s": 5, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73b76/iX1uGwnkP23fiDK9gyfeC_output.mp4"},
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 122, "length_ms_requested": 45500, "cost_usd": 0.455, "url": "https://v3b.fal.media/files/b/0aa73b6e/duwFo5oi5czg-TN8_aQNL_music_generated.mp3"},
     "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "duration_s": 0.8, "cost_usd": 0.0016, "url": "https://v3b.fal.media/files/b/0aa73b84/rftRNRdToZBKz2xLwHPhf_sound_effect.mp3"},
     "total_cost_usd_est": 1.1666
   },
   "post_render_verify": {
-    "status": "pendiente",
-    "nota": "esta corrida es PRE-RENDER. El verify real (incluida verificacion de la atribucion en el mismo frame, no solo el copy) lo hace video-producer sobre el MP4 real DESPUES del render de devops — ver handoff en ReelsHvacSerie.README.md."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE",
+    "artifact": "https://media.aetherlogik.com/agency/reels-hvac-serie/los-numeros-de-marino-hvac-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 96000Hz, 2ch", "duration_s": 45.0, "size_bytes": 8828946, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -14.03,
+      "lufs_medido_independiente": -14.03,
+      "coincidencia": "exacta a 2 decimales",
+      "true_peak_dbtp": 0.15,
+      "true_peak_verdict": "FAIL — true peak POSITIVO confirmado por 2 metodos independientes (loudnorm input_tp=+0.15 y astats sample-peak=+0.149dB): clipping real post-decode-AAC, viola el target duro -1.0dBTP de premium-craft-standards.md",
+      "bpm_declarado": 122,
+      "bpm_medido_autocorrelacion": 121.5,
+      "bpm_delta": 0.5
+    },
+    "coherence_guard": {"frames_muestreados": ["1.0s", "4.0s"], "veredicto": "pass", "detalle": "mismo personaje (Alain Marino), mismo van/calle/palmeras, luz golden-hour consistente, gesto natural (leve asentir + sonrisa mirando el telefono), sin drift"},
+    "palette_scan": {
+      "metodo": "HSV region+control + segundo umbral 'neon'",
+      "stat_reveal_15s": "0.000%",
+      "brand_close_40.5s": "0.016%",
+      "hero_1s_4s": "0.638%/0.562% RAW, 0 pixeles 'neon' en ambos (media de valor ~0.18, cielo/sombra natural de la foto, no un accent introducido)",
+      "veredicto": "pass"
+    },
+    "beat_pixel_check": {
+      "escena": "stat_reveal, frame 15.0s",
+      "hallazgo": "'$4,400' + 'perdidos al mes, en 88 facturas' + 'Estimacion de AetherLogik a partir de los datos del cliente.' LOS TRES visibles en el MISMO frame, confirmado en pixeles reales (no solo en el codigo)",
+      "veredicto": "pass — satisface la regla dura de atribucion en el mismo frame"
+    },
+    "visual_spotcheck": {"brand_close": "CTA de 2 lineas centrado, margen simetrico, sin bleed", "veredicto": "pass"},
+    "fix_required": {
+      "defecto": "true peak +0.15 dBTP post-AAC (clipping real)",
+      "decision_del_director": "FIX REQUERIDO. Un true peak positivo es clipping real en el archivo entregado, no un margen de headroom insuficiente — el target -1.0dBTP de premium-craft-standards.md existe exactamente para absorber el overshoot de inter-sample peaks que introduce el encoder AAC. 'Las plataformas recomprimen igual' no es un argumento tecnico valido: la recompresion no revierte un overshoot ya presente, puede incluso combinarse con el. Rechazo el criterio de 'es marginal, no vale la pena' — el gate esta en rojo contra un estandar documentado y medible; se arregla, no se documenta como excepcion.",
+      "tecnica_validada_por_video_producer": "simulacion propia sobre audio extraido del v1.mp4 (stereo 48kHz, no el downmix mono que uso una corrida preliminar invalida): loudnorm 2-pasadas con TP=-2.0 (en vez de -1.0) manteniendo I=-14/LRA medido, re-encode AAC 256kbps, re-medido independientemente el archivo resultante -> true peak final -1.77dBTP (negativo, seguro), LUFS final -14.00 (dentro de banda). La tecnica FUNCIONA — no es una hipotesis sin probar.",
+      "instruccion_exacta_para_devops": "re-mux SOLO audio (NO re-renderizar Remotion ni re-aplicar el grade de video): tomar el mix PRE-AAC original (el bus antes de tu pasada 2 de loudnorm, no el m4a/mp4 ya entregado, para evitar doble-procesamiento), correr loudnorm pasada 2 con TP=-2.0 (I=-14, LRA=el medido en tu pasada 1), re-encode a AAC 256kbps/48kHz, remux con el video ya finalizado via -c:v copy, subir como los-numeros-de-marino-hvac-v2.mp4 SIN sobreescribir el -v1.mp4 (P-05/P-13: nunca reintroducir el master viejo)"
+    },
+    "final_verdict": "NO-GO (v1) — pendiente re-mux de audio, ver fix_required"
   }
 }

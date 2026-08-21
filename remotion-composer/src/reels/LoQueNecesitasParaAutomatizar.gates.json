@@ -7,9 +7,9 @@
       "average": 0.55,
       "verdict": "strong",
       "dimensions": {
-        "repetition": {"score": 0.3, "reason": "6 escenas, cada una con un device distinto (incluido el signature device series_recap)"},
+        "repetition": {"score": 0.3, "reason": "6 escenas, cada una con un device distinto"},
         "decorative_visuals": {"score": 0.0, "reason": "cada escena ilustra una seccion textual del post"},
-        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v) — reel de cierre 100% motion-autorado, mismo patron GO'd que ComoEmpiezasSinPerderLeads"},
+        "weak_motion": {"score": 1.0, "reason": "0 de 6 escenas es video real (i2v)"},
         "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
         "typography_overreliance": {"score": 1.9, "reason": "6 de 6 escenas (100%) tipografia/UI/stat_card — reel de cierre, desviacion consciente y declarada"},
         "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama footage cinematico en ningun momento"}
@@ -19,15 +19,43 @@
     "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.0, "motion_cuts": 0, "slide_cuts": 6, "still_cuts": 0},
     "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
     "coherence_guard": {"status": "no aplica — cero escenas i2v en este reel"},
-    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 items de steps_list, el timeline de 2-4 semanas, el caveat de fallback manual, y las 3 plataformas nombradas (QuickBooks/ServiceTitan/Jobber) son citas directas del post; el CTA final (/para-hvac, diagnostico gratuito) es EXACTAMENTE el del post. Cero cifras inventadas."}
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 items de steps_list, el timeline de 2-4 semanas, el caveat de fallback manual, y las 3 plataformas nombradas son citas directas del post; el CTA final es EXACTAMENTE el del post."}
   },
   "assets_generated": {
     "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 134, "length_ms_requested": 45500, "cost_usd": 0.455, "url": "https://v3b.fal.media/files/b/0aa73b6e/rcFdS7eRSjEjMjrCknVpn_music_generated.mp3"},
-    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
+    "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3", "cost_usd": 0.0},
     "total_cost_usd_est": 0.455
   },
   "post_render_verify": {
-    "status": "pendiente",
-    "nota": "esta corrida es PRE-RENDER. El verify real lo hace video-producer sobre el MP4 real DESPUES del render de devops — ver handoff en ReelsHvacSerie.README.md."
+    "run_date": "2026-08-21",
+    "run_by": "video-producer, verificacion INDEPENDIENTE",
+    "artifact": "https://media.aetherlogik.com/agency/reels-hvac-serie/lo-que-necesitas-para-automatizar-v1.mp4",
+    "independent_ffprobe": {"codec_video": "h264, 1080x1920, 24fps", "codec_audio": "aac, 96000Hz, 2ch", "duration_s": 45.0, "size_bytes": 5447422, "http_status": 200},
+    "audio_spotcheck": {
+      "lufs_devops_reportado": -13.95,
+      "lufs_medido_independiente": -13.95,
+      "coincidencia": "exacta a 2 decimales",
+      "true_peak_dbtp": 0.52,
+      "true_peak_verdict": "FAIL — true peak POSITIVO confirmado por 2 metodos independientes (loudnorm input_tp=+0.52 y astats sample-peak=+0.505dB), el mas severo de los 4 reels: clipping real post-decode-AAC en el reel de CIERRE de la serie (la ultima impresion), viola el target duro -1.0dBTP",
+      "bpm_declarado": 134,
+      "bpm_medido_autocorrelacion": 133.6,
+      "bpm_delta": 0.4
+    },
+    "coherence_guard": {"status": "no aplica — cero escenas i2v"},
+    "palette_scan": {
+      "metodo": "HSV region+control",
+      "steps_list_10s": "0.000%",
+      "outcome_27s": "0 pixeles coloreados en el frame (0.000% — momento del corte con poco/ningun texto aun visible, no un defecto)",
+      "brand_close_40s": "0.009%",
+      "veredicto": "pass"
+    },
+    "visual_spotcheck": {"brand_close": "CTA FINAL de conversion ('aetherlogik.com/para-hvac . agenda tu diagnostico gratuito ->') centrado, margen simetrico, sin bleed — exactamente el CTA declarado en el guion", "veredicto": "pass"},
+    "fix_required": {
+      "defecto": "true peak +0.52 dBTP post-AAC (clipping real, el mas severo de la serie)",
+      "decision_del_director": "FIX REQUERIDO, con mayor urgencia que el reel 3. Mismo razonamiento: un true peak positivo es clipping real, no margen; +0.52dBTP es una desviacion material (~6% de amplitud sobre full-scale), mas audible que el +0.15dBTP del reel 3. Este es ademas el reel de CIERRE de la serie — la ultima impresion antes del CTA de conversion final no se entrega con un defecto medible.",
+      "tecnica_validada_por_video_producer": "misma simulacion que el reel 3, sobre el audio propio de este reel: loudnorm 2-pasadas con TP=-2.0, I=-14, re-encode AAC 256kbps -> true peak final -1.81dBTP (negativo, seguro), LUFS final -14.05 (dentro de banda). Tecnica validada, no hipotesis.",
+      "instruccion_exacta_para_devops": "identica a la del reel 3: re-mux SOLO audio desde el mix PRE-AAC original con TP=-2.0 (I=-14, LRA medido en tu pasada 1), AAC 256kbps/48kHz, remux con -c:v copy sobre el video ya finalizado, subir como lo-que-necesitas-para-automatizar-v2.mp4 SIN sobreescribir el -v1.mp4"
+    },
+    "final_verdict": "NO-GO (v1) — pendiente re-mux de audio, ver fix_required"
   }
 }
