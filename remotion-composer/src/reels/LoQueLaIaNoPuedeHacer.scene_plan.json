@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, camara locked-off): abogado enfocado revisando un documento impreso a la luz de una lampara, marca y anota con pluma roja. HeadlineOverlay abajo: 'El juicio sigue siendo tuyo.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked_off", "lighting_key": "tungsteno calido sobre near-black, foco de lampara de escritorio"},
+    "shot_intent": "dramatiza en imagen, antes de decirlo en texto, que el juicio humano se mantiene sobre cualquier borrador generado",
+    "hero_moment": true,
+    "information_role": "cold open del reel de limites",
+    "texture_keywords": ["i2v hero real", "pluma roja", "luz de lampara calida"]
+  },
+  {
+    "id": "limits_list",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de los 4 limites EXACTOS del post: juicio legal estrategico, relacion con el cliente, cumplimiento normativo, responsabilidad profesional",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "enumera los 4 limites tal como los declara el post, sin suavizarlos ni exagerarlos",
+    "hero_moment": false,
+    "information_role": "los 4 limites declarados (seccion 'lo que la IA no puede hacer')",
+    "texture_keywords": ["cascada de tags", "tick ember"]
+  },
+  {
+    "id": "human_connection",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'La confianza se construye con presencia humana, empatia y seguimiento personal.' - cita fiel del segundo bullet del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, intimo"},
+    "shot_intent": "profundiza el limite mas relacional (la IA no sustituye la relacion con el cliente) con su propia escena",
+    "hero_moment": false,
+    "information_role": "desarrollo del limite 2",
+    "texture_keywords": ["una palabra en ember", "hold intimo"]
+  },
+  {
+    "id": "responsibility_beat",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'Si hay un error, la responsabilidad es tuya. No de la herramienta.' - cita fiel del ultimo bullet del post",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, el punto mas serio del reel"},
+    "shot_intent": "el limite mas importante para la credibilidad del reel con una audiencia de abogados: la responsabilidad profesional no se delega",
+    "hero_moment": false,
+    "information_role": "limite 4, el mas critico",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Por eso disenamos flujos donde tu mantienes el control.' + sweep EmberThread como puente hacia el cierre",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "sweep ember, transicion de marca"},
+    "shot_intent": "convierte los limites en una promesa de diseno (AetherLogik disena PARA los limites, no a pesar de ellos)",
+    "hero_moment": false,
+    "information_role": "tease hacia el reel de cierre",
+    "texture_keywords": ["sweep ember", "bridge"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

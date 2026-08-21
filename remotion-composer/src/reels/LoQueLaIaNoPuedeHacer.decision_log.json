@@ -1,0 +1,53 @@
+{
+  "reel": "lo-que-la-ia-no-puede-hacer",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion 100% motion-autorado (sin i2v)",
+        "render_runtime=remotion con 1 escena hero i2v (Kling O1) + el resto tipografia cinetica",
+        "render_runtime=hyperframes"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "Este es el reel de CREDIBILIDAD de la serie: la audiencia de abogados es la mas dura con afirmaciones exageradas. Un i2v que dramatiza visualmente 'el juicio sigue siendo tuyo' (abogado corrigiendo a mano un borrador) es mas persuasivo que solo texto, y refuerza la promesa central del reel antes de enumerar los limites. HyperFrames no aporta aqui - no hay UI/datos densos, es un reel de tono y limites.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Modelo i2v y parametros del hero",
+      "options_considered": [
+        "Kling 3.0 (o3), volumen/default",
+        "Kling O1 solo start_image_url (un solo plano aislado)",
+        "Veo 3.1 (hero+audio nativo)"
+      ],
+      "choice": "Kling O1 image-to-video, solo start_image_url (sin end_image_url), duration=5s",
+      "reason": "UN solo plano aislado (sin multi-plano que encadenar). Veo 3.1 se descarto por costo/latencia. duration='5' explicito desde el inicio (fix aplicado de P-11, Kling O1 rechaza duration fuera de {5,10} sin end_image_url).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan - tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "tono solemne/lento (el reel habla de responsabilidad y limites)",
+        "120 BPM, drive contenido pero presente, mood serio-pero-confiable"
+      ],
+      "choice": "120 BPM, corporate-tech instrumental, four-on-the-floor restringido, mood serio-pero-confiable",
+      "reason": "la directriz de la mision es DURA (banda 120-140, nada de ambient) y aplica a TODOS los reels sin excepcion, incluido este de tono mas serio. 120 BPM es el extremo bajo permitido de la banda, balanceando el drive exigido con la seriedad del contenido (responsabilidad profesional).",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Por que se citan los 4 limites completos sin suavizarlos",
+      "options_considered": [
+        "suavizar el limite 4 ('responsabilidad profesional') para no sonar negativo sobre la IA",
+        "citar los 4 limites tal como el post los declara, incluida la frase sobre responsabilidad"
+      ],
+      "choice": "los 4 limites completos, sin suavizar",
+      "reason": "suavizar el limite de responsabilidad profesional en un reel dirigido a abogados seria contraproducente (esa es exactamente la garantia que un abogado necesita escuchar de un proveedor de IA) y violaria la regla dura anti-invencion/anti-omision de la mision. El post mismo dedica un parrafo entero a ese punto.",
+      "confidence": 0.9
+    }
+  ]
+}
