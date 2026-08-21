@@ -38,6 +38,10 @@ import { LoQueTeCuestaFacturarAMano, LoQueTeCuestaFacturarAManoProps, LO_QUE_TE_
 import { ComoFuncionaLaAutomatizacionDeFacturacion, ComoFuncionaLaAutomatizacionDeFacturacionProps, COMO_FUNCIONA_LA_AUTOMATIZACION_DE_FACTURACION_TOTAL_FRAMES } from "./reels/ComoFuncionaLaAutomatizacionDeFacturacion";
 import { LosNumerosDeMarinoHVAC, LosNumerosDeMarinoHVACProps, LOS_NUMEROS_DE_MARINO_HVAC_TOTAL_FRAMES } from "./reels/LosNumerosDeMarinoHVAC";
 import { LoQueNecesitasParaAutomatizar, LoQueNecesitasParaAutomatizarProps, LO_QUE_NECESITAS_PARA_AUTOMATIZAR_TOTAL_FRAMES } from "./reels/LoQueNecesitasParaAutomatizar";
+import { LaDiferenciaQueImporta, LaDiferenciaQueImportaProps, LA_DIFERENCIA_QUE_IMPORTA_TOTAL_FRAMES } from "./reels/LaDiferenciaQueImporta";
+import { LosCincoTrabajosDeLaIa, LosCincoTrabajosDeLaIaProps, LOS_CINCO_TRABAJOS_DE_LA_IA_TOTAL_FRAMES } from "./reels/LosCincoTrabajosDeLaIa";
+import { TresNegociosTresResultados, TresNegociosTresResultadosProps, TRES_NEGOCIOS_TRES_RESULTADOS_TOTAL_FRAMES } from "./reels/TresNegociosTresResultados";
+import { CincoSenalesDeQueEstasListo, CincoSenalesDeQueEstasListoProps, CINCO_SENALES_DE_QUE_ESTAS_LISTO_TOTAL_FRAMES } from "./reels/CincoSenalesDeQueEstasListo";
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -699,6 +703,65 @@ export const Root: React.FC = () => {
           sfxWhooshSrc: "",
           tail_padding_seconds: 0,
         } as LoQueNecesitasParaAutomatizarProps}
+      />
+      <Composition
+        id="LaDiferenciaQueImporta"
+        component={LaDiferenciaQueImporta}
+        durationInFrames={LA_DIFERENCIA_QUE_IMPORTA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as LaDiferenciaQueImportaProps}
+      />
+      <Composition
+        id="LosCincoTrabajosDeLaIa"
+        component={LosCincoTrabajosDeLaIa}
+        durationInFrames={LOS_CINCO_TRABAJOS_DE_LA_IA_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          fiveJobsChecklistSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChipSrc: "",
+          tail_padding_seconds: 0,
+        } as LosCincoTrabajosDeLaIaProps}
+      />
+      <Composition
+        id="TresNegociosTresResultados"
+        component={TresNegociosTresResultados}
+        durationInFrames={TRES_NEGOCIOS_TRES_RESULTADOS_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          heroVideoSrc: "",
+          musicSrc: "",
+          logoSrc: "",
+          sfxChimeSrc: "",
+          tail_padding_seconds: 0,
+        } as TresNegociosTresResultadosProps}
+      />
+      <Composition
+        id="CincoSenalesDeQueEstasListo"
+        component={CincoSenalesDeQueEstasListo}
+        durationInFrames={CINCO_SENALES_DE_QUE_ESTAS_LISTO_TOTAL_FRAMES}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          musicSrc: "",
+          logoSrc: "",
+          sfxWhooshSrc: "",
+          tail_padding_seconds: 0,
+        } as CincoSenalesDeQueEstasListoProps}
       />
     </>
   );
