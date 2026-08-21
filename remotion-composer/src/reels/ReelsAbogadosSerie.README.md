@@ -189,3 +189,40 @@ manifiesto de assets, recipe de finishing exacto, comandos de render por
 reel, el gate de entrada `npx remotion compositions`) quedan preservadas
 en el historial de commits de este archivo (`git log -p -- remotion-composer/src/reels/ReelsAbogadosSerie.README.md`)
 para referencia de futuras series — ya no aplican como pasos pendientes.
+
+
+---
+
+## Refresh retroactivo — re-render de los 3 reels con el fix de `BrandClose.tsx` (2026-08-21)
+
+`devops-aetherlogik-homelab` re-renderizo `ComoEmpezarSinDesorden` (prioritario,
+CTA final de conversion), `LoQueYaPuedesDelegar` y `LoQueLaIaNoPuedeHacer` sobre
+HEAD `725f7bc` (incluye el fix `BrandClose.tsx`, commit `6fbf7e4`), mismos
+props/assets, sin cambios de duracion ni contenido:
+
+- `tsc --noEmit`: 0 errores.
+- Los 3 masters ProRes se generaron **en solitario** (`--concurrency=1`, uno a la
+  vez) tras un intento inicial en paralelo que saturo la memoria del CT 128
+  (6GB total) y produjo un `SIGKILL` del compositor en pleno render de
+  `LoQueYaPuedesDelegar` mas un `.mov` corrupto (`moov atom not found`) de
+  `LoQueLaIaNoPuedeHacer` por dos procesos duplicados escribiendo al mismo
+  archivo. Ambos se detectaron por verificacion de contenido (`ffprobe`, nunca
+  por la sola existencia del archivo), se limpiaron y se re-renderizaron uno a
+  la vez sin incidentes.
+- Finishing FFmpeg identico (`finish_reel.py`: curves sin 0.25/0.22, CRF16,
+  aq-mode=2:aq-strength=1.2, sin noise, acompressor->loudnorm 2 pasadas por
+  mix). LUFS post-hoc medido sobre el archivo final: -13.88 / -14.02 / -14.01
+  (los 3 dentro de banda -14+-0.5).
+- ffprobe: h264, 1080x1920, 24fps, duraciones exactas (45.0s / 46.0s / 45.0s).
+- Spot-check visual del frame `brand_close` (recorte de la banda de texto) en
+  los 3: CTA de 2 lineas centrado con margen simetrico, sin bleed al borde.
+- Subidos a R2 con naming nuevo `-v2.mp4` (NO se sobreescribio el `-v1.mp4`
+  defectuoso — CF cachea por nombre, path nuevo evita servir el asset viejo
+  desde el edge): `como-empezar-sin-desorden-v2.mp4`,
+  `lo-que-ya-puedes-delegar-v2.mp4`, `lo-que-la-ia-no-puede-hacer-v2.mp4`,
+  los 3 verificados `curl` 200 con `Content-Length` igual al tamano local.
+  Los `-v1.mp4` NO se borraron (limpieza pendiente de decision del director).
+
+**Pendiente:** `video-producer` re-verifica el `brand_close` de estos 3 y
+emite el GO final de la serie (mismo criterio que `ReelsInmobiliariosSerie` y
+`ReelsClinicasSerie`); si aprueba, decidir si limpiar los `-v1.mp4` de R2.
