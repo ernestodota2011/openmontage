@@ -1,0 +1,53 @@
+{
+  "reel": "el-ciclo-que-te-cuesta-horas",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion, 100% motion-autorado (sin i2v)",
+        "render_runtime=remotion con 1 escena hero i2v real (Kling O1) + el resto tipografia cinetica",
+        "render_runtime=hyperframes para toda la pieza"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "Es el GANCHO de la serie (30-45s, doctrina: 'el problema vivido + mira lo que es posible'). Un gancho 100% tipografico pierde el enganche humano de los primeros 2s que la doctrina de coherencia/edicion identifica como criticos. HyperFrames no aporta nada aqui (no hay UI/datos densos en este reel, es puro problema humano). Un solo hero i2v (no mas) respeta el limite de 'maximo 1 escena hero por reel' de la skill.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Modelo i2v y parametros del hero",
+      "options_considered": [
+        "Kling 2.5 Turbo Pro (volumen, barato)",
+        "Kling O1 first/last-frame (coherencia, un solo plano sin necesidad de encadenar)",
+        "Veo 3.1 (hero+audio nativo)"
+      ],
+      "choice": "Kling O1 image-to-video, solo start_image_url (sin end_image_url), duration=5s",
+      "reason": "Es UN solo plano aislado (no un reel humano multi-plano que necesite encadenar first/last-frame entre varios shots) — la doctrina de coherencia reserva el encadenado end->start para 'cadena continua' de varios planos, que no aplica aqui (1 sola escena i2v en todo el reel). Veo 3.1 se descarto por costo/latencia sin necesitar audio nativo (la musica la compone Remotion). GOTCHA NUEVO DESCUBIERTO: sin end_image_url, Kling O1 solo acepta duration 5 o 10s (rechazo 422 con duration=4) — documentado para Video-problemas.md como P-11.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz dura de Ernesto, vigente desde la serie anterior)",
+      "options_considered": [
+        "tono atmosferico/tenso para el gancho (mas cinematico)",
+        "124 BPM, drive ritmico, urgente-pero-esperanzador"
+      ],
+      "choice": "124 BPM, corporate-tech instrumental, four-on-the-floor, mood urgente-pero-esperanzador",
+      "reason": "la directriz de la mision es DURA y aplica a TODA la serie ('nada de ambient'). 124 BPM (banda 120-140) balancea la tension del gancho (agotamiento) con el drive ritmico exigido — no se opto por el extremo bajo del rango porque el reel SI necesita urgencia desde el segundo 0.",
+      "confidence": 0.8
+    },
+    {
+      "id": "d-004",
+      "topic": "Por que NO citar ninguna cifra en el gancho",
+      "options_considered": [
+        "teaser parcial de la cifra de Klara (30-38%) sin atribucion completa, generando curiosidad",
+        "cero cifras en este reel, todas con su atribucion completa en los reels 3 y 4"
+      ],
+      "choice": "cero cifras en el gancho",
+      "reason": "la regla dura de la mision exige que TODA cifra lleve su atribucion exacta. Un teaser parcial en pantalla (numero sin fuente visible en el mismo frame) viola esa regla aunque la atribucion completa aparezca despues en otro reel — cada reel debe ser autocontenido en sus afirmaciones.",
+      "confidence": 0.95
+    }
+  ]
+}

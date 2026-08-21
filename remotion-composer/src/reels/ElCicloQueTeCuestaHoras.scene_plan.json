@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, camara locked-off): coordinadora de clinica de noche, mano alcanzando el telefono que suena, hombros que se hunden de cansancio. HeadlineOverlay abajo: 'El telefono no para de sonar.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked_off", "lighting_key": "tungsteno calido sobre near-black, un solo foco de lampara"},
+    "shot_intent": "establece el problema vivido en la primera escena, con cine real (no solo tipografia) para abrir con enganche",
+    "hero_moment": true,
+    "information_role": "cold open del gancho",
+    "texture_keywords": ["i2v hero real", "luz de lampara calida", "grano fino"]
+  },
+  {
+    "id": "manual_cycle",
+    "type": "stat_card",
+    "description": "Cascada de tipografia cinetica (TagRevealList) con los 6 pasos del ciclo manual del post, uno tras otro, ritmo rapido y creciente",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "dramatiza la repeticion agotadora del ciclo manual citando el post fielmente, sin inventar pasos",
+    "hero_moment": false,
+    "information_role": "el ciclo manual tipico (seccion 1 del post)",
+    "texture_keywords": ["cascada rapida", "stagger creciente"]
+  },
+  {
+    "id": "hidden_cost",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'Cada cita perdida se lleva el tiempo que costo conseguirla.' — sin cifras, solo el costo oculto en palabras",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "el costo oculto de los no-shows (seccion 1 del post) sin citar ninguna cifra suelta sin fuente en pantalla",
+    "hero_moment": false,
+    "information_role": "costo oculto de los no-shows",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Esto no tiene que seguir asi.' + sweep EmberThread como puente hacia el cierre",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "sweep ember, transicion de marca"},
+    "shot_intent": "la promesa del reel: hay una salida, sin todavia explicar como (eso es el reel 2)",
+    "hero_moment": false,
+    "information_role": "tease hacia la serie",
+    "texture_keywords": ["sweep ember", "bridge"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

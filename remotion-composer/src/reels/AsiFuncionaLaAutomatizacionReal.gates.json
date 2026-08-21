@@ -1,0 +1,70 @@
+{
+  "reel": "asi-funciona-la-automatizacion-real",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.4,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.4, "reason": "6 devices visuales distintos en 7 escenas (2 reusados con contenido genuinamente equivalente, 1 nuevo, resto tipografia/marca)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a un pilar exacto del post, ninguno es decorativo"},
+        "weak_motion": {"score": 0.0, "reason": "5 de 7 escenas tienen movimiento de UI real (contador, typing/reply/card, cascada de sedes, sweep, spring de marca)"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 7 escenas"},
+        "typography_overreliance": {"score": 0.7, "reason": "2 de 7 escenas (28.6%) son tipografia pura (cold_open_hook, punch_montage) — bajo el umbral 60%"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "reel 100% UI/tipografia, no reclama nada cinematico"}
+      }
+    },
+    "variation_checker": {
+      "score": 0.3,
+      "verdict": "strong",
+      "violations": [],
+      "suggestions": [],
+      "shot_size_diversity": ["MS", "ECU", "ECU", "MS", "CU", "MS", "MS"],
+      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
+    },
+    "delivery_promise": {
+      "promise_type": "hybrid",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.7142857142857143,
+      "motion_cuts": 5,
+      "slide_cuts": 2,
+      "still_cuts": 0,
+      "note": "cold_open_hook y punch_montage tipados stat_card (tipografia NO cuenta como motion real per doctrina); las 5 escenas de UI animada (incl. brand_close) SI cuentan. Declarado 'hybrid' (no 'motion_led') por honestidad con la naturaleza mixta, mismo criterio que el reel homologo de la serie anterior."
+    },
+    "brand_palette_guard": {
+      "verdict": "revise",
+      "counts": {"critical": 0, "warning": 5},
+      "violations": [
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.bubble (pilar1/pilar2)"},
+        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.appointment_card (pilar2)"},
+        {"severity": "warning", "kind": "card_boxless", "value": "clinic_sync_board.location_card (pilar3, x3 columnas)"},
+        {"severity": "warning", "kind": "card_boxless", "value": "escalate_badge (si_algo_falla)"}
+      ],
+      "note": "mismas excepciones de UI-chrome ya aceptadas en la serie anterior (bordes+radius necesarios para leer tarjetas/columnas). 0 criticos: BRAND.accent/BRAND.text/BRAND.muted son los unicos colores usados en ClinicSceneKit.tsx (mismo patron que CapabilitySceneKit.tsx) — revisado linea por linea."
+    },
+    "coherence_guard": {"status": "no aplica — cero i2v/stills generativos en este reel (100% motion-autorado)"},
+    "tsc_noemit": {
+      "status": "PENDIENTE — corre devops antes de renderizar. Este reel agrega 1 componente nuevo (ClinicSceneKit.tsx, ClinicSyncBoard) que sigue linea por linea el patron ya verificado de CapabilitySceneKit.tsx (mismos imports de theme.ts, mismo estilo de props tipadas) — riesgo bajo mas no cero."
+    }
+  },
+  "assets_generated": {
+    "music": {
+      "model": "fal-ai/elevenlabs/music",
+      "prompt_bpm_declared": 128,
+      "prompt_energy_declared": "corporate-tech instrumental, four-on-the-floor, confiado y tranquilizador",
+      "url": "https://v3b.fal.media/files/b/0aa734e2/8B2LNpTZsS_Ixtq4_94ZU_music_generated.mp3",
+      "generated_length_s": 58,
+      "picture_length_s": 47.0,
+      "cost_usd": 0.58,
+      "note": "buffer de 11s sobre picture length; devops recorta a 47.0s exactos en finishing. BPM real medible solo sobre el audio final (PENDIENTE hasta el render)."
+    },
+    "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734e7/dDF8uo4yZwtzaJyMIIW5-_sound_effect.mp3", "cost_usd": 0.002},
+    "sfx_confirm_ding": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fc/0WPJvc5cuVvp6FAP6cPyu_sound_effect.mp3", "cost_usd": 0.002},
+    "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fb/8OkH83AjiXGipIpsotn_n_sound_effect.mp3", "cost_usd": 0.002},
+    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado, cero costo de assets generativos visuales (mismo patron que el reel homologo de la serie anterior)",
+    "total_cost_usd_est": 0.586
+  },
+  "post_render_verify": "PENDIENTE — esta sesion NO renderiza (instruccion explicita de la mision). El verify lo corre video-producer DESPUES del handoff a devops, sobre el MP4 real. Ver ReelsClinicasSerie.README.md."
+}

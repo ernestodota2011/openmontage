@@ -1,0 +1,52 @@
+{
+  "reel": "asi-funciona-la-automatizacion-real",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes (renderer_family / render_runtime / composition_mode)",
+      "options_considered": [
+        "render_runtime=remotion (reusar ChatThreadScene/CapabilitySceneKit + 1 device nuevo, cero HyperFrames)",
+        "render_runtime=hyperframes (reconstruir las 4 UI en HTML/CSS)",
+        "render_runtime=hybrid (mezclar ambos motores dentro del mismo reel)"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=remotion, composition_mode=atelier",
+      "reason": "El contenido de los 3 pilares es literalmente UI de mensajeria/agenda — ChatThreadScene y CapabilitySceneKit ya son componentes GO'd en produccion (serie anterior) con el mismo lenguaje visual de marca. Reconstruir en HyperFrames habria duplicado trabajo sin ganar nada (Rule Zero: reusa conocimiento del motor). HyperFrames se reserva para el reel 4, donde el contenido (checklist operativo + benchmark) SI es un caso que ningun componente Remotion existente cubre mejor.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Por que un componente nuevo (ClinicSyncBoard) solo para el pilar 3",
+      "options_considered": [
+        "reusar ChatThreadStack (cascada de mensajes) para simular la sincronizacion",
+        "construir un device visual nuevo para N sedes sincronizando"
+      ],
+      "choice": "ClinicSyncBoard nuevo (ClinicSceneKit.tsx)",
+      "reason": "forzar un hilo de chat a representar 'sincronizacion entre 3 sedes' habria sido una metafora forzada (viola bespoke-composition: la escena debe representar el contenido real, no un mockup generico reetiquetado). El pilar es literalmente sobre AGENDAS sincronizando, no sobre mensajes — necesitaba su propio lenguaje visual (columnas por sede + sweep + tick en cascada).",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "mantener 124 BPM del reel 1 (consistencia de tempo entre reels)",
+        "subir a 128 BPM (mas confiado/capaz, ya que este reel muestra la solucion funcionando)"
+      ],
+      "choice": "128 BPM, corporate-tech instrumental, four-on-the-floor, confiado y tranquilizador",
+      "reason": "el reel 1 es el problema (urgente-pero-esperanzador, 124 BPM); este reel es la solucion funcionando — el tempo sube ligeramente para reflejar mas confianza, dentro de la banda 120-140 exigida por la directriz de Ernesto. Coincide con el BPM del reel 2 de la serie anterior (mismo rol narrativo: el didactico que muestra el mecanismo).",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "Anti-claims — fidelidad a los 3 pilares del post",
+      "options_considered": [
+        "parafrasear libremente los pilares",
+        "citar los 3 subtitulos EXACTOS del post, mismo orden, mas la seccion de escalacion"
+      ],
+      "choice": "los 3 subtitulos exactos, mismo orden, mas 'Y si algo falla?' como cuarto beat",
+      "reason": "doctrina anti-claims: no inventar/reordenar lo que el post ya declara. El nombre 'Carla' en la insignia de transferencia es ficticio (no un empleado real de ningun cliente) — mismo patron que 'Ana' en la serie anterior, nombre distinto para no confundir series.",
+      "confidence": 0.95
+    }
+  ]
+}

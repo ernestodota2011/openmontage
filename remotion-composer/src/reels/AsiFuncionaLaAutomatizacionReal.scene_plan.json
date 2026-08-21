@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cold_open_hook",
+    "type": "stat_card",
+    "description": "Tipografia cinetica mask-reveal: 'No es magia. Son 3 piezas que ya conoces, conectadas.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "reencuadra la automatizacion como algo simple/conocido, no magico, en 3s sin costo de asset",
+    "hero_moment": true,
+    "information_role": "promesa del reel: te muestro las piezas",
+    "texture_keywords": ["mask reveal", "sin cine, puente desde el reel 1"]
+  },
+  {
+    "id": "pilar1_captura",
+    "type": "animation",
+    "description": "ECU: mensaje entrante por cualquier canal, contador grande ember de segundos, respuesta que llega al completarse (reuso de QuickReplyBeat, CapabilitySceneKit.tsx)",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "static", "lighting_key": "UI modo oscuro, contador en ember"},
+    "shot_intent": "dramatiza 'captura y valida sin que alguien copie y pegue' con un dato visible, no solo con la palabra",
+    "hero_moment": false,
+    "information_role": "pilar 1 del post, primer subtitulo exacto",
+    "texture_keywords": ["contador tabular ember", "burbuja de respuesta rapida"]
+  },
+  {
+    "id": "pilar2_confirma",
+    "type": "animation",
+    "description": "typing indicator, respuesta, tarjeta de cita confirmada con fecha y hora + mencion de recordatorio automatico (reuso de ChatThreadBotReply, ChatThreadScene.tsx)",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, tarjeta con hairline ember"},
+    "shot_intent": "confirmacion y recordatorio son literalmente esa tarjeta: mostrarla es la prueba",
+    "hero_moment": false,
+    "information_role": "pilar 2 del post, segundo subtitulo exacto",
+    "texture_keywords": ["tick ember", "tarjeta de cita confirmada"]
+  },
+  {
+    "id": "pilar3_sincroniza",
+    "type": "animation",
+    "description": "3 columnas de sede sincronizando en cascada (nueva ClinicSyncBoard, ClinicSceneKit.tsx) + chip 'expediente del paciente conectado'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, sweep ember de sincronizacion"},
+    "shot_intent": "visualiza N sedes sincronizando a la vez, algo que ningun device de la serie anterior cubria (esa era de UN solo hilo de mensajeria)",
+    "hero_moment": false,
+    "information_role": "pilar 3 del post, tercer subtitulo exacto",
+    "texture_keywords": ["cascada de sedes", "sweep ember", "chip de expediente conectado"]
+  },
+  {
+    "id": "si_algo_falla",
+    "type": "animation",
+    "description": "Mensaje que requiere un humano, sweep ember de handoff, insignia 'Transferido a Carla . con el contexto completo' (reuso de EscalateBeat, CapabilitySceneKit.tsx)",
+    "shot_language": {"shot_size": "CU", "camera_movement": "punch_in", "lighting_key": "UI modo oscuro, sweep ember como transicion"},
+    "shot_intent": "la promesa de escalacion con contexto (post: 'lo deriva a un humano con toda la informacion ya recopilada') se muestra, no se enuncia",
+    "hero_moment": false,
+    "information_role": "seccion 'Y si algo falla?' del post",
+    "texture_keywords": ["sweep ember", "insignia de transferencia"]
+  },
+  {
+    "id": "punch_montage",
+    "type": "stat_card",
+    "description": "Recap kinetico de los 3 pilares + escalacion: 'Captura. Confirma. Sincroniza. Escala si hace falta.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, grano sutil"},
+    "shot_intent": "consolida el reel antes del cierre, construye anticipacion hacia el caso real",
+    "hero_moment": false,
+    "information_role": "resumen",
+    "texture_keywords": ["stagger rapido", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
