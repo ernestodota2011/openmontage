@@ -191,3 +191,152 @@ renderizado todavia. No hay veredicto GO/NO-GO hasta completar los pasos
   nativo del fork (que viola boxless/ember-only con fondo blanco, card y
   colores hardcodeados) — mismo patron de sustitucion que ya paso con
   `hero_title`/`HeadlineOverlay` en el pilot original.
+
+
+## Resultado devops (2026-08-21) — 4/4 renderizados, finalizados y en R2
+
+> [!success] Estado — LOS 4 REELS RENDERIZADOS, FINALIZADOS Y EN R2. Sin bloqueos (7ª serie de la línea `reels-del-blog`).
+
+### Paso 0 — Archivado de 6 assets + 2 bloques HyperFrames a R2 — COMPLETO
+
+Los 6 assets fal.media del manifiesto (4 músicas + 2 SFX) ya estaban referenciados por su
+URL final correcta en los `props/*.json` desde la pre-producción — sin necesidad de
+actualizar props. Descargados y verificados por tamaño exacto (6/6, sin discrepancias) y
+subidos a R2 (`agency/reels-n8n-zapier-serie/assets/`, 6/6 HTTP 200).
+
+### Paso 1 — Bloques HyperFrames (reels 2 y 3) — COMPLETO
+
+Contrato de 6 atributos + `data-no-timeline` confirmado presente en ambos `#stage` por
+lectura ANTES de lintear. `hf lint` real (no solo lectura) → **0 errors, 0 warnings** en
+ambas composiciones.
+
+| Composición | `hf lint` | Render | Frames | Duración ffprobe |
+|---|---|---|---|---|
+| `cuanto-cuesta-cada-uno-tabla` | 0/0 | 36.4s wall-time | 624/624 | 26.000000s |
+| `cuando-elegir-cada-uno-tabla` | 0/0 | 34.5s wall-time | 600/600 | 25.000000s |
+
+Sin el impuesto de 45s del poller (confirma `data-no-timeline` funcionando desde la
+autoría). Spot-check visual de ambas tablas: legibles, boxless, hairline ember, cero
+cian/violeta/glow. Archivadas a R2 (`assets/cuanto-cuesta-cada-uno-tabla.mp4` +
+`assets/cuando-elegir-cada-uno-tabla.mp4`), verificado `curl` público 200 en las 2.
+
+### Paso 2 — Gate de entrada — PASADO sin hallazgos
+
+`git pull` confirmó HEAD `8864761`. `npm install` (up to date) + `npx tsc --noEmit` → exit
+0. `npx remotion compositions src/index.tsx` listó las 4 composiciones nuevas con
+fps/resolución/duración EXACTOS a la tabla de pre-producción: `AlquilarOComprar` 720f
+(30.00s), `CuantoCuestaCadaUno` 1176f (49.00s), `CuandoElegirCadaUno` 1152f (48.00s),
+`LoQueDecidioDmpConsulting` 936f (39.00s), las 4 a 24fps 1080x1920 — confirma que
+`Root.tsx` venía correctamente wireado, sin intervención necesaria.
+
+### Paso 3 — Render Remotion (los 4, ProRes HQ, master nombre explícito, SECUENCIAL) — COMPLETO
+
+Los 4 corridos con `--codec=prores --prores-profile=hq --image-format=png
+--color-space=bt709`, desacoplados (`nohup ... &`, log a archivo, poll síncrono —
+**nunca en paralelo**, disciplina dura de la misión por el OOM de 6GB):
+
+| Reel | Master | Tamaño | Frames | Duración ffprobe |
+|---|---|---|---|---|
+| `AlquilarOComprar` | `out/alquilar-o-comprar-master.mov` | 101.7 MB | 720/720 | 30.000000s |
+| `CuantoCuestaCadaUno` | `out/cuanto-cuesta-cada-uno-master.mov` | 165 MB | 1176/1176 | 49.000000s |
+| `CuandoElegirCadaUno` | `out/cuando-elegir-cada-uno-master.mov` | 167 MB | 1152/1152 | 48.000000s |
+| `LoQueDecidioDmpConsulting` | `out/lo-que-decidio-dmp-consulting-master.mov` | 99.8 MB | 936/936 | 39.000000s |
+
+`ffprobe` de los 4 masters: video `prores 1080x1920 24fps`, audio `pcm_s16le` — las 4
+duraciones exactas a la spec.
+
+### Paso 4 — Finishing FFmpeg (recipe de este README §"Paso 4", TP=-2.0 desde el primer pase P-15) — COMPLETO, 4/4 en banda sin re-mux
+
+Receta exacta del README (curves sin el punto intermedio que crushea luma + eq + unsharp
++ vignette + `libx264 -crf 16 -preset slow -x264-params aq-mode=2:aq-strength=1.2`).
+Audio: `acompressor` pre-loudnorm → `loudnorm` dinámico con `I` recalibrado por una
+pasada de medición previa (el offset NO se transfiere entre reels, ni siquiera de la
+misma serie — confirmado de nuevo):
+
+| Reel | `I` inicial → medido | Offset | `I` recalibrado | Resultado final (post-hoc) |
+|---|---|---|---|---|
+| `AlquilarOComprar` | -14 → -13.29 | +0.71 | -14.71 | **-13.98 LUFS / -1.87 dBTP** |
+| `CuantoCuestaCadaUno` | -14 → -13.79 | +0.21 | -14.21 | **-14.07 LUFS / -1.91 dBTP** |
+| `CuandoElegirCadaUno` | -14 → -13.56 | +0.44 | -14.44 | **-13.98 LUFS / -1.78 dBTP** |
+| `LoQueDecidioDmpConsulting` | -14 → -14.38 | -0.38 | -13.62 | **-14.02 LUFS / -1.99 dBTP** |
+
+**Los 4 dentro de banda -14±0.5 LUFS y los 4 con true peak ≤ -1.0 dBTP** (criterio de la
+misión) — la columna "Resultado final" es la medición POST-HOC independiente sobre el
+archivo entregado (`loudnorm print_format=json` de nuevo, sin `linear=true`, leyendo
+`input_i`/`input_tp` como medida real del archivo). **Sin necesidad de una segunda
+pasada de re-mux** en ningún reel.
+
+### Verificación ffprobe final — 4/4 exactos
+
+Video: `h264 1080x1920` los 4. Duración de contenedor exacta: 30.000000 / 49.000000 /
+48.000000 / 39.000000s. Audio: AAC 256k/48kHz real (no mudo, confirmado). Bitrate:
+1,173,371 / 983,700 / 977,010 / 1,123,394 bps respectivamente — banda razonable para
+1080×1920@24fps CRF16.
+
+### Spot-check visual región+control (frames extraídos y vistos, no solo medidos) — GO
+
+- **Reel 2, t=15s** (bloque HyperFrames "Como cobra cada uno"): tabla de 2 columnas
+  ZAPIER/N8N legible, hairline ember vertical, boxless.
+- **Reel 2, t=45s** (`brand_close`): centrado, teaser "cuando elegir cada uno, en el
+  próximo video ->".
+- **Reel 3, t=15s** (bloque HyperFrames "Cuando elegir cada uno"): tabla de 2 columnas
+  "ELIGE ZAPIER SI"/"ELIGE N8N SI" legible.
+- **Reel 3, t=44s** (`brand_close`): centrado, teaser "como lo decidió un cliente real,
+  en el próximo video ->".
+- **Reel 1, t=25s** (`brand_close`): centrado, teaser "cuánto cuesta cada uno, en el
+  próximo video ->".
+- **Reel 4, t=8s**: cifra **"1,440 horas"** + "recuperadas al año al automatizar con
+  n8n" + atribución **"DMP Consulting Services, Houston/Katy TX . estimación de
+  AetherLogik a partir de los datos del cliente."** en el MISMO frame.
+- **Reel 4, t=15s**: cifra **"+160 citas"** + "adicionales cada mes, sin contratar
+  personal" + la MISMA atribución en el MISMO frame.
+- **Reel 4, t=22s**: quote **"La automatización nos permitió enfocarnos en lo que
+  realmente importa: el trabajo con los clientes."** + atribución **"— Mayli Parra, DMP
+  Consulting Services"** en el MISMO frame.
+- **Reel 4, t=35s** (`brand_close`, cierre de la serie, CTA real): **"cal.com/
+  aetherlogik/discovery . agenda tu diagnóstico gratuito ->"** — centrado, márgenes
+  simétricos en las 2 líneas, sin artefactos (fix P-13 sigue vigente).
+- Los 4 reels: paleta ember-only confirmada en las 9 capturas, cero cian/violeta/glow,
+  boxless.
+
+### R2 — los 4 entregables finales + los 2 bloques HyperFrames + los 6 assets generativos subidos y verificados
+
+| Objeto R2 | Tamaño | HTTP |
+|---|---|---|
+| `agency/reels-n8n-zapier-serie/alquilar-o-comprar-v1.mp4` | 4,400,144 B | 200 |
+| `agency/reels-n8n-zapier-serie/cuanto-cuesta-cada-uno-v1.mp4` | 6,025,167 B | 200 |
+| `agency/reels-n8n-zapier-serie/cuando-elegir-cada-uno-v1.mp4` | 5,862,061 B | 200 |
+| `agency/reels-n8n-zapier-serie/lo-que-decidio-dmp-consulting-v1.mp4` | 5,476,546 B | 200 |
+| `agency/reels-n8n-zapier-serie/assets/cuanto-cuesta-cada-uno-tabla.mp4` | 462,083 B | 200 |
+| `agency/reels-n8n-zapier-serie/assets/cuando-elegir-cada-uno-tabla.mp4` | 500,001 B | 200 |
+| `agency/reels-n8n-zapier-serie/assets/*` (6 assets fal.media archivados) | ver Paso 0 | 200 x6 |
+
+### Handoff a video-producer
+
+Los 4 MP4 finales están en R2, técnicamente verificados (ffprobe/LUFS post-hoc/spot-check
+visual región+control incluidos los 2 frames de atribución de DMP, la cita de Mayli Parra
+y el CTA final a resolución de frame completo, todos legibles sin necesidad de zoom
+adicional) — falta el `final_review` completo del director (promise/subtitle/
+`brand_palette_guard` sobre los 4; `coherence_guard` no aplica, 0 escenas i2v en toda la
+serie) antes del sign-off GO/NO-GO oficial.
+
+## Lecciones
+
+1. **Séptima serie consecutiva de la línea `reels-del-blog` en converger en banda de
+   loudness en un solo pase de finishing** (sin re-mux) — la disciplina de recalibrar el
+   `I` por mix ANTES del encode final, con `TP=-2.0` horneado desde el inicio, sigue
+   rindiendo de forma consistente serie tras serie.
+2. **Primera serie con 0 escenas i2v de principio a fin** — validación práctica de que
+   la doctrina "0 heroes es legítimo" funciona para contenido puramente
+   comparativo/técnico sin forzar una viñeta humana que el post no describe. El
+   `delivery_promise` `data_explainer` (no `motion_led`) declarado por video-producer
+   se sostuvo: nada en el render reclama movimiento/cinematografía que no existe.
+3. **Primera tabla comparativa de 2 columnas autorada en HyperFrames** (las 6 series
+   anteriores solo usaron checklists de 1 columna) — el layout se reusó
+   deliberadamente entre los reels 2 y 3 de esta misma serie sin verse como
+   hero-component-spine, confirmado en el spot-check visual.
+4. **El README de pre-producción de esta serie ya traía la receta de finishing
+   COMPLETA** (curves+eq+unsharp+vignette+aq-mode+acompressor→loudnorm con TP=-2.0),
+   a diferencia de `reels-ia-miami-serie` (README con receta simplificada desactualizada
+   frente a `premium-craft-standards.md`) — evidencia de que la lección de esa serie se
+   propagó al handoff de pre-producción de la siguiente, cerrando el loop.
