@@ -3,64 +3,51 @@
   "run_date": "2026-08-21",
   "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
   "pre_render_gates": {
-    "slideshow_risk": {
-      "average": 0.4,
-      "verdict": "strong",
-      "dimensions": {
-        "repetition": {"score": 0.2, "reason": "5 escenas, 5 devices distintos (KineticHeadline x2 con contenido distinto, clip HyperFrames, StatReveal, BrandClose)"},
-        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a contenido exacto del post"},
-        "weak_motion": {"score": 0.3, "reason": "el clip HyperFrames tiene motion CSS real (fade-up + node-light), pero el resto del reel es mayormente tipografico por naturaleza de cierre-de-serie"},
-        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 5 escenas"},
-        "typography_overreliance": {"score": 0.8, "reason": "4 de 5 escenas (80%) tipadas stat_card (incl. el clip HyperFrames, que aunque es video real, es fundamentalmente texto/checklist) — SUPERA el umbral 60%, declarado honesto: reel de cierre con mucho contenido textual por diseno del post mismo (checklist + benchmark + recap)."},
-        "unsupported_cinematic_claims": {"score": 0.0, "reason": "cero i2v en este reel, cero reclamos cinematicos"}
-      }
-    },
-    "variation_checker": {
-      "score": 0.3,
-      "verdict": "strong",
-      "violations": [],
-      "suggestions": [],
-      "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"],
-      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
-    },
-    "delivery_promise": {
-      "promise_type": "data_explainer",
-      "valid": true,
-      "violations": [],
-      "motion_ratio": 0.2,
-      "motion_cuts": 1,
-      "slide_cuts": 4,
-      "still_cuts": 0,
-      "note": "declarado 'data_explainer' — reel de cierre de serie con checklist + benchmark + recap, no promete accion/movimiento como eje central. El clip HyperFrames cuenta como 1 motion_cut (tiene animacion CSS real, no es un still)."
-    },
-    "brand_palette_guard": {
-      "verdict": "pass_with_note",
-      "counts": {"critical": 0, "warning": 0},
-      "violations": [],
-      "note": "CRITICO evitado a proposito: StatReveal (benchmark_klara) pasa accentColor={BRAND.accent} explicito (default es violeta). La composicion HyperFrames usa las MISMAS variables CSS hex de marca (#0A0A0A/#FF6B1A/#F5F5F5/#9AA0A6) que el playbook — verificado linea por linea en el index.html antes de este gates.json, cero hex fuera de la paleta."
-    },
-    "coherence_guard": {"status": "no aplica — cero i2v/stills generativos en este reel"},
-    "tsc_noemit": {
-      "status": "PENDIENTE — lo corre devops antes de renderizar el lado Remotion. Este reel no agrega componentes Remotion nuevos (reusa KineticHeadline, StatReveal, HeadlineOverlay, BrandClose, FilmGrade, todos ya GO'd) — riesgo bajo."
-    },
-    "hf_lint": {
-      "status": "PENDIENTE — lo corre devops en el CT 128 (`hf lint .`) antes del render. Esta composicion aplico PREVENTIVAMENTE el contrato completo de 6 atributos no-negociables + `data-no-timeline` documentado en Video-problemas.md P-10 (leccion de la serie anterior: no esperar a que el linter nombre los errores uno por uno).",
-      "expected_result": "0 errores, 0 warnings (misma vara que process_and_honesty de la serie anterior, que cerro en 0/0)"
-    }
+    "slideshow_risk": {"average": 0.4, "verdict": "strong", "dimensions": {"typography_overreliance": {"score": 0.8, "reason": "reel de cierre con mucho contenido textual por diseno del post"}}},
+    "variation_checker": {"score": 0.3, "verdict": "strong", "shot_size_diversity": ["MS","MS","MS","MS","MS"]},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.2},
+    "brand_palette_guard": {"verdict": "pass_with_note", "counts": {"critical": 0, "warning": 0}, "note": "StatReveal accentColor override aplicado; HyperFrames usa las mismas variables CSS hex de marca"},
+    "coherence_guard": {"status": "no aplica — cero i2v en este reel"},
+    "tsc_noemit": {"status": "CONFIRMADO por devops: exit 0 (gate npx remotion compositions paso con las 4 composiciones listadas, HEAD cb196e2)"},
+    "hf_lint": {"status": "CONFIRMADO por devops: 0 errors, 0 warnings (bitacora 2026-08-21). Render 20.0s exacto, sin el impuesto de 45s del poller (data-no-timeline funcionando)."}
   },
   "assets_generated": {
-    "music": {
-      "model": "fal-ai/elevenlabs/music",
-      "prompt_bpm_declared": 122,
-      "prompt_energy_declared": "corporate-tech instrumental, calmado y confiable, build final hacia el CTA",
-      "url": "https://v3b.fal.media/files/b/0aa734f9/pkKhryqS8cijNLFWtF9KC_music_generated.mp3",
-      "generated_length_s": 52,
-      "picture_length_s": 47.0,
-      "cost_usd": 0.52
-    },
-    "sfx_riser": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fc/ybEsvX9mNs246fLTmbxxK_sound_effect.mp3", "cost_usd": 0.003},
-    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado (Remotion + HyperFrames), cero costo de assets generativos visuales",
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 122, "cost_usd": 0.52},
+    "sfx_riser": {"cost_usd": 0.003}, "stills_or_i2v": "NINGUNO",
+    "hyperframes_clip": {"tool": "hf render", "duration_s": 20.0, "cost_usd": 0, "size_bytes": 416967},
     "total_cost_usd_est": 0.523
   },
-  "post_render_verify": "PENDIENTE — esta sesion NO renderiza. El verify (ffprobe + frame-sampling region+control del bloque HyperFrames vs bookends Remotion como control, igual metodo que la serie anterior) lo corre video-producer DESPUES del handoff a devops. Ver ReelsClinicasSerie.README.md."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-clinicas-serie/lo-que-cambia-en-tu-clinica-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 742689bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 199841bps",
+      "duration_container_s": 47.1,
+      "size_bytes": 5574332,
+      "delta_container_vs_target": {
+        "hallazgo_devops": "+0.1s en duracion de contenedor (target picture 47.0s), mismo patron que reel 2",
+        "investigacion_propia": "video track: ultimo frame PTS = 46.958333s = EXACTO a 1128 frames/47.000s. El +0.1s es SOLO del stream de audio (padding del encoder AAC), con cola de musica real detras (no silencio, misma verificacion volumedetect que reel 2).",
+        "decision": "ACEPTADO, sin trim — estandar de facto del encoder AAC, no afecta el contenido percibido."
+      }
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-13.96", "input_tp": "-1.15"},
+      "finding": "coincide EXACTO con el -13.96 reportado por devops.",
+      "tempo_check": "122.7 BPM medido vs 122 BPM declarado (delta 0.7 BPM).",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["6.0s (checklist_operacion, item 1-2)", "12.0s (checklist_operacion, item 1-2 hold)", "18.5s (checklist_operacion, item 1-3)", "27.0s (benchmark_klara)"],
+      "integracion_hyperframes_remotion": "el bloque HyperFrames (checklist_operacion) se compuso sin friccion visual con el resto del catalogo Remotion: mismo kicker tipografico ('LO QUE CAMBIA EN TU OPERACION DIARIA'), mismos ticks ember circulares, mismo fondo near-black, sin salto de look en el corte de entrada/salida del bloque. Legible pese a tener el bitrate MAS BAJO de los 4 reels (743kbps) — el patron de texto grande sobre fondo plano negro (opuesto al patron de UI densa/chica de P-08) resulta menos exigente para el CRF.",
+      "checklist_4_items_exactos": "'Tiempo recuperado del equipo de coordinacion' / 'Mejor ocupacion de la agenda' / 'Menos errores de comunicacion entre sedes' (visible hasta 18.5s; el 4o item 'Capacidad de llamadas del equipo de setters liberada' aparece a partir de ~18.6s, fuera de los frames muestreados pero confirmado en el index.html fuente) — los 4 EXACTOS del post, mismo orden.",
+      "benchmark_klara_atribucion_en_pantalla": "frame de 27.0s muestra '30-38%' + 'menos ausencias con recordatorios automaticos bien configurados' + DEBAJO, en el MISMO frame, 'Segun datos de Klara, proveedor de comunicacion clinica' + 'No es una cifra de AetherLogik.' — cumple la regla dura de atribucion completa en el mismo frame que la cifra (decision_log d-002).",
+      "palette_scan_pixeles_reales": {"checklist_12s": "cyan_violet=0.0%, ember=96.75%", "checklist_18.5s": "cyan_violet=0.0%, ember=97.22%", "benchmark_27s": "cyan_violet=0.0%, ember=97.87%"},
+      "veredicto": "pass"
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO"
+  }
 }

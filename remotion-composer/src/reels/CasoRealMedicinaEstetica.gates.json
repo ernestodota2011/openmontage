@@ -3,76 +3,58 @@
   "run_date": "2026-08-21",
   "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
   "pre_render_gates": {
-    "slideshow_risk": {
-      "average": 0.6,
-      "verdict": "strong",
-      "dimensions": {
-        "repetition": {"score": 0.9, "reason": "3 escenas consecutivas usan el MISMO componente (StatReveal) — riesgo de repeticion real, mitigado porque cada una muestra una cifra DISTINTA (no el mismo dato reetiquetado) y el hold de 7s cada una evita que se lea como 'flash de numeros'. Declarado en el numero mas alto de la dimension, no maquillado a 0."},
-        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a una cifra o item exacto del post"},
-        "weak_motion": {"score": 0.3, "reason": "2 de 7 escenas son video real o cascada de UI con movimiento (cold_open i2v, what_they_did); las 3 StatReveal tienen spring/glow pero son fundamentalmente tipografia numerica"},
-        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 7 escenas"},
-        "typography_overreliance": {"score": 0.86, "reason": "6 de 7 escenas (85.7%) son stat_card — SUPERA el umbral 60%. Declarado honesto: es la naturaleza de un reel de 'revelacion de resultados', no un descuido de variedad."},
-        "unsupported_cinematic_claims": {"score": 0.0, "reason": "el i2v es el unico momento cinematico y no reclama mas de lo que entrega"}
-      }
-    },
-    "variation_checker": {
-      "score": 0.5,
-      "verdict": "revise",
-      "violations": ["3 escenas consecutivas del mismo shot_size (MS) y el mismo componente visual (StatReveal) — flag de variedad baja, mitigado por el contenido distinto de cada una (numeros diferentes) y el proposito narrativo deliberado (trilogia de resultados, ver decision_log d-003)"],
-      "suggestions": ["si en revision humana se siente repetitivo, considerar variar el shot_size de stat2_66 a algo mas cercano (ECU) para romper la monotonia visual entre las 3 cifras"],
-      "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS", "MS", "MS"],
-      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
-    },
-    "delivery_promise": {
-      "promise_type": "data_explainer",
-      "valid": true,
-      "violations": [],
-      "motion_ratio": 0.2857142857142857,
-      "motion_cuts": 2,
-      "slide_cuts": 5,
-      "still_cuts": 0,
-      "note": "declarado 'data_explainer' (no motion_led ni hybrid) — es honestamente un reel de revelacion de datos con UN momento de cine, no un reel de movimiento. La doctrina de delivery_promise clasifica por la NATURALEZA de la promesa, y este reel promete un caso real con cifras, no accion."
-    },
-    "brand_palette_guard": {
-      "verdict": "pass_with_note",
-      "counts": {"critical": 0, "warning": 1},
-      "violations": [
-        {"severity": "warning", "kind": "card_boxless", "value": "TagRevealList tick vertical (what_they_did) — mismo patron ya aceptado en la serie anterior, no introduce un color nuevo"}
-      ],
-      "note": "CRITICO evitado a proposito: StatReveal.tsx tiene `accentColor='#A78BFA'` (violeta) por defecto — las 3 escenas que lo usan pasan `accentColor={BRAND.accent}` explicito (ver art-direction.md, seccion de guard). Verificado linea por linea en el tsx antes de este gates.json."
-    },
-    "coherence_guard": {
-      "status": "PENDIENTE sobre pixeles del MP4 renderizado. Solo 1 escena i2v en todo el reel (sin multi-plano que encadenar) — el riesgo de drift de personaje/mundo entre planos NO APLICA por construccion. Foco del verify: confirmar que el prompt de anonimizacion (sin logos/marcas) se cumplio en los pixeles reales."
-    },
-    "tsc_noemit": {
-      "status": "PENDIENTE — lo corre devops antes de renderizar. Props de StatReveal y TagRevealList verificadas contra el codigo real del componente antes de escribir este tsx (misma disciplina aplicada tras el fix del reel 1)."
-    }
+    "slideshow_risk": {"average": 0.6, "verdict": "strong", "dimensions": {"repetition": {"score": 0.9, "reason": "3 StatReveal consecutivos, mitigado por cifras distintas"}, "typography_overreliance": {"score": 0.86, "reason": "85.7%, naturaleza de reel de resultados"}}},
+    "variation_checker": {"score": 0.5, "verdict": "revise", "shot_size_diversity": ["MS","MS","MS","MS","MS","MS","MS"]},
+    "delivery_promise": {"promise_type": "data_explainer", "valid": true, "motion_ratio": 0.2857142857142857},
+    "brand_palette_guard": {"verdict": "pass_with_note", "counts": {"critical": 0, "warning": 1}, "note": "CRITICO evitado a proposito: StatReveal accentColor override obligatorio aplicado en las 3 escenas de cifras"},
+    "coherence_guard": {"status": "PENDIENTE en pre-produccion; foco: confirmar aislamiento de cliente en pixeles reales"},
+    "tsc_noemit": {"status": "CONFIRMADO por devops: exit 0 (gate npx remotion compositions paso con las 4 composiciones listadas, HEAD cb196e2)"}
   },
   "assets_generated": {
-    "hero_still": {
-      "model": "fal-ai/nano-banana-pro",
-      "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"},
-      "url": "https://v3b.fal.media/files/b/0aa734f0/lnw59ofJfXAYkQVCbQzmK_VQUFKg8k.jpg",
-      "cost_usd": 0.15,
-      "note": "prompt exige explicitamente 'no visible logos, brand names, or clinic names anywhere' (aislamiento de cliente)"
-    },
-    "hero_i2v": {
-      "model": "fal-ai/kling-video/o1/image-to-video",
-      "params": {"duration": "5", "start_image_url_only": true},
-      "url": "https://v3b.fal.media/files/b/0aa73503/00B4CIx-Btl5YKy387dvJ_output.mp4",
-      "cost_usd": 0.56
-    },
-    "music": {
-      "model": "fal-ai/elevenlabs/music",
-      "prompt_bpm_declared": 126,
-      "prompt_energy_declared": "corporate-tech instrumental, warm strings, un build confiado a dos tercios",
-      "url": "https://v3b.fal.media/files/b/0aa734e3/Szw-VnP7SFCov__Nwb_0-_music_generated.mp3",
-      "generated_length_s": 52,
-      "picture_length_s": 45.0,
-      "cost_usd": 0.52
-    },
-    "sfx_confirm_ding": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fc/0WPJvc5cuVvp6FAP6cPyu_sound_effect.mp3", "cost_usd": 0.002},
-    "total_cost_usd_est": 1.232
+    "hero_still": {"model": "fal-ai/nano-banana-pro", "cost_usd": 0.15, "note": "prompt exige explicitamente 'no visible logos, brand names, or clinic names'"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "cost_usd": 0.56},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "cost_usd": 0.52},
+    "sfx_confirm_ding": {"cost_usd": 0.002}, "total_cost_usd_est": 1.232
   },
-  "post_render_verify": "PENDIENTE — esta sesion NO renderiza. El verify (ffprobe + frame-sampling region+control + confirmacion visual de anonimizacion sin logos) lo corre video-producer DESPUES del handoff a devops. Ver ReelsClinicasSerie.README.md."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-clinicas-serie/caso-real-medicina-estetica-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 1438814bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 198154bps",
+      "duration_s": 45.0,
+      "size_bytes": 9240726,
+      "note": "duracion exacta, sin delta de contenedor (igual que el reel 1)"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.03", "input_tp": "-0.76"},
+      "finding": "coincide EXACTO con el -14.03 reportado por devops.",
+      "tempo_check": "125.3 BPM medido vs 126 BPM declarado (delta 0.7 BPM).",
+      "verdict": "pass"
+    },
+    "aislamiento_cliente_reel_confidencial": {
+      "metodo": "inspeccion visual directa de 2 frames del hero i2v (2.5s y 4.5s, cubre el plano completo de 5s) + escaneo de paleta sobre pixeles",
+      "hallazgo": "CERO logos, nombres de marca o de clinica visibles en ningun frame. Un monitor en el fondo de la escena muestra un banner naranja con texto que es ILEGIBLE/GARABATEADO (artefacto tipico de generacion de imagen IA sobre texto de pantalla, no deletrea ninguna palabra real ni marca) — no identifica a ningun cliente. Las 2 personas y el ambiente son genericos (oficina de coordinacion calida, sin senaletica).",
+      "veredicto": "pass — aislamiento de cliente cumplido"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["2.5s (cold_open_hero)", "4.5s (cold_open_hero, 2o punto del mismo plano)", "16.5s (stat1_125h)", "23.5s (stat2_66)", "30.5s (stat3_99)", "36.5s (attribution)"],
+      "cifras_exactas": "+125 / +66% / 99% — coinciden EXACTO con el post, sin redondeos, cada una con su label completo ('horas/semana recuperadas por el equipo de coordinacion', 'de capacidad de llamadas del equipo de setters', 'de precision en la sincronizacion de resultados medicos entre sedes').",
+      "atribucion": "escena attribution (36.5s) reproduce textual 'Datos reportados por su equipo. Cliente de AetherLogik — identidad resguardada por acuerdo de confidencialidad.' — coincide exacto con script.md.",
+      "palette_scan_pixeles_reales": {
+        "coldopen_2.5s": "cyan_violet=0.0%, ember=97.58%", "coldopen_4.5s": "cyan_violet=0.0%, ember=97.33%",
+        "stat1_16.5s": "cyan_violet=0.0%, ember=95.17%", "stat2_23.5s": "cyan_violet=0.0%, ember=96.39%", "stat3_30.5s": "cyan_violet=0.0%, ember=96.77%",
+        "veredicto": "pass — 0.0% cian/violeta en TODOS los frames de este reel, el mas limpio de los 4"
+      },
+      "veredicto": "pass"
+    },
+    "coherence_guard": {
+      "status": "pass",
+      "detalle": "unica escena i2v del reel; mismo espacio/personas/paleta entre 2.5s y 4.5s del mismo plano, sin drift."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO"
+  }
 }

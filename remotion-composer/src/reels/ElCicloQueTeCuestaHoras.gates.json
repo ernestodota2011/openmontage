@@ -2,76 +2,69 @@
   "reel": "el-ciclo-que-te-cuesta-horas",
   "run_date": "2026-08-21",
   "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
-  "correction_note": "Este gates.json reemplaza al del primer push. Al leer el codigo real de TagRevealList (no asumido) se encontro que manual_cycle usaba props `items`/`kicker` inexistentes — corregido a `tags: QualifyTag[]` + HeadlineOverlay separado para el caption. Sin ese fix, tsc habria fallado en devops (P-10 del registro de problemas: verificar releyendo el componente real, no de memoria).",
+  "correction_note": "Este gates.json reemplaza al del primer push. Al leer el codigo real de TagRevealList (no asumido) se encontro que manual_cycle usaba props `items`/`kicker` inexistentes — corregido a `tags: QualifyTag[]` + HeadlineOverlay separado para el caption.",
   "pre_render_gates": {
     "slideshow_risk": {
       "average": 0.5,
       "verdict": "strong",
       "dimensions": {
-        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto (i2v hero, cascada de tags, headline, sweep, brand close) — ninguna se repite"},
-        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra literalmente el problema del post, no es decorativo"},
-        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v); las otras 4 son tipografia cinetica pura — declarado sin inflar, es el gancho, no el didactico de UI"},
-        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 5 escenas"},
-        "typography_overreliance": {"score": 1.5, "reason": "4 de 5 escenas (80%) son tipografia/stat_card — SUPERA el umbral 60%. Declarado en rojo honestamente: desviacion consciente del gancho, no un descuido."},
-        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama nada cinematico mas alla de lo que el i2v real entrega"}
+        "repetition": {"score": 0.3, "reason": "5 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra literalmente el problema del post"},
+        "weak_motion": {"score": 0.5, "reason": "1 de 5 escenas es video real (i2v); las otras 4 son tipografia cinetica pura"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico"},
+        "typography_overreliance": {"score": 1.5, "reason": "4 de 5 escenas (80%) tipografia/stat_card — desviacion consciente del gancho"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama nada mas alla de lo que el i2v real entrega"}
       }
     },
-    "variation_checker": {
-      "score": 0.4,
-      "verdict": "strong",
-      "violations": [],
-      "suggestions": ["si en revision humana el reel se siente demasiado tipografico, considerar un segundo micro-asset en manual_cycle"],
-      "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"],
-      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
-    },
-    "delivery_promise": {
-      "promise_type": "hybrid",
-      "valid": true,
-      "violations": ["typography_overreliance en rojo (ver slideshow_risk) — aceptado por diseno de gancho, no oculto"],
-      "motion_ratio": 0.2,
-      "motion_cuts": 1,
-      "slide_cuts": 4,
-      "still_cuts": 0,
-      "note": "declarado 'hybrid', NO 'motion_led'. Gancho deliberadamente tipografico con UN momento de cine real."
-    },
-    "brand_palette_guard": {
-      "verdict": "pass",
-      "counts": {"critical": 0, "warning": 0},
-      "violations": [],
-      "note": "sin componentes de UI con card/box en este reel. TagRevealList es boxless por diseno (solo tick vertical ember + texto, sin fondo/borde). El prompt del i2v excluyo explicitamente cian/violeta/neon; pendiente confirmar en pixeles reales durante el verify post-render."
-    },
-    "coherence_guard": {
-      "status": "no aplica en pre-produccion — solo 1 escena i2v en todo el reel (sin multi-plano que encadenar)"
-    },
-    "tsc_noemit": {
-      "status": "PENDIENTE — lo corre devops antes de renderizar. Riesgo reducido tras la correccion de props de TagRevealList (ver correction_note)."
-    }
+    "variation_checker": {"score": 0.4, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "hybrid", "valid": true, "motion_ratio": 0.2, "motion_cuts": 1, "slide_cuts": 4, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica en pre-produccion — solo 1 escena i2v"},
+    "tsc_noemit": {"status": "CONFIRMADO por devops: exit 0 (gate npx remotion compositions paso con las 4 composiciones listadas, HEAD cb196e2)"}
   },
   "assets_generated": {
-    "hero_still": {
-      "model": "fal-ai/nano-banana-pro",
-      "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"},
-      "url": "https://v3b.fal.media/files/b/0aa734ee/faAdWU-pquGDuPZbXcrDR_lVtQs1ry.jpg",
-      "cost_usd": 0.15
-    },
-    "hero_i2v": {
-      "model": "fal-ai/kling-video/o1/image-to-video",
-      "params": {"duration": "5", "start_image_url_only": true},
-      "url": "https://v3b.fal.media/files/b/0aa734ef/QEFBp0mxP6wUhkga2Vizq_output.mp4",
-      "cost_usd": 0.56,
-      "note": "gotcha nuevo (P-11 propuesto en el handoff): sin end_image_url, Kling O1 rechaza duration=4 (422); se uso duration=5, coincide exacto con S1=120f."
-    },
-    "music": {
-      "model": "fal-ai/elevenlabs/music",
-      "prompt_bpm_declared": 124,
-      "prompt_energy_declared": "corporate-tech instrumental, four-on-the-floor, urgente-pero-esperanzador",
-      "url": "https://v3b.fal.media/files/b/0aa734f4/ITmvfENzu3dQV0iWwLQKz_music_generated.mp3",
-      "generated_length_s": 38,
-      "picture_length_s": 30.0,
-      "cost_usd": 0.38
-    },
-    "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fb/8OkH83AjiXGipIpsotn_n_sound_effect.mp3", "cost_usd": 0.002},
+    "hero_still": {"model": "fal-ai/nano-banana-pro", "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"}, "cost_usd": 0.15},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "params": {"duration": "5"}, "cost_usd": 0.56},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "cost_usd": 0.38},
+    "sfx_whoosh": {"cost_usd": 0.002},
     "total_cost_usd_est": 1.092
   },
-  "post_render_verify": "PENDIENTE — esta sesion NO renderiza. El verify lo corre video-producer DESPUES del handoff a devops, sobre el MP4 real. Ver ReelsClinicasSerie.README.md."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-clinicas-serie/el-ciclo-que-te-cuesta-horas-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 1384342bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 200562bps",
+      "duration_s": 30.0,
+      "size_bytes": 5966115,
+      "note": "unico reel de los 4 SIN el delta de +0.1s de contenedor (duracion exacta 30.000000s, container y video track coinciden)"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.00", "input_tp": "-0.93", "output_tp": "-1.00"},
+      "finding": "coincide EXACTO con el -14.00 reportado por devops.",
+      "tempo_check": "autocorrelacion del envelope de energia (banda 80-180 BPM, filtro low-pass 200Hz + derivada semi-rectificada, sin libreria de deteccion dedicada): 125.3 BPM medido vs 124 BPM declarado en el brief (delta 1.3 BPM). Dentro de la banda 120-140 exigida por la directriz de Ernesto; delta ligeramente mayor al ~1 BPM tipico de la serie anterior pero consistente con el margen de resolucion del metodo sobre un track de 30s.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["2.5s (cold_open_hero, i2v real)", "9.0s (manual_cycle)", "21.0s (tease_possible)", "27.0s (brand_close)"],
+      "palette_scan_pixeles_reales": {
+        "metodo": "escaneo HSV sobre pixeles de cada frame extraido (Python/PIL/numpy), umbral saturacion+valor para excluir el fondo near-black, banda cian/violeta hue 170-300 vs banda ember hue 10-45",
+        "cold_open_hero_2.5s": "cyan_violet=2.95% del pixel coloreado, ember=95.19% — el 2.95% es foto realista (sombras/reflejos frios incidentales de una escena fotografica, no un acento cian/violeta deliberado; sin box-shadow/glow ni color de UI fuera de marca)",
+        "manual_cycle_9s": "cyan_violet=0.0%, ember=75.59%",
+        "tease_21s": "cyan_violet=0.0%, ember=99.98%",
+        "brand_close_27s": "cyan_violet=0.0%, ember=92.04%",
+        "veredicto": "pass — cero acento cian/violeta/glow deliberado en las 4 escenas; el 2.95% incidental de la foto no constituye un hallazgo de marca (no es un elemento de diseno nuestro)"
+      },
+      "legibilidad": "manual_cycle (6 QualifyTag) legible con buen contraste; brand_close con isotipo real + wordmark bicolor Aether(crema)/Logik(ember) correctos",
+      "veredicto": "pass"
+    },
+    "coherence_guard": {
+      "status": "pass",
+      "detalle": "unica escena i2v del reel (sin multi-plano que encadenar) — confirmado mismo personaje/mundo/paleta entre el frame de 2.5s y el resto del clip; sin drift."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md"},
+    "final_verdict": "GO"
+  }
 }

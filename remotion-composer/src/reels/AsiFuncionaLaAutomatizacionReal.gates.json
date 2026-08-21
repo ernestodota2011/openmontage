@@ -7,64 +7,54 @@
       "average": 0.4,
       "verdict": "strong",
       "dimensions": {
-        "repetition": {"score": 0.4, "reason": "6 devices visuales distintos en 7 escenas (2 reusados con contenido genuinamente equivalente, 1 nuevo, resto tipografia/marca)"},
-        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a un pilar exacto del post, ninguno es decorativo"},
-        "weak_motion": {"score": 0.0, "reason": "5 de 7 escenas tienen movimiento de UI real (contador, typing/reply/card, cascada de sedes, sweep, spring de marca)"},
-        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 7 escenas"},
-        "typography_overreliance": {"score": 0.7, "reason": "2 de 7 escenas (28.6%) son tipografia pura (cold_open_hook, punch_montage) — bajo el umbral 60%"},
-        "unsupported_cinematic_claims": {"score": 0.0, "reason": "reel 100% UI/tipografia, no reclama nada cinematico"}
+        "repetition": {"score": 0.4, "reason": "6 devices distintos, 2 reusados con contenido genuinamente equivalente"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada visual atado a un pilar exacto del post"},
+        "weak_motion": {"score": 0.0, "reason": "5 de 7 escenas con movimiento de UI real"},
+        "weak_shot_intent": {"score": 0.0, "reason": "declarado y especifico"},
+        "typography_overreliance": {"score": 0.7, "reason": "2 de 7 (28.6%), bajo el umbral"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "100% UI/tipografia"}
       }
     },
-    "variation_checker": {
-      "score": 0.3,
-      "verdict": "strong",
-      "violations": [],
-      "suggestions": [],
-      "shot_size_diversity": ["MS", "ECU", "ECU", "MS", "CU", "MS", "MS"],
-      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
-    },
-    "delivery_promise": {
-      "promise_type": "hybrid",
-      "valid": true,
-      "violations": [],
-      "motion_ratio": 0.7142857142857143,
-      "motion_cuts": 5,
-      "slide_cuts": 2,
-      "still_cuts": 0,
-      "note": "cold_open_hook y punch_montage tipados stat_card (tipografia NO cuenta como motion real per doctrina); las 5 escenas de UI animada (incl. brand_close) SI cuentan. Declarado 'hybrid' (no 'motion_led') por honestidad con la naturaleza mixta, mismo criterio que el reel homologo de la serie anterior."
-    },
-    "brand_palette_guard": {
-      "verdict": "revise",
-      "counts": {"critical": 0, "warning": 5},
-      "violations": [
-        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.bubble (pilar1/pilar2)"},
-        {"severity": "warning", "kind": "card_boxless", "value": "chat_ui.appointment_card (pilar2)"},
-        {"severity": "warning", "kind": "card_boxless", "value": "clinic_sync_board.location_card (pilar3, x3 columnas)"},
-        {"severity": "warning", "kind": "card_boxless", "value": "escalate_badge (si_algo_falla)"}
-      ],
-      "note": "mismas excepciones de UI-chrome ya aceptadas en la serie anterior (bordes+radius necesarios para leer tarjetas/columnas). 0 criticos: BRAND.accent/BRAND.text/BRAND.muted son los unicos colores usados en ClinicSceneKit.tsx (mismo patron que CapabilitySceneKit.tsx) — revisado linea por linea."
-    },
-    "coherence_guard": {"status": "no aplica — cero i2v/stills generativos en este reel (100% motion-autorado)"},
-    "tsc_noemit": {
-      "status": "PENDIENTE — corre devops antes de renderizar. Este reel agrega 1 componente nuevo (ClinicSceneKit.tsx, ClinicSyncBoard) que sigue linea por linea el patron ya verificado de CapabilitySceneKit.tsx (mismos imports de theme.ts, mismo estilo de props tipadas) — riesgo bajo mas no cero."
-    }
+    "variation_checker": {"score": 0.3, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","ECU","ECU","MS","CU","MS","MS"]},
+    "delivery_promise": {"promise_type": "hybrid", "valid": true, "motion_ratio": 0.7142857142857143, "motion_cuts": 5, "slide_cuts": 2, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "revise", "counts": {"critical": 0, "warning": 4}, "note": "excepciones de UI-chrome aceptadas (bordes+radius de tarjetas/columnas)"},
+    "coherence_guard": {"status": "no aplica — cero i2v en este reel"},
+    "tsc_noemit": {"status": "CONFIRMADO por devops: exit 0 (gate npx remotion compositions paso con las 4 composiciones listadas, HEAD cb196e2). Componente nuevo ClinicSceneKit.tsx compilo limpio."}
   },
   "assets_generated": {
-    "music": {
-      "model": "fal-ai/elevenlabs/music",
-      "prompt_bpm_declared": 128,
-      "prompt_energy_declared": "corporate-tech instrumental, four-on-the-floor, confiado y tranquilizador",
-      "url": "https://v3b.fal.media/files/b/0aa734e2/8B2LNpTZsS_Ixtq4_94ZU_music_generated.mp3",
-      "generated_length_s": 58,
-      "picture_length_s": 47.0,
-      "cost_usd": 0.58,
-      "note": "buffer de 11s sobre picture length; devops recorta a 47.0s exactos en finishing. BPM real medible solo sobre el audio final (PENDIENTE hasta el render)."
-    },
-    "sfx_chip": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734e7/dDF8uo4yZwtzaJyMIIW5-_sound_effect.mp3", "cost_usd": 0.002},
-    "sfx_confirm_ding": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fc/0WPJvc5cuVvp6FAP6cPyu_sound_effect.mp3", "cost_usd": 0.002},
-    "sfx_whoosh": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fb/8OkH83AjiXGipIpsotn_n_sound_effect.mp3", "cost_usd": 0.002},
-    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado, cero costo de assets generativos visuales (mismo patron que el reel homologo de la serie anterior)",
-    "total_cost_usd_est": 0.586
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 128, "cost_usd": 0.58},
+    "sfx_chip": {"cost_usd": 0.002}, "sfx_confirm_ding": {"cost_usd": 0.002}, "sfx_whoosh": {"cost_usd": 0.002},
+    "stills_or_i2v": "NINGUNO", "total_cost_usd_est": 0.586
   },
-  "post_render_verify": "PENDIENTE — esta sesion NO renderiza (instruccion explicita de la mision). El verify lo corre video-producer DESPUES del handoff a devops, sobre el MP4 real. Ver ReelsClinicasSerie.README.md."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-clinicas-serie/asi-funciona-la-automatizacion-real-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 970710bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 199311bps",
+      "duration_container_s": 47.1,
+      "size_bytes": 6910908,
+      "delta_container_vs_target": {
+        "hallazgo_devops": "+0.1s en duracion de contenedor (target picture 47.0s)",
+        "investigacion_propia": "video track: ultimo frame PTS = 46.958333s (frame 1127/1128 @24fps) = EXACTO a 1128 frames/47.000s declarados en el .tsx. El +0.1s vive SOLO en el stream de audio. volumedetect en la region 46.90-47.10s: mean=-16.3dB, max=-3.7dB — audio REAL (cola de la musica de brand_close), no silencio ni artefacto.",
+        "decision": "ACEPTADO, sin trim. Es el comportamiento estandar de un encoder AAC (bloques de 1024 muestras + priming/padding del encoder, ~100ms tipico) reportado por ffprobe como parte de la duracion del contenedor — el video (lo que se PERCIBE) termina exacto en el frame 1128/47.0s; el audio simplemente continua su ultimo bloque de codificacion. No amerita trim explicito: recortar arriesgaria cortar la cola natural de la musica del cierre."
+      }
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.01", "input_tp": "-0.73"},
+      "finding": "coincide EXACTO con el -14.01 reportado por devops.",
+      "tempo_check": "127.9 BPM medido vs 128 BPM declarado (delta 0.1 BPM) — el mejor match de los 4 reels.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["8.0s (pilar1_captura)", "17.0s (pilar2_confirma)", "25.0s (pilar3_sincroniza)", "34.0s (si_algo_falla)"],
+      "legibilidad_texto_UI": "critico dado P-08/P-09 de la serie anterior (texto de UI pequeno aplastado por la curva de finishing). Verificado: contador '4.0 segundos' nitido; 'Cita confirmada / Consulta - recordatorio 24h y 2h antes / Jueves 10:00-10:30am' totalmente legible; las 3 columnas de sede ('Sede Centro/Norte/Sur', 'sincronizado', 'expediente del paciente conectado') NITIDAS con buen contraste, el caso MAS denso de texto pequeno de toda la serie; 'Transferido a Carla / con el contexto completo de la conversacion' legible. CONFIRMA que la curva sin el punto 0.25/0.22 (recipe del README) resolvio el defecto de raiz — no reaparece con MAS densidad de UI que la serie anterior.",
+      "palette_scan_pixeles_reales": {"pilar1_8s": "cyan_violet=0.0%, ember=99.92%", "pilar2_17s": "cyan_violet=0.0%, ember=99.86%", "pilar3_25s": "cyan_violet=0.0%, ember=97.43%", "escala_34s": "cyan_violet=0.0%, ember=97.92%"},
+      "veredicto": "pass"
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass"},
+    "final_verdict": "GO"
+  }
 }
