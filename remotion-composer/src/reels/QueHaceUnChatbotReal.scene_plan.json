@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cold_open_hook",
+    "type": "stat_card",
+    "description": "Tipografia cinetica mask-reveal sobre near-black: 'El chatbot de las demos se cae. Este no.' con acento ember en 'no'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "hook que diferencia este reel del bot generico de demo, en 3s sin depender de un asset generado",
+    "hero_moment": true,
+    "information_role": "promesa del reel: esto SI funciona",
+    "texture_keywords": ["mask reveal", "una palabra en ember"]
+  },
+  {
+    "id": "cap1_responde",
+    "type": "animation",
+    "description": "ECU sobre un solo intercambio: mensaje entrante, contador grande ember de segundos, respuesta que llega justo al completarse",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "static", "lighting_key": "UI modo oscuro, contador en ember"},
+    "shot_intent": "dramatiza 'responde en segundos, no en horas' con un dato visible (el contador), no solo con la palabra",
+    "hero_moment": false,
+    "information_role": "capacidad 1 del post, primera vineta exacta",
+    "texture_keywords": ["contador tabular ember", "burbuja de respuesta rapida"]
+  },
+  {
+    "id": "cap2_califica",
+    "type": "animation",
+    "description": "Cascada de 4 burbujas alternando pregunta del bot / respuesta del cliente (servicio, urgencia)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, sin acento saturado"},
+    "shot_intent": "muestra la calificacion real: preguntas concretas, no un menu de botones",
+    "hero_moment": false,
+    "information_role": "capacidad 2 del post, segunda vineta exacta",
+    "texture_keywords": ["cascada de burbujas", "pregunta-respuesta alternada"]
+  },
+  {
+    "id": "cap3_agenda",
+    "type": "animation",
+    "description": "Typing indicator, respuesta, tarjeta de cita confirmada con fecha y hora",
+    "shot_language": {"shot_size": "ECU", "camera_movement": "micro_drift", "lighting_key": "UI modo oscuro, tarjeta con hairline ember"},
+    "shot_intent": "agenda o deriva es literalmente la tarjeta de cita: mostrarla es la prueba",
+    "hero_moment": false,
+    "information_role": "capacidad 3 del post, tercera vineta exacta",
+    "texture_keywords": ["tick ember", "tarjeta de cita confirmada"]
+  },
+  {
+    "id": "cap4_escala",
+    "type": "animation",
+    "description": "Mensaje del cliente que requiere una persona, sweep ember de handoff, insignia 'Transferido a Ana con el contexto completo'",
+    "shot_language": {"shot_size": "CU", "camera_movement": "punch_in", "lighting_key": "UI modo oscuro, sweep ember como transicion"},
+    "shot_intent": "la promesa de contexto (no repetir todo) se muestra, no se enuncia",
+    "hero_moment": false,
+    "information_role": "capacidad 4 del post, cuarta vineta exacta",
+    "texture_keywords": ["sweep ember", "insignia de transferencia"]
+  },
+  {
+    "id": "punch_montage",
+    "type": "stat_card",
+    "description": "Recap kinetico de las 4 promesas: 'En segundos. Calificado. Agendado. Con contexto.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, grano sutil"},
+    "shot_intent": "consolida las 4 capacidades antes del cierre, construye anticipacion",
+    "hero_moment": false,
+    "information_role": "resumen",
+    "texture_keywords": ["stagger rapido", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
