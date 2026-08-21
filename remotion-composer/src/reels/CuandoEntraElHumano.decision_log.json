@@ -1,0 +1,51 @@
+{
+  "reel": "cuando-entra-el-humano",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes",
+      "options_considered": [
+        "100% tipografico (sin i2v), mismo patron que reel 2",
+        "1 hero i2v (Kling O1) + resto tipografia/stat cinetica"
+      ],
+      "choice": "renderer_family=cinematic, render_runtime=remotion, composition_mode=atelier, 1 escena hero i2v",
+      "reason": "es el reel de CREDIBILIDAD de la serie — dramatizar en imagen 'el humano sigue al mando' es mas persuasivo que solo decirlo en texto, mismo patron GO'd en LoQueLaIaNoPuedeHacer.tsx (serie abogados). El presupuesto de hero i2v de la serie se reparte 1-y-1 entre reel 1 y reel 3.",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Escenario y duracion exacta del i2v (evitando P-11 desde el diseno)",
+      "options_considered": [
+        "escena de 6.0s con clip Kling O1 de 10s trimeado en Remotion",
+        "escena de 5.0s con clip Kling O1 de exactamente 5s (duration='5')"
+      ],
+      "choice": "5.0s exactos, duration='5' en la llamada a fal, sin discrepancia asset/composicion",
+      "reason": "aunque Remotion puede trimear un clip mas largo dentro de un Sequence mas corto sin error, generar el asset a la duracion exacta que se usa evita desperdicio de presupuesto y es mas simple de verificar (el .mp4 completo se usa integro). Kling O1 acepta duration='5' explicito sin ambiguedad.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia mas serio que el resto de la serie",
+      "options_considered": [
+        "mismo BPM que reel 1/2 (128-132), mantener consistencia ritmica",
+        "124 BPM, mas restringido, para el reel mas intimo/serio de la serie"
+      ],
+      "choice": "124 BPM, corporate-tech instrumental, mood 'confiable y humano'",
+      "reason": "el reel trata sobre confianza y limites — un tempo ligeramente mas bajo (pero aun dentro de la banda 120-140 exigida) refuerza el tono mas serio sin salirse de la directriz dura de musica movida de la mision.",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "Por que el reel NO promete que la IA cierra tratos",
+      "options_considered": [
+        "enfatizar solo lo que la IA SI hace (mas venta, menos honesto)",
+        "dedicar el reel completo a los limites reales, fiel al FAQ del post"
+      ],
+      "choice": "reel completo de limites/credibilidad, fiel al post",
+      "reason": "la regla dura anti-claims de la mision + el hecho de que un agente inmobiliario es la audiencia MAS sensible a promesas de que 'la IA reemplaza la negociacion humana' — sobre-prometer aqui rompe la confianza de todo el reel 2. El post mismo es explicito sobre esto en su cierre.",
+      "confidence": 0.9
+    }
+  ]
+}

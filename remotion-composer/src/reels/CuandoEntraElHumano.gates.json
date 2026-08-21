@@ -1,0 +1,31 @@
+{
+  "reel": "cuando-entra-el-humano",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py - SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.6,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.35, "reason": "6 escenas, cada una con un device distinto"},
+        "decorative_visuals": {"score": 0.0, "reason": "el hero i2v ilustra literalmente el punto del reel (el humano sigue al mando)"},
+        "weak_motion": {"score": 0.4, "reason": "1 de 6 escenas es video real (i2v); las otras 5 son tipografia/stat cinetica"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico por escena"},
+        "typography_overreliance": {"score": 1.8, "reason": "5 de 6 escenas (83%) tipografia/stat_card - desviacion consciente, reel didactico de credibilidad"},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "no reclama nada mas alla de lo que el i2v real entrega"}
+      }
+    },
+    "variation_checker": {"score": 0.45, "verdict": "strong", "violations": [], "shot_size_diversity": ["MS","MS","MS","MS","MS","MS"], "generic_language_check": "0 instancias de lenguaje generico"},
+    "delivery_promise": {"promise_type": "hybrid", "valid": true, "motion_ratio": 0.17, "motion_cuts": 1, "slide_cuts": 5, "still_cuts": 0},
+    "brand_palette_guard": {"verdict": "pass", "counts": {"critical": 0, "warning": 0}, "violations": []},
+    "coherence_guard": {"status": "no aplica en pre-produccion - solo 1 escena i2v, sin multi-plano que encadenar; verificado por video-producer sobre pixeles reales de los 2 frames de muestra del clip generado (1.0s y 4.0s): mismo personaje, mismo espacio, misma paleta calida, sin drift"},
+    "anti_claims_audit": {"verdict": "pass", "detalle": "los 4 items de limits_list y la frase de responsibility_beat son sintesis textual del FAQ del post; el reel EVITA explicitamente prometer que la IA cierra tratos o reemplaza la negociacion"}
+  },
+  "assets_generated": {
+    "hero_still": {"model": "fal-ai/nano-banana-pro", "params": {"resolution": "2K", "aspect_ratio": "9:16", "output_format": "jpeg"}, "cost_usd": 0.15, "url": "https://v3b.fal.media/files/b/0aa73848/Pbps1hut80AIt2ewbn0CU_sVVKZkaD.jpg"},
+    "hero_i2v": {"model": "fal-ai/kling-video/o1/image-to-video", "params": {"duration": "5", "start_image_url_only": true}, "cost_usd": 0.56, "url": "https://v3b.fal.media/files/b/0aa73859/0ZkbEQW8T7DBvjMGV9lnr_output.mp4", "verificado_por_video_producer": "ffprobe: h264, 1072x1928, 24fps, 5.04s, 10329474 bytes; 2 frames extraidos (1.0s, 4.0s) y mirados - mismo personaje/espacio/paleta calida golden-hour, push-in sutil de camara, sonrisa y saludo coherentes, sin distorsion de manos ni drift de color"},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 124, "length_ms": 45000, "cost_usd": 0.45, "url": "https://v3b.fal.media/files/b/0aa73850/FwavJ2Y4XBUOHdTm6W6b5_music_generated.mp3", "verificado_por_video_producer": "ffprobe: 44.98s; volumedetect mean=-14.6dB max=-1.4dB (no muda, sin clip)"},
+    "total_cost_usd_est": 1.16
+  },
+  "render_status": "PENDIENTE - handoff a devops-aetherlogik-homelab. Aun no se renderizo el MP4 final; este gates.json documenta unicamente el pre_render. El post_render_verify lo corre video-producer en la SIGUIENTE sesion."
+}

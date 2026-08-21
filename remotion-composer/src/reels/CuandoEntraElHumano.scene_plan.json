@@ -1,0 +1,62 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, push-in sutil): agente inmobiliario cerrando un saludo/llamada personal con calidez genuina en la puerta de una propiedad, luz calida de atardecer. HeadlineOverlay abajo: 'Cuando importa, entras tu.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "slow_push_in", "lighting_key": "golden hour calido, tonos ambar"},
+    "shot_intent": "dramatiza en imagen el punto central del reel (el humano sigue al mando) antes de decirlo en texto",
+    "hero_moment": true,
+    "information_role": "cold open del reel de credibilidad",
+    "texture_keywords": ["i2v hero real", "luz dorada", "calidez humana"]
+  },
+  {
+    "id": "limits_list",
+    "type": "stat_card",
+    "description": "Cascada TagRevealList de 4 QualifyTag: los 4 limites que el FAQ del post nombra explicitamente (negociacion, financiamiento, confianza, criterio)",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "establece con precision lo que la IA NO reemplaza, fiel al FAQ del post",
+    "hero_moment": false,
+    "information_role": "los 4 limites del post",
+    "texture_keywords": ["cascada de tags", "stagger 64f"]
+  },
+  {
+    "id": "human_connection",
+    "type": "animation",
+    "description": "KineticHeadline 'La IA te escala la conversacion justo cuando importa.' — fiel al FAQ sobre escalamiento",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "explica el MECANISMO de escalamiento, no solo el limite",
+    "hero_moment": false,
+    "information_role": "como funciona el traspaso a humano",
+    "texture_keywords": ["una palabra en ember"]
+  },
+  {
+    "id": "responsibility_beat",
+    "type": "stat_card",
+    "description": "KineticHeadline 'El historial completo. El contexto entero. Tu decides cuando entrar.' — el punto mas serio del reel",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "refuerza que el agente mantiene control total y contexto, no solo una notificacion generica",
+    "hero_moment": false,
+    "information_role": "el control permanece en el agente",
+    "texture_keywords": ["hold deliberado", "3 lineas cortas"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Por eso disenamos flujos donde tu mantienes el control.' + sweep EmberThread",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "sweep ember, transicion de marca"},
+    "shot_intent": "bridge hacia el reel de implementacion (reel 4)",
+    "hero_moment": false,
+    "information_role": "tease hacia la serie",
+    "texture_keywords": ["sweep ember", "bridge"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
