@@ -52,17 +52,17 @@
     "still_i2v_input_2k": {"model": "fal-ai/nano-banana-pro", "url": "https://v3b.fal.media/files/b/0aa7291b/82ZomjfT5QYZCOn2-HoDD_eunr6gy5.jpg", "resolution": "1536x2752 JPEG, 1.09MB", "cost_usd": 0.15},
     "cold_open_video": {
       "model": "fal-ai/kling-video/v2.5-turbo/pro/image-to-video",
-      "url": "https://v3b.fal.media/files/b/0aa72913/xBbl3dBo1wiGWDilYl__o_output.mp4",
+      "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/caso-marino-hvac/cold-open.mp4",
       "duration_s_actual": 5.041667,
       "resolution": "1076x1924",
       "codec": "h264",
       "cost_usd": 0.35
     },
-    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "url": "https://v3b.fal.media/files/b/0aa728ed/yQx1_FqDiGjh5AQM6RYn5_music_generated.mp3", "cost_usd_est": 0.45},
+    "music": {"model": "fal-ai/elevenlabs/music", "prompt_bpm_declared": 126, "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/caso-marino-hvac/music.mp3", "cost_usd_est": 0.45},
     "sfx_ding": {"model": "reusado del piloto (cero costo adicional)", "url": "https://media.aetherlogik.com/agency/tres-mensajes-de-anoche/sfx-notification-ding.mp3", "cost_usd": 0},
-    "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa72a47/wNuYyBU0peq3_3GmNOLXd_sound_effect.mp3", "cost_usd": 0.001, "nota": "regenerado 2026-08-21 — la URL original (0aa728ef/blLPj2DOcrfJr5y9A0Nxr) expiro con 404 antes de archivarse a R2"},
+    "sfx_chime": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://media.aetherlogik.com/agency/reels-chatbot-serie/caso-marino-hvac/sfx-chime-marino.mp3", "cost_usd": 0.001, "nota": "regenerado 2026-08-21 (la version anterior expiro con 404 antes de archivarse). Archivado a R2 desde el commit 6ad46ad — verificado por mi con curl -I: HTTP 200, Content-Length 8821, coincide byte a byte. CORRECCION: mi reporte anterior lo daba como 'pendiente de archivar' — estaba desactualizado, ya estaba resuelto."},
     "total_cost_usd_est": 1.101,
-    "note": "URLs de fal.media (CDN temporal). coldOpenSrc y musicSrc ya archivados a R2 por devops (agency/reels-chatbot-serie/caso-marino-hvac/); sfxChimeSrc regenerado, aun pendiente de archivar."
+    "note": "Los 4 assets (coldOpenSrc, musicSrc, sfxDingSrc, sfxChimeSrc) confirmados en R2, servidos desde media.aetherlogik.com."
   },
   "cold_open_visual_verification": {
     "method": "ffprobe (duracion/resolucion/codec) + ffmpeg -ss <t> -frames:v 1 en 3 puntos (0.3s/2.5s/4.7s), mirados directamente con el tool Read por video-producer en esta sesion",
@@ -102,6 +102,6 @@
     "consistencia_de_look_vs_piloto": "mismo hallazgo que reel 2 (ver QueHaceUnChatbotReal.gates.json post_render_verify_v2): el piloto ya toleraba texto de chat mas apagado que sus titulares; el nuevo recipe (sin el punto 0.25/0.22) no rompe esa consistencia, la acerca a un punto mas legible dentro de la misma familia visual.",
     "promise_preservation": {"verdict": "pass", "detail": "cero cifras inventadas confirmado en pixeles (qualify_tags solo muestra las 4 etiquetas cualitativas planeadas, ningun numero fabricado se coló en el render)"},
     "subtitle_check": {"verdict": "pass"},
-    "final_verdict": "GO — reel 3 listo para publicar. Handoff pendiente: archivar sfxChimeSrc (regenerado) a R2."
+    "final_verdict": "GO — reel 3 listo para publicar. Sin cabos sueltos (los 4 assets confirmados en R2)."
   }
 }
