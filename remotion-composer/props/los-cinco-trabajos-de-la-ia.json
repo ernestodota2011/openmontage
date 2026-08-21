@@ -1,8 +1,7 @@
 {
-  "fiveJobsChecklistSrc": "",
+  "fiveJobsChecklistSrc": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-checklist.mp4",
   "musicSrc": "https://media.aetherlogik.com/agency/reels-ia-miami-serie/assets/los-cinco-trabajos-de-la-ia-musica.mp3",
   "logoSrc": "https://media.aetherlogik.com/aetherlogik/brand/logo-ember-hires.webp",
   "sfxChipSrc": "https://media.aetherlogik.com/agency/reels-hvac-serie/assets/sfx-ding-checklist.mp3",
-  "tail_padding_seconds": 0,
-  "_devops_note": "fiveJobsChecklistSrc VACIO a proposito: pendiente del render HyperFrames del paso 3 (hf lint . && hf render sobre hyperframes-compositions/los-cinco-trabajos-de-la-ia-checklist/, luego archivar y llenar este campo)."
+  "tail_padding_seconds": 0
 }
