@@ -165,3 +165,34 @@ en el historial de commits de este archivo
 (`git log -p -- remotion-composer/src/reels/ReelsInmobiliariosSerie.README.md`)
 para referencia — ya no aplican como pasos pendientes de pre-produccion (esa
 fase esta cerrada; lo pendiente hoy es el re-render puntual de 2 reels).
+
+
+---
+
+## Refresh — re-render completo, los 2 reels pendientes ya resueltos (2026-08-21)
+
+`devops-aetherlogik-homelab` re-renderizo `LoQueYaPuedesAutomatizar` y
+`CuandoEntraElHumano` sobre HEAD `de8b047` (incluye el fix `BrandClose.tsx`,
+commit `706d449`), mismos props/assets, sin cambios de duracion ni contenido:
+
+- `tsc --noEmit`: 0 errores.
+- Masters ProRes renderizados en paralelo, sin incidentes de memoria (fueron
+  los 2 primeros de la ronda de re-renders del dia, antes de que la ronda
+  posterior de 3-en-paralelo de `reels-abogados-serie` saturara el CT 128 —
+  ver el refresh de esa serie para el detalle del OOM y su recuperacion).
+- Finishing FFmpeg identico (`finish_reel.py`): LUFS post-hoc -14.06
+  (automatizar) / -14.01 (humano), ambos dentro de banda -14+-0.5.
+- ffprobe: h264, 1080x1920, 24fps, duraciones exactas 46.0s / 45.0s.
+- Spot-check visual del frame `brand_close` en ambos: CTA de 2 lineas
+  centrado con margen simetrico, sin bleed al borde — el defecto original
+  (texto pegado al borde izquierdo) ya no aparece.
+- Subidos a R2 con naming nuevo `-v2.mp4` (NO se sobreescribio el `-v1.mp4`
+  defectuoso — CF cachea por nombre, path nuevo evita servir el asset viejo
+  desde el edge): `lo-que-ya-puedes-automatizar-v2.mp4`,
+  `cuando-entra-el-humano-v2.mp4`, ambos verificados `curl` 200 con
+  `Content-Length` igual al tamano local. Los `-v1.mp4` NO se borraron
+  (limpieza pendiente de decision del director).
+
+**Pendiente:** `video-producer` re-verifica el `brand_close` de estos 2 y
+emite el GO final de la serie (los reels 1 y 4 ya tenian GO desde el verify
+original).
