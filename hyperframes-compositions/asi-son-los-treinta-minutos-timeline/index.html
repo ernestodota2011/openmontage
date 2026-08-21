@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>asi-son-los-treinta-minutos-timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0d0d0d 0%, #0a0a0a 60%, #050505 100%);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  #stage {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .header {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: #F5F5F5;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: headerIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    padding: 0 90px;
+  }
+  @keyframes headerIn { to { opacity: 1; transform: translateY(0); } }
+
+  .timebar-wrap {
+    position: absolute;
+    top: 300px;
+    width: 860px;
+  }
+  .timebar-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #201f1f;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+  }
+  .timebar-seg {
+    height: 100%;
+    background: #201f1f;
+    position: relative;
+  }
+  .timebar-seg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #FF6B1A;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  #seg1 { width: 33.33%; border-right: 2px solid #0a0a0a; }
+  #seg2 { width: 50%; border-right: 2px solid #0a0a0a; }
+  #seg3 { width: 16.67%; }
+  #seg1::after { animation: fillSeg 1.6s cubic-bezier(0.16,1,0.3,1) 1.6s forwards; }
+  #seg2::after { animation: fillSeg 2.2s cubic-bezier(0.16,1,0.3,1) 8.0s forwards; }
+  #seg3::after { animation: fillSeg 1.0s cubic-bezier(0.16,1,0.3,1) 15.2s forwards; }
+  @keyframes fillSeg { to { transform: scaleX(1); } }
+
+  .timebar-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    font-size: 16px;
+    color: #6b6b6b;
+    letter-spacing: 0.04em;
+  }
+
+  .phases {
+    position: absolute;
+    top: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    width: 860px;
+  }
+  .phase {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    opacity: 0;
+    transform: translateY(28px);
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16,1,0.3,1);
+    animation-fill-mode: both;
+  }
+  .phase-tick {
+    width: 3px;
+    align-self: stretch;
+    min-height: 96px;
+    background: #FF6B1A;
+    flex-shrink: 0;
+  }
+  .phase-minutes {
+    font-size: 17px;
+    letter-spacing: 0.08em;
+    color: #FF6B1A;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .phase-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #F5F5F5;
+    line-height: 1.3;
+    max-width: 740px;
+    margin-bottom: 6px;
+  }
+  .phase-detail {
+    font-size: 20px;
+    font-weight: 400;
+    color: #9AA0A6;
+    line-height: 1.4;
+    max-width: 740px;
+  }
+
+  @keyframes phaseIn { to { opacity: 1; transform: translateY(0); } }
+
+  #phase1 { animation-name: phaseIn; animation-delay: 1.6s; }
+  #phase2 { animation-name: phaseIn; animation-delay: 8.0s; }
+  #phase3 { animation-name: phaseIn; animation-delay: 15.2s; }
+</style>
+</head>
+<body>
+  <div
+    id="stage"
+    data-composition-id="asi-son-los-treinta-minutos-timeline"
+    data-start="0"
+    data-duration="20"
+    data-fps="24"
+    data-width="1080"
+    data-height="1920"
+    data-no-timeline
+  >
+    <div class="header">Una conversacion de 30 minutos, en 3 partes.</div>
+
+    <div class="timebar-wrap">
+      <div class="timebar-track">
+        <div class="timebar-seg" id="seg1"></div>
+        <div class="timebar-seg" id="seg2"></div>
+        <div class="timebar-seg" id="seg3"></div>
+      </div>
+      <div class="timebar-labels">
+        <span>0 min</span>
+        <span>30 min</span>
+      </div>
+    </div>
+
+    <div class="phases">
+      <div class="phase" id="phase1">
+        <div class="phase-tick"></div>
+        <div>
+          <div class="phase-minutes">Minutos 0-10</div>
+          <div class="phase-title">Entendemos tu negocio</div>
+          <div class="phase-detail">Tu operacion diaria, tu equipo, los procesos que mas tiempo te consumen.</div>
+        </div>
+      </div>
+      <div class="phase" id="phase2">
+        <div class="phase-tick"></div>
+        <div>
+          <div class="phase-minutes">Minutos 10-25</div>
+          <div class="phase-title">Identificamos oportunidades especificas</div>
+          <div class="phase-detail">Que se puede automatizar en tu caso y como funcionaria, paso a paso.</div>
+        </div>
+      </div>
+      <div class="phase" id="phase3">
+        <div class="phase-tick"></div>
+        <div>
+          <div class="phase-minutes">Minutos 25-30</div>
+          <div class="phase-title">Estimacion y proximos pasos</div>
+          <div class="phase-detail">Numeros realistas sobre el impacto, basados en tu operacion.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
