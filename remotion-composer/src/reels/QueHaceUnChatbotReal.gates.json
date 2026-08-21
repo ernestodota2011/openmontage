@@ -44,9 +44,8 @@
       "note": "Mismas excepciones de UI-chrome ya aceptadas en el piloto (burbujas y tarjeta de cita necesitan bg+radius para leerse). La insignia de transferencia (cap4) usa el MISMO tratamiento boxless-con-borde que la tarjeta de cita — no introduce un device nuevo de card. 0 criticos: cero cian/violeta/lavanda/glow en ningun componente nuevo (revisado linea por linea: BRAND.accent/BRAND.text/BRAND.muted son los UNICOS colores usados en CapabilitySceneKit.tsx)."
     },
     "tsc_noemit": {
-      "status": "PENDIENTE — no verificable desde esta sesion",
-      "reason": "video-producer no tiene checkout local del fork con node_modules instalados en esta sesion (solo acceso vía github MCP, sin Bash contra el repo). NO se declara exit_code 0 sin haberlo corrido de verdad.",
-      "required_before_render": "devops corre `npm install && npx tsc --noEmit -p remotion-composer` en el CT 128 ANTES de renderizar; si hay errores, se corrigen y se re-verifica antes de proceder."
+      "status": "corrido por devops antes del render: exit 0 (HEAD efab0a2)",
+      "reason": "video-producer no tiene checkout local del fork con node_modules instalados en esta sesion; devops lo corrio como pre-render gate obligatorio, confirmado en su handoff."
     }
   },
   "assets_generated": {
@@ -63,8 +62,46 @@
     "total_cost_usd_est": 0.4622,
     "note": "URLs de fal.media (CDN temporal). Devops debe re-hostear a R2 antes de ~24-48h (ver ReelsChatbotSerie.README.md)."
   },
-  "pending_post_render_gates": {
-    "coherence_guard": "no aplica en el sentido estricto (no hay i2v hero-frame que trackear), pero SI corre continuidad de paleta/tipografia entre escenas sobre el MP4 real. Pendiente del render.",
-    "final_review": "ffprobe + frame-sampling >=4 frames + promise_preservation + subtitle_check. Pendiente del render."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-chatbot-serie/que-hace-un-chatbot-real-v1.mp4",
+    "verdict_on_v1": "NO-GO",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps",
+      "duration_s": 46.0,
+      "size_bytes": 5245335,
+      "video_bit_rate_bps": 706435,
+      "audio_bit_rate_bps": 199926,
+      "faststart_verified_byte_level": "moov offset 32 < mdat offset 33213 — real, no solo la flag"
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.13", "input_tp": "-0.83", "input_lra": "3.10"},
+      "finding": "coincide EXACTO con el -14.13 reportado por devops — LUFS objetivo cumplido, sin hallazgos.",
+      "tempo_check": "estimado por autocorrelacion del envelope de energia (ventanas 20ms/10ms hop, banda de busqueda 80-180 BPM, script propio numpy — sin libreria de deteccion de tempo dedicada): 127.9 BPM. Coincide con el 128 BPM declarado en el brief de musica (d-003 del decision_log) dentro de 0.1 BPM — CONFIRMA que la directriz de Ernesto ('mas movidos') se cumplio de forma medible, no solo declarada. RMS por escena (cv 0.24-0.51) muestra dinamica real, no un pad plano.",
+      "verdict": "pass — cumple LUFS y cumple la directriz de tempo/energia con evidencia cuantitativa."
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["1.5s", "5.0s", "9.5s", "14.0s", "24.0s", "33.0s", "39.0s", "44.0s"],
+      "control_used": "cold_open_hook (1.5s, KineticHeadline) como control de 'texto bien expuesto': max=255, p99=254.4, mean_top2%=251.5 en luma, dentro de un recorte de la region de texto (no el frame completo — metodo de P-04: region + control, nunca histograma global).",
+      "findings": [
+        {
+          "severity": "critical",
+          "scene": "cap1_responde / cap3_agenda / cap4_escala (region de texto de UI: burbujas, tarjeta, insignia)",
+          "measurement": "mismo metodo de recorte+control aplicado a estas escenas: cap1_responde @9.5s mean_top2%=113.5 (55% mas oscuro que el control); cap3_agenda @24.0s mean_top2%=36.5 (85% mas oscuro); cap4_escala @33.0s: insignia 'Transferido a Ana' y mensaje entrante casi indistinguibles del fondo near-black a simple vista.",
+          "block_variance_crushing_check": "varianza local 8x8 (mismo metodo P-04 del piloto): cold_open (control) avg_std=16.74, dead_blocks=23.2%; cap1_responde avg_std=4.56, dead=37.4%; cap3_agenda avg_std=2.31, dead=34.3% (avg_std CAE mas que en cap1 pese a dead% similar — el detalle fino que sobrevive es cada vez mas pobre).",
+          "issue": "El texto de UI (burbujas de chat, tarjeta de cita, insignia de transferencia) se lee visiblemente apagado/con bajo contraste, empeorando progresivamente hacia el final del reel (cap4_escala es el peor). El headline grande (cold_open, punch_montage, brand_close) SI renderiza nitido — el defecto es especifico de texto pequeno sobre fondo near-black con relleno/box_shadow bajo, consistente con detalle fino siendo aplastado por una tasa de bits insuficiente para la densidad de esta composicion (706kbps es sensiblemente mas bajo que el ~1.69Mbps del piloto GO'd, que tenia MENOS escenas de UI de texto pequeno).",
+          "root_cause_hypothesis": "CRF de finishing probablemente por encima de la banda 16-18 recomendada para este tipo de contenido (mucho near-black + texto fino de bajo peso visual, similar en naturaleza al problema de grano aplastado del piloto P-01, pero aqui es texto en vez de grano). No es un bug de opacity/spring de Remotion: se verifico que en los 3 timestamps muestreados los springs/opacities de los elementos YA estaban asentados (frames suficientes desde su entrada), asi que el defecto vive en el encode, no en la composicion.",
+          "fix_status": "PENDIENTE — instruccion de fix abajo, no se toco el codigo (no es un bug de TSX)"
+        }
+      ]
+    },
+    "promise_preservation": {"verdict": "pass", "detail": "las 4 capacidades del post se muestran tal como se planeo; el defecto es de legibilidad de encode, no de contenido/promesa"},
+    "subtitle_check": {"verdict": "pass", "detail": "todo el copy vive en pantalla; problema de contraste de encode aparte, el texto SIGUE siendo el correcto (no se perdio ningun caption)"},
+    "fix_instruction_for_next_render": {
+      "scope": "SOLO re-encode de video desde el master ProRes (`que-hace-un-chatbot-real-master.mov`, verificar tamano exacto ANTES de tocarlo — no repetir P-05 del piloto). El audio YA esta correcto (-14.13 LUFS medido independiente, tempo 127.9 BPM confirmado) — reusar el audio ya calibrado, NO recalibrar loudnorm de nuevo.",
+      "cambio": "bajar CRF a la banda 16-18 (empezar en CRF17; si el verify de abajo sigue mostrando bloques 'muertos' en las zonas de texto de UI, bajar a CRF16). Mantener el resto de la receta de-plastic igual (curves/eq/unsharp/vignette) — el problema es tasa de bits/CRF, no los filtros de color.",
+      "verify_exigido_antes_de_re-entregar": "1) ffprobe (bit_rate de video deberia subir de ~706kbps a un rango mas sano, sin techo — comparar contra el ~1.69Mbps del piloto como referencia, no como limite). 2) recorte+control en los MISMOS 3 timestamps (9.5s/24.0s/33.0s) con el mismo metodo (mean de luma del top 2% dentro del recorte de texto, comparado contra el control de cold_open_hook @1.5s) — el objetivo es que cap1/cap3/cap4 se acerquen a >=180 en vez de 113/36/casi-invisible. 3) varianza local 8x8 en las mismas 2 regiones (cap1 bubble, cap3 card) contra el v1 como control del defecto (igual que hizo devops en el piloto v2->v3)."
+    }
   }
 }
