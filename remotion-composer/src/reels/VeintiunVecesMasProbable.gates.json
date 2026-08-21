@@ -28,5 +28,41 @@
     "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
     "total_cost_usd_est": 1.01
   },
-  "render_status": "PENDIENTE - handoff a devops-aetherlogik-homelab. Aun no se renderizo el MP4 final; este gates.json documenta unicamente el pre_render (assets verificados por video-producer sobre los archivos crudos de fal, coherence_guard sobre pixeles del i2v). El post_render_verify (ffprobe del MP4 compuesto, LUFS medido, brand_palette_guard sobre pixeles de la composicion final, frame-sampling) lo corre video-producer en la SIGUIENTE sesion, despues del render+finishing de devops."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-inmobiliarios-serie/veintiun-veces-mas-probable-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 1439284bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 316576bps",
+      "duration_s": 30.0,
+      "size_bytes": 6607513
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-13.96", "input_tp": "-0.99"},
+      "finding": "coincide EXACTO con el -13.96 reportado por devops",
+      "tempo_check": "autocorrelacion propia (lowpass 200Hz + envelope 20Hz + derivada semi-rectificada, banda de busqueda 80-180 BPM, script propio numpy/scipy reimplementado en esta sesion): 127.9 BPM medido vs 128 BPM declarado (delta 0.1 BPM). Dentro de la banda 120-140 exigida.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["1.0s y 4.0s (cold_open_hero, i2v real, para coherence_guard)", "9.0s (stat_reveal)", "27.0s (brand_close)"],
+      "palette_scan_pixeles_reales": {
+        "metodo": "escaneo HSV region+control sobre pixeles de cada frame extraido (Python/PIL/numpy), clasifica pixel 'coloreado' (s>0.15,v en 0.08-0.98) en banda cian/violeta (hue 170-300) vs ember (hue 10-45)",
+        "cold_open_hero_1.0s": "cyan_violet=0.00%, ember=96.47% del pixel coloreado (35.6% del frame)",
+        "cold_open_hero_4.0s": "cyan_violet=0.00%, ember=97.74% del pixel coloreado (37.2% del frame)",
+        "stat_reveal_9s": "cyan_violet=0.02%, ember=87.79%",
+        "brand_close_27s": "cyan_violet=0.40%, ember=79.59%",
+        "veredicto": "pass - cero acento cian/violeta deliberado; el residual (<0.4%) es ruido de anti-aliasing"
+      },
+      "legibilidad": "stat_reveal: '21x' + 'mas probable calificar la venta' + 'Segun datos de HBR e InsideSales.' + subtitulo completo ('Responder en menos de 5 minutos hace 21 veces mas probable calificar una venta.') TODO en el mismo frame, legible; brand_close con isotipo real + wordmark bicolor Aether(crema)/Logik(ember) + CTA en 1 SOLA linea, centrado, con margen simetrico visible en ambos lados",
+      "veredicto": "pass"
+    },
+    "coherence_guard": {
+      "status": "pass",
+      "detalle": "2 frames (1.0s, 4.0s) del unico plano i2v: mismo personaje, mismo espacio (oficina/escritorio con lampara de banquero, listados y llave), misma paleta calida, movimiento consistente (mano bajando hacia el escritorio); sin drift."
+    },
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md"},
+    "final_verdict": "GO"
+  }
 }

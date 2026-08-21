@@ -26,5 +26,36 @@
     "sfx_whoosh": {"source": "reusado de agency/reels-clinicas-serie/shared/sfx-whoosh.mp3 (URL publica ya archivada en R2, sin costo)", "cost_usd": 0.0},
     "total_cost_usd_est": 0.45
   },
-  "render_status": "PENDIENTE - handoff a devops-aetherlogik-homelab. Aun no se renderizo el MP4 final. El post_render_verify lo corre video-producer en la SIGUIENTE sesion, incluyendo el final_review sobre la serie completa (las 4 piezas) para el sign-off tecnico equivalente al de las 3 series anteriores."
+  "post_render_verify": {
+    "run_date": "2026-08-21",
+    "artifact": "https://media.aetherlogik.com/agency/reels-inmobiliarios-serie/como-empiezas-sin-perder-leads-v1.mp4",
+    "independent_ffprobe": {
+      "matches_devops_report": true,
+      "codec_video": "h264, 1080x1920, 24fps, bitrate 850813bps",
+      "codec_audio": "aac, 48000Hz, 2ch, bitrate 320418bps",
+      "duration_s": 45.0,
+      "size_bytes": 6621636
+    },
+    "audio_spotcheck": {
+      "loudnorm_measured_independiente": {"input_i": "-14.04", "input_tp": "-1.16"},
+      "finding": "coincide EXACTO con el -14.04 reportado por devops",
+      "tempo_check": "autocorrelacion propia (mismo metodo numpy/scipy que el resto de la serie): 129.3 BPM medido vs 130 BPM declarado (delta 0.7 BPM). Dentro de la banda 120-140 exigida.",
+      "verdict": "pass"
+    },
+    "visual_spotcheck": {
+      "frames_sampled": ["12.0s (steps_list)", "41.0s (brand_close, CTA final de la serie)"],
+      "palette_scan_pixeles_reales": {
+        "metodo": "escaneo HSV region+control (Python/PIL/numpy), denominador = pixel coloreado",
+        "steps_12s": "cyan_violet=0.02%, ember=10.50% del pixel coloreado (0.3% del frame - kicker/marcadores chicos)",
+        "close_41s": "cyan_violet=0.37%, ember=79.38%",
+        "veredicto": "pass - cero acento cian/violeta deliberado"
+      },
+      "legibilidad": "steps_list a t=12s: 3 de 4 pasos visibles (Mapeamos tus flujos actuales / Configuramos CRM y fuentes de leads / Entrenamos los mensajes con tu voz) + caption 'Dos a cuatro semanas, en paralelo'; brand_close con isotipo real + wordmark bicolor + CTA FINAL 'aetherlogik.com/para-real-estate . agenda tu diagnostico gratuito ->' en 1 SOLA linea, centrado, con margen simetrico visible en ambos lados - el CTA de conversion real de la serie completa esta limpio",
+      "veredicto": "pass"
+    },
+    "coherence_guard": {"status": "no aplica - cero escenas i2v en este reel"},
+    "promise_preservation": {"verdict": "pass"},
+    "subtitle_check": {"verdict": "pass", "detalle": "todo el copy vive en pantalla, coincide con el script.md"},
+    "final_verdict": "GO"
+  }
 }
