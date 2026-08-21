@@ -1,0 +1,66 @@
+{
+  "reel": "lo-que-cambia-en-tu-clinica",
+  "run_date": "2026-08-21",
+  "run_by": "video-producer (auto-score razonado contra la rubrica documentada de lib/*.py — SIN checkout local de Node/el fork en esta sesion; no es una corrida literal del script Python)",
+  "pre_render_gates": {
+    "slideshow_risk": {
+      "average": 0.4,
+      "verdict": "strong",
+      "dimensions": {
+        "repetition": {"score": 0.2, "reason": "5 escenas, 5 devices distintos (KineticHeadline x2 con contenido distinto, clip HyperFrames, StatReveal, BrandClose)"},
+        "decorative_visuals": {"score": 0.0, "reason": "cada visual esta atado a contenido exacto del post"},
+        "weak_motion": {"score": 0.3, "reason": "el clip HyperFrames tiene motion CSS real (fade-up + node-light), pero el resto del reel es mayormente tipografico por naturaleza de cierre-de-serie"},
+        "weak_shot_intent": {"score": 0.0, "reason": "shot_intent declarado y especifico en las 5 escenas"},
+        "typography_overreliance": {"score": 0.8, "reason": "4 de 5 escenas (80%) tipadas stat_card (incl. el clip HyperFrames, que aunque es video real, es fundamentalmente texto/checklist) — SUPERA el umbral 60%, declarado honesto: reel de cierre con mucho contenido textual por diseno del post mismo (checklist + benchmark + recap)."},
+        "unsupported_cinematic_claims": {"score": 0.0, "reason": "cero i2v en este reel, cero reclamos cinematicos"}
+      }
+    },
+    "variation_checker": {
+      "score": 0.3,
+      "verdict": "strong",
+      "violations": [],
+      "suggestions": [],
+      "shot_size_diversity": ["MS", "MS", "MS", "MS", "MS"],
+      "generic_language_check": "0 instancias de 'modern/sleek/cutting-edge/stunning' en script ni scene_plan"
+    },
+    "delivery_promise": {
+      "promise_type": "data_explainer",
+      "valid": true,
+      "violations": [],
+      "motion_ratio": 0.2,
+      "motion_cuts": 1,
+      "slide_cuts": 4,
+      "still_cuts": 0,
+      "note": "declarado 'data_explainer' — reel de cierre de serie con checklist + benchmark + recap, no promete accion/movimiento como eje central. El clip HyperFrames cuenta como 1 motion_cut (tiene animacion CSS real, no es un still)."
+    },
+    "brand_palette_guard": {
+      "verdict": "pass_with_note",
+      "counts": {"critical": 0, "warning": 0},
+      "violations": [],
+      "note": "CRITICO evitado a proposito: StatReveal (benchmark_klara) pasa accentColor={BRAND.accent} explicito (default es violeta). La composicion HyperFrames usa las MISMAS variables CSS hex de marca (#0A0A0A/#FF6B1A/#F5F5F5/#9AA0A6) que el playbook — verificado linea por linea en el index.html antes de este gates.json, cero hex fuera de la paleta."
+    },
+    "coherence_guard": {"status": "no aplica — cero i2v/stills generativos en este reel"},
+    "tsc_noemit": {
+      "status": "PENDIENTE — lo corre devops antes de renderizar el lado Remotion. Este reel no agrega componentes Remotion nuevos (reusa KineticHeadline, StatReveal, HeadlineOverlay, BrandClose, FilmGrade, todos ya GO'd) — riesgo bajo."
+    },
+    "hf_lint": {
+      "status": "PENDIENTE — lo corre devops en el CT 128 (`hf lint .`) antes del render. Esta composicion aplico PREVENTIVAMENTE el contrato completo de 6 atributos no-negociables + `data-no-timeline` documentado en Video-problemas.md P-10 (leccion de la serie anterior: no esperar a que el linter nombre los errores uno por uno).",
+      "expected_result": "0 errores, 0 warnings (misma vara que process_and_honesty de la serie anterior, que cerro en 0/0)"
+    }
+  },
+  "assets_generated": {
+    "music": {
+      "model": "fal-ai/elevenlabs/music",
+      "prompt_bpm_declared": 122,
+      "prompt_energy_declared": "corporate-tech instrumental, calmado y confiable, build final hacia el CTA",
+      "url": "https://v3b.fal.media/files/b/0aa734f9/pkKhryqS8cijNLFWtF9KC_music_generated.mp3",
+      "generated_length_s": 52,
+      "picture_length_s": 47.0,
+      "cost_usd": 0.52
+    },
+    "sfx_riser": {"model": "fal-ai/elevenlabs/sound-effects/v2", "url": "https://v3b.fal.media/files/b/0aa734fc/ybEsvX9mNs246fLTmbxxK_sound_effect.mp3", "cost_usd": 0.003},
+    "stills_or_i2v": "NINGUNO — reel 100% motion-autorado (Remotion + HyperFrames), cero costo de assets generativos visuales",
+    "total_cost_usd_est": 0.523
+  },
+  "post_render_verify": "PENDIENTE — esta sesion NO renderiza. El verify (ffprobe + frame-sampling region+control del bloque HyperFrames vs bookends Remotion como control, igual metodo que la serie anterior) lo corre video-producer DESPUES del handoff a devops. Ver ReelsClinicasSerie.README.md."
+}

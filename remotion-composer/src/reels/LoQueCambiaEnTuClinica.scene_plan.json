@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open",
+    "type": "stat_card",
+    "description": "KineticHeadline 'Esto no cambia de la noche a la manana. Esto es lo que SI cambia.' — tipografia pura, sin costo de asset",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "marca honestidad sobre el ritmo de cambio antes de listar lo que SI cambia, puente desde el reel 3",
+    "hero_moment": true,
+    "information_role": "cold open del cierre de serie",
+    "texture_keywords": ["mask reveal", "honestidad de ritmo"]
+  },
+  {
+    "id": "checklist_operacion",
+    "type": "animation",
+    "description": "Clip HyperFrames (HTML/CSS puro, 20s) con los 4 items EXACTOS de 'Lo que cambia en la operacion diaria' del post, cascada de checkmarks ember",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, tratamiento de checklist"},
+    "shot_intent": "es el bloque mas denso de texto de la serie — HyperFrames es el runtime correcto para un checklist/roadmap, igual que en la serie anterior",
+    "hero_moment": false,
+    "information_role": "lo que cambia en la operacion diaria (los 4 bullets del post)",
+    "texture_keywords": ["HyperFrames", "checklist cascada", "data-no-timeline"]
+  },
+  {
+    "id": "benchmark_klara",
+    "type": "stat_card",
+    "description": "StatReveal '30-38%' (accentColor ember explicito) + HeadlineOverlay inferior con la atribucion COMPLETA a Klara en el mismo frame",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember, hold deliberado"},
+    "shot_intent": "la cifra externa de referencia del post, con su fuente visible en la MISMA escena (regla dura de atribucion)",
+    "hero_moment": false,
+    "information_role": "benchmark que usamos como referencia (seccion del post)",
+    "texture_keywords": ["numero grande ember", "atribucion en pantalla"]
+  },
+  {
+    "id": "series_recap",
+    "type": "stat_card",
+    "description": "KineticHeadline recap de los 4 reels de la serie: 'El ciclo manual. Como funciona. Un caso real. Esto.'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "amarra la serie completa antes del cierre de marca, da sensacion de arco completo",
+    "hero_moment": false,
+    "information_role": "resumen de la serie",
+    "texture_keywords": ["stagger", "una palabra en ember"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA final al blog + calculadora",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca y de la serie completa, CTA a la conversion real (calculadora/auditoria)",
+    "hero_moment": false,
+    "information_role": "CTA final",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]

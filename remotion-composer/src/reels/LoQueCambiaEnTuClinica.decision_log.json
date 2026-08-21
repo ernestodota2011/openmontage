@@ -1,0 +1,52 @@
+{
+  "reel": "lo-que-cambia-en-tu-clinica",
+  "date": "2026-08-21",
+  "decided_by": "video-producer",
+  "decisions": [
+    {
+      "id": "d-001",
+      "topic": "3 ejes — render_runtime HIBRIDO (Remotion + HyperFrames), ambos runtimes presentados explicitamente",
+      "options_considered": [
+        "render_runtime=remotion puro (forzar el checklist en TagRevealList, que ya se uso 2 veces en la serie)",
+        "render_runtime=hyperframes puro (reconstruir cold_open/benchmark/recap/brand_close en HTML/CSS)",
+        "render_runtime=hybrid (checklist en HyperFrames, resto en Remotion GO'd)"
+      ],
+      "choice": "renderer_family=animated-explainer, render_runtime=hybrid, composition_mode=atelier",
+      "reason": "mismo patron tecnico ya probado GO en el reel 4 de la serie anterior (ComoSeConstruyeSinRomperNada): el bloque de checklist/roadmap es el caso que la skill aetherlogik-hyperframes marca como suyo (mockup de proceso, no cine ni chat), y ningun componente Remotion existente cubre 'checklist operativo de 4 items con cascada' sin forzar un reuso repetido de TagRevealList (violaria repetition de slideshow_risk, ya usado 2x en la serie).",
+      "confidence": 0.85
+    },
+    {
+      "id": "d-002",
+      "topic": "Atribucion de la cifra de Klara EN LA MISMA ESCENA (no en otro reel)",
+      "options_considered": [
+        "mostrar solo el numero grande, con la atribucion en la descripcion/caption fuera de pantalla",
+        "mostrar el numero + un HeadlineOverlay inferior con la atribucion completa, ambos visibles al mismo tiempo en el mismo frame"
+      ],
+      "choice": "numero + atribucion completa en el mismo frame",
+      "reason": "regla dura de la mision: 'solo las cifras del post CON su atribucion exacta'. Una cifra sin su fuente visible en el MISMO frame se lee como una afirmacion propia de AetherLogik, no como una cita — aunque la fuente aparezca en la descripcion del video (fuera del video mismo), eso no basta para la doctrina de atribucion.",
+      "confidence": 0.9
+    },
+    {
+      "id": "d-003",
+      "topic": "Music plan — tempo/energia (directriz dura de Ernesto)",
+      "options_considered": [
+        "mantener 126 BPM del reel 3 (consistencia con el reel anterior)",
+        "bajar a 122 BPM (cierre calmado y confiable, con un build final hacia el CTA)"
+      ],
+      "choice": "122 BPM, corporate-tech instrumental, calmado y confiable, build final hacia el CTA",
+      "reason": "dentro de la banda 120-140 exigida (extremo bajo, deliberado): es el CIERRE de la serie — el rol narrativo es 'aterrizar' antes del CTA, no acelerar. Coincide con el rol y BPM del reel 4 de la serie anterior (122 BPM tambien).",
+      "confidence": 0.75
+    },
+    {
+      "id": "d-004",
+      "topic": "Anti-claims — fidelidad a los 4 items del checklist y a la cita de Klara",
+      "options_considered": [
+        "parafrasear los 4 items o inventar una interpretacion propia del beneficio",
+        "citar los 4 encabezados EXACTOS en negrita de 'Lo que cambia en la operacion diaria', y citar a Klara palabra por palabra ('los recordatorios automaticos reducen las ausencias entre un 30% y un 38%')"
+      ],
+      "choice": "citas exactas en ambos casos",
+      "reason": "doctrina anti-claims + regla dura de atribucion de cifras de la mision. Klara es la fuente citada por el POST, no una fuente que AetherLogik eligio directamente — el reel debe declarar exactamente eso (proveedor de comunicacion clinica), no simplificar a 'segun un estudio'.",
+      "confidence": 0.95
+    }
+  ]
+}

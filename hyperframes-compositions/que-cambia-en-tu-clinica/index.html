@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Que cambia en tu clinica — Reel 4 (reels-clinicas-serie)</title>
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --accent: #FF6B1A;
+    --text: #F5F5F5;
+    --muted: #9AA0A6;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 1080px; height: 1920px;
+    background: var(--bg); overflow: hidden;
+    font-family: Inter, system-ui, sans-serif; color: var(--text);
+  }
+  #stage { position: relative; width: 1080px; height: 1920px; background: var(--bg); }
+  .section { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  #kicker {
+    font-size: 28px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase;
+    opacity: 0; transform: translateY(16px);
+    animation: fade-up 0.8s var(--ease) 0.6s forwards;
+  }
+  .checklist { position: relative; width: 800px; margin-top: 90px; display: flex; flex-direction: column; gap: 130px; }
+  .item-row { display: flex; align-items: center; gap: 32px; opacity: 0; transform: translateX(-24px); }
+  .item-node { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--muted); flex-shrink: 0; background: transparent; }
+  .item-label { font-size: 34px; color: var(--text); font-weight: 700; line-height: 1.28; }
+
+  #item-1 { animation: fade-in-x 0.7s var(--ease) 2.0s forwards; }
+  #item-1-node { animation: node-light 0.01s linear 2.0s forwards; }
+  #item-2 { animation: fade-in-x 0.7s var(--ease) 6.2s forwards; }
+  #item-2-node { animation: node-light 0.01s linear 6.2s forwards; }
+  #item-3 { animation: fade-in-x 0.7s var(--ease) 10.4s forwards; }
+  #item-3-node { animation: node-light 0.01s linear 10.4s forwards; }
+  #item-4 { animation: fade-in-x 0.7s var(--ease) 14.6s forwards; }
+  #item-4-node { animation: node-light 0.01s linear 14.6s forwards; }
+
+  @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fade-in-x { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes node-light { from { border-color: var(--muted); background: transparent; } to { border-color: var(--accent); background: var(--accent); } }
+</style>
+</head>
+<body>
+  <!--
+    Composicion HyperFrames standalone (CLI global `hf`, ver skill
+    aetherlogik-hyperframes). Viewport = resolucion de salida exacta
+    (1080x1920, igual que el resto de la serie). Duracion total 20.0s
+    @24fps = 480 frames, 100% CSS (@keyframes + cubic-bezier(0.16,1,0.3,1),
+    el mismo easing del craft de aetherlogik-video) — sin GSAP, por eso el
+    elemento raiz lleva `data-no-timeline` (evita el impuesto de 45s del
+    poller documentado en la skill; regla `missing_data_no_timeline`).
+
+    2026-08-21 — contrato COMPLETO del stage aplicado PREVENTIVAMENTE (no
+    reactivamente) contra el mismo hallazgo que produjo Video-problemas.md
+    P-10 en la serie anterior: los 6 atributos no-negociables del elemento
+    raiz/`#stage` (data-composition-id, data-start="0", data-duration,
+    data-fps, data-width, data-height) + data-no-timeline por ser CSS-puro.
+
+    Los 4 items son los 4 encabezados EXACTOS en negrita de la seccion
+    'Lo que cambia en la operacion diaria' del post
+    `automatizar-citas-clinica-miami.md`, mismo orden, sin agregar ni
+    quitar ninguno.
+
+    Render (lo ejecuta devops, NO video-producer): pct start 128 ->
+    hf lint . && hf render -c index.html -o que-cambia-en-tu-clinica.mp4 ->
+    pct stop 128.
+  -->
+  <div
+    id="stage"
+    data-composition-id="que-cambia-en-tu-clinica"
+    data-start="0"
+    data-duration="20"
+    data-fps="24"
+    data-width="1080"
+    data-height="1920"
+    data-no-timeline
+  >
+
+    <section id="section-checklist" class="section">
+      <div id="kicker">Lo que cambia en tu operacion diaria</div>
+      <div class="checklist">
+        <div id="item-1" class="item-row">
+          <div id="item-1-node" class="item-node"></div>
+          <div class="item-label">Tiempo recuperado del equipo de coordinacion</div>
+        </div>
+        <div id="item-2" class="item-row">
+          <div id="item-2-node" class="item-node"></div>
+          <div class="item-label">Mejor ocupacion de la agenda</div>
+        </div>
+        <div id="item-3" class="item-row">
+          <div id="item-3-node" class="item-node"></div>
+          <div class="item-label">Menos errores de comunicacion entre sedes</div>
+        </div>
+        <div id="item-4" class="item-row">
+          <div id="item-4-node" class="item-node"></div>
+          <div class="item-label">Capacidad de llamadas del equipo de setters liberada</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
