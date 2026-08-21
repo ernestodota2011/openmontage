@@ -43,6 +43,20 @@ export interface BrandCloseProps {
  * reel's exact string, so other callers of this shared component keep
  * working (mono fallback when `wordmarkAccentPart` isn't found, or force
  * it explicitly via `wordmarkMono`).
+ *
+ * FIX (2026-08-21, verify de video-producer sobre reels-inmobiliarios-serie,
+ * pixeles reales de reels 2 y 3): el `<div>` del `url` no tenia `maxWidth`
+ * ni `textAlign: "center"` (a diferencia del `tagline`, que si los tiene).
+ * Con un CTA corto que cabe en 1 linea, el div se encoge al contenido y el
+ * `alignItems: "center"` del AbsoluteFill padre lo centra visualmente por
+ * accidente — pero en cuanto el texto es lo bastante ancho para necesitar
+ * wrap, el div crece al 100% del contenedor (sin limite), pierde el
+ * centrado y el texto queda pegado al borde izquierdo (text-align default
+ * de un div = left), sin margen. Bug de layout LATENTE del componente
+ * compartido (no de un reel puntual) — reproducido con evidencia en
+ * `ReelsInmobiliariosSerie.README.md`. Se arregla en la RAIZ (maxWidth +
+ * textAlign, igual que ya hacia `tagline`) en vez de acortar el copy de
+ * cada CTA como parche.
  */
 export const BrandClose: React.FC<BrandCloseProps> = ({
   wordmark,
@@ -149,6 +163,8 @@ export const BrandClose: React.FC<BrandCloseProps> = ({
             fontFamily: "Inter, system-ui, sans-serif",
             color: accentColor,
             letterSpacing: "0.02em",
+            textAlign: "center",
+            maxWidth: "82%",
           }}
         >
           {url}
