@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cold_open_hero",
+    "type": "animation",
+    "description": "i2v hero (Kling O1, 5s, camara locked-off): agente inmobiliario solo de noche en su oficina/escritorio, rodeado de listados impresos y una llave de casa, cabeza entre las manos por cansancio, telefono con notificaciones sobre el escritorio junto a el. HeadlineOverlay abajo: '11pm. Otro lead. ¿Contestas ahora?'",
+    "shot_language": {"shot_size": "MS", "camera_movement": "locked_off", "lighting_key": "tungsteno calido sobre near-black, un solo foco de lampara de escritorio"},
+    "shot_intent": "establece el problema vivido en la primera escena, con cine real (no solo tipografia) para abrir con enganche",
+    "hero_moment": true,
+    "information_role": "cold open del gancho",
+    "texture_keywords": ["i2v hero real", "luz de lampara calida", "grano fino"]
+  },
+  {
+    "id": "stat_reveal",
+    "type": "stat_card",
+    "description": "StatReveal '21x' + label 'mas probable calificar la venta', con HeadlineOverlay inferior citando la fuente EXACTA del post en el MISMO frame: 'Segun datos de HBR e InsideSales.' + subtitulo con la oracion completa.",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black"},
+    "shot_intent": "ancla el gancho en un dato real y atribuido (seccion 'por que la velocidad de respuesta es critica' del post), no en una afirmacion suelta",
+    "hero_moment": false,
+    "information_role": "cifra central del post con atribucion completa",
+    "texture_keywords": ["una cifra en ember", "atribucion en el mismo frame"]
+  },
+  {
+    "id": "hidden_cost",
+    "type": "stat_card",
+    "description": "KineticHeadline: 'Mientras dudas, otro agente ya le esta escribiendo.' — parafrasea el escenario del post (el lead consulta a 3 agentes a la vez) sin inventar cifras nuevas",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "editorial ember sobre near-black, mas intimo"},
+    "shot_intent": "conecta la cifra con la competencia en tiempo real que el post nombra explicitamente",
+    "hero_moment": false,
+    "information_role": "el costo de esperar",
+    "texture_keywords": ["una palabra en ember", "hold deliberado"]
+  },
+  {
+    "id": "tease_possible",
+    "type": "animation",
+    "description": "KineticHeadline 'Esto no tiene que seguir asi.' + sweep EmberThread como puente hacia el cierre",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "sweep ember, transicion de marca"},
+    "shot_intent": "la promesa del reel: hay una salida, sin todavia explicar como (eso es el reel 2)",
+    "hero_moment": false,
+    "information_role": "tease hacia la serie",
+    "texture_keywords": ["sweep ember", "bridge"]
+  },
+  {
+    "id": "brand_close",
+    "type": "animation",
+    "description": "Isotipo + wordmark bicolor + tagline + CTA al siguiente reel de la serie",
+    "shot_language": {"shot_size": "MS", "camera_movement": "static", "lighting_key": "near-black de estudio"},
+    "shot_intent": "cierre de marca con CTA a la serie, no a venta directa",
+    "hero_moment": false,
+    "information_role": "CTA",
+    "texture_keywords": ["isotipo real", "hold final"]
+  }
+]
